@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/favicon.png?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="linux," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="我已经用了十年的Linux了，通过今天这篇文章我将向大家展示一系列的命令、工具和技巧，我希望一开始就有人告诉我这些，而不是曾在我成长道路上绊住我。  命令行日常系快捷键 如下的快捷方式非常有用，能够极大的提升你的工作效率： 12345678910CTRL + U - 剪切光标前的内容CTRL + K - 剪切光标至行末的内容CTRL + Y - 粘贴CTRL + E - 移动光标到行末CTRL +">
+<meta name="keywords" content="linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[转]11 Linux Terminal Commands That Will Rock Your World">
+<meta property="og:url" content="http://codz.me/2015/05/20/11-linux-terminal-commands-that-will-rock-your-world/index.html">
+<meta property="og:site_name" content="Code Is Poetry">
+<meta property="og:description" content="我已经用了十年的Linux了，通过今天这篇文章我将向大家展示一系列的命令、工具和技巧，我希望一开始就有人告诉我这些，而不是曾在我成长道路上绊住我。  命令行日常系快捷键 如下的快捷方式非常有用，能够极大的提升你的工作效率： 12345678910CTRL + U - 剪切光标前的内容CTRL + K - 剪切光标至行末的内容CTRL + Y - 粘贴CTRL + E - 移动光标到行末CTRL +">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2015-05-20T02:19:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[转]11 Linux Terminal Commands That Will Rock Your World">
+<meta name="twitter:description" content="我已经用了十年的Linux了，通过今天这篇文章我将向大家展示一系列的命令、工具和技巧，我希望一开始就有人告诉我这些，而不是曾在我成长道路上绊住我。  命令行日常系快捷键 如下的快捷方式非常有用，能够极大的提升你的工作效率： 12345678910CTRL + U - 剪切光标前的内容CTRL + K - 剪切光标至行末的内容CTRL + Y - 粘贴CTRL + E - 移动光标到行末CTRL +">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://codz.me/2015/05/20/11-linux-terminal-commands-that-will-rock-your-world/"/>
+
+
+
+
+
+  <title>[转]11 Linux Terminal Commands That Will Rock Your World | Code Is Poetry</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Code Is Poetry</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://codz.me/2015/05/20/11-linux-terminal-commands-that-will-rock-your-world/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="laudukang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/favicon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Is Poetry">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">[转]11 Linux Terminal Commands That Will Rock Your World</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-05-20T10:17:00+08:00">
+                2015-05-20 10:17:00
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2015-05-20T10:19:20+08:00">
+                2015-05-20 10:19:20
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>我已经用了十年的Linux了，通过今天这篇文章我将向大家展示一系列的命令、工具和技巧，我希望一开始就有人告诉我这些，而不是曾在我成长道路上绊住我。</p>
+<ol>
+<li><p>命令行日常系快捷键</p>
+<p>如下的快捷方式非常有用，能够极大的提升你的工作效率：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">CTRL</span> + U - 剪切光标前的内容</span><br><span class="line"><span class="built_in">CTRL</span> + K - 剪切光标至行末的内容</span><br><span class="line"><span class="built_in">CTRL</span> + Y - 粘贴</span><br><span class="line"><span class="built_in">CTRL</span> + E - 移动光标到行末</span><br><span class="line"><span class="built_in">CTRL</span> + A - 移动光标到行首</span><br><span class="line">ALT + F - 跳向下一个空格</span><br><span class="line">ALT + B - 跳回上一个空格</span><br><span class="line">ALT + Backspace - 删除前一个单词</span><br><span class="line"><span class="built_in">CTRL</span> + W - 剪切光标前一个单词</span><br><span class="line">Shift + Insert - 向终端内粘贴文本</span><br></pre></td></tr></table></figure>
+<p>那么为了让上述内容更易理解来看下面的这行命令。</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-<span class="builtin-name">get</span> intall programname</span><br></pre></td></tr></table></figure>
+<p>如你所见，命令中存在拼写错误，为了正常执行需要把“intall”替换成“install”。</p>
+<p>想象现在光标正在行末，我们有很多的方法将她退回单词install并替换它。</p>
+<p>我可以按两次ALT+B这样光标就会在如下的位置（这里用指代光标的位置）。</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-<span class="keyword">get</span>^intall programname</span><br></pre></td></tr></table></figure>
+<p>现在你可以按两下方向键并将“s”插入到install中去了。</p>
+<p>如果你想将浏览器中的文本复制到终端，可以使用快捷键”shift + insert”。</p>
+</li>
+<li><p>SUDO !!</p>
+<p>如果你还不知道这个命令，我觉得你应该好好感谢我，因为如果你不知道的话，那每次你在输入长串命令后看到“permission denied”后一定会痛苦不堪。</p>
+<ul>
+<li>sudo !!</li>
+</ul>
+<p>如何使用sudo !!？很简单。试想你刚输入了如下命令：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-<span class="builtin-name">get</span> install ranger</span><br></pre></td></tr></table></figure>
+<p>一定会出现“Permission denied”，除非你已经登录了足够高权限的账户。</p>
+<p>sudo !! 就会用 sudo 的形式运行上一条命令。所以上一条命令就变成了这样：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-<span class="builtin-name">get</span> install ranger</span><br></pre></td></tr></table></figure>
+<p>如果你不知道什么是sudo，戳这里。</p>
+<p>（警告！主页君强烈反对使用这个命令，因为如果万一上个命令存在一些笔误或者你搞错了哪条是上一条命令，那么有可能带来的后果是灾难性的！所以，千万不要执行这条命令！千万不要执行这条命令！千万不要执行这条命令！重要的事情重复三遍。）</p>
+</li>
+<li><p>暂停并在后台运行命令</p>
+<p>我曾经写过一篇如何在终端后台运行命令的指南。</p>
+<p>CTRL + Z - 暂停应用程序<br>fg - 重新将程序唤到前台<br>如何使用这个技巧呢?</p>
+<p>试想你正用nano编辑一个文件：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">sudo</span> <span class="selector-tag">nano</span> <span class="selector-tag">abc</span><span class="selector-class">.txt</span></span><br></pre></td></tr></table></figure>
+<p>文件编辑到一半你意识到你需要马上在终端输入些命令，但是nano在前台运行让你不能输入。</p>
+<p>你可能觉得唯一的方法就是保存文件，退出 nano，运行命令以后在重新打开nano。</p>
+<p>其实你只要按CTRL + Z，前台的命令就会暂停，画面就切回到命令行了。然后你就能运行你想要运行命令，等命令运行完后在终端窗口输入“fg”就可以回到先前暂停的任务。</p>
+<p>有一个尝试非常有趣就是用nano打开文件，输入一些东西然后暂停会话。再用nano打开另一个文件，输入一些什么后再暂停会话。如果你输入“fg”你将回到第二个用nano打开的文件。只有退出nano再输入“fg”，你才会回到第一个用nano打开的文件。</p>
+</li>
+<li><p>使用nohup在登出SSH会话后仍运行命令</p>
+<p>如果你用ssh登录别的机器时，nohup命令真的非常有用。</p>
+<p>那么怎么使用nohup呢？</p>
+<p>想象一下你使用ssh远程登录到另一台电脑上，你运行了一条非常耗时的命令然后退出了ssh会话，不过命令仍在执行。而nohup可以将这一场景变成现实。</p>
+<p>举个例子，因为测试的需要，我用我的树莓派来下载发行版。我绝对不会给我的树莓派外接显示器、键盘或鼠标。</p>
+<p>一般我总是用SSH从笔记本电脑连接到树莓派。如果我在不用nohup的情况下使用树莓派下载大型文件，那我就必须等待到下载完成后，才能登出ssh会话关掉笔记本。可如果是这样，那我为什么要使用树莓派下文件呢？</p>
+<p>使用nohup的方法也很简单，只需如下例中在nohup后输入要执行的命令即可：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup wget http:<span class="regexp">//mi</span>rror.is.co.za<span class="regexp">/mirrors/</span>linuxmint.com<span class="regexp">/iso/</span><span class="regexp">/stable/</span><span class="number">17.1</span><span class="regexp">/linuxmint-17.1-cinnamon-64bit.iso &amp;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>‘在（at）’特定的时间运行Linux命令</p>
+<p>‘nohup’命令在你用SSH连接到服务器，并在上面保持执行SSH登出前任务的时候十分有用。</p>
+<p>想一下如果你需要在特定的时间执行相同的命令，这种情况该怎么办呢？</p>
+<p>命令‘at’就能妥善解决这一情况。以下是‘at’使用示例。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">at 10:38 PM Fri</span><br><span class="line"><span class="meta">at&gt;</span><span class="bash"> cowsay <span class="string">'hello'</span></span></span><br><span class="line"><span class="meta">at&gt;</span><span class="bash"> CTRL + D</span></span><br></pre></td></tr></table></figure>
+<p>上面的命令能在周五下午10时38分运行程序cowsay。</p>
+<p>使用的语法就是‘at’后追加日期时间。当at&gt;提示符出现后就可以输入你想在那个时间运行的命令了。</p>
+<p>CTRL + D 返回终端。</p>
+<p>还有许多日期和时间的格式，都需要你好好翻一翻‘at’的man手册来找到更多的使用方式。</p>
+</li>
+<li><p>Man手册</p>
+<p>Man手册会为你列出命令和参数的使用大纲，教你如何使用她们。Man手册看起来沉闷呆板。（我思忖她们也不是被设计来娱乐我们的）。</p>
+<p>不过这不代表你不能做些什么来使她们变得漂亮些。</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="builtin-name">export</span> <span class="attribute">PAGER</span>=most</span><br></pre></td></tr></table></figure>
+<p>你需要安装 ‘most’；她会使你的你的man手册的色彩更加绚丽。</p>
+<p>你可以用以下命令给man手册设定指定的行长：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="builtin-name">export</span> <span class="attribute">MANWIDTH</span>=80</span><br></pre></td></tr></table></figure>
+<p>最后，如果你有一个可用的浏览器，你可以使用-H在默认浏览器中打开任意的man页。</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">man -H &lt;<span class="keyword">command</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>注意啦，以上的命令只有在你将默认的浏览器设置到环境变量$BROWSER中了之后才效果哟。</p>
+</li>
+<li><p>使用htop查看和管理进程</p>
+<p>你用哪个命令找出电脑上正在运行的进程的呢？我敢打赌是‘ps’并在其后加不同的参数来得到你所想要的不同输出。</p>
+<p>安装‘htop’吧！绝对让你相见恨晚。</p>
+<p>htop在终端中将进程以列表的方式呈现，有点类似于Windows中的任务管理器。你可以使用功能键的组合来切换排列的方式和展示出来的项。你也可以在htop中直接杀死进程。</p>
+<p>在终端中简单的输入htop即可运行。</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">htop</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用ranger浏览文件系统</p>
+<p>如果说htop是命令行进程控制的好帮手，那么ranger就是命令行浏览文件系统的好帮手。</p>
+<p>你在用之前可能需要先安装，不过一旦安装了以后就可以在命令行输入以下命令启动她：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">ranger</span></span><br></pre></td></tr></table></figure>
+<p>在命令行窗口中ranger和一些别的文件管理器很像，但是相比上下结构布局，她是左右结构的，这意味着你按左方向键你将前进到上一个文件夹，而右方向键则会切换到下一个。</p>
+<p>在使用前ranger的man手册还是值得一读的，这样你就可以用快捷键操作ranger了。</p>
+</li>
+<li><p>取消关机</p>
+<p>无论是在命令行还是图形用户界面关机后，才发现自己不是真的想要关机。</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">shutdown</span> -c</span><br></pre></td></tr></table></figure>
+<p>需要注意的是，如果关机已经开始则有可能来不及停止关机。</p>
+<p>以下是另一个可以尝试命令：</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pkill <span class="built_in">shutdown</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>杀死挂起进程的简单方法</p>
+<p>想象一下，你正在运行的应用程序不明原因的僵死了。</p>
+<p>你可以使用‘ps -ef’来找到该进程后杀掉或者使用‘htop’。</p>
+<p>有一个更快、更容易的命令叫做xkill。</p>
+<p>简单的在终端中输入以下命令并在窗口中点击你想杀死的应用程序。</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">xkill</span></span><br></pre></td></tr></table></figure>
+<p>那如果整个系统挂掉了怎么办呢？</p>
+<p>按住键盘上的‘alt’和‘sysrq’不放，然后慢慢输入以下键：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">REISUB</span></span><br></pre></td></tr></table></figure>
+<p>这样不按电源键你的计算机也能重启了。</p>
+</li>
+<li><p>下载Youtube视频</p>
+<p>一般来说我们大多数人都喜欢看Youtube的视频，也会通过钟爱的播放器播放Youtube的流媒体。</p>
+<p>如果你需要离线一段时间（比如：从苏格兰南部坐飞机到英格兰南部旅游的这段时间）那么你可能希望下载一些视频到存储设备中，到闲暇时观看。</p>
+<p>你所要做的就是从包管理器中安装youtube-dl。</p>
+<p>你可以用以下命令使用youtube-dl：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">youtube-<span class="selector-tag">dl</span> url-to-video</span><br></pre></td></tr></table></figure>
+<p>你可以在Youtubu视频页面点击分享链接得到视频的url。只要简单的复制链接在粘帖到命令行就行了（要用shift + insert快捷键哟）。</p>
+</li>
+</ol>
+<p>总结，希望你在这篇文章中得到帮助，并且在这11条中找到至少一条让你惊叹“原来可以这样”的技巧。</p>
+<p>reference:</p>
+<ul>
+<li><a href="https://linux.cn/article-5438-1.html" target="_blank" rel="external">11个让你吃惊的 Linux 终端命令</a></li>
+<li><a href="https://www.lifewire.com/linux-terminal-commands-rock-your-world-2201165" target="_blank" rel="external">15 Linux Terminal Commands That Will Rock Your World</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag"># linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/05/17/vsftp-config-analysis/" rel="next" title="[转] vsftpd 配置文件详解">
+                <i class="fa fa-chevron-left"></i> [转] vsftpd 配置文件详解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/05/27/ubuntu-expand-hard-disk/" rel="prev" title="Ubuntu 扩展硬盘/交换分区">
+                Ubuntu 扩展硬盘/交换分区 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/favicon.png"
+                alt="laudukang" />
+            
+              <p class="site-author-name" itemprop="name">laudukang</p>
+              <p class="site-description motion-element" itemprop="description">Bug Not Found</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">63</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/laudukang" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:laudukang@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://gitee.com/laudukang" target="_blank" title="Git@OSC">
+                    
+                      <i class="fa fa-fw fa-github"></i>Git@OSC</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://my.oschina.net/laudukang" target="_blank" title="OSC">
+                    
+                      <i class="fa fa-fw fa-user-circle"></i>OSC</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/laudukang" target="_blank" title="Twitter">
+                    
+                      <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.v2ex.com/member/laudukang" target="_blank" title="V2EX">
+                    
+                      <i class="fa fa-fw fa-globe"></i>V2EX</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">laudukang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io" rel="external nofollow">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">NexT.Pisces</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/favicon.png?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="java," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Remark: Finished read 1-7, 2015-07-23 15:40:57Multithreading in Java is a very important topic. I have written a lot about Threads in Java. Java Thread is a lightweight process that executes some task">
+<meta name="keywords" content="java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Repost]Multithreading in Java">
+<meta property="og:url" content="http://codz.me/2015/07/23/multithreading-in-java/index.html">
+<meta property="og:site_name" content="Code Is Poetry">
+<meta property="og:description" content="Remark: Finished read 1-7, 2015-07-23 15:40:57Multithreading in Java is a very important topic. I have written a lot about Threads in Java. Java Thread is a lightweight process that executes some task">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://oss-aliyun.codz.me/images/2015/07/23/multithreading-in-java/multithreading-in-java.jpg">
+<meta property="og:image" content="http://oss-aliyun.codz.me/images/2015/07/23/multithreading-in-java/java-thread.png">
+<meta property="og:updated_time" content="2015-07-23T07:40:57.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[Repost]Multithreading in Java">
+<meta name="twitter:description" content="Remark: Finished read 1-7, 2015-07-23 15:40:57Multithreading in Java is a very important topic. I have written a lot about Threads in Java. Java Thread is a lightweight process that executes some task">
+<meta name="twitter:image" content="http://oss-aliyun.codz.me/images/2015/07/23/multithreading-in-java/multithreading-in-java.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://codz.me/2015/07/23/multithreading-in-java/"/>
+
+
+
+
+
+  <title>[Repost]Multithreading in Java | Code Is Poetry</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Code Is Poetry</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://codz.me/2015/07/23/multithreading-in-java/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="laudukang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/favicon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Is Poetry">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">[Repost]Multithreading in Java</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-07-23T01:30:00+08:00">
+                2015-07-23 01:30:00
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2015-07-23T15:40:57+08:00">
+                2015-07-23 15:40:57
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="Remark-Finished-read-1-7-2015-07-23-15-40-57"><a href="#Remark-Finished-read-1-7-2015-07-23-15-40-57" class="headerlink" title="Remark: Finished read 1-7, 2015-07-23 15:40:57"></a>Remark: Finished read 1-7, 2015-07-23 15:40:57</h4><p>Multithreading in Java is a very important topic. I have written a lot about Threads in Java. Java Thread is a lightweight process that executes some task. Java provides multithreading support with the Thread class and an application can create multiple threads executing concurrently.</p>
+<img src="http://oss-aliyun.codz.me/images/2015/07/23/multithreading-in-java/multithreading-in-java.jpg" alt="multithreading-in-java.jpg" title="">
+<p>There are two types of threads in an application – user thread and daemon thread. When we start an application, main is the first user thread created and we can create multiple user threads as well as daemon threads. When all the user threads are executed, JVM terminates the program.</p>
+<p>We can set different priorities to different Threads but it doesn’t guarantee that higher priority thread will execute first than lower priority thread. Thread scheduler is the part of Operating System implementation and when a Thread is started, it’s execution is controlled by Thread Scheduler and JVM doesn’t have any control on it’s execution.</p>
+<p>We can create Threads by either implementing Runnable interface or by extending Thread Class.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Thread t = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable()&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>Above is a one liner statement to create new Thread, Here we are creating Runnable as Anonymous Class, read this post to learn about inner class, nested class and anonymous inner class.</p>
+<p>In last few weeks, I have posted some useful articles on multithreading in java, you can follow them in order to learn about Threads in Java.</p>
+<h1 id="Threads-in-Java"><a href="#Threads-in-Java" class="headerlink" title="Threads in Java"></a>Threads in Java</h1><img src="http://oss-aliyun.codz.me/images/2015/07/23/multithreading-in-java/java-thread.png" alt="java-thread.png" title="">
+<p>With Java 8 lambda expressions, we can create Thread in java like below too because Runnable is a functional interface.</p>
+<ol>
+<li><h3 id="Java-Thread-Example"><a href="#Java-Thread-Example" class="headerlink" title="Java Thread Example"></a><span id="java-thread-example"><a href="https://www.journaldev.com/1016/java-thread-example" target="_blank" rel="external">Java Thread Example</a></span></h3><p>This is the first post in the multithreading in java tutorial series. Read this to learn about <strong>Process</strong> and <strong>Thread</strong>. What is the difference between Thread and Process. Benefits of using Threads and how we can create Threads using <strong>Runnable</strong> interface and <strong>Thread</strong> class. This post also compares Runnable interface with Thread class.</p>
+</li>
+<li><h3 id="Java-Thread-Sleep"><a href="#Java-Thread-Sleep" class="headerlink" title="Java Thread Sleep"></a><span id="java-thread-sleep"><a href="https://www.journaldev.com/1020/thread-sleep-java" target="_blank" rel="external">Java Thread Sleep</a></span></h3><p><em>Java Thread sleep</em> is used to pause the execution of current thread. We will use Thread sleep extensively in future posts, so it’s good to know how it works and is it accurate or not?</p>
+</li>
+<li><h3 id="Java-Thread-Join"><a href="#Java-Thread-Join" class="headerlink" title="Java Thread Join"></a><span id="java-thread-join"><a href="https://www.journaldev.com/1024/java-thread-join-example" target="_blank" rel="external">Java Thread Join</a></span></h3><p>Sometimes we need to wait for other threads to finish it’s execution before we can proceed. We can achieve this using <strong>Thread join</strong>, learn how it works and when we should use it.</p>
+</li>
+<li><h3 id="Java-Thread-States"><a href="#Java-Thread-States" class="headerlink" title="Java Thread States"></a><span id="java-thread-states"><a href="https://www.journaldev.com/1044/thread-life-cycle-in-java-thread-states-in-java" target="_blank" rel="external">Java Thread States</a></span></h3><p>Understanding different <strong>states of thread</strong> is important. Learn how thread changes it’s state and how thread scheduler changes thread state.</p>
+</li>
+<li><h3 id="Java-Thread-wait-notify-and-notifyAll"><a href="#Java-Thread-wait-notify-and-notifyAll" class="headerlink" title="Java Thread wait, notify and notifyAll"></a><span id="java-thread-wait-notify-and-notifyall"><a href="https://www.journaldev.com/1037/java-thread-wait-notify-and-notifyall-example" target="_blank" rel="external">Java Thread wait, notify and notifyAll</a></span></h3><p>Java Object class contains three methods using which threads can communicate about the lock status of a resource. Learn with example usage of these Object class methods in a simple Wait-Notify implementation.</p>
+</li>
+<li><h3 id="Java-Thread-Safety-and-Java-Synchronization"><a href="#Java-Thread-Safety-and-Java-Synchronization" class="headerlink" title="Java Thread Safety and Java Synchronization"></a><span id="java-thread-safety-and-java-synchronization"><a href="https://www.journaldev.com/1061/thread-safety-in-java" title="Java Synchronization and Thread Safety Tutorial with Examples" target="_blank" rel="external">Java Thread Safety and Java Synchronization</a></span></h3><p>We know that Threads share Object resources, it can lead to data corruption because these operations are not atomic. Learn how we can achieve <strong><a href="https://www.journaldev.com/1061/thread-safety-in-java" target="_blank" rel="external">thread safety in java</a></strong> using different methods. Read this post to learn about the correct usage of <strong>synchronization</strong>, synchronized methods and synchronized blocks.<br>There are various examples of synchronized usage and the post explains what are the issues with them.</p>
+</li>
+<li><h3 id="Java-Exception-in-thread-main"><a href="#Java-Exception-in-thread-main" class="headerlink" title="Java Exception in thread main"></a><span id="java-exception-in-thread-main"><a href="https://www.journaldev.com/611/exception-in-thread-main-java" target="_blank" rel="external">Java Exception in thread main</a></span></h3><p>JVM creates first thread using <strong>main</strong> method. This post explains about some common exceptions we see in daily life and what is the root cause of them and how to fix them.</p>
+</li>
+<li><h3 id="Thread-Safety-in-Singleton-Class"><a href="#Thread-Safety-in-Singleton-Class" class="headerlink" title="Thread Safety in Singleton Class"></a><span id="thread-safety-in-singleton-class"><a href="https://www.journaldev.com/171/thread-safety-in-java-singleton-classes-with-example-code" target="_blank" rel="external">Thread Safety in Singleton Class</a></span></h3><p>In this article, you will learn basic concepts of creating Singleton class. What are thread safety issues with different implementation. How we can achieve <strong>thread safety in Singleton class</strong>.</p>
+</li>
+<li><h3 id="Daemon-Thread-in-Java"><a href="#Daemon-Thread-in-Java" class="headerlink" title="Daemon Thread in Java"></a><span id="daemon-thread-in-java"><a href="https://www.journaldev.com/1072/daemon-thread-in-java" title="Daemon Thread in Java" target="_blank" rel="external">Daemon Thread in Java</a></span></h3><p>A simple article explaining about <strong>daemon threads</strong> and how we can create daemon threads in java.</p>
+</li>
+<li><h3 id="Java-Thread-Local"><a href="#Java-Thread-Local" class="headerlink" title="Java Thread Local"></a><span id="java-thread-local"><a href="https://www.journaldev.com/1076/java-threadlocal-example" title="Java ThreadLocal Example to create thread-local variables" target="_blank" rel="external">Java Thread Local</a></span></h3><p>We know that threads share Object’s variables but what if we want to have thread-local variables created at class level. Java provides <strong>ThreadLocal</strong> utility class to create thread-local variables. Read more to learn about how we can create <em>ThreadLocal</em> variables in java program.</p>
+</li>
+<li><h3 id="Java-Thread-Dump"><a href="#Java-Thread-Dump" class="headerlink" title="Java Thread Dump"></a><span id="java-thread-dump"><a href="https://www.journaldev.com/1053/java-thread-dump-visualvm-jstack-kill-3-jcmd" title="How to generate Thread Dump in Java" target="_blank" rel="external">Java Thread Dump</a></span></h3><p><strong>Java Thread dump</strong> provides the current threads information for the program. Java Thread dump provides useful information to analyze performance issues with the application. You can use thread dump to find and fix deadlock situations. This post explains different methods that can be used to generate thread dump in java.</p>
+</li>
+<li><h3 id="How-to-Analyze-Deadlock-and-avoid-it-in-Java"><a href="#How-to-Analyze-Deadlock-and-avoid-it-in-Java" class="headerlink" title="How to Analyze Deadlock and avoid it in Java"></a><span id="how-to-analyze-deadlock-and-avoid-it-in-java"><a href="https://www.journaldev.com/1058/deadlock-in-java-example" title="Java Deadlock Example and How to analyze deadlock situation" target="_blank" rel="external">How to Analyze Deadlock and avoid it in Java</a></span></h3><p>Deadlock is a situation where multiple threads are waiting for each other to release resources causing cyclic dependency. This article discusses about the situation in which we can get deadlock in a java program. How we can use Thread dump to find the deadlock and best practices to <strong>avoid deadlock in java</strong> program.</p>
+</li>
+<li><h3 id="Java-Timer-Thread"><a href="#Java-Timer-Thread" class="headerlink" title="Java Timer Thread"></a><span id="java-timer-thread"><a href="https://www.journaldev.com/1050/java-timer-timertask-example" title="Java Timer TimerTask Example" target="_blank" rel="external">Java Timer Thread</a></span></h3><p>This post explains how we can use <strong>Java Timer</strong> and TimerTask classes to create jobs to run at scheduled interval, an example program showing it’s usage and how we can cancel the timer.</p>
+</li>
+<li><h3 id="Java-Producer-Consumer-Problem"><a href="#Java-Producer-Consumer-Problem" class="headerlink" title="Java Producer Consumer Problem"></a><span id="java-producer-consumer-problem"><a href="https://www.journaldev.com/1034/java-blockingqueue-example" title="Java BlockingQueue Example implementing Producer Consumer Problem" target="_blank" rel="external">Java Producer Consumer Problem</a></span></h3><p>Before Java 5, producer-consumer problem can be solved using wait() and notify() methods but introduction of BlockingQueue has made it very easy. Learn how we can use BlockingQueue to solve producer consumer problem in java.</p>
+</li>
+<li><h3 id="Java-Thread-Pool"><a href="#Java-Thread-Pool" class="headerlink" title="Java Thread Pool"></a><span id="java-thread-pool"><a href="https://www.journaldev.com/1069/threadpoolexecutor-java-thread-pool-example-executorservice" title="Java Thread Pool Example using Executors and ThreadPoolExecutor" target="_blank" rel="external">Java Thread Pool</a></span></h3><p>Java Thread Pool is a collection of worker threads waiting to process jobs. Java 5 introduction of Executor framework has made it very easy to create thread pool in java using Executors and ThreadPoolExecutor classes. Learn how to use them to create thread pool in java.</p>
+</li>
+<li><h3 id="Java-Callable-Future"><a href="#Java-Callable-Future" class="headerlink" title="Java Callable Future"></a><span id="java-callable-future"><a href="https://www.journaldev.com/1090/java-callable-future-example" title="Java Callable Future Example" target="_blank" rel="external">Java Callable Future</a></span></h3><p>Sometimes we wish Thread could return values that we can use. Java 5 Callable can be used in that case that is similar as Runnable interface. We can use Executor framework to execute Callable tasks.</p>
+</li>
+<li><h3 id="Java-FutureTask-Example"><a href="#Java-FutureTask-Example" class="headerlink" title="Java FutureTask Example"></a><span id="java-futuretask-example"><a href="https://www.journaldev.com/1650/java-futuretask-example-program" title="Java FutureTask Example" target="_blank" rel="external">Java FutureTask Example</a></span></h3><p>FutureTask class is the base concrete class that implements Future interface. We use it with Callable implementation and Executors for asynchronous processing. FutureTask provide implementation methods to check the state of the task and return the value to the calling program once it’s processing is finished. It comes handy when you want to override some of the implementation methods of the Future interface.</p>
+</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/07/20/java-post-validation-code/" rel="next" title="Java 实现图形验证码">
+                <i class="fa fa-chevron-left"></i> Java 实现图形验证码
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/07/27/music-piao-yao-zhou-xun/" rel="prev" title="飘摇-周迅.mp3">
+                飘摇-周迅.mp3 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/favicon.png"
+                alt="laudukang" />
+            
+              <p class="site-author-name" itemprop="name">laudukang</p>
+              <p class="site-description motion-element" itemprop="description">Bug Not Found</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">63</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/laudukang" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:laudukang@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://gitee.com/laudukang" target="_blank" title="Git@OSC">
+                    
+                      <i class="fa fa-fw fa-github"></i>Git@OSC</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://my.oschina.net/laudukang" target="_blank" title="OSC">
+                    
+                      <i class="fa fa-fw fa-user-circle"></i>OSC</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/laudukang" target="_blank" title="Twitter">
+                    
+                      <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.v2ex.com/member/laudukang" target="_blank" title="V2EX">
+                    
+                      <i class="fa fa-fw fa-globe"></i>V2EX</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Remark-Finished-read-1-7-2015-07-23-15-40-57"><span class="nav-number">1.</span> <span class="nav-text">Remark: Finished read 1-7, 2015-07-23 15:40:57</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Threads-in-Java"><span class="nav-number"></span> <span class="nav-text">Threads in Java</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-Thread-Example"><span class="nav-number"></span> <span class="nav-text">Java Thread Example</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-Thread-Sleep"><span class="nav-number"></span> <span class="nav-text">Java Thread Sleep</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-Thread-Join"><span class="nav-number"></span> <span class="nav-text">Java Thread Join</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-Thread-States"><span class="nav-number"></span> <span class="nav-text">Java Thread States</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-Thread-wait-notify-and-notifyAll"><span class="nav-number"></span> <span class="nav-text">Java Thread wait, notify and notifyAll</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-Thread-Safety-and-Java-Synchronization"><span class="nav-number"></span> <span class="nav-text">Java Thread Safety and Java Synchronization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-Exception-in-thread-main"><span class="nav-number"></span> <span class="nav-text">Java Exception in thread main</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Thread-Safety-in-Singleton-Class"><span class="nav-number"></span> <span class="nav-text">Thread Safety in Singleton Class</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Daemon-Thread-in-Java"><span class="nav-number"></span> <span class="nav-text">Daemon Thread in Java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-Thread-Local"><span class="nav-number"></span> <span class="nav-text">Java Thread Local</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-Thread-Dump"><span class="nav-number"></span> <span class="nav-text">Java Thread Dump</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#How-to-Analyze-Deadlock-and-avoid-it-in-Java"><span class="nav-number"></span> <span class="nav-text">How to Analyze Deadlock and avoid it in Java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-Timer-Thread"><span class="nav-number"></span> <span class="nav-text">Java Timer Thread</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-Producer-Consumer-Problem"><span class="nav-number"></span> <span class="nav-text">Java Producer Consumer Problem</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-Thread-Pool"><span class="nav-number"></span> <span class="nav-text">Java Thread Pool</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-Callable-Future"><span class="nav-number"></span> <span class="nav-text">Java Callable Future</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-FutureTask-Example"><span class="nav-number"></span> <span class="nav-text">Java FutureTask Example</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">laudukang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io" rel="external nofollow">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">NexT.Pisces</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

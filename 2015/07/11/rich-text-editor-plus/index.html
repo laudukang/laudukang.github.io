@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/favicon.png?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="git,web," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Rich Text Editor PlusA collection of editor with customized update, Rich Text Editor Plus Github Ueditor Change Log 表情文件本地化 images目录下的所有表情文件夹复制到dialogs/emotion/images/文件夹下面，修改editor_config.js文件，去掉emot">
+<meta name="keywords" content="git,web">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Rich Text Editor Plus">
+<meta property="og:url" content="http://codz.me/2015/07/11/rich-text-editor-plus/index.html">
+<meta property="og:site_name" content="Code Is Poetry">
+<meta property="og:description" content="Rich Text Editor PlusA collection of editor with customized update, Rich Text Editor Plus Github Ueditor Change Log 表情文件本地化 images目录下的所有表情文件夹复制到dialogs/emotion/images/文件夹下面，修改editor_config.js文件，去掉emot">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2015-07-12T04:17:03.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Rich Text Editor Plus">
+<meta name="twitter:description" content="Rich Text Editor PlusA collection of editor with customized update, Rich Text Editor Plus Github Ueditor Change Log 表情文件本地化 images目录下的所有表情文件夹复制到dialogs/emotion/images/文件夹下面，修改editor_config.js文件，去掉emot">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://codz.me/2015/07/11/rich-text-editor-plus/"/>
+
+
+
+
+
+  <title>Rich Text Editor Plus | Code Is Poetry</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Code Is Poetry</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://codz.me/2015/07/11/rich-text-editor-plus/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="laudukang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/favicon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Is Poetry">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Rich Text Editor Plus</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-07-11T23:52:00+08:00">
+                2015-07-11 23:52:00
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2015-07-12T12:17:03+08:00">
+                2015-07-12 12:17:03
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Git/" itemprop="url" rel="index">
+                    <span itemprop="name">Git</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Rich-Text-Editor-Plus"><a href="#Rich-Text-Editor-Plus" class="headerlink" title="Rich Text Editor Plus"></a>Rich Text Editor Plus</h1><p>A collection of editor with customized update, <a href="https://github.com/laudukang/rich-text-editor-plus" target="_blank" rel="external">Rich Text Editor Plus Github</a></p>
+<h2 id="Ueditor-Change-Log"><a href="#Ueditor-Change-Log" class="headerlink" title="Ueditor Change Log"></a>Ueditor Change Log</h2><ol>
+<li><p>表情文件本地化<br> images目录下的所有表情文件夹复制到<code>dialogs/emotion/images/</code>文件夹下面，修改<code>editor_config.js</code>文件，去掉<code>emotionLocalization</code>项的注释，值改为<code>true</code>。</p>
+</li>
+<li><p>列表文件本地化<br> 解压放到你的<code>themes/</code>文件夹下（可以按照需求放置路径），修改<code>editor_config.js</code>文件，修改listiconpath配置项：</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//如果是自己的目录，请使用  <span class="string">'/'</span>开头的绝对路径</span><br><span class="line">listiconpath : <span class="type">URL</span>+<span class="symbol">'themes</span>/ueditor-list/'</span><br></pre></td></tr></table></figure>
+<p>在发布文章的页面，引用<code>uparse.js</code>，并运行 uParse 函数，传入列表路径：</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">uParse(<span class="string">'.content'</span>,&#123;</span><br><span class="line">    <span class="string">'liiconpath'</span>:<span class="string">'/UTest/ueditor/themes/ueditor-list/'</span>    <span class="comment">//使用 '/' 开头的绝对路径</span></span><br><span class="line">&#125;)</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>升级ueditor的SyntaxHighlighter，ueditor默认使用了SyntaxHighlighter的Default主题</p>
+<p> 更多配置请参见<br> <a href="http://www.crarun.com/article-3.html" target="_blank" rel="external">升级UEditor的SyntaxHighlighter</a></p>
+</li>
+<li><p>更改了ueditor的默认上传位置，使用了tomcat的虚拟路径，避免重新部署后丢失先前的文件，</p>
+<p> 这里修改了<code>com.baidu.ueditor.ConfigManager</code>类，主要是对<code>ueditor.config.js</code>虚拟路径配置的处理;</p>
+<p> 还修改了<code>com.baidu.ueditor.hunter.FileManager</code>和<code>com.baidu.ueditor.upload.BinaryUploader</code>，主要是对配置了tomcat虚拟路径后的处理;</p>
+<p> 特别地，修改了原图片在线管理/文件在线附件的获取，原ueditor可以获取文件的个数并显示出来，但图片/文件显示不了，因为其封装的路径有文件，原ueditor的封装使用了绝对路径，即把</p>
+ <figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D:<span class="symbol">\T</span>omcat 7.0.57<span class="symbol">\w</span>ebapps<span class="symbol">\E</span>ditorDemo<span class="symbol">\u</span>pload<span class="symbol">\i</span>mage<span class="symbol">\2</span>0150711<span class="symbol">\1</span>436591786822080766.jpg</span><br></pre></td></tr></table></figure>
+<p> 这样的文件路径返回前台，这样子前台ueditor是获取不了文件的，所以改成了相对路径，见FileManager类下的getPath (File)方法；</p>
+<p> 关于tomcat虚拟路径的配置，修改tomcat conf目录下的server.xml，在Host里面添加:</p>
+ <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Context <span class="attribute">path</span>=<span class="string">"/EditorDemo/ueditorupload"</span> <span class="attribute">docBase</span>=<span class="string">"D:\apache\EditorDemo\ueditor\ueditorupload"</span>/&gt;</span><br></pre></td></tr></table></figure>
+<p> 这部分内容参考了<br> <a href="http://blog.csdn.net/will_awoke/article/details/39579061" target="_blank" rel="external">百度UEditor 上传组件 使用虚拟路径映射配置</a></p>
+</li>
+<li><p>是否保存上传文件到虚拟路径的配置请参见<code>ueditor/jsp/</code>下的<code>config.json</code>，xxxRealMappingPath指定了物理路径的位置</p>
+</li>
+<li><p>修改百度map组件的默认位置为<code>广东广州</code></p>
+</li>
+<li><p>该版本基于ubuilder_1_4_3-utf8-jsp修改</p>
+</li>
+<li><p>ueditor这部分的最后修改时间2015年7月11日22:31:04</p>
+</li>
+</ol>
+<h2 id="Kindeditor-Change-Log"><a href="#Kindeditor-Change-Log" class="headerlink" title="Kindeditor Change Log"></a>Kindeditor Change Log</h2><ol>
+<li>基于kindeditor-4.1.10修改</li>
+<li>修改代码高亮为SyntaxHighlighter插件</li>
+<li>添加插入附件的文件类型图标，用于插入附件后在前面显示</li>
+<li>修改了<code>kindeditor/jsp</code>文件夹下的<code>file_manager_json.jsp</code>和<code>upload_json.jsp</code>文件，用于上传文件/文件管理器的支持</li>
+<li>添加/修改了jwplayer插件，用于播放流媒体文件</li>
+<li><p>虚拟路径</p>
+ <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Context <span class="attribute">path</span>=<span class="string">"/EditorDemo/kindeditorupload"</span> <span class="attribute">docBase</span>=<span class="string">"D:\apache\EditorDemo\kindeditor\kindeditorupload"</span>/&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>kindeditor这部分的最后修改时间2015年7月12日01:30:29</p>
+</li>
+</ol>
+<h2 id="Ckeditor-Change-Log"><a href="#Ckeditor-Change-Log" class="headerlink" title="Ckeditor Change Log"></a>Ckeditor Change Log</h2><ol>
+<li><p>基于ckeditor_4.5.1_full修改</p>
+</li>
+<li><p>添加了<code>jsp/browse.jsp</code>和<code>jsp/upload.jsp</code>两个文件，分别用于浏览服务器文件和上传图片/附件到服务器；</p>
+<p> <code>config.js</code>配置了这两个文件的调用；</p>
+<p> 修改返回路径为服务器相对路径saveUrl；</p>
+<p> 修改上传文件新文件名为当前日期+随机码，tomcat需要配置虚拟路径</p>
+ <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Context <span class="attribute">path</span>=<span class="string">"/EditorDemo/ckeditorupload"</span> <span class="attribute">docBase</span>=<span class="string">"D:\apache\EditorDemo\ckeditor\ckeditorupload"</span>/&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>ckeditor这部分的最后修改时间2015年7月12日12:11:55</p>
+</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/git/" rel="tag"># git</a>
+          
+            <a href="/tags/web/" rel="tag"># web</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/07/10/java-forkjoin/" rel="next" title="JAVA 并行框架 ForkJoin">
+                <i class="fa fa-chevron-left"></i> JAVA 并行框架 ForkJoin
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/07/17/setup-linux-server/" rel="prev" title="[转]Linux 服务器的初步配置流程">
+                [转]Linux 服务器的初步配置流程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/favicon.png"
+                alt="laudukang" />
+            
+              <p class="site-author-name" itemprop="name">laudukang</p>
+              <p class="site-description motion-element" itemprop="description">Bug Not Found</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">63</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/laudukang" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:laudukang@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://gitee.com/laudukang" target="_blank" title="Git@OSC">
+                    
+                      <i class="fa fa-fw fa-github"></i>Git@OSC</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://my.oschina.net/laudukang" target="_blank" title="OSC">
+                    
+                      <i class="fa fa-fw fa-user-circle"></i>OSC</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/laudukang" target="_blank" title="Twitter">
+                    
+                      <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.v2ex.com/member/laudukang" target="_blank" title="V2EX">
+                    
+                      <i class="fa fa-fw fa-globe"></i>V2EX</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Rich-Text-Editor-Plus"><span class="nav-number">1.</span> <span class="nav-text">Rich Text Editor Plus</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ueditor-Change-Log"><span class="nav-number">1.1.</span> <span class="nav-text">Ueditor Change Log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kindeditor-Change-Log"><span class="nav-number">1.2.</span> <span class="nav-text">Kindeditor Change Log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ckeditor-Change-Log"><span class="nav-number">1.3.</span> <span class="nav-text">Ckeditor Change Log</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">laudukang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io" rel="external nofollow">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">NexT.Pisces</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
