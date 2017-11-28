@@ -2,14 +2,18 @@
 
 
 
+  
 
-<html class="theme-next pisces" lang="zh-Hans">
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
 
+
+<link href="/lib/nprogress/nprogress.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -77,7 +81,7 @@
 
 
 
-<meta name="description" content="背景：在学校做的项目都是使用SVN版本管理，遂研究了如何本地搭建GitLab，并且成功搭建在306实验室。laudukang，2017年11月20日14:01:53。  GitLab版本管理部署-推荐  GitLab Installers-快速安装包  GitLab搭建自己的私有GitHub  How to change URL of a working GitLab install?  gitl">
+<meta name="description" content="背景：在学校做的项目都是使用SVN版本管理，遂研究了如何本地搭建GitLab，并且成功搭建在306实验室。laudukang，2017年11月20日14:01:53。  GitLab版本管理部署-推荐  GitLab Installers-快速安装包  GitLab搭建自己的私有GitHub  How to chang">
 <meta name="keywords" content="gitlab">
 <meta property="og:type" content="article">
 <meta property="og:title" content="GitLab 搭建及 svn2git 保留原提交记录">
@@ -101,7 +105,7 @@
     sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
-    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
       userId: '0',
       author: '博主'
@@ -131,6 +135,16 @@
 
 
 
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?f286ee7ebbe4dd6dfe2457f73f042ac0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
 
 
 
@@ -159,7 +173,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle"></p>
+        <h1 class="site-subtitle" itemprop="description"></h1>
       
   </div>
 
@@ -288,7 +302,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">GitLab 搭建及 svn2git 保留原提交记录</h1>
+          <h2 class="post-title" itemprop="name headline">GitLab 搭建及 svn2git 保留原提交记录</h2>
         
 
         <div class="post-meta">
@@ -297,8 +311,6 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
               
               <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-05-27T21:05:00+08:00">
                 2015-05-27 21:05:00
@@ -314,8 +326,6 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
               <time title="更新于" itemprop="dateModified" datetime="2016-01-23T19:29:23+08:00">
                 2016-01-23 19:29:23
               </time>
@@ -330,8 +340,6 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -351,6 +359,10 @@
           
 
           
+          
+             <span id="/2015/05/27/gitlab-setup-and-svn2git/" class="leancloud_visitors" data-flag-title="GitLab 搭建及 svn2git 保留原提交记录">
+                
+             </span>
           
 
           
@@ -374,32 +386,32 @@
       
         <p>背景：在学校做的项目都是使用SVN版本管理，遂研究了如何本地搭建GitLab，并且成功搭建在306实验室。laudukang，2017年11月20日14:01:53。</p>
 <ul>
-<li><p><a href="http://www.cnblogs.com/wintersun/p/3930900.html" target="_blank" rel="external">GitLab版本管理部署-推荐</a></p>
+<li><p><a href="http://www.cnblogs.com/wintersun/p/3930900.html" target="_blank" rel="noopener">GitLab版本管理部署-推荐</a></p>
 </li>
-<li><p><a href="https://bitnami.com/stack/gitlab/installer" target="_blank" rel="external">GitLab Installers-快速安装包</a></p>
+<li><p><a href="https://bitnami.com/stack/gitlab/installer" target="_blank" rel="noopener">GitLab Installers-快速安装包</a></p>
 </li>
-<li><p><a href="http://segmentfault.com/a/1190000000345686" target="_blank" rel="external">GitLab搭建自己的私有GitHub</a></p>
+<li><p><a href="http://segmentfault.com/a/1190000000345686" target="_blank" rel="noopener">GitLab搭建自己的私有GitHub</a></p>
 </li>
-<li><p><a href="http://stackoverflow.com/questions/19456129/how-to-change-url-of-a-working-gitlab-install" target="_blank" rel="external">How to change URL of a working GitLab install?</a></p>
+<li><p><a href="http://stackoverflow.com/questions/19456129/how-to-change-url-of-a-working-gitlab-install" target="_blank" rel="noopener">How to change URL of a working GitLab install?</a></p>
 </li>
-<li><p><a href="http://herry2013git.blog.163.com/blog/static/219568011201341111240751" target="_blank" rel="external">gitlab多人协同工作-推荐</a></p>
+<li><p><a href="http://herry2013git.blog.163.com/blog/static/219568011201341111240751" target="_blank" rel="noopener">gitlab多人协同工作-推荐</a></p>
 </li>
-<li><p><a href="http://my.oschina.net/u/1158620/blog/289191" target="_blank" rel="external">Gitlab7.0通知邮箱的配置（smtp）</a></p>
+<li><p><a href="http://my.oschina.net/u/1158620/blog/289191" target="_blank" rel="noopener">Gitlab7.0通知邮箱的配置（smtp）</a></p>
 </li>
-<li><p><a href="http://my.oschina.net/anylain/blog/220774" target="_blank" rel="external">配置GitLab 用smtp发邮件 (gitlab-6.7.3)</a></p>
+<li><p><a href="http://my.oschina.net/anylain/blog/220774" target="_blank" rel="noopener">配置GitLab 用smtp发邮件 (gitlab-6.7.3)</a></p>
 </li>
-<li><p><a href="http://blog.fizyk.net.pl/blog/configure-gitlab-with-smtp-mail-server.html" target="_blank" rel="external">Configure gitlab with smtp mail server</a></p>
+<li><p><a href="http://blog.fizyk.net.pl/blog/configure-gitlab-with-smtp-mail-server.html" target="_blank" rel="noopener">Configure gitlab with smtp mail server</a></p>
 </li>
 </ul>
 <h2 id="svn2git"><a href="#svn2git" class="headerlink" title="svn2git"></a>svn2git</h2><h5 id="updated-by-laudukang-at-2017-11-20-14-10-57"><a href="#updated-by-laudukang-at-2017-11-20-14-10-57" class="headerlink" title="updated by laudukang at 2017-11-20 14:10:57"></a>updated by laudukang at 2017-11-20 14:10:57</h5><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cd</span> svn_repertory</span><br><span class="line"><span class="comment">#generate author.txt config</span></span><br><span class="line">svn log <span class="params">--quiet</span>   | grep -a -E <span class="string">"r[0-9]+ \| .+ \|"</span> | cut -d'|' -f2 | sed 's/^ <span class="string">//</span>' | sort | uniq</span><br><span class="line"></span><br><span class="line">git svn clone &lt;your-svn-url&gt; <span class="params">--trunk=</span><span class="string">"trunk"</span> <span class="params">--branches=</span><span class="string">"branches"</span> -A <span class="string">/d/author.txt</span> <span class="params">--follow-parent</span> <span class="params">--username</span> laudukang <span class="params">(--password &lt;your-password&gt; 可选)</span></span><br><span class="line"></span><br><span class="line">git branch -r</span><br><span class="line">git checkout -b master remotes/your-branch</span><br><span class="line"></span><br><span class="line">git push -u origin <span class="params">--all</span> &amp;&amp; git push -u origin <span class="params">--tags</span></span><br></pre></td></tr></table></figure>
 <p>reference:</p>
 <ol>
-<li><a href="https://www.troyhunt.com/migrating-from-subversion-to-git-with/" target="_blank" rel="external">Migrating from Subversion to Git with svn2git on Windows</a></li>
-<li><a href="https://docs.gitlab.com/ce/user/project/import/svn.html" target="_blank" rel="external">Migrating from SVN to GitLab</a></li>
-<li><a href="https://www.getdonedone.com/converting-5-year-old-repository-subversion-git/" target="_blank" rel="external">Converting A 5-Year-Old Repository From Subversion To Git</a></li>
-<li><a href="https://stackoverflow.com/questions/3239759/checkout-remote-branch-using-git-svn" target="_blank" rel="external">Checkout remote branch using git svn</a></li>
-<li><a href="https://stackoverflow.com/questions/12161541/work-around-for-failing-git-svn-clone-requiring-full-history" target="_blank" rel="external">Work-around for failing “git svn clone” (requiring full history)</a></li>
-<li><a href="https://git-scm.com/docs/git-svn" target="_blank" rel="external">git-svn</a></li>
+<li><a href="https://www.troyhunt.com/migrating-from-subversion-to-git-with/" target="_blank" rel="noopener">Migrating from Subversion to Git with svn2git on Windows</a></li>
+<li><a href="https://docs.gitlab.com/ce/user/project/import/svn.html" target="_blank" rel="noopener">Migrating from SVN to GitLab</a></li>
+<li><a href="https://www.getdonedone.com/converting-5-year-old-repository-subversion-git/" target="_blank" rel="noopener">Converting A 5-Year-Old Repository From Subversion To Git</a></li>
+<li><a href="https://stackoverflow.com/questions/3239759/checkout-remote-branch-using-git-svn" target="_blank" rel="noopener">Checkout remote branch using git svn</a></li>
+<li><a href="https://stackoverflow.com/questions/12161541/work-around-for-failing-git-svn-clone-requiring-full-history" target="_blank" rel="noopener">Work-around for failing “git svn clone” (requiring full history)</a></li>
+<li><a href="https://git-scm.com/docs/git-svn" target="_blank" rel="noopener">git-svn</a></li>
 </ol>
 
       
@@ -514,7 +526,7 @@
                 alt="laudukang" />
             
               <p class="site-author-name" itemprop="name">laudukang</p>
-              <p class="site-description motion-element" itemprop="description">Bug Not Found</p>
+              <p class="site-description motion-element" itemprop="description"></p>
           </div>
 
           <nav class="site-state motion-element">
@@ -663,6 +675,26 @@
 
 
         
+<div class="busuanzi-count" style="display: none;">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
 
 
 
@@ -690,6 +722,7 @@
     window.Promise = null;
   }
 </script>
+
 
 
 
@@ -730,6 +763,9 @@
   <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
 
   
+  <script type="text/javascript" src="/lib/nprogress/nprogress.js"></script>
+
+  
   <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
   
@@ -742,6 +778,8 @@
   <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
 
   <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/custom/custom.js?v=5.1.3"></script>
 
 
 
@@ -806,6 +844,128 @@
   
 
   
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("CPfRDhOlTyfkHW155W3Kx3H1-gzGzoHsz", "TX05RQSQMd8fbL7RaJNADS7S");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
 
   
 

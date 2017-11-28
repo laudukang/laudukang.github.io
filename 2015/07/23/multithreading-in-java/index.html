@@ -2,14 +2,18 @@
 
 
 
+  
 
-<html class="theme-next pisces" lang="zh-Hans">
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
 
+
+<link href="/lib/nprogress/nprogress.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -77,7 +81,7 @@
 
 
 
-<meta name="description" content="Remark: Finished read 1-7, 2015-07-23 15:40:57Multithreading in Java is a very important topic. I have written a lot about Threads in Java. Java Thread is a lightweight process that executes some task">
+<meta name="description" content="Remark: Finished read 1-7, 2015-07-23 15:40:57Multithreading in Java is a very important topic. I have written a lot about Threads in Java. Java Thread is a lig">
 <meta name="keywords" content="java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Repost]Multithreading in Java">
@@ -104,7 +108,7 @@
     sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
-    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
       userId: '0',
       author: '博主'
@@ -134,6 +138,16 @@
 
 
 
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?f286ee7ebbe4dd6dfe2457f73f042ac0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
 
 
 
@@ -162,7 +176,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle"></p>
+        <h1 class="site-subtitle" itemprop="description"></h1>
       
   </div>
 
@@ -291,7 +305,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">[Repost]Multithreading in Java</h1>
+          <h2 class="post-title" itemprop="name headline">[Repost]Multithreading in Java</h2>
         
 
         <div class="post-meta">
@@ -300,8 +314,6 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
               
               <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-07-23T01:30:00+08:00">
                 2015-07-23 01:30:00
@@ -317,8 +329,6 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
               <time title="更新于" itemprop="dateModified" datetime="2015-07-23T15:40:57+08:00">
                 2015-07-23 15:40:57
               </time>
@@ -333,8 +343,6 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -354,6 +362,10 @@
           
 
           
+          
+             <span id="/2015/07/23/multithreading-in-java/" class="leancloud_visitors" data-flag-title="[Repost]Multithreading in Java">
+                
+             </span>
           
 
           
@@ -386,39 +398,39 @@
 <h1 id="Threads-in-Java"><a href="#Threads-in-Java" class="headerlink" title="Threads in Java"></a>Threads in Java</h1><img src="http://oss-aliyun.codz.me/images/2015/07/23/multithreading-in-java/java-thread.png" alt="java-thread.png" title="">
 <p>With Java 8 lambda expressions, we can create Thread in java like below too because Runnable is a functional interface.</p>
 <ol>
-<li><h3 id="Java-Thread-Example"><a href="#Java-Thread-Example" class="headerlink" title="Java Thread Example"></a><span id="java-thread-example"><a href="https://www.journaldev.com/1016/java-thread-example" target="_blank" rel="external">Java Thread Example</a></span></h3><p>This is the first post in the multithreading in java tutorial series. Read this to learn about <strong>Process</strong> and <strong>Thread</strong>. What is the difference between Thread and Process. Benefits of using Threads and how we can create Threads using <strong>Runnable</strong> interface and <strong>Thread</strong> class. This post also compares Runnable interface with Thread class.</p>
+<li><h3 id="Java-Thread-Example"><a href="#Java-Thread-Example" class="headerlink" title="Java Thread Example"></a><span id="java-thread-example"><a href="https://www.journaldev.com/1016/java-thread-example" target="_blank" rel="noopener">Java Thread Example</a></span></h3><p>This is the first post in the multithreading in java tutorial series. Read this to learn about <strong>Process</strong> and <strong>Thread</strong>. What is the difference between Thread and Process. Benefits of using Threads and how we can create Threads using <strong>Runnable</strong> interface and <strong>Thread</strong> class. This post also compares Runnable interface with Thread class.</p>
 </li>
-<li><h3 id="Java-Thread-Sleep"><a href="#Java-Thread-Sleep" class="headerlink" title="Java Thread Sleep"></a><span id="java-thread-sleep"><a href="https://www.journaldev.com/1020/thread-sleep-java" target="_blank" rel="external">Java Thread Sleep</a></span></h3><p><em>Java Thread sleep</em> is used to pause the execution of current thread. We will use Thread sleep extensively in future posts, so it’s good to know how it works and is it accurate or not?</p>
+<li><h3 id="Java-Thread-Sleep"><a href="#Java-Thread-Sleep" class="headerlink" title="Java Thread Sleep"></a><span id="java-thread-sleep"><a href="https://www.journaldev.com/1020/thread-sleep-java" target="_blank" rel="noopener">Java Thread Sleep</a></span></h3><p><em>Java Thread sleep</em> is used to pause the execution of current thread. We will use Thread sleep extensively in future posts, so it’s good to know how it works and is it accurate or not?</p>
 </li>
-<li><h3 id="Java-Thread-Join"><a href="#Java-Thread-Join" class="headerlink" title="Java Thread Join"></a><span id="java-thread-join"><a href="https://www.journaldev.com/1024/java-thread-join-example" target="_blank" rel="external">Java Thread Join</a></span></h3><p>Sometimes we need to wait for other threads to finish it’s execution before we can proceed. We can achieve this using <strong>Thread join</strong>, learn how it works and when we should use it.</p>
+<li><h3 id="Java-Thread-Join"><a href="#Java-Thread-Join" class="headerlink" title="Java Thread Join"></a><span id="java-thread-join"><a href="https://www.journaldev.com/1024/java-thread-join-example" target="_blank" rel="noopener">Java Thread Join</a></span></h3><p>Sometimes we need to wait for other threads to finish it’s execution before we can proceed. We can achieve this using <strong>Thread join</strong>, learn how it works and when we should use it.</p>
 </li>
-<li><h3 id="Java-Thread-States"><a href="#Java-Thread-States" class="headerlink" title="Java Thread States"></a><span id="java-thread-states"><a href="https://www.journaldev.com/1044/thread-life-cycle-in-java-thread-states-in-java" target="_blank" rel="external">Java Thread States</a></span></h3><p>Understanding different <strong>states of thread</strong> is important. Learn how thread changes it’s state and how thread scheduler changes thread state.</p>
+<li><h3 id="Java-Thread-States"><a href="#Java-Thread-States" class="headerlink" title="Java Thread States"></a><span id="java-thread-states"><a href="https://www.journaldev.com/1044/thread-life-cycle-in-java-thread-states-in-java" target="_blank" rel="noopener">Java Thread States</a></span></h3><p>Understanding different <strong>states of thread</strong> is important. Learn how thread changes it’s state and how thread scheduler changes thread state.</p>
 </li>
-<li><h3 id="Java-Thread-wait-notify-and-notifyAll"><a href="#Java-Thread-wait-notify-and-notifyAll" class="headerlink" title="Java Thread wait, notify and notifyAll"></a><span id="java-thread-wait-notify-and-notifyall"><a href="https://www.journaldev.com/1037/java-thread-wait-notify-and-notifyall-example" target="_blank" rel="external">Java Thread wait, notify and notifyAll</a></span></h3><p>Java Object class contains three methods using which threads can communicate about the lock status of a resource. Learn with example usage of these Object class methods in a simple Wait-Notify implementation.</p>
+<li><h3 id="Java-Thread-wait-notify-and-notifyAll"><a href="#Java-Thread-wait-notify-and-notifyAll" class="headerlink" title="Java Thread wait, notify and notifyAll"></a><span id="java-thread-wait-notify-and-notifyall"><a href="https://www.journaldev.com/1037/java-thread-wait-notify-and-notifyall-example" target="_blank" rel="noopener">Java Thread wait, notify and notifyAll</a></span></h3><p>Java Object class contains three methods using which threads can communicate about the lock status of a resource. Learn with example usage of these Object class methods in a simple Wait-Notify implementation.</p>
 </li>
-<li><h3 id="Java-Thread-Safety-and-Java-Synchronization"><a href="#Java-Thread-Safety-and-Java-Synchronization" class="headerlink" title="Java Thread Safety and Java Synchronization"></a><span id="java-thread-safety-and-java-synchronization"><a href="https://www.journaldev.com/1061/thread-safety-in-java" title="Java Synchronization and Thread Safety Tutorial with Examples" target="_blank" rel="external">Java Thread Safety and Java Synchronization</a></span></h3><p>We know that Threads share Object resources, it can lead to data corruption because these operations are not atomic. Learn how we can achieve <strong><a href="https://www.journaldev.com/1061/thread-safety-in-java" target="_blank" rel="external">thread safety in java</a></strong> using different methods. Read this post to learn about the correct usage of <strong>synchronization</strong>, synchronized methods and synchronized blocks.<br>There are various examples of synchronized usage and the post explains what are the issues with them.</p>
+<li><h3 id="Java-Thread-Safety-and-Java-Synchronization"><a href="#Java-Thread-Safety-and-Java-Synchronization" class="headerlink" title="Java Thread Safety and Java Synchronization"></a><span id="java-thread-safety-and-java-synchronization"><a href="https://www.journaldev.com/1061/thread-safety-in-java" title="Java Synchronization and Thread Safety Tutorial with Examples" target="_blank" rel="noopener">Java Thread Safety and Java Synchronization</a></span></h3><p>We know that Threads share Object resources, it can lead to data corruption because these operations are not atomic. Learn how we can achieve <strong><a href="https://www.journaldev.com/1061/thread-safety-in-java" target="_blank" rel="noopener">thread safety in java</a></strong> using different methods. Read this post to learn about the correct usage of <strong>synchronization</strong>, synchronized methods and synchronized blocks.<br>There are various examples of synchronized usage and the post explains what are the issues with them.</p>
 </li>
-<li><h3 id="Java-Exception-in-thread-main"><a href="#Java-Exception-in-thread-main" class="headerlink" title="Java Exception in thread main"></a><span id="java-exception-in-thread-main"><a href="https://www.journaldev.com/611/exception-in-thread-main-java" target="_blank" rel="external">Java Exception in thread main</a></span></h3><p>JVM creates first thread using <strong>main</strong> method. This post explains about some common exceptions we see in daily life and what is the root cause of them and how to fix them.</p>
+<li><h3 id="Java-Exception-in-thread-main"><a href="#Java-Exception-in-thread-main" class="headerlink" title="Java Exception in thread main"></a><span id="java-exception-in-thread-main"><a href="https://www.journaldev.com/611/exception-in-thread-main-java" target="_blank" rel="noopener">Java Exception in thread main</a></span></h3><p>JVM creates first thread using <strong>main</strong> method. This post explains about some common exceptions we see in daily life and what is the root cause of them and how to fix them.</p>
 </li>
-<li><h3 id="Thread-Safety-in-Singleton-Class"><a href="#Thread-Safety-in-Singleton-Class" class="headerlink" title="Thread Safety in Singleton Class"></a><span id="thread-safety-in-singleton-class"><a href="https://www.journaldev.com/171/thread-safety-in-java-singleton-classes-with-example-code" target="_blank" rel="external">Thread Safety in Singleton Class</a></span></h3><p>In this article, you will learn basic concepts of creating Singleton class. What are thread safety issues with different implementation. How we can achieve <strong>thread safety in Singleton class</strong>.</p>
+<li><h3 id="Thread-Safety-in-Singleton-Class"><a href="#Thread-Safety-in-Singleton-Class" class="headerlink" title="Thread Safety in Singleton Class"></a><span id="thread-safety-in-singleton-class"><a href="https://www.journaldev.com/171/thread-safety-in-java-singleton-classes-with-example-code" target="_blank" rel="noopener">Thread Safety in Singleton Class</a></span></h3><p>In this article, you will learn basic concepts of creating Singleton class. What are thread safety issues with different implementation. How we can achieve <strong>thread safety in Singleton class</strong>.</p>
 </li>
-<li><h3 id="Daemon-Thread-in-Java"><a href="#Daemon-Thread-in-Java" class="headerlink" title="Daemon Thread in Java"></a><span id="daemon-thread-in-java"><a href="https://www.journaldev.com/1072/daemon-thread-in-java" title="Daemon Thread in Java" target="_blank" rel="external">Daemon Thread in Java</a></span></h3><p>A simple article explaining about <strong>daemon threads</strong> and how we can create daemon threads in java.</p>
+<li><h3 id="Daemon-Thread-in-Java"><a href="#Daemon-Thread-in-Java" class="headerlink" title="Daemon Thread in Java"></a><span id="daemon-thread-in-java"><a href="https://www.journaldev.com/1072/daemon-thread-in-java" title="Daemon Thread in Java" target="_blank" rel="noopener">Daemon Thread in Java</a></span></h3><p>A simple article explaining about <strong>daemon threads</strong> and how we can create daemon threads in java.</p>
 </li>
-<li><h3 id="Java-Thread-Local"><a href="#Java-Thread-Local" class="headerlink" title="Java Thread Local"></a><span id="java-thread-local"><a href="https://www.journaldev.com/1076/java-threadlocal-example" title="Java ThreadLocal Example to create thread-local variables" target="_blank" rel="external">Java Thread Local</a></span></h3><p>We know that threads share Object’s variables but what if we want to have thread-local variables created at class level. Java provides <strong>ThreadLocal</strong> utility class to create thread-local variables. Read more to learn about how we can create <em>ThreadLocal</em> variables in java program.</p>
+<li><h3 id="Java-Thread-Local"><a href="#Java-Thread-Local" class="headerlink" title="Java Thread Local"></a><span id="java-thread-local"><a href="https://www.journaldev.com/1076/java-threadlocal-example" title="Java ThreadLocal Example to create thread-local variables" target="_blank" rel="noopener">Java Thread Local</a></span></h3><p>We know that threads share Object’s variables but what if we want to have thread-local variables created at class level. Java provides <strong>ThreadLocal</strong> utility class to create thread-local variables. Read more to learn about how we can create <em>ThreadLocal</em> variables in java program.</p>
 </li>
-<li><h3 id="Java-Thread-Dump"><a href="#Java-Thread-Dump" class="headerlink" title="Java Thread Dump"></a><span id="java-thread-dump"><a href="https://www.journaldev.com/1053/java-thread-dump-visualvm-jstack-kill-3-jcmd" title="How to generate Thread Dump in Java" target="_blank" rel="external">Java Thread Dump</a></span></h3><p><strong>Java Thread dump</strong> provides the current threads information for the program. Java Thread dump provides useful information to analyze performance issues with the application. You can use thread dump to find and fix deadlock situations. This post explains different methods that can be used to generate thread dump in java.</p>
+<li><h3 id="Java-Thread-Dump"><a href="#Java-Thread-Dump" class="headerlink" title="Java Thread Dump"></a><span id="java-thread-dump"><a href="https://www.journaldev.com/1053/java-thread-dump-visualvm-jstack-kill-3-jcmd" title="How to generate Thread Dump in Java" target="_blank" rel="noopener">Java Thread Dump</a></span></h3><p><strong>Java Thread dump</strong> provides the current threads information for the program. Java Thread dump provides useful information to analyze performance issues with the application. You can use thread dump to find and fix deadlock situations. This post explains different methods that can be used to generate thread dump in java.</p>
 </li>
-<li><h3 id="How-to-Analyze-Deadlock-and-avoid-it-in-Java"><a href="#How-to-Analyze-Deadlock-and-avoid-it-in-Java" class="headerlink" title="How to Analyze Deadlock and avoid it in Java"></a><span id="how-to-analyze-deadlock-and-avoid-it-in-java"><a href="https://www.journaldev.com/1058/deadlock-in-java-example" title="Java Deadlock Example and How to analyze deadlock situation" target="_blank" rel="external">How to Analyze Deadlock and avoid it in Java</a></span></h3><p>Deadlock is a situation where multiple threads are waiting for each other to release resources causing cyclic dependency. This article discusses about the situation in which we can get deadlock in a java program. How we can use Thread dump to find the deadlock and best practices to <strong>avoid deadlock in java</strong> program.</p>
+<li><h3 id="How-to-Analyze-Deadlock-and-avoid-it-in-Java"><a href="#How-to-Analyze-Deadlock-and-avoid-it-in-Java" class="headerlink" title="How to Analyze Deadlock and avoid it in Java"></a><span id="how-to-analyze-deadlock-and-avoid-it-in-java"><a href="https://www.journaldev.com/1058/deadlock-in-java-example" title="Java Deadlock Example and How to analyze deadlock situation" target="_blank" rel="noopener">How to Analyze Deadlock and avoid it in Java</a></span></h3><p>Deadlock is a situation where multiple threads are waiting for each other to release resources causing cyclic dependency. This article discusses about the situation in which we can get deadlock in a java program. How we can use Thread dump to find the deadlock and best practices to <strong>avoid deadlock in java</strong> program.</p>
 </li>
-<li><h3 id="Java-Timer-Thread"><a href="#Java-Timer-Thread" class="headerlink" title="Java Timer Thread"></a><span id="java-timer-thread"><a href="https://www.journaldev.com/1050/java-timer-timertask-example" title="Java Timer TimerTask Example" target="_blank" rel="external">Java Timer Thread</a></span></h3><p>This post explains how we can use <strong>Java Timer</strong> and TimerTask classes to create jobs to run at scheduled interval, an example program showing it’s usage and how we can cancel the timer.</p>
+<li><h3 id="Java-Timer-Thread"><a href="#Java-Timer-Thread" class="headerlink" title="Java Timer Thread"></a><span id="java-timer-thread"><a href="https://www.journaldev.com/1050/java-timer-timertask-example" title="Java Timer TimerTask Example" target="_blank" rel="noopener">Java Timer Thread</a></span></h3><p>This post explains how we can use <strong>Java Timer</strong> and TimerTask classes to create jobs to run at scheduled interval, an example program showing it’s usage and how we can cancel the timer.</p>
 </li>
-<li><h3 id="Java-Producer-Consumer-Problem"><a href="#Java-Producer-Consumer-Problem" class="headerlink" title="Java Producer Consumer Problem"></a><span id="java-producer-consumer-problem"><a href="https://www.journaldev.com/1034/java-blockingqueue-example" title="Java BlockingQueue Example implementing Producer Consumer Problem" target="_blank" rel="external">Java Producer Consumer Problem</a></span></h3><p>Before Java 5, producer-consumer problem can be solved using wait() and notify() methods but introduction of BlockingQueue has made it very easy. Learn how we can use BlockingQueue to solve producer consumer problem in java.</p>
+<li><h3 id="Java-Producer-Consumer-Problem"><a href="#Java-Producer-Consumer-Problem" class="headerlink" title="Java Producer Consumer Problem"></a><span id="java-producer-consumer-problem"><a href="https://www.journaldev.com/1034/java-blockingqueue-example" title="Java BlockingQueue Example implementing Producer Consumer Problem" target="_blank" rel="noopener">Java Producer Consumer Problem</a></span></h3><p>Before Java 5, producer-consumer problem can be solved using wait() and notify() methods but introduction of BlockingQueue has made it very easy. Learn how we can use BlockingQueue to solve producer consumer problem in java.</p>
 </li>
-<li><h3 id="Java-Thread-Pool"><a href="#Java-Thread-Pool" class="headerlink" title="Java Thread Pool"></a><span id="java-thread-pool"><a href="https://www.journaldev.com/1069/threadpoolexecutor-java-thread-pool-example-executorservice" title="Java Thread Pool Example using Executors and ThreadPoolExecutor" target="_blank" rel="external">Java Thread Pool</a></span></h3><p>Java Thread Pool is a collection of worker threads waiting to process jobs. Java 5 introduction of Executor framework has made it very easy to create thread pool in java using Executors and ThreadPoolExecutor classes. Learn how to use them to create thread pool in java.</p>
+<li><h3 id="Java-Thread-Pool"><a href="#Java-Thread-Pool" class="headerlink" title="Java Thread Pool"></a><span id="java-thread-pool"><a href="https://www.journaldev.com/1069/threadpoolexecutor-java-thread-pool-example-executorservice" title="Java Thread Pool Example using Executors and ThreadPoolExecutor" target="_blank" rel="noopener">Java Thread Pool</a></span></h3><p>Java Thread Pool is a collection of worker threads waiting to process jobs. Java 5 introduction of Executor framework has made it very easy to create thread pool in java using Executors and ThreadPoolExecutor classes. Learn how to use them to create thread pool in java.</p>
 </li>
-<li><h3 id="Java-Callable-Future"><a href="#Java-Callable-Future" class="headerlink" title="Java Callable Future"></a><span id="java-callable-future"><a href="https://www.journaldev.com/1090/java-callable-future-example" title="Java Callable Future Example" target="_blank" rel="external">Java Callable Future</a></span></h3><p>Sometimes we wish Thread could return values that we can use. Java 5 Callable can be used in that case that is similar as Runnable interface. We can use Executor framework to execute Callable tasks.</p>
+<li><h3 id="Java-Callable-Future"><a href="#Java-Callable-Future" class="headerlink" title="Java Callable Future"></a><span id="java-callable-future"><a href="https://www.journaldev.com/1090/java-callable-future-example" title="Java Callable Future Example" target="_blank" rel="noopener">Java Callable Future</a></span></h3><p>Sometimes we wish Thread could return values that we can use. Java 5 Callable can be used in that case that is similar as Runnable interface. We can use Executor framework to execute Callable tasks.</p>
 </li>
-<li><h3 id="Java-FutureTask-Example"><a href="#Java-FutureTask-Example" class="headerlink" title="Java FutureTask Example"></a><span id="java-futuretask-example"><a href="https://www.journaldev.com/1650/java-futuretask-example-program" title="Java FutureTask Example" target="_blank" rel="external">Java FutureTask Example</a></span></h3><p>FutureTask class is the base concrete class that implements Future interface. We use it with Callable implementation and Executors for asynchronous processing. FutureTask provide implementation methods to check the state of the task and return the value to the calling program once it’s processing is finished. It comes handy when you want to override some of the implementation methods of the Future interface.</p>
+<li><h3 id="Java-FutureTask-Example"><a href="#Java-FutureTask-Example" class="headerlink" title="Java FutureTask Example"></a><span id="java-futuretask-example"><a href="https://www.journaldev.com/1650/java-futuretask-example-program" title="Java FutureTask Example" target="_blank" rel="noopener">Java FutureTask Example</a></span></h3><p>FutureTask class is the base concrete class that implements Future interface. We use it with Callable implementation and Executors for asynchronous processing. FutureTask provide implementation methods to check the state of the task and return the value to the calling program once it’s processing is finished. It comes handy when you want to override some of the implementation methods of the Future interface.</p>
 </li>
 </ol>
 
@@ -532,7 +544,7 @@
                 alt="laudukang" />
             
               <p class="site-author-name" itemprop="name">laudukang</p>
-              <p class="site-description motion-element" itemprop="description">Bug Not Found</p>
+              <p class="site-description motion-element" itemprop="description"></p>
           </div>
 
           <nav class="site-state motion-element">
@@ -681,6 +693,26 @@
 
 
         
+<div class="busuanzi-count" style="display: none;">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
 
 
 
@@ -708,6 +740,7 @@
     window.Promise = null;
   }
 </script>
+
 
 
 
@@ -748,6 +781,9 @@
   <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
 
   
+  <script type="text/javascript" src="/lib/nprogress/nprogress.js"></script>
+
+  
   <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
   
@@ -760,6 +796,8 @@
   <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
 
   <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/custom/custom.js?v=5.1.3"></script>
 
 
 
@@ -824,6 +862,128 @@
   
 
   
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("CPfRDhOlTyfkHW155W3Kx3H1-gzGzoHsz", "TX05RQSQMd8fbL7RaJNADS7S");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
 
   
 

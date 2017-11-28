@@ -2,14 +2,18 @@
 
 
 
+  
 
-<html class="theme-next pisces" lang="zh-Hans">
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
 
+
+<link href="/lib/nprogress/nprogress.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -77,7 +81,7 @@
 
 
 
-<meta name="description" content="背景ngrok官网被q，而且访问速度慢，最主要的是不支持域名绑定，每次启动都是随机的二级域名，333 ngrok.cc-Sunny-Ngrok内网转发，服务器在香港，访问速度也慢，支持自定义系统域名，但只能定义一个（可以先定义TCP端口转发，保存后编辑，可以修改成系统分配域名，这样子就可以有多个自定义的系统域名，然并卵，客户端连接不上，一直提示该域名已被注册，官方做限制了吧）。 对比了上面两个服务">
+<meta name="description" content="背景ngrok官网被q，而且访问速度慢，最主要的是不支持域名绑定，每次启动都是随机的二级域名，333 ngrok.cc-Sunny-Ngrok内网转发，服务器在香港，访问速度也慢，支持自定义系统域名，但只能定义一个（可以先定义TCP端口转发，保存后编辑，可以修改成系统分配域名，这样子就可以有多个自定义的系统域名，然并卵">
 <meta name="keywords" content="ngrok">
 <meta property="og:type" content="article">
 <meta property="og:title" content="从编译到使用 - ngrok 服务搭建">
@@ -101,7 +105,7 @@
     sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
-    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
       userId: '0',
       author: '博主'
@@ -131,6 +135,16 @@
 
 
 
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?f286ee7ebbe4dd6dfe2457f73f042ac0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
 
 
 
@@ -159,7 +173,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle"></p>
+        <h1 class="site-subtitle" itemprop="description"></h1>
       
   </div>
 
@@ -288,7 +302,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">从编译到使用 - ngrok 服务搭建</h1>
+          <h2 class="post-title" itemprop="name headline">从编译到使用 - ngrok 服务搭建</h2>
         
 
         <div class="post-meta">
@@ -297,8 +311,6 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
               
               <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-21T20:39:00+08:00">
                 2016-07-21 20:39:00
@@ -314,8 +326,6 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
               <time title="更新于" itemprop="dateModified" datetime="2017-02-20T08:42:32+08:00">
                 2017-02-20 08:42:32
               </time>
@@ -330,8 +340,6 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -351,6 +359,10 @@
           
 
           
+          
+             <span id="/2016/07/21/ngrok-compile-and-run-online/" class="leancloud_visitors" data-flag-title="从编译到使用 - ngrok 服务搭建">
+                
+             </span>
           
 
           
@@ -372,8 +384,8 @@
       
 
       
-        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p><a href="https://ngrok.com/" target="_blank" rel="external">ngrok官网</a>被q，而且访问速度慢，最主要的是不支持域名绑定，每次启动都是随机的二级域名，333</p>
-<p><a href="https://www.ngrok.cc/" target="_blank" rel="external">ngrok.cc-Sunny-Ngrok内网转发</a>，服务器在香港，访问速度也慢，支持自定义系统域名，但只能定义一个（可以先定义TCP端口转发，保存后编辑，可以修改成系统分配域名，这样子就可以有多个自定义的系统域名，然并卵，客户端连接不上，一直提示该域名已被注册，官方做限制了吧）。</p>
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p><a href="https://ngrok.com/" target="_blank" rel="noopener">ngrok官网</a>被q，而且访问速度慢，最主要的是不支持域名绑定，每次启动都是随机的二级域名，333</p>
+<p><a href="https://www.ngrok.cc/" target="_blank" rel="noopener">ngrok.cc-Sunny-Ngrok内网转发</a>，服务器在香港，访问速度也慢，支持自定义系统域名，但只能定义一个（可以先定义TCP端口转发，保存后编辑，可以修改成系统分配域名，这样子就可以有多个自定义的系统域名，然并卵，客户端连接不上，一直提示该域名已被注册，官方做限制了吧）。</p>
 <p>对比了上面两个服务，加上自己的需求：</p>
 <ul>
 <li>需要多个自定义的域名；</li>
@@ -395,7 +407,7 @@
 <p>ngrok通过bindata将ngrok源码目录下的assets目录打包到可执行文件(ngrokd和ngrok)中去，<code>assets/client/tls和assets/server/tls</code>下分别存放着用于ngrok和ngrokd的默认证书文件。</p>
 <p>我们需要将它们替换成我们自己生成的，因此这一步务必放在编译可执行文件之前。</p>
 <p>所以，执行下面拷贝命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cp rootCA.pem assets/client/tls/ngrokroot.crt</span><br><span class="line">cp device.crt assets/server/tls/snakeoil.crt</span><br><span class="line">cp device.key assets/server/tls/snakeoil.key</span><br></pre></td></tr></table></figure></p>
-<h2 id="搭建go环境"><a href="#搭建go环境" class="headerlink" title="搭建go环境"></a>搭建go环境</h2><p><a href="https://golang.org/" target="_blank" rel="external">Golang官网</a>被q，下载安装包特么慢，<a href="https://golangtc.com/download" target="_blank" rel="external">Golang中国</a>提供下载站点，我使用的是1.6.3版本；</p>
+<h2 id="搭建go环境"><a href="#搭建go环境" class="headerlink" title="搭建go环境"></a>搭建go环境</h2><p><a href="https://golang.org/" target="_blank" rel="noopener">Golang官网</a>被q，下载安装包特么慢，<a href="https://golangtc.com/download" target="_blank" rel="noopener">Golang中国</a>提供下载站点，我使用的是1.6.3版本；</p>
 <p>下载并解压到go的默认安装路径<code>/usr/local/go</code><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /work/download</span><br><span class="line">wget http://www.golangtc.com/static/go/1.6.3/go1.6.3.linux-amd64.tar.gz</span><br><span class="line">tar -zxvf go1.6.3.linux-amd64.tar.gz -C /usr/<span class="built_in">local</span></span><br></pre></td></tr></table></figure></p>
 <p>修改PATH<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/profile</span><br><span class="line"><span class="built_in">export</span> GOROOT=/usr/<span class="built_in">local</span>/go</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$GOROOT</span>/bin</span><br><span class="line"><span class="built_in">source</span> /etc/profile</span><br></pre></td></tr></table></figure></p>
 <p>正确配置后，go env可以查看得到当前go的环境<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">GOARCH</span>=<span class="string">"amd64"</span></span><br><span class="line"><span class="attr">GOBIN</span>=<span class="string">""</span></span><br><span class="line"><span class="attr">GOEXE</span>=<span class="string">""</span></span><br><span class="line"><span class="attr">GOHOSTARCH</span>=<span class="string">"amd64"</span></span><br><span class="line"><span class="attr">GOHOSTOS</span>=<span class="string">"linux"</span></span><br><span class="line"><span class="attr">GOOS</span>=<span class="string">"linux"</span></span><br><span class="line"><span class="attr">GOPATH</span>=<span class="string">""</span></span><br><span class="line"><span class="attr">GORACE</span>=<span class="string">""</span></span><br><span class="line"><span class="attr">GOROOT</span>=<span class="string">"/usr/local/go"</span></span><br><span class="line"><span class="attr">GOTOOLDIR</span>=<span class="string">"/usr/local/go/pkg/tool/linux_amd64"</span></span><br><span class="line"><span class="attr">GO15VENDOREXPERIMENT</span>=<span class="string">"1"</span></span><br><span class="line"><span class="attr">CC</span>=<span class="string">"gcc"</span></span><br><span class="line"><span class="attr">GOGCCFLAGS</span>=<span class="string">"-fPIC -m64 -pthread -fmessage-length=0"</span></span><br><span class="line"><span class="attr">CXX</span>=<span class="string">"g++"</span></span><br><span class="line"><span class="attr">CGO_ENABLED</span>=<span class="string">"1"</span></span><br></pre></td></tr></table></figure></p>
@@ -406,7 +418,7 @@
 <p>make很可能出现的错误有（来自Windows下的错误信息，Ubuntu下跑一切正常）<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">package archive/zip: unrecognized import path "archive/zip" (import path does not <span class="keyword">begin</span> <span class="keyword">with</span> hostname)</span><br><span class="line"><span class="keyword">package</span> <span class="keyword">bytes</span>: unrecognized <span class="keyword">import</span> <span class="keyword">path</span> <span class="string">"bytes"</span> (<span class="keyword">import</span> <span class="keyword">path</span> does <span class="keyword">not</span> <span class="keyword">begin</span> <span class="keyword">with</span> hostname)</span><br><span class="line"><span class="keyword">package</span> <span class="keyword">encoding</span>/<span class="keyword">json</span>: unrecognized <span class="keyword">import</span> <span class="keyword">path</span> <span class="string">"encoding/json"</span> (<span class="keyword">import</span> <span class="keyword">path</span> does <span class="keyword">not</span> <span class="keyword">begin</span> <span class="keyword">with</span> hostname)</span><br><span class="line"><span class="keyword">package</span> <span class="keyword">encoding</span>/<span class="keyword">xml</span>: unrecognized <span class="keyword">import</span> <span class="keyword">path</span> <span class="string">"encoding/xml"</span> (<span class="keyword">import</span> <span class="keyword">path</span> does <span class="keyword">not</span> <span class="keyword">begin</span> <span class="keyword">with</span> hostname)</span><br><span class="line"><span class="keyword">package</span> <span class="keyword">errors</span>: unrecognized <span class="keyword">import</span> <span class="keyword">path</span> <span class="string">"errors"</span> (<span class="keyword">import</span> <span class="keyword">path</span> does <span class="keyword">not</span> <span class="keyword">begin</span> <span class="keyword">with</span> hostname)</span><br><span class="line"><span class="keyword">package</span> expvar: unrecognized <span class="keyword">import</span> <span class="keyword">path</span> <span class="string">"expvar"</span> (<span class="keyword">import</span> <span class="keyword">path</span> does <span class="keyword">not</span> <span class="keyword">begin</span> <span class="keyword">with</span> hostname)</span><br><span class="line"><span class="keyword">package</span> flag: unrecognized <span class="keyword">import</span> <span class="keyword">path</span> <span class="string">"flag"</span> (<span class="keyword">import</span> <span class="keyword">path</span> does <span class="keyword">not</span> <span class="keyword">begin</span> <span class="keyword">with</span> hostname)</span><br><span class="line"><span class="keyword">package</span> fmt: unrecognized <span class="keyword">import</span> <span class="keyword">path</span> <span class="string">"fmt"</span> (<span class="keyword">import</span> <span class="keyword">path</span> does <span class="keyword">not</span> <span class="keyword">begin</span> <span class="keyword">with</span> hostname)</span><br></pre></td></tr></table></figure></p>
 <h2 id="启动ngrok"><a href="#启动ngrok" class="headerlink" title="启动ngrok"></a>启动ngrok</h2><h3 id="服务端启动"><a href="#服务端启动" class="headerlink" title="服务端启动"></a>服务端启动</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /work/ngrok/bin</span><br><span class="line">ngrokd -domain=<span class="string">"codz.me"</span> -httpAddr=<span class="string">":8088"</span> -httpsAddr=<span class="string">":8089"</span></span><br></pre></td></tr></table></figure>
 <p>-domain的内容需要与上面生成证书所填的<code>NGROK_BASE_DOMAIN</code>一致；</p>
-<p>自定义http、https提供服务的端口，据此你使用的二级域名应该是 <a href="http://[自定义].codz.me:8088" target="_blank" rel="external">http://[自定义].codz.me:8088</a></p>
+<p>自定义http、https提供服务的端口，据此你使用的二级域名应该是 <a href="http://[自定义].codz.me:8088" target="_blank" rel="noopener">http://[自定义].codz.me:8088</a></p>
 <p>其他有用的启动脚本</p>
 <ul>
 <li><p>后台启动，输出日志</p>
@@ -428,10 +440,10 @@
 <p>多个用户同时访问效果不是很明显，可能与ECS带宽有关（→_→ 1Mbps），ngrok使用多个自定义域名目的已达成，这是重点。</p>
 <p>参考：</p>
 <ul>
-<li><a href="https://aotu.io/notes/2016/02/19/ngrok/" target="_blank" rel="external">https://aotu.io/notes/2016/02/19/ngrok/</a></li>
-<li><a href="http://tonybai.com/2015/03/14/selfhost-ngrok-service" target="_blank" rel="external">http://tonybai.com/2015/03/14/selfhost-ngrok-service</a></li>
-<li><a href="http://blog.csdn.net/tao_627/article/details/17191977" target="_blank" rel="external">http://blog.csdn.net/tao_627/article/details/17191977</a></li>
-<li><a href="http://briteming.blogspot.com/2016/04/ngrok.html" target="_blank" rel="external">http://briteming.blogspot.com/2016/04/ngrok.html</a></li>
+<li><a href="https://aotu.io/notes/2016/02/19/ngrok/" target="_blank" rel="noopener">https://aotu.io/notes/2016/02/19/ngrok/</a></li>
+<li><a href="http://tonybai.com/2015/03/14/selfhost-ngrok-service" target="_blank" rel="noopener">http://tonybai.com/2015/03/14/selfhost-ngrok-service</a></li>
+<li><a href="http://blog.csdn.net/tao_627/article/details/17191977" target="_blank" rel="noopener">http://blog.csdn.net/tao_627/article/details/17191977</a></li>
+<li><a href="http://briteming.blogspot.com/2016/04/ngrok.html" target="_blank" rel="noopener">http://briteming.blogspot.com/2016/04/ngrok.html</a></li>
 </ul>
 
       
@@ -544,7 +556,7 @@
                 alt="laudukang" />
             
               <p class="site-author-name" itemprop="name">laudukang</p>
-              <p class="site-description motion-element" itemprop="description">Bug Not Found</p>
+              <p class="site-description motion-element" itemprop="description"></p>
           </div>
 
           <nav class="site-state motion-element">
@@ -693,6 +705,26 @@
 
 
         
+<div class="busuanzi-count" style="display: none;">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
 
 
 
@@ -720,6 +752,7 @@
     window.Promise = null;
   }
 </script>
+
 
 
 
@@ -760,6 +793,9 @@
   <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
 
   
+  <script type="text/javascript" src="/lib/nprogress/nprogress.js"></script>
+
+  
   <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
   
@@ -772,6 +808,8 @@
   <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
 
   <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/custom/custom.js?v=5.1.3"></script>
 
 
 
@@ -836,6 +874,128 @@
   
 
   
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("CPfRDhOlTyfkHW155W3Kx3H1-gzGzoHsz", "TX05RQSQMd8fbL7RaJNADS7S");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
 
   
 

@@ -2,14 +2,18 @@
 
 
 
+  
 
-<html class="theme-next pisces" lang="zh-Hans">
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
 
+
+<link href="/lib/nprogress/nprogress.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -99,7 +103,7 @@
     sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
-    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
       userId: '0',
       author: '博主'
@@ -128,6 +132,16 @@
 
 
 
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?f286ee7ebbe4dd6dfe2457f73f042ac0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
 
 
 
@@ -158,7 +172,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle"></p>
+        <h1 class="site-subtitle" itemprop="description"></h1>
       
   </div>
 
@@ -287,9 +301,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/12/minio-and-nginx/" itemprop="url">High Vailability Minio Deploy Tutorial</a></h1>
+                <a class="post-title-link" href="/2017/10/12/minio-and-nginx/" itemprop="url">High Vailability Minio Deploy Tutorial</a></h2>
         
 
         <div class="post-meta">
@@ -298,8 +312,6 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
               
               <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-12T10:16:00+08:00">
                 2017-10-12 10:16:00
@@ -315,8 +327,6 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
               <time title="更新于" itemprop="dateModified" datetime="2017-10-12T19:06:44+08:00">
                 2017-10-12 19:06:44
               </time>
@@ -331,8 +341,6 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -352,6 +360,10 @@
           
 
           
+          
+             <span id="/2017/10/12/minio-and-nginx/" class="leancloud_visitors" data-flag-title="High Vailability Minio Deploy Tutorial">
+                
+             </span>
           
 
           
@@ -375,7 +387,7 @@
       
         
           
-            <h2 id="Minio-Introduction"><a href="#Minio-Introduction" class="headerlink" title="Minio Introduction"></a><a href="https://minio.io/" target="_blank" rel="external">Minio Introduction</a></h2><p>Minio is an object storage server released under Apache License v2.0.</p>
+            <h2 id="Minio-Introduction"><a href="#Minio-Introduction" class="headerlink" title="Minio Introduction"></a><a href="https://minio.io/" target="_blank" rel="noopener">Minio Introduction</a></h2><p>Minio is an object storage server released under Apache License v2.0.</p>
 <p>It is compatible with Amazon S3 cloud storage service.</p>
 <p>It is best suited for storing unstructured data such as photos, videos, log files, backups and container / VM images.</p>
 <p>Size of an object can range from a few KBs to a maximum of 5TB.</p>
@@ -385,9 +397,9 @@
 <p>SSL/TLS Termination<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">    <span class="attribute">server_name</span> www.example.com;</span><br><span class="line">    <span class="attribute">return</span> <span class="number">301</span> https://www.example.com<span class="variable">$request_uri</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span>              <span class="number">443</span> ssl;</span><br><span class="line">    <span class="attribute">server_name</span>         www.example.com;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">ssl_certificate</span>     www.example.com.crt;</span><br><span class="line">    <span class="attribute">ssl_certificate_key</span> www.example.com.key;</span><br><span class="line">    <span class="attribute">ssl_protocols</span>       TLSv1 TLSv1.<span class="number">1</span> TLSv1.<span class="number">2</span>;</span><br><span class="line">    <span class="attribute">ssl_ciphers</span>         HIGH:!aNULL:!MD5;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">location</span> / &#123;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> Host <span class="variable">$http_host</span>;</span><br><span class="line">        <span class="attribute">proxy_pass</span>       http://localhost:9000;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>Nginx caching<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">limit_req_zone <span class="variable">$binary_remote_addr</span> <span class="attribute">zone</span>=my_req_limit:10m <span class="attribute">rate</span>=10r/s;</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">    # <span class="built_in">..</span>.</span><br><span class="line">    location /images/ &#123;</span><br><span class="line">        limit_req <span class="attribute">zone</span>=my_req_limit <span class="attribute">burst</span>=20;</span><br><span class="line">        # <span class="built_in">..</span>.</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
-<li><a href="https://github.com/minio/minio/tree/master/docs/distributed" target="_blank" rel="external">Distributed Minio Quickstart Guide</a></li>
-<li><a href="https://github.com/minio/minio-service/tree/master/linux-systemd" target="_blank" rel="external">Systemd service for Minio</a></li>
-<li><a href="https://www.nginx.com/blog/enterprise-grade-cloud-storage-nginx-plus-minio/" target="_blank" rel="external">Enterprise-Grade Cloud Storage with NGINX Plus and Minio</a></li>
+<li><a href="https://github.com/minio/minio/tree/master/docs/distributed" target="_blank" rel="noopener">Distributed Minio Quickstart Guide</a></li>
+<li><a href="https://github.com/minio/minio-service/tree/master/linux-systemd" target="_blank" rel="noopener">Systemd service for Minio</a></li>
+<li><a href="https://www.nginx.com/blog/enterprise-grade-cloud-storage-nginx-plus-minio/" target="_blank" rel="noopener">Enterprise-Grade Cloud Storage with NGINX Plus and Minio</a></li>
 </ul>
 
           
@@ -454,9 +466,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/09/24/rise-of-worse-is-better/" itemprop="url">[Repost]The Rise of Worse is Better</a></h1>
+                <a class="post-title-link" href="/2017/09/24/rise-of-worse-is-better/" itemprop="url">[Repost]The Rise of Worse is Better</a></h2>
         
 
         <div class="post-meta">
@@ -465,8 +477,6 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
               
               <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-24T16:54:00+08:00">
                 2017-09-24 16:54:00
@@ -482,8 +492,6 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
               <time title="更新于" itemprop="dateModified" datetime="2017-09-24T16:57:21+08:00">
                 2017-09-24 16:57:21
               </time>
@@ -498,8 +506,6 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -519,6 +525,10 @@
           
 
           
+          
+             <span id="/2017/09/24/rise-of-worse-is-better/" class="leancloud_visitors" data-flag-title="[Repost]The Rise of Worse is Better">
+                
+             </span>
           
 
           
@@ -573,7 +583,7 @@
 <p>A wrong lesson is to take the parable literally and to conclude that C is the right vehicle for AI software. The 50% solution has to be basically right, and in this case it isn’t.</p>
 <p>But, one can conclude only that the Lisp community needs to seriously rethink its position on Lisp design. I will say more about this later….</p>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
-<li><a href="http://dreamsongs.com/RiseOfWorseIsBetter.html" target="_blank" rel="external">The Rise of Worse is Better</a></li>
+<li><a href="http://dreamsongs.com/RiseOfWorseIsBetter.html" target="_blank" rel="noopener">The Rise of Worse is Better</a></li>
 </ul>
 
           
@@ -640,9 +650,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/06/10/can-not-read-from-dev-random/" itemprop="url">Cannot read from /dev/random: Resource temporarily unavailable</a></h1>
+                <a class="post-title-link" href="/2017/06/10/can-not-read-from-dev-random/" itemprop="url">Cannot read from /dev/random: Resource temporarily unavailable</a></h2>
         
 
         <div class="post-meta">
@@ -651,8 +661,6 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
               
               <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-10T16:51:00+08:00">
                 2017-06-10 16:51:00
@@ -668,8 +676,6 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
               <time title="更新于" itemprop="dateModified" datetime="2017-06-10T16:51:32+08:00">
                 2017-06-10 16:51:32
               </time>
@@ -684,8 +690,6 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -705,6 +709,10 @@
           
 
           
+          
+             <span id="/2017/06/10/can-not-read-from-dev-random/" class="leancloud_visitors" data-flag-title="Cannot read from /dev/random: Resource temporarily unavailable">
+                
+             </span>
           
 
           
@@ -732,7 +740,7 @@
 <p>solution<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mv <span class="regexp">/dev/</span>random <span class="regexp">/dev/</span>random.orig</span><br><span class="line">ln -s <span class="regexp">/dev/u</span>random <span class="regexp">/dev/</span>random</span><br></pre></td></tr></table></figure></p>
 <p>reference:</p>
 <ul>
-<li><a href="https://forum.openwrt.org/viewtopic.php?id=30931" target="_blank" rel="external">WPA Enterprise not working after upgrading to rc5</a></li>
+<li><a href="https://forum.openwrt.org/viewtopic.php?id=30931" target="_blank" rel="noopener">WPA Enterprise not working after upgrading to rc5</a></li>
 </ul>
 
           
@@ -799,9 +807,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/02/19/2017-annual-book-list/" itemprop="url">2017我的书单</a></h1>
+                <a class="post-title-link" href="/2017/02/19/2017-annual-book-list/" itemprop="url">2017我的书单</a></h2>
         
 
         <div class="post-meta">
@@ -810,8 +818,6 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
               
               <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-19T21:18:00+08:00">
                 2017-02-19 21:18:00
@@ -827,10 +833,8 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2017-11-24T11:51:58+08:00">
-                2017-11-24 11:51:58
+              <time title="更新于" itemprop="dateModified" datetime="2017-11-25T19:43:58+08:00">
+                2017-11-25 19:43:58
               </time>
             
           </span>
@@ -843,8 +847,6 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -864,6 +866,10 @@
           
 
           
+          
+             <span id="/2017/02/19/2017-annual-book-list/" class="leancloud_visitors" data-flag-title="2017我的书单">
+                
+             </span>
           
 
           
@@ -890,60 +896,60 @@
             <ul>
 <li><p>一月</p>
 <ul>
-<li><a href="https://item.jd.com/11398297.html" target="_blank" rel="external">MacTalk人生元编程</a></li>
-<li><a href="https://item.jd.com/11803342.html" target="_blank" rel="external">MacTalk跨边界编程</a></li>
-<li><a href="https://item.jd.com/11917790.html" target="_blank" rel="external">Java 8实战</a></li>
+<li><a href="https://item.jd.com/11398297.html" target="_blank" rel="noopener">MacTalk人生元编程</a></li>
+<li><a href="https://item.jd.com/11803342.html" target="_blank" rel="noopener">MacTalk跨边界编程</a></li>
+<li><a href="https://item.jd.com/11917790.html" target="_blank" rel="noopener">Java 8实战</a></li>
 </ul>
 </li>
 <li><p>二月</p>
 <ul>
-<li><a href="https://item.jd.com/11322972.html" target="_blank" rel="external">大型网站技术架构 核心原理与案例分析</a></li>
-<li><a href="https://www.amazon.cn/gp/product/B018QQZYTQ" target="_blank" rel="external">天才在左疯子在右(完整版)</a>(2.10-?)</li>
-<li><a href="https://item.jd.com/11264057.html" target="_blank" rel="external">源泉-安·兰德</a>(2.19-?)</li>
-<li><a href="https://item.jd.com/11458318.html" target="_blank" rel="external">程序员的呐喊</a>(2.20-?)</li>
+<li><a href="https://item.jd.com/11322972.html" target="_blank" rel="noopener">大型网站技术架构 核心原理与案例分析</a></li>
+<li><a href="https://www.amazon.cn/gp/product/B018QQZYTQ" target="_blank" rel="noopener">天才在左疯子在右(完整版)</a>(2.10-?)</li>
+<li><a href="https://item.jd.com/11264057.html" target="_blank" rel="noopener">源泉-安·兰德</a>(2.19-?)</li>
+<li><a href="https://item.jd.com/11458318.html" target="_blank" rel="noopener">程序员的呐喊</a>(2.20-?)</li>
 </ul>
 </li>
 <li><p>三月</p>
 <ul>
-<li><a href="http://item.jd.com/11857434.html" target="_blank" rel="external">深入理解ElasticSearch</a></li>
-<li><a href="http://item.jd.com/11988131.html" target="_blank" rel="external">科技之巅</a></li>
-<li><a href="http://www.infoq.com/cn/minibooks/insighting-into-data" target="_blank" rel="external">洞见数据之密</a></li>
-<li><a href="http://www.infoq.com/cn/minibooks/Microservice-DevOps" target="_blank" rel="external">架构师特刊：微服务与DevOps技术内参</a></li>
-<li><a href="http://www.infoq.com/cn/minibooks/architect-201702" target="_blank" rel="external">架构师（2017年2月）</a></li>
-<li><a href="https://www.amazon.cn/gp/product/B01N7EVWOH/" target="_blank" rel="external">图解设计模式</a></li>
+<li><a href="http://item.jd.com/11857434.html" target="_blank" rel="noopener">深入理解ElasticSearch</a></li>
+<li><a href="http://item.jd.com/11988131.html" target="_blank" rel="noopener">科技之巅</a></li>
+<li><a href="http://www.infoq.com/cn/minibooks/insighting-into-data" target="_blank" rel="noopener">洞见数据之密</a></li>
+<li><a href="http://www.infoq.com/cn/minibooks/Microservice-DevOps" target="_blank" rel="noopener">架构师特刊：微服务与DevOps技术内参</a></li>
+<li><a href="http://www.infoq.com/cn/minibooks/architect-201702" target="_blank" rel="noopener">架构师（2017年2月）</a></li>
+<li><a href="https://www.amazon.cn/gp/product/B01N7EVWOH/" target="_blank" rel="noopener">图解设计模式</a></li>
 </ul>
 </li>
 <li><p>四月</p>
 <ul>
-<li><a href="https://item.jd.com/10898799.html" target="_blank" rel="external">编写高质量代码：改善Java程序的151个建议</a></li>
-<li><a href="https://item.jd.com/11763016.html" target="_blank" rel="external">Spark机器学习</a></li>
-<li><a href="http://www.infoq.com/cn/minibooks/architect-201703" target="_blank" rel="external">架构师（2017年3月）</a></li>
+<li><a href="https://item.jd.com/10898799.html" target="_blank" rel="noopener">编写高质量代码：改善Java程序的151个建议</a></li>
+<li><a href="https://item.jd.com/11763016.html" target="_blank" rel="noopener">Spark机器学习</a></li>
+<li><a href="http://www.infoq.com/cn/minibooks/architect-201703" target="_blank" rel="noopener">架构师（2017年3月）</a></li>
 </ul>
 </li>
 <li><p>五月</p>
 <ul>
-<li><a href="https://item.jd.com/11969881.html" target="_blank" rel="external">Spring Boot实战</a></li>
+<li><a href="https://item.jd.com/11969881.html" target="_blank" rel="noopener">Spring Boot实战</a></li>
 </ul>
 </li>
 <li><p>六月</p>
 <ul>
-<li><a href="http://www.infoq.com/cn/minibooks/architect-201704" target="_blank" rel="external">架构师（2017年4月）</a></li>
+<li><a href="http://www.infoq.com/cn/minibooks/architect-201704" target="_blank" rel="noopener">架构师（2017年4月）</a></li>
 </ul>
 </li>
 <li><p>八月</p>
 <ul>
-<li><a href="https://item.jd.com/11749340.html" target="_blank" rel="external">重新定义公司：谷歌是如何运营的</a>(8.16-?)</li>
-<li><a href="https://item.jd.com/12172344.html" target="_blank" rel="external">Spring Cloud微服务实战</a>(8.26-?)</li>
+<li><a href="https://item.jd.com/11749340.html" target="_blank" rel="noopener">重新定义公司：谷歌是如何运营的</a>(8.16-?)</li>
+<li><a href="https://item.jd.com/12172344.html" target="_blank" rel="noopener">Spring Cloud微服务实战</a>(8.26-?)</li>
 </ul>
 </li>
 <li><p>九月</p>
 <ul>
-<li><a href="https://item.jd.com/12013041.html" target="_blank" rel="external">Docker实战</a>(9.18-?)</li>
+<li><a href="https://item.jd.com/12013041.html" target="_blank" rel="noopener">Docker实战</a>(9.18-?)</li>
 </ul>
 </li>
 <li><p>十月</p>
 <ul>
-<li><a href="https://item.jd.com/10582495.html" target="_blank" rel="external">黑客与画家：硅谷创业之父Paul Graham文集</a>(10.22-11.25)</li>
+<li><a href="https://item.jd.com/10582495.html" target="_blank" rel="noopener">黑客与画家：硅谷创业之父Paul Graham文集</a>(10.22-11.25)</li>
 </ul>
 </li>
 </ul>
@@ -1012,9 +1018,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/01/14/a-bug-of-ubuntu-16_04_1/" itemprop="url">A bug of Ubuntu 16.04.1 LTS</a></h1>
+                <a class="post-title-link" href="/2017/01/14/a-bug-of-ubuntu-16_04_1/" itemprop="url">A bug of Ubuntu 16.04.1 LTS</a></h2>
         
 
         <div class="post-meta">
@@ -1023,8 +1029,6 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
               
               <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-14T20:55:00+08:00">
                 2017-01-14 20:55:00
@@ -1040,8 +1044,6 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
               <time title="更新于" itemprop="dateModified" datetime="2017-02-22T21:05:29+08:00">
                 2017-02-22 21:05:29
               </time>
@@ -1056,8 +1058,6 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1077,6 +1077,10 @@
           
 
           
+          
+             <span id="/2017/01/14/a-bug-of-ubuntu-16_04_1/" class="leancloud_visitors" data-flag-title="A bug of Ubuntu 16.04.1 LTS">
+                
+             </span>
           
 
           
@@ -1104,10 +1108,10 @@
 <p>issue<br><figure class="highlight golo"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">find</span>: '/<span class="keyword">var</span>/lib/lxcfs/cgroup/devices/devices.allow': Permission denied <span class="keyword">find</span>: '/<span class="keyword">var</span>/lib/lxcfs/cgroup/devices/devices.deny': Permission denied <span class="keyword">find</span>: '/<span class="keyword">var</span>/lib/lxcfs/cgroup/devices/init.scope/devices.allow': Permission denied <span class="keyword">find</span>: '/<span class="keyword">var</span>/lib/lxcfs/cgroup/devices/init.scope/devices.deny': Permission denied <span class="keyword">find</span>: '/<span class="keyword">var</span>/lib/lxcfs/cgroup/devices/system.slice/devices.allow': Permission denied <span class="keyword">find</span>: '/<span class="keyword">var</span>/lib/lxcfs/cgroup/devices/system.slice/devices.deny': Permission denied <span class="keyword">find</span>: '/<span class="keyword">var</span>/lib/lxcfs/cgroup/devices/system.slice/vagrant.mount/devices.allow': Permission denied <span class="keyword">find</span>: '/<span class="keyword">var</span>/lib/lxcfs/cgroup/devices/system.slice/vagrant.mount/devices.deny': Permission denied <span class="keyword">find</span>: '/<span class="keyword">var</span>/lib/lxcfs/cgroup/devices/system.slice/mdadm.service/devices.allow': Permission denied <span class="keyword">find</span>: '/<span class="keyword">var</span>/lib/lxcfs/cgroup/devices/system.slice/mdadm.service/devices.deny': Permission denied <span class="keyword">find</span>: '/<span class="keyword">var</span>/lib/lxcfs/cgroup/devices/system.slice/vboxadd-x11.service/devices.allow': Permission denied <span class="keyword">find</span>: '/<span class="keyword">var</span>/lib/lxcfs/cgroup/devices/system.slice/vboxadd-x11.service/devices.deny': Permission denied <span class="keyword">find</span>: '/<span class="keyword">var</span>/lib/lxcfs/cgroup/devices/system.slice/ifup<span class="meta">@enp</span>0s8.service/devices.allow': Permission denied <span class="keyword">find</span>: '/<span class="keyword">var</span>/lib/lxcfs/cgroup/devices/system.slice/ifup<span class="meta">@enp</span>0s8.service/devices.deny': Permission denied <span class="keyword">find</span>: '/<span class="keyword">var</span>/lib/lxcfs/cgroup/devices/system.slice/boot.mount/devices.allow': Permission denied <span class="keyword">find</span>: '/<span class="keyword">var</span>/lib/lxcfs/cgroup/devices/system.slice/boot.mount/devices.deny': Permission denied <span class="keyword">find</span>: '/<span class="keyword">var</span>/lib/lxcfs/cgroup/devices/system.slice/dbus.service/devices.allow': Permission denied <span class="keyword">find</span>: '/<span class="keyword">var</span>/lib/lxcfs/cgroup/devices/system.slice/dbus.service/devices.deny': Permission denied <span class="keyword">find</span>: '/<span class="keyword">var</span>/lib/lxcfs/cgroup/devices/system.slice/<span class="keyword">var</span>-lib-lxcfs.mount/devices.allow': Permission denied <span class="keyword">find</span>: '/<span class="keyword">var</span>/lib/lxcfs/cgroup/devices/system.slice/<span class="keyword">var</span>-lib-lxcfs.mount/devices.deny': Permission denied <span class="keyword">find</span>: '/<span class="keyword">var</span>/lib/lxcfs/cgroup/devices/system.slice/cron.service/devices.allow': Permission denied <span class="keyword">find</span>: '/<span class="keyword">var</span>/lib/lxcfs/cgroup/devices/system.slice/cron.service/devices.deny': Permission denied <span class="keyword">find</span>: '/<span class="keyword">var</span>/lib/lxcfs/cgroup/devices/system.slice/run-user<span class="number">-0.</span>mount/devices.allow': Permission denied <span class="keyword">find</span>: '/<span class="keyword">var</span>/lib/lxcfs/cgroup/devices/system.slice/run-user<span class="number">-0.</span>mount/devices.deny': Permission denied <span class="keyword">find</span>: '/<span class="keyword">var</span>/lib/lxcfs/cgroup/devices/system.slice/lvm2-lvmetad.service/devices.allow': Permission denied <span class="keyword">find</span>: '/<span class="keyword">var</span>/lib/lxcfs/cgroup/devices/system.slice/lvm2-lvmetad.service/devices.deny': Permission denied <span class="keyword">find</span>: '/<span class="keyword">var</span>/lib/lxcfs/cgroup/devices/system.slice/run-lxcfs-controllers-cpu\\x2ccpuacct.mount/devices.allow': Permission denied <span class="keyword">find</span>: '/<span class="keyword">var</span>/lib/lxcfs/cgroup/devices/system.slice/run-lxcfs-controllers-cpu\\x2ccpuacct.mount/devices.deny': Permission denied</span><br></pre></td></tr></table></figure></p>
 <p>版本信息<br><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">root@vagrant:/tmp# cat /etc/\*-release</span></span><br><span class="line">DISTRIB_ID=Ubuntu</span><br><span class="line">DISTRIB_RELEASE=16.04</span><br><span class="line">DISTRIB_CODENAME=xenial</span><br><span class="line">DISTRIB_DESCRIPTION=<span class="string">"Ubuntu 16.04.1 LTS"</span></span><br><span class="line">NAME=<span class="string">"Ubuntu"</span></span><br><span class="line">VERSION=<span class="string">"16.04.1 LTS (Xenial Xerus)"</span></span><br><span class="line">ID=ubuntu</span><br><span class="line">ID_LIKE=debian</span><br><span class="line">PRETTY_NAME=<span class="string">"Ubuntu 16.04.1 LTS"</span></span><br><span class="line">VERSION_ID=<span class="string">"16.04"</span></span><br><span class="line">HOME_URL=<span class="string">"http://www.ubuntu.com/"</span></span><br><span class="line">SUPPORT_URL=<span class="string">"http://help.ubuntu.com/"</span></span><br><span class="line">BUG_REPORT_URL=<span class="string">"http://bugs.launchpad.net/ubuntu/"</span></span><br><span class="line">UBUNTU_CODENAME=xenial</span><br></pre></td></tr></table></figure></p>
 <blockquote><p>Bug was fix in lxcfs (2.0.4-0ubuntu1~ubuntu16.04.1)<br>debian/changelog :lxcfs (2.0.4-0ubuntu1~ubuntu16.04.1) xenial; urgency=medium</p>
-<footer><strong>Bug #1656309</strong><cite><a href="https://bugs.launchpad.net/ubuntu/+source/lxcfs/+bug/1656309" target="_blank" rel="external">bugs.launchpad.net/ubuntu/+source/lxcfs/+bug/1656309</a></cite></footer></blockquote>
+<footer><strong>Bug #1656309</strong><cite><a href="https://bugs.launchpad.net/ubuntu/+source/lxcfs/+bug/1656309" target="_blank" rel="noopener">bugs.launchpad.net/ubuntu/+source/lxcfs/+bug/1656309</a></cite></footer></blockquote>
 <p><br><br>一个临时解决方案<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get remove --auto-remove lxcfs</span><br></pre></td></tr></table></figure></p>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
-<li><a href="https://www.howtoinstall.co/en/ubuntu/xenial/lxcfs?action=remove" target="_blank" rel="external">How to remove lxcfs from Ubuntu 16.04 (Xenial Xerus)</a></li>
+<li><a href="https://www.howtoinstall.co/en/ubuntu/xenial/lxcfs?action=remove" target="_blank" rel="noopener">How to remove lxcfs from Ubuntu 16.04 (Xenial Xerus)</a></li>
 </ul>
 
           
@@ -1174,9 +1178,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/09/25/java-cacerts-import-certificate/" itemprop="url">Java cacerts 证书库导入自签名证书</a></h1>
+                <a class="post-title-link" href="/2016/09/25/java-cacerts-import-certificate/" itemprop="url">Java cacerts 证书库导入自签名证书</a></h2>
         
 
         <div class="post-meta">
@@ -1185,8 +1189,6 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
               
               <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-25T17:21:00+08:00">
                 2016-09-25 17:21:00
@@ -1202,8 +1204,6 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
               <time title="更新于" itemprop="dateModified" datetime="2016-09-25T17:21:41+08:00">
                 2016-09-25 17:21:41
               </time>
@@ -1218,8 +1218,6 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1239,6 +1237,10 @@
           
 
           
+          
+             <span id="/2016/09/25/java-cacerts-import-certificate/" class="leancloud_visitors" data-flag-title="Java cacerts 证书库导入自签名证书">
+                
+             </span>
           
 
           
@@ -1266,7 +1268,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javax.net.ssl.SSLHandshakeException: sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target at sun.security.ssl.Alerts.getSSLException(Alerts.java:<span class="number">192</span>) at sun.security.ssl.SSLSocketImpl.fatal(SSLSocketImpl.java:<span class="number">1949</span>) at sun.security.ssl.Handshaker.fatalSE(Handshaker.java:<span class="number">302</span>) at sun.security.ssl.Handshaker.fatalSE(Handshaker.java:<span class="number">296</span>) at sun.security.ssl.ClientHandshaker.serverCertificate(ClientHandshaker.java:<span class="number">1509</span>) at sun.security.ssl.ClientHandshaker.processMessage(ClientHandshaker.java:<span class="number">216</span>) at sun.security.ssl.Handshaker.processLoop(Handshaker.java:<span class="number">979</span>) at sun.security.ssl.Handshaker.process_record(Handshaker.java:<span class="number">914</span>) at sun.security.ssl.SSLSocketImpl.readRecord(SSLSocketImpl.java:<span class="number">1062</span>) at sun.security.ssl.SSLSocketImpl.performInitialHandshake(SSLSocketImpl.java:<span class="number">1375</span>) at sun.security.ssl.SSLSocketImpl.writeRecord(SSLSocketImpl.java:<span class="number">747</span>) at sun.security.ssl.AppOutputStream.write(AppOutputStream.java:<span class="number">123</span>) at java.io.BufferedOutputStream.flushBuffer(BufferedOutputStream.java:<span class="number">82</span>) at java.io.BufferedOutputStream.flush(BufferedOutputStream.java:<span class="number">140</span>) at org.apache.commons.httpclient.HttpConnection.flushRequestOutputStream(HttpConnection.java:<span class="number">828</span>) at org.apache.commons.httpclient.HttpMethodBase.writeRequest(HttpMethodBase.java:<span class="number">2116</span>) at org.apache.commons.httpclient.HttpMethodBase.execute(HttpMethodBase.java:<span class="number">1096</span>) at org.apache.commons.httpclient.HttpMethodDirector.executeWithRetry(HttpMethodDirector.java:<span class="number">398</span>) at org.apache.commons.httpclient.HttpMethodDirector.executeMethod(HttpMethodDirector.java:<span class="number">171</span>) at org.apache.commons.httpclient.HttpClient.executeMethod(HttpClient.java:<span class="number">397</span>) at org.apache.commons.httpclient.HttpClient.executeMethod(HttpClient.java:<span class="number">323</span>) ``` ```java Caused by: sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target at sun.security.validator.PKIXValidator.doBuild(PKIXValidator.java:<span class="number">387</span>) at sun.security.validator.PKIXValidator.engineValidate(PKIXValidator.java:<span class="number">292</span>) at sun.security.validator.Validator.validate(Validator.java:<span class="number">260</span>) at sun.security.ssl.X509TrustManagerImpl.validate(X509TrustManagerImpl.java:<span class="number">324</span>) at sun.security.ssl.X509TrustManagerImpl.checkTrusted(X509TrustManagerImpl.java:<span class="number">229</span>) at sun.security.ssl.X509TrustManagerImpl.checkServerTrusted(X509TrustManagerImpl.java:<span class="number">124</span>) at sun.security.ssl.ClientHandshaker.serverCertificate(ClientHandshaker.java:<span class="number">1491</span>) ... <span class="number">19</span> more Caused by: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target at sun.security.provider.certpath.SunCertPathBuilder.build(SunCertPathBuilder.java:<span class="number">141</span>) at sun.security.provider.certpath.SunCertPathBuilder.engineBuild(SunCertPathBuilder.java:<span class="number">126</span>) at java.security.cert.CertPathBuilder.build(CertPathBuilder.java:<span class="number">280</span>) at sun.security.validator.PKIXValidator.doBuild(PKIXValidator.java:<span class="number">382</span>) ... <span class="number">25</span> more</span><br></pre></td></tr></table></figure>
 <p>solution<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> <span class="variable">$&#123;JAVA_HOME&#125;</span>/jre/lib/security</span><br><span class="line"></span><br><span class="line">keytool -import -<span class="built_in">alias</span> codz -keystore cacerts -file <span class="variable">$&#123;JAVA_HOME&#125;</span>/jre/lib/security/codz.cer  </span><br><span class="line"></span><br><span class="line">keytool -list -keystore cacerts -<span class="built_in">alias</span> codz</span><br></pre></td></tr></table></figure></p>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
-<li><a href="http://blog.csdn.net/wangjunjun2008/article/details/37662851" target="_blank" rel="external">将安全证书导入到java的cacerts证书库</a></li>
+<li><a href="http://blog.csdn.net/wangjunjun2008/article/details/37662851" target="_blank" rel="noopener">将安全证书导入到java的cacerts证书库</a></li>
 </ul>
 
           
@@ -1333,9 +1335,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/08/12/nginx-tomcat-config-https/" itemprop="url">HTTPS 证书生成 & Nginx/Tomcat 配置 HTTPS</a></h1>
+                <a class="post-title-link" href="/2016/08/12/nginx-tomcat-config-https/" itemprop="url">HTTPS 证书生成 & Nginx/Tomcat 配置 HTTPS</a></h2>
         
 
         <div class="post-meta">
@@ -1344,8 +1346,6 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
               
               <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-12T21:44:00+08:00">
                 2016-08-12 21:44:00
@@ -1361,8 +1361,6 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
               <time title="更新于" itemprop="dateModified" datetime="2017-02-20T08:48:31+08:00">
                 2017-02-20 08:48:31
               </time>
@@ -1377,8 +1375,6 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1398,6 +1394,10 @@
           
 
           
+          
+             <span id="/2016/08/12/nginx-tomcat-config-https/" class="leancloud_visitors" data-flag-title="HTTPS 证书生成 & Nginx/Tomcat 配置 HTTPS">
+                
+             </span>
           
 
           
@@ -1457,7 +1457,7 @@
 <p>Ubuntu上跑Tengine，代理Windows上的应用，访问HTTPS页面时候总是报504错误，后来又报502错误。</p>
 <p>排查了一个多小时后发现是Windows系统安装了Vmware Workstation，而Vmware的VMware Authorization Service自动启动了。</p>
 <p>还有另外一个Vmware的服务忘记了，这两个服务会影响本地应用使用HTTPS，所以停止掉或禁用掉就可以了。</p>
-<p><a href="http://tool.chinaz.com/pagestatus/" target="_blank" rel="external">HTTP状态码</a></p>
+<p><a href="http://tool.chinaz.com/pagestatus/" target="_blank" rel="noopener">HTTP状态码</a></p>
 <blockquote><p>502 作为网关或者代理工作的服务器尝试执行请求时，从上游服务器接收到无效的响应。</p>
 <p>504 作为网关或者代理工作的服务器尝试执行请求时，未能及时从上游服务器（URI标识出的服务器，例如HTTP、FTP、LDAP）或者辅助服务器（例如DNS）收到响应。 　　注意：某些代理服务器在DNS查询超时时会返回400或者500错误</p>
 </blockquote>
@@ -1465,11 +1465,11 @@
 </ol>
 <p>参考资料：</p>
 <ul>
-<li><a href="http://my.oschina.net/itblog/blog/651434" target="_blank" rel="external">OpenSSL生成根证书CA及签发子证书</a></li>
-<li><a href="http://my.oschina.net/u/658145/blog/75093" target="_blank" rel="external">Windows下Tomcat+nginx配置证书实现登录页https访问</a></li>
-<li><a href="http://itindex.net/detail/50701-tomcat-bio-nio.apr" target="_blank" rel="external">Tomcat 的三种(bio,nio.apr) 高级 Connector 运行模式</a></li>
-<li><a href="http://blog.csdn.net/na_tion/article/details/17334669" target="_blank" rel="external">Nginx部署部分https与部分http</a></li>
-<li><a href="https://iyaozhen.com/nginx-https-conf.html" target="_blank" rel="external">Nginx HTTPS 配置实践</a></li>
+<li><a href="http://my.oschina.net/itblog/blog/651434" target="_blank" rel="noopener">OpenSSL生成根证书CA及签发子证书</a></li>
+<li><a href="http://my.oschina.net/u/658145/blog/75093" target="_blank" rel="noopener">Windows下Tomcat+nginx配置证书实现登录页https访问</a></li>
+<li><a href="http://itindex.net/detail/50701-tomcat-bio-nio.apr" target="_blank" rel="noopener">Tomcat 的三种(bio,nio.apr) 高级 Connector 运行模式</a></li>
+<li><a href="http://blog.csdn.net/na_tion/article/details/17334669" target="_blank" rel="noopener">Nginx部署部分https与部分http</a></li>
+<li><a href="https://iyaozhen.com/nginx-https-conf.html" target="_blank" rel="noopener">Nginx HTTPS 配置实践</a></li>
 </ul>
 
           
@@ -1536,9 +1536,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/07/28/ubuntu-desktop-boot-to-char-interface/" itemprop="url">Ubuntu Desktop 16.04 设置默认启动到字符界面</a></h1>
+                <a class="post-title-link" href="/2016/07/28/ubuntu-desktop-boot-to-char-interface/" itemprop="url">Ubuntu Desktop 16.04 设置默认启动到字符界面</a></h2>
         
 
         <div class="post-meta">
@@ -1547,8 +1547,6 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
               
               <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-28T22:47:00+08:00">
                 2016-07-28 22:47:00
@@ -1564,8 +1562,6 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
               <time title="更新于" itemprop="dateModified" datetime="2016-07-28T22:48:51+08:00">
                 2016-07-28 22:48:51
               </time>
@@ -1580,8 +1576,6 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1601,6 +1595,10 @@
           
 
           
+          
+             <span id="/2016/07/28/ubuntu-desktop-boot-to-char-interface/" class="leancloud_visitors" data-flag-title="Ubuntu Desktop 16.04 设置默认启动到字符界面">
+                
+             </span>
           
 
           
@@ -1629,9 +1627,9 @@
 <p>返回默认启动图形界面<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">set</span>-default graphical.target</span><br></pre></td></tr></table></figure></p>
 <p>其他方法，例如，均失败告终<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#1</span></span><br><span class="line">sudo vi /etc/default/grub</span><br><span class="line"></span><br><span class="line"><span class="attribute">GRUB_CMDLINE_LINUX_DEFAULT</span>=<span class="string">"text"</span></span><br><span class="line"></span><br><span class="line">sudo update-grub2</span><br><span class="line"></span><br><span class="line"><span class="comment">#2</span></span><br><span class="line">sudo vi /etc/init/rc-sysinit.conf</span><br><span class="line"></span><br><span class="line">env <span class="attribute">DEFAULT_RUNLEVEL</span>=3</span><br></pre></td></tr></table></figure></p>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
-<li><p><a href="https://www.ubuntu.org.cn/viewtopic.php?f=49&amp;t=478193" target="_blank" rel="external">https://www.ubuntu.org.cn/viewtopic.php?f=49&amp;t=478193</a></p>
+<li><p><a href="https://www.ubuntu.org.cn/viewtopic.php?f=49&amp;t=478193" target="_blank" rel="noopener">https://www.ubuntu.org.cn/viewtopic.php?f=49&amp;t=478193</a></p>
 </li>
-<li><p><a href="http://www.2cto.com/os/201308/237632.html" target="_blank" rel="external">http://www.2cto.com/os/201308/237632.html</a></p>
+<li><p><a href="http://www.2cto.com/os/201308/237632.html" target="_blank" rel="noopener">http://www.2cto.com/os/201308/237632.html</a></p>
 </li>
 </ul>
 
@@ -1699,9 +1697,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/07/21/ngrok-compile-and-run-online/" itemprop="url">从编译到使用 - ngrok 服务搭建</a></h1>
+                <a class="post-title-link" href="/2016/07/21/ngrok-compile-and-run-online/" itemprop="url">从编译到使用 - ngrok 服务搭建</a></h2>
         
 
         <div class="post-meta">
@@ -1710,8 +1708,6 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
               
               <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-21T20:39:00+08:00">
                 2016-07-21 20:39:00
@@ -1727,8 +1723,6 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
               <time title="更新于" itemprop="dateModified" datetime="2017-02-20T08:42:32+08:00">
                 2017-02-20 08:42:32
               </time>
@@ -1743,8 +1737,6 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1764,6 +1756,10 @@
           
 
           
+          
+             <span id="/2016/07/21/ngrok-compile-and-run-online/" class="leancloud_visitors" data-flag-title="从编译到使用 - ngrok 服务搭建">
+                
+             </span>
           
 
           
@@ -1787,8 +1783,8 @@
       
         
           
-            <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p><a href="https://ngrok.com/" target="_blank" rel="external">ngrok官网</a>被q，而且访问速度慢，最主要的是不支持域名绑定，每次启动都是随机的二级域名，333</p>
-<p><a href="https://www.ngrok.cc/" target="_blank" rel="external">ngrok.cc-Sunny-Ngrok内网转发</a>，服务器在香港，访问速度也慢，支持自定义系统域名，但只能定义一个（可以先定义TCP端口转发，保存后编辑，可以修改成系统分配域名，这样子就可以有多个自定义的系统域名，然并卵，客户端连接不上，一直提示该域名已被注册，官方做限制了吧）。</p>
+            <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p><a href="https://ngrok.com/" target="_blank" rel="noopener">ngrok官网</a>被q，而且访问速度慢，最主要的是不支持域名绑定，每次启动都是随机的二级域名，333</p>
+<p><a href="https://www.ngrok.cc/" target="_blank" rel="noopener">ngrok.cc-Sunny-Ngrok内网转发</a>，服务器在香港，访问速度也慢，支持自定义系统域名，但只能定义一个（可以先定义TCP端口转发，保存后编辑，可以修改成系统分配域名，这样子就可以有多个自定义的系统域名，然并卵，客户端连接不上，一直提示该域名已被注册，官方做限制了吧）。</p>
 <p>对比了上面两个服务，加上自己的需求：</p>
 <ul>
 <li>需要多个自定义的域名；</li>
@@ -1810,7 +1806,7 @@
 <p>ngrok通过bindata将ngrok源码目录下的assets目录打包到可执行文件(ngrokd和ngrok)中去，<code>assets/client/tls和assets/server/tls</code>下分别存放着用于ngrok和ngrokd的默认证书文件。</p>
 <p>我们需要将它们替换成我们自己生成的，因此这一步务必放在编译可执行文件之前。</p>
 <p>所以，执行下面拷贝命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cp rootCA.pem assets/client/tls/ngrokroot.crt</span><br><span class="line">cp device.crt assets/server/tls/snakeoil.crt</span><br><span class="line">cp device.key assets/server/tls/snakeoil.key</span><br></pre></td></tr></table></figure></p>
-<h2 id="搭建go环境"><a href="#搭建go环境" class="headerlink" title="搭建go环境"></a>搭建go环境</h2><p><a href="https://golang.org/" target="_blank" rel="external">Golang官网</a>被q，下载安装包特么慢，<a href="https://golangtc.com/download" target="_blank" rel="external">Golang中国</a>提供下载站点，我使用的是1.6.3版本；</p>
+<h2 id="搭建go环境"><a href="#搭建go环境" class="headerlink" title="搭建go环境"></a>搭建go环境</h2><p><a href="https://golang.org/" target="_blank" rel="noopener">Golang官网</a>被q，下载安装包特么慢，<a href="https://golangtc.com/download" target="_blank" rel="noopener">Golang中国</a>提供下载站点，我使用的是1.6.3版本；</p>
 <p>下载并解压到go的默认安装路径<code>/usr/local/go</code><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /work/download</span><br><span class="line">wget http://www.golangtc.com/static/go/1.6.3/go1.6.3.linux-amd64.tar.gz</span><br><span class="line">tar -zxvf go1.6.3.linux-amd64.tar.gz -C /usr/<span class="built_in">local</span></span><br></pre></td></tr></table></figure></p>
 <p>修改PATH<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/profile</span><br><span class="line"><span class="built_in">export</span> GOROOT=/usr/<span class="built_in">local</span>/go</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$GOROOT</span>/bin</span><br><span class="line"><span class="built_in">source</span> /etc/profile</span><br></pre></td></tr></table></figure></p>
 <p>正确配置后，go env可以查看得到当前go的环境<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">GOARCH</span>=<span class="string">"amd64"</span></span><br><span class="line"><span class="attr">GOBIN</span>=<span class="string">""</span></span><br><span class="line"><span class="attr">GOEXE</span>=<span class="string">""</span></span><br><span class="line"><span class="attr">GOHOSTARCH</span>=<span class="string">"amd64"</span></span><br><span class="line"><span class="attr">GOHOSTOS</span>=<span class="string">"linux"</span></span><br><span class="line"><span class="attr">GOOS</span>=<span class="string">"linux"</span></span><br><span class="line"><span class="attr">GOPATH</span>=<span class="string">""</span></span><br><span class="line"><span class="attr">GORACE</span>=<span class="string">""</span></span><br><span class="line"><span class="attr">GOROOT</span>=<span class="string">"/usr/local/go"</span></span><br><span class="line"><span class="attr">GOTOOLDIR</span>=<span class="string">"/usr/local/go/pkg/tool/linux_amd64"</span></span><br><span class="line"><span class="attr">GO15VENDOREXPERIMENT</span>=<span class="string">"1"</span></span><br><span class="line"><span class="attr">CC</span>=<span class="string">"gcc"</span></span><br><span class="line"><span class="attr">GOGCCFLAGS</span>=<span class="string">"-fPIC -m64 -pthread -fmessage-length=0"</span></span><br><span class="line"><span class="attr">CXX</span>=<span class="string">"g++"</span></span><br><span class="line"><span class="attr">CGO_ENABLED</span>=<span class="string">"1"</span></span><br></pre></td></tr></table></figure></p>
@@ -1821,7 +1817,7 @@
 <p>make很可能出现的错误有（来自Windows下的错误信息，Ubuntu下跑一切正常）<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">package archive/zip: unrecognized import path "archive/zip" (import path does not <span class="keyword">begin</span> <span class="keyword">with</span> hostname)</span><br><span class="line"><span class="keyword">package</span> <span class="keyword">bytes</span>: unrecognized <span class="keyword">import</span> <span class="keyword">path</span> <span class="string">"bytes"</span> (<span class="keyword">import</span> <span class="keyword">path</span> does <span class="keyword">not</span> <span class="keyword">begin</span> <span class="keyword">with</span> hostname)</span><br><span class="line"><span class="keyword">package</span> <span class="keyword">encoding</span>/<span class="keyword">json</span>: unrecognized <span class="keyword">import</span> <span class="keyword">path</span> <span class="string">"encoding/json"</span> (<span class="keyword">import</span> <span class="keyword">path</span> does <span class="keyword">not</span> <span class="keyword">begin</span> <span class="keyword">with</span> hostname)</span><br><span class="line"><span class="keyword">package</span> <span class="keyword">encoding</span>/<span class="keyword">xml</span>: unrecognized <span class="keyword">import</span> <span class="keyword">path</span> <span class="string">"encoding/xml"</span> (<span class="keyword">import</span> <span class="keyword">path</span> does <span class="keyword">not</span> <span class="keyword">begin</span> <span class="keyword">with</span> hostname)</span><br><span class="line"><span class="keyword">package</span> <span class="keyword">errors</span>: unrecognized <span class="keyword">import</span> <span class="keyword">path</span> <span class="string">"errors"</span> (<span class="keyword">import</span> <span class="keyword">path</span> does <span class="keyword">not</span> <span class="keyword">begin</span> <span class="keyword">with</span> hostname)</span><br><span class="line"><span class="keyword">package</span> expvar: unrecognized <span class="keyword">import</span> <span class="keyword">path</span> <span class="string">"expvar"</span> (<span class="keyword">import</span> <span class="keyword">path</span> does <span class="keyword">not</span> <span class="keyword">begin</span> <span class="keyword">with</span> hostname)</span><br><span class="line"><span class="keyword">package</span> flag: unrecognized <span class="keyword">import</span> <span class="keyword">path</span> <span class="string">"flag"</span> (<span class="keyword">import</span> <span class="keyword">path</span> does <span class="keyword">not</span> <span class="keyword">begin</span> <span class="keyword">with</span> hostname)</span><br><span class="line"><span class="keyword">package</span> fmt: unrecognized <span class="keyword">import</span> <span class="keyword">path</span> <span class="string">"fmt"</span> (<span class="keyword">import</span> <span class="keyword">path</span> does <span class="keyword">not</span> <span class="keyword">begin</span> <span class="keyword">with</span> hostname)</span><br></pre></td></tr></table></figure></p>
 <h2 id="启动ngrok"><a href="#启动ngrok" class="headerlink" title="启动ngrok"></a>启动ngrok</h2><h3 id="服务端启动"><a href="#服务端启动" class="headerlink" title="服务端启动"></a>服务端启动</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /work/ngrok/bin</span><br><span class="line">ngrokd -domain=<span class="string">"codz.me"</span> -httpAddr=<span class="string">":8088"</span> -httpsAddr=<span class="string">":8089"</span></span><br></pre></td></tr></table></figure>
 <p>-domain的内容需要与上面生成证书所填的<code>NGROK_BASE_DOMAIN</code>一致；</p>
-<p>自定义http、https提供服务的端口，据此你使用的二级域名应该是 <a href="http://[自定义].codz.me:8088" target="_blank" rel="external">http://[自定义].codz.me:8088</a></p>
+<p>自定义http、https提供服务的端口，据此你使用的二级域名应该是 <a href="http://[自定义].codz.me:8088" target="_blank" rel="noopener">http://[自定义].codz.me:8088</a></p>
 <p>其他有用的启动脚本</p>
 <ul>
 <li><p>后台启动，输出日志</p>
@@ -1843,10 +1839,10 @@
 <p>多个用户同时访问效果不是很明显，可能与ECS带宽有关（→_→ 1Mbps），ngrok使用多个自定义域名目的已达成，这是重点。</p>
 <p>参考：</p>
 <ul>
-<li><a href="https://aotu.io/notes/2016/02/19/ngrok/" target="_blank" rel="external">https://aotu.io/notes/2016/02/19/ngrok/</a></li>
-<li><a href="http://tonybai.com/2015/03/14/selfhost-ngrok-service" target="_blank" rel="external">http://tonybai.com/2015/03/14/selfhost-ngrok-service</a></li>
-<li><a href="http://blog.csdn.net/tao_627/article/details/17191977" target="_blank" rel="external">http://blog.csdn.net/tao_627/article/details/17191977</a></li>
-<li><a href="http://briteming.blogspot.com/2016/04/ngrok.html" target="_blank" rel="external">http://briteming.blogspot.com/2016/04/ngrok.html</a></li>
+<li><a href="https://aotu.io/notes/2016/02/19/ngrok/" target="_blank" rel="noopener">https://aotu.io/notes/2016/02/19/ngrok/</a></li>
+<li><a href="http://tonybai.com/2015/03/14/selfhost-ngrok-service" target="_blank" rel="noopener">http://tonybai.com/2015/03/14/selfhost-ngrok-service</a></li>
+<li><a href="http://blog.csdn.net/tao_627/article/details/17191977" target="_blank" rel="noopener">http://blog.csdn.net/tao_627/article/details/17191977</a></li>
+<li><a href="http://briteming.blogspot.com/2016/04/ngrok.html" target="_blank" rel="noopener">http://briteming.blogspot.com/2016/04/ngrok.html</a></li>
 </ul>
 
           
@@ -1913,9 +1909,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/05/30/elasticsearch-note-2/" itemprop="url">（二）Elasticsearch学习笔记：CURD</a></h1>
+                <a class="post-title-link" href="/2016/05/30/elasticsearch-note-2/" itemprop="url">（二）Elasticsearch学习笔记：CURD</a></h2>
         
 
         <div class="post-meta">
@@ -1924,8 +1920,6 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
               
               <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-30T22:13:00+08:00">
                 2016-05-30 22:13:00
@@ -1941,8 +1935,6 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
               <time title="更新于" itemprop="dateModified" datetime="2017-02-22T22:16:59+08:00">
                 2017-02-22 22:16:59
               </time>
@@ -1957,8 +1949,6 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1978,6 +1968,10 @@
           
 
           
+          
+             <span id="/2016/05/30/elasticsearch-note-2/" class="leancloud_visitors" data-flag-title="（二）Elasticsearch学习笔记：CURD">
+                
+             </span>
           
 
           
@@ -2091,7 +2085,7 @@
                 alt="laudukang" />
             
               <p class="site-author-name" itemprop="name">laudukang</p>
-              <p class="site-description motion-element" itemprop="description">Bug Not Found</p>
+              <p class="site-description motion-element" itemprop="description"></p>
           </div>
 
           <nav class="site-state motion-element">
@@ -2224,6 +2218,26 @@
 
 
         
+<div class="busuanzi-count" style="display: none;">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
 
 
 
@@ -2251,6 +2265,7 @@
     window.Promise = null;
   }
 </script>
+
 
 
 
@@ -2291,6 +2306,9 @@
   <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
 
   
+  <script type="text/javascript" src="/lib/nprogress/nprogress.js"></script>
+
+  
   <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
   
@@ -2303,6 +2321,8 @@
   <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
 
   <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/custom/custom.js?v=5.1.3"></script>
 
 
 
@@ -2363,6 +2383,128 @@
   
 
   
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("CPfRDhOlTyfkHW155W3Kx3H1-gzGzoHsz", "TX05RQSQMd8fbL7RaJNADS7S");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
 
   
 
