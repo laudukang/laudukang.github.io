@@ -1,7 +1,7 @@
 http://codz.me/2017/10/12/minio-and-nginx/
 http://codz.me/2017/09/24/rise-of-worse-is-better/
 http://codz.me/2017/06/10/can-not-read-from-dev-random/
-http://codz.me/2017/02/19/2017-annual-book-list/
+http://codz.me/2017/02/19/annual-book-list-2017/
 http://codz.me/2017/01/14/a-bug-of-ubuntu-16_04_1/
 http://codz.me/2016/09/25/java-cacerts-import-certificate/
 http://codz.me/2016/08/12/nginx-tomcat-config-https/
