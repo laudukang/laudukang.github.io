@@ -284,6 +284,185 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://codz.me/2015/08/13/java-programmer-advanced-learning-day-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="laudukang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/favicon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Is Poetry">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/08/13/java-programmer-advanced-learning-day-3/" itemprop="url">[Day 3] Java 程序员修炼之道学习笔记</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-08-13T00:56:00+08:00">
+                2015-08-13 00:56:00
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2015-08-13T11:13:51+08:00">
+                2015-08-13 11:13:51
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2015/08/13/java-programmer-advanced-learning-day-3/" class="leancloud_visitors" data-flag-title="[Day 3] Java 程序员修炼之道学习笔记">
+                
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ol>
+<li><p><code>@Inject</code>注解</p>
+<p><code>@Inject</code>注解可以出现在三种类成员之前：构造器、方法、属性</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//构造器，不含参数的构造器也可以使用@Inject 注解</span></span><br><span class="line"><span class="meta">@Inject</span> <span class="function"><span class="keyword">public</span> <span class="title">MurmurMessage</span><span class="params">(Header header, Content content)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.header = header;</span><br><span class="line">    <span class="keyword">this</span>.content = content;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//方法</span></span><br><span class="line"><span class="meta">@Inject</span> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setContent</span><span class="params">(Content content)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.content = content;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//属性</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MurmurMessenger</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="meta">@Inject</span> <span class="keyword">private</span> MurmurMessage murmurMessage;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>@Qualifier</code>注解</p>
+<p>用<code>@Qualifier</code>注解区分同一类型MusicGenre的不用bean</p>
+<p>必须标记为<code>@Qualifier</code>和<code>@Retention(RUNTIME)</code>，以确保该限定注解运行时一直有效</p>
+<p>通常还会加上<code>@Documented</code>注解，从而该实现就能加API的公共Javadoc中</p>
+<p>可以有属性</p>
+<p><code>@Target</code>注解可以限定其使用范围</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Retention</span>(RUNTIME)</span><br><span class="line"><span class="meta">@Qualifier</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> MusicGenre</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function">Genre <span class="title">genre</span><span class="params">()</span> <span class="keyword">default</span> Genre.TRANCE</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">enum</span> GENRE &#123; CLASSICAL, METAL, ROCK, TRANCE &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MetalRecordAlbumns</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="meta">@Inject</span> <span class="meta">@MusicGenre</span>(GENRE.METAL) Genre genre;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>@Named</code>注解</p>
+<p>将<code>@Named</code>和<code>@Inject</code>一起使用，符合指定名称并且类型正确的对象会被注入</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//注入了名称为“murmur”和“broadcast”的两个MurmurMessage对象</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MurmurMessenger</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="meta">@Inject</span> <span class="meta">@Named</span>(<span class="string">"murmur"</span>) <span class="keyword">private</span> MurmurMessage murmurMessage;</span><br><span class="line">    <span class="meta">@Inject</span> <span class="meta">@Named</span>(<span class="string">"broadcast"</span>) <span class="keyword">private</span> MurmurMessage broadcastMessage;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>@Singleton</code>注解</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//单例模式</span></span><br><span class="line"><span class="keyword">public</span> MurmurMessage</span><br><span class="line">&#123;</span><br><span class="line">    <span class="meta">@Inject</span> <span class="meta">@Singleton</span> MessageHeader defaultHeader;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>接口Provider<t></t></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.google.inject.Inject;</span><br><span class="line"><span class="keyword">import</span> com.google.inject.Provider;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MurmurMessage</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">  <span class="meta">@Inject</span> MurmurMessage (Provider&lt;Message&gt; messageProvider)</span><br><span class="line">  &#123;</span><br><span class="line">      Message msg1 = messageProvider.get();</span><br><span class="line">      <span class="keyword">if</span> (someGlobalCondition)</span><br><span class="line">      &#123;</span><br><span class="line">          Message copyOfMsg1 = messageProvider.get();</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">//...</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><a href="http://blog.chinaunix.net/uid-20749563-id-718418.html" target="_blank" rel="noopener">Google Guice使用入门</a></p>
+</li>
+<li><p><a href="https://github.com/google/guice/wiki/Motivation" target="_blank" rel="noopener">Github google/guice wiki</a></p>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://codz.me/2015/08/11/java-programmer-advanced-learning-day-2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1806,212 +1985,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://codz.me/2015/07/11/rich-text-editor-plus/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="laudukang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/favicon.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Code Is Poetry">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/07/11/rich-text-editor-plus/" itemprop="url">Rich Text Editor Plus</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-07-11T23:52:00+08:00">
-                2015-07-11 23:52:00
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2015-07-12T12:17:03+08:00">
-                2015-07-12 12:17:03
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Git/" itemprop="url" rel="index">
-                    <span itemprop="name">Git</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2015/07/11/rich-text-editor-plus/" class="leancloud_visitors" data-flag-title="Rich Text Editor Plus">
-                
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Rich-Text-Editor-Plus"><a href="#Rich-Text-Editor-Plus" class="headerlink" title="Rich Text Editor Plus"></a>Rich Text Editor Plus</h1><p>A collection of editor with customized update, <a href="https://github.com/laudukang/rich-text-editor-plus" target="_blank" rel="noopener">Rich Text Editor Plus Github</a></p>
-<h2 id="Ueditor-Change-Log"><a href="#Ueditor-Change-Log" class="headerlink" title="Ueditor Change Log"></a>Ueditor Change Log</h2><ol>
-<li><p>表情文件本地化<br> images目录下的所有表情文件夹复制到<code>dialogs/emotion/images/</code>文件夹下面，修改<code>editor_config.js</code>文件，去掉<code>emotionLocalization</code>项的注释，值改为<code>true</code>。</p>
-</li>
-<li><p>列表文件本地化<br> 解压放到你的<code>themes/</code>文件夹下（可以按照需求放置路径），修改<code>editor_config.js</code>文件，修改listiconpath配置项：</p>
-<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//如果是自己的目录，请使用  <span class="string">'/'</span>开头的绝对路径</span><br><span class="line">listiconpath : <span class="type">URL</span>+<span class="symbol">'themes</span>/ueditor-list/'</span><br></pre></td></tr></table></figure>
-<p>在发布文章的页面，引用<code>uparse.js</code>，并运行 uParse 函数，传入列表路径：</p>
- <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">uParse(<span class="string">'.content'</span>,&#123;</span><br><span class="line">    <span class="string">'liiconpath'</span>:<span class="string">'/UTest/ueditor/themes/ueditor-list/'</span>    <span class="comment">//使用 '/' 开头的绝对路径</span></span><br><span class="line">&#125;)</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>升级ueditor的SyntaxHighlighter，ueditor默认使用了SyntaxHighlighter的Default主题</p>
-<p> 更多配置请参见<br> <a href="http://www.crarun.com/article-3.html" target="_blank" rel="noopener">升级UEditor的SyntaxHighlighter</a></p>
-</li>
-<li><p>更改了ueditor的默认上传位置，使用了tomcat的虚拟路径，避免重新部署后丢失先前的文件，</p>
-<p> 这里修改了<code>com.baidu.ueditor.ConfigManager</code>类，主要是对<code>ueditor.config.js</code>虚拟路径配置的处理;</p>
-<p> 还修改了<code>com.baidu.ueditor.hunter.FileManager</code>和<code>com.baidu.ueditor.upload.BinaryUploader</code>，主要是对配置了tomcat虚拟路径后的处理;</p>
-<p> 特别地，修改了原图片在线管理/文件在线附件的获取，原ueditor可以获取文件的个数并显示出来，但图片/文件显示不了，因为其封装的路径有文件，原ueditor的封装使用了绝对路径，即把</p>
- <figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D:<span class="symbol">\T</span>omcat 7.0.57<span class="symbol">\w</span>ebapps<span class="symbol">\E</span>ditorDemo<span class="symbol">\u</span>pload<span class="symbol">\i</span>mage<span class="symbol">\2</span>0150711<span class="symbol">\1</span>436591786822080766.jpg</span><br></pre></td></tr></table></figure>
-<p> 这样的文件路径返回前台，这样子前台ueditor是获取不了文件的，所以改成了相对路径，见FileManager类下的getPath (File)方法；</p>
-<p> 关于tomcat虚拟路径的配置，修改tomcat conf目录下的server.xml，在Host里面添加:</p>
- <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Context <span class="attribute">path</span>=<span class="string">"/EditorDemo/ueditorupload"</span> <span class="attribute">docBase</span>=<span class="string">"D:\apache\EditorDemo\ueditor\ueditorupload"</span>/&gt;</span><br></pre></td></tr></table></figure>
-<p> 这部分内容参考了<br> <a href="http://blog.csdn.net/will_awoke/article/details/39579061" target="_blank" rel="noopener">百度UEditor 上传组件 使用虚拟路径映射配置</a></p>
-</li>
-<li><p>是否保存上传文件到虚拟路径的配置请参见<code>ueditor/jsp/</code>下的<code>config.json</code>，xxxRealMappingPath指定了物理路径的位置</p>
-</li>
-<li><p>修改百度map组件的默认位置为<code>广东广州</code></p>
-</li>
-<li><p>该版本基于ubuilder_1_4_3-utf8-jsp修改</p>
-</li>
-<li><p>ueditor这部分的最后修改时间2015年7月11日22:31:04</p>
-</li>
-</ol>
-<h2 id="Kindeditor-Change-Log"><a href="#Kindeditor-Change-Log" class="headerlink" title="Kindeditor Change Log"></a>Kindeditor Change Log</h2><ol>
-<li>基于kindeditor-4.1.10修改</li>
-<li>修改代码高亮为SyntaxHighlighter插件</li>
-<li>添加插入附件的文件类型图标，用于插入附件后在前面显示</li>
-<li>修改了<code>kindeditor/jsp</code>文件夹下的<code>file_manager_json.jsp</code>和<code>upload_json.jsp</code>文件，用于上传文件/文件管理器的支持</li>
-<li>添加/修改了jwplayer插件，用于播放流媒体文件</li>
-<li><p>虚拟路径</p>
- <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Context <span class="attribute">path</span>=<span class="string">"/EditorDemo/kindeditorupload"</span> <span class="attribute">docBase</span>=<span class="string">"D:\apache\EditorDemo\kindeditor\kindeditorupload"</span>/&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>kindeditor这部分的最后修改时间2015年7月12日01:30:29</p>
-</li>
-</ol>
-<h2 id="Ckeditor-Change-Log"><a href="#Ckeditor-Change-Log" class="headerlink" title="Ckeditor Change Log"></a>Ckeditor Change Log</h2><ol>
-<li><p>基于ckeditor_4.5.1_full修改</p>
-</li>
-<li><p>添加了<code>jsp/browse.jsp</code>和<code>jsp/upload.jsp</code>两个文件，分别用于浏览服务器文件和上传图片/附件到服务器；</p>
-<p> <code>config.js</code>配置了这两个文件的调用；</p>
-<p> 修改返回路径为服务器相对路径saveUrl；</p>
-<p> 修改上传文件新文件名为当前日期+随机码，tomcat需要配置虚拟路径</p>
- <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Context <span class="attribute">path</span>=<span class="string">"/EditorDemo/ckeditorupload"</span> <span class="attribute">docBase</span>=<span class="string">"D:\apache\EditorDemo\ckeditor\ckeditorupload"</span>/&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>ckeditor这部分的最后修改时间2015年7月12日12:11:55</p>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2066,7 +2039,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">63</span>
+                  <span class="site-state-item-count">64</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

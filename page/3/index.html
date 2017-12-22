@@ -284,6 +284,166 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://codz.me/2016/02/01/spring-propertyreferenceexception-exception/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="laudukang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/favicon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Is Poetry">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/02/01/spring-propertyreferenceexception-exception/" itemprop="url">Solutions of Spring PropertyReferenceException Exception</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-02-01T21:48:00+08:00">
+                2016-02-01 21:48:00
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2016-02-01T21:48:48+08:00">
+                2016-02-01 21:48:48
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/02/01/spring-propertyreferenceexception-exception/" class="leancloud_visitors" data-flag-title="Solutions of Spring PropertyReferenceException Exception">
+                
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><code>Caused by: org.springframework.data.mapping.PropertyReferenceException: No property saveAdmin found for type OsAdmin!</code></p>
+<p>Exception message:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line">java.lang.IllegalStateException: Failed to load ApplicationContext</span><br><span class="line"></span><br><span class="line">    at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:<span class="number">124</span>)</span><br><span class="line">    at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:<span class="number">83</span>)</span><br><span class="line">    at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:<span class="number">117</span>)</span><br><span class="line">    at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:<span class="number">83</span>)</span><br><span class="line">    at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:<span class="number">228</span>)</span><br><span class="line">    at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:<span class="number">230</span>)</span><br><span class="line">    at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$<span class="number">1</span>.runReflectiveCall(SpringJUnit4ClassRunner.java:<span class="number">289</span>)</span><br><span class="line">    at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:<span class="number">12</span>)</span><br><span class="line">    at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:<span class="number">291</span>)</span><br><span class="line">    at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:<span class="number">249</span>)</span><br><span class="line">    at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:<span class="number">89</span>)</span><br><span class="line">    at org.junit.runners.ParentRunner$<span class="number">3</span>.run(ParentRunner.java:<span class="number">290</span>)</span><br><span class="line">    at org.junit.runners.ParentRunner$<span class="number">1</span>.schedule(ParentRunner.java:<span class="number">71</span>)</span><br><span class="line">    at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:<span class="number">288</span>)</span><br><span class="line">    at org.junit.runners.ParentRunner.access$<span class="number">000</span>(ParentRunner.java:<span class="number">58</span>)</span><br><span class="line">    at org.junit.runners.ParentRunner$<span class="number">2</span>.evaluate(ParentRunner.java:<span class="number">268</span>)</span><br><span class="line">    at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:<span class="number">61</span>)</span><br><span class="line">    at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:<span class="number">70</span>)</span><br><span class="line">    at org.junit.runners.ParentRunner.run(ParentRunner.java:<span class="number">363</span>)</span><br><span class="line">    at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:<span class="number">193</span>)</span><br><span class="line">    at org.junit.runner.JUnitCore.run(JUnitCore.java:<span class="number">137</span>)</span><br><span class="line">    at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:<span class="number">69</span>)</span><br><span class="line">    at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:<span class="number">234</span>)</span><br><span class="line">    at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:<span class="number">74</span>)</span><br><span class="line">    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</span><br><span class="line">    at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:<span class="number">62</span>)</span><br><span class="line">    at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:<span class="number">43</span>)</span><br><span class="line">    at java.lang.reflect.Method.invoke(Method.java:<span class="number">497</span>)</span><br><span class="line">    at com.intellij.rt.execution.application.AppMain.main(AppMain.java:<span class="number">144</span>)</span><br><span class="line">Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name <span class="string">'adminService'</span>: Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: me.laudukang.persistence.repository.AdminRepository me.laudukang.persistence.service.impl.AdminService.adminRepository; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name <span class="string">'adminRepository'</span>: Invocation of init method failed; nested exception is org.springframework.data.mapping.PropertyReferenceException: No property saveAdmin found <span class="keyword">for</span> type OsAdmin!</span><br><span class="line">    at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:<span class="number">334</span>)</span><br><span class="line">    at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:<span class="number">1214</span>)</span><br><span class="line">    at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:<span class="number">543</span>)</span><br><span class="line">    at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:<span class="number">482</span>)</span><br><span class="line">    at org.springframework.beans.factory.support.AbstractBeanFactory$<span class="number">1</span>.getObject(AbstractBeanFactory.java:<span class="number">306</span>)</span><br><span class="line">    at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:<span class="number">230</span>)</span><br><span class="line">    at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:<span class="number">302</span>)</span><br><span class="line">    at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:<span class="number">197</span>)</span><br><span class="line">    at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:<span class="number">772</span>)</span><br><span class="line">    at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:<span class="number">839</span>)</span><br><span class="line">    at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:<span class="number">538</span>)</span><br><span class="line">    at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:<span class="number">125</span>)</span><br><span class="line">    at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:<span class="number">60</span>)</span><br><span class="line">    at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:<span class="number">98</span>)</span><br><span class="line">    at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:<span class="number">116</span>)</span><br><span class="line">    ... <span class="number">28</span> more</span><br><span class="line">Caused by: org.springframework.beans.factory.BeanCreationException: Could not autowire field: me.laudukang.persistence.repository.AdminRepository me.laudukang.persistence.service.impl.AdminService.adminRepository; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name <span class="string">'adminRepository'</span>: Invocation of init method failed; nested exception is org.springframework.data.mapping.PropertyReferenceException: No property saveAdmin found <span class="keyword">for</span> type OsAdmin!</span><br><span class="line">    at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:<span class="number">573</span>)</span><br><span class="line">    at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:<span class="number">88</span>)</span><br><span class="line">    at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:<span class="number">331</span>)</span><br><span class="line">    ... <span class="number">42</span> more</span><br><span class="line">Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name <span class="string">'adminRepository'</span>: Invocation of init method failed; nested exception is org.springframework.data.mapping.PropertyReferenceException: No property saveAdmin found <span class="keyword">for</span> type OsAdmin!</span><br><span class="line">    at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:<span class="number">1578</span>)</span><br><span class="line">    at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:<span class="number">545</span>)</span><br><span class="line">    at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:<span class="number">482</span>)</span><br><span class="line">    at org.springframework.beans.factory.support.AbstractBeanFactory$<span class="number">1</span>.getObject(AbstractBeanFactory.java:<span class="number">306</span>)</span><br><span class="line">    at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:<span class="number">230</span>)</span><br><span class="line">    at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:<span class="number">302</span>)</span><br><span class="line">    at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:<span class="number">197</span>)</span><br><span class="line">    at org.springframework.beans.factory.support.DefaultListableBeanFactory.findAutowireCandidates(DefaultListableBeanFactory.java:<span class="number">1192</span>)</span><br><span class="line">    at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:<span class="number">1116</span>)</span><br><span class="line">    at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:<span class="number">1014</span>)</span><br><span class="line">    at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:<span class="number">545</span>)</span><br><span class="line">    ... <span class="number">44</span> more</span><br><span class="line">Caused by: org.springframework.data.mapping.PropertyReferenceException: No property saveAdmin found <span class="keyword">for</span> type OsAdmin!</span><br><span class="line">    at org.springframework.data.mapping.PropertyPath.&lt;init&gt;(PropertyPath.java:<span class="number">75</span>)</span><br><span class="line">    at org.springframework.data.mapping.PropertyPath.create(PropertyPath.java:<span class="number">327</span>)</span><br><span class="line">    at org.springframework.data.mapping.PropertyPath.create(PropertyPath.java:<span class="number">307</span>)</span><br><span class="line">    at org.springframework.data.mapping.PropertyPath.from(PropertyPath.java:<span class="number">270</span>)</span><br><span class="line">    at org.springframework.data.mapping.PropertyPath.from(PropertyPath.java:<span class="number">241</span>)</span><br><span class="line">    at org.springframework.data.repository.query.parser.Part.&lt;init&gt;(Part.java:<span class="number">76</span>)</span><br><span class="line">    at org.springframework.data.repository.query.parser.PartTree$OrPart.&lt;init&gt;(PartTree.java:<span class="number">235</span>)</span><br><span class="line">    at org.springframework.data.repository.query.parser.PartTree$Predicate.buildTree(PartTree.java:<span class="number">373</span>)</span><br><span class="line">    at org.springframework.data.repository.query.parser.PartTree$Predicate.&lt;init&gt;(PartTree.java:<span class="number">353</span>)</span><br><span class="line">    at org.springframework.data.repository.query.parser.PartTree.&lt;init&gt;(PartTree.java:<span class="number">84</span>)</span><br><span class="line">    at org.springframework.data.jpa.repository.query.PartTreeJpaQuery.&lt;init&gt;(PartTreeJpaQuery.java:<span class="number">61</span>)</span><br><span class="line">    at org.springframework.data.jpa.repository.query.JpaQueryLookupStrategy$CreateQueryLookupStrategy.resolveQuery(JpaQueryLookupStrategy.java:<span class="number">95</span>)</span><br><span class="line">    at org.springframework.data.jpa.repository.query.JpaQueryLookupStrategy$CreateIfNotFoundQueryLookupStrategy.resolveQuery(JpaQueryLookupStrategy.java:<span class="number">206</span>)</span><br><span class="line">    at org.springframework.data.jpa.repository.query.JpaQueryLookupStrategy$AbstractQueryLookupStrategy.resolveQuery(JpaQueryLookupStrategy.java:<span class="number">73</span>)</span><br><span class="line">    at org.springframework.data.repository.core.support.RepositoryFactorySupport$QueryExecutorMethodInterceptor.&lt;init&gt;(RepositoryFactorySupport.java:<span class="number">416</span>)</span><br><span class="line">    at org.springframework.data.repository.core.support.RepositoryFactorySupport.getRepository(RepositoryFactorySupport.java:<span class="number">206</span>)</span><br><span class="line">    at org.springframework.data.repository.core.support.RepositoryFactoryBeanSupport.initAndReturn(RepositoryFactoryBeanSupport.java:<span class="number">251</span>)</span><br><span class="line">    at org.springframework.data.repository.core.support.RepositoryFactoryBeanSupport.afterPropertiesSet(RepositoryFactoryBeanSupport.java:<span class="number">237</span>)</span><br><span class="line">    at org.springframework.data.jpa.repository.support.JpaRepositoryFactoryBean.afterPropertiesSet(JpaRepositoryFactoryBean.java:<span class="number">92</span>)</span><br><span class="line">    at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:<span class="number">1637</span>)</span><br><span class="line">    at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:<span class="number">1574</span>)</span><br><span class="line">    ... <span class="number">54</span> more</span><br></pre></td></tr></table></figure></p>
+<p>Solution:</p>
+<ul>
+<li>YourInterfaceName</li>
+<li>YourInterfaceNameCustom</li>
+<li>YourInterfaceNameImpl</li>
+</ul>
+<img src="http://oss-aliyun.codz.me/images/2016/02/01/spring-propertyreferenceexception-exception/AdminRepositoryCustom.png" alt="AdminRepositoryCustom.png" title="">
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://codz.me/2016/01/23/gitignore-config/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1721,185 +1881,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://codz.me/2015/08/13/java-programmer-advanced-learning-day-3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="laudukang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/favicon.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Code Is Poetry">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/08/13/java-programmer-advanced-learning-day-3/" itemprop="url">[Day 3] Java 程序员修炼之道学习笔记</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-08-13T00:56:00+08:00">
-                2015-08-13 00:56:00
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2015-08-13T11:13:51+08:00">
-                2015-08-13 11:13:51
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2015/08/13/java-programmer-advanced-learning-day-3/" class="leancloud_visitors" data-flag-title="[Day 3] Java 程序员修炼之道学习笔记">
-                
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ol>
-<li><p><code>@Inject</code>注解</p>
-<p><code>@Inject</code>注解可以出现在三种类成员之前：构造器、方法、属性</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//构造器，不含参数的构造器也可以使用@Inject 注解</span></span><br><span class="line"><span class="meta">@Inject</span> <span class="function"><span class="keyword">public</span> <span class="title">MurmurMessage</span><span class="params">(Header header, Content content)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.header = header;</span><br><span class="line">    <span class="keyword">this</span>.content = content;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//方法</span></span><br><span class="line"><span class="meta">@Inject</span> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setContent</span><span class="params">(Content content)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.content = content;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//属性</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MurmurMessenger</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="meta">@Inject</span> <span class="keyword">private</span> MurmurMessage murmurMessage;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>@Qualifier</code>注解</p>
-<p>用<code>@Qualifier</code>注解区分同一类型MusicGenre的不用bean</p>
-<p>必须标记为<code>@Qualifier</code>和<code>@Retention(RUNTIME)</code>，以确保该限定注解运行时一直有效</p>
-<p>通常还会加上<code>@Documented</code>注解，从而该实现就能加API的公共Javadoc中</p>
-<p>可以有属性</p>
-<p><code>@Target</code>注解可以限定其使用范围</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Retention</span>(RUNTIME)</span><br><span class="line"><span class="meta">@Qualifier</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> MusicGenre</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function">Genre <span class="title">genre</span><span class="params">()</span> <span class="keyword">default</span> Genre.TRANCE</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">enum</span> GENRE &#123; CLASSICAL, METAL, ROCK, TRANCE &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MetalRecordAlbumns</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="meta">@Inject</span> <span class="meta">@MusicGenre</span>(GENRE.METAL) Genre genre;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>@Named</code>注解</p>
-<p>将<code>@Named</code>和<code>@Inject</code>一起使用，符合指定名称并且类型正确的对象会被注入</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//注入了名称为“murmur”和“broadcast”的两个MurmurMessage对象</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MurmurMessenger</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="meta">@Inject</span> <span class="meta">@Named</span>(<span class="string">"murmur"</span>) <span class="keyword">private</span> MurmurMessage murmurMessage;</span><br><span class="line">    <span class="meta">@Inject</span> <span class="meta">@Named</span>(<span class="string">"broadcast"</span>) <span class="keyword">private</span> MurmurMessage broadcastMessage;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><code>@Singleton</code>注解</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//单例模式</span></span><br><span class="line"><span class="keyword">public</span> MurmurMessage</span><br><span class="line">&#123;</span><br><span class="line">    <span class="meta">@Inject</span> <span class="meta">@Singleton</span> MessageHeader defaultHeader;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>接口Provider<t></t></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.google.inject.Inject;</span><br><span class="line"><span class="keyword">import</span> com.google.inject.Provider;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MurmurMessage</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">  <span class="meta">@Inject</span> MurmurMessage (Provider&lt;Message&gt; messageProvider)</span><br><span class="line">  &#123;</span><br><span class="line">      Message msg1 = messageProvider.get();</span><br><span class="line">      <span class="keyword">if</span> (someGlobalCondition)</span><br><span class="line">      &#123;</span><br><span class="line">          Message copyOfMsg1 = messageProvider.get();</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">//...</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><a href="http://blog.chinaunix.net/uid-20749563-id-718418.html" target="_blank" rel="noopener">Google Guice使用入门</a></p>
-</li>
-<li><p><a href="https://github.com/google/guice/wiki/Motivation" target="_blank" rel="noopener">Github google/guice wiki</a></p>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1954,7 +1935,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">63</span>
+                  <span class="site-state-item-count">64</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

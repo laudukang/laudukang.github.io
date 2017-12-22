@@ -284,6 +284,168 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://codz.me/2015/05/02/ubuntu-desktop-1404-root-login/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="laudukang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/favicon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Is Poetry">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/05/02/ubuntu-desktop-1404-root-login/" itemprop="url">Ubuntu Desktop 14.04 开启 root 登陆</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-05-02T14:14:00+08:00">
+                2015-05-02 14:14:00
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2015-05-02T19:58:21+08:00">
+                2015-05-02 19:58:21
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2015/05/02/ubuntu-desktop-1404-root-login/" class="leancloud_visitors" data-flag-title="Ubuntu Desktop 14.04 开启 root 登陆">
+                
+             </span>
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  ubuntu desktop permit root login
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>安装完成如需使用root身份登录，可打开终端输入以下命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#设置root密码</span></span><br><span class="line">sudo passwd root</span><br><span class="line"><span class="comment">#切换到root用户</span></span><br><span class="line">sudo -s</span><br></pre></td></tr></table></figure></p>
+<p>想要在登录界面使用root身份登录，可编辑<code>/etc/lightdm/</code>目录下的<code>lightdm.conf</code>文件，如没有此文件，直接创建<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">vim</span> /etc/lightdm/lightdm.<span class="keyword">conf</span></span><br></pre></td></tr></table></figure></p>
+<p>文件内容：<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[SeatDefaults]</span></span><br><span class="line"><span class="comment">#启动后以root身份自动登录</span></span><br><span class="line"><span class="attr">autologin-user</span>=root</span><br><span class="line"><span class="attr">greeter-session</span>=unity-greeter</span><br><span class="line"><span class="attr">user-session</span>=ubuntu</span><br><span class="line"><span class="comment">#手工输入登陆系统的用户名和密码</span></span><br><span class="line"><span class="attr">greeter-show-manual-login</span>=<span class="literal">true</span></span><br><span class="line"><span class="comment">#禁用guest用户</span></span><br><span class="line"><span class="attr">allow-guest</span>=<span class="literal">false</span></span><br></pre></td></tr></table></figure></p>
+<p>修改完之后执行<code>init 6</code>命令重启Ubuntu生效。<br>如果上面方式还是无法解决，再按照下面方式操作，修改<code>/etc/pam.d/login</code>文件：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gedit <span class="regexp">/etc/</span>pam.d<span class="regexp">/login</span></span><br></pre></td></tr></table></figure></p>
+<p>找到<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">auth [<span class="attribute">success</span>=ok <span class="attribute">new_authtok_reqd</span>=ok <span class="attribute">ignore</span>=ignore <span class="attribute">user_unknown</span>=bad <span class="attribute">default</span>=die] pam_securetty.so</span><br></pre></td></tr></table></figure></p>
+<p>修改成为下面的内容：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">auth</span> <span class="selector-tag">requisite</span> <span class="selector-tag">pam_securetty</span><span class="selector-class">.so</span></span><br></pre></td></tr></table></figure></p>
+<p>再次重启计算机。<br>此时，使用root用户可以登录计算机了。<br>root用户有风险，使用需谨慎。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://codz.me/2015/05/01/apache-config-htaccess/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -815,7 +977,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">63</span>
+                  <span class="site-state-item-count">64</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

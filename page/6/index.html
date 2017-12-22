@@ -284,6 +284,177 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://codz.me/2015/05/27/ubuntu-expand-hard-disk/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="laudukang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/favicon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Is Poetry">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/05/27/ubuntu-expand-hard-disk/" itemprop="url">Ubuntu 扩展硬盘/交换分区</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-05-27T20:59:00+08:00">
+                2015-05-27 20:59:00
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2015-05-27T21:04:59+08:00">
+                2015-05-27 21:04:59
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2015/05/27/ubuntu-expand-hard-disk/" class="leancloud_visitors" data-flag-title="Ubuntu 扩展硬盘/交换分区">
+                
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>背景：调整VMware虚拟机硬盘大小。laudukang。2017年11月20日14:02:38。</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo fdisk -l</span><br><span class="line">sudo fdisk <span class="regexp">/dev/</span>sda</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><a href="http://www.linuxidc.com/Linux/2010-06/26689.htm" target="_blank" rel="noopener">Ubuntu用gparted合并分区</a></p>
+</li>
+<li><p><a href="http://www.2cto.com/os/201305/212230.html" target="_blank" rel="noopener">Ubuntu无损分区调整</a></p>
+</li>
+<li><p><a href="https://help.ubuntu.com/community/Fstab" target="_blank" rel="noopener">Introduction to fstab</a></p>
+</li>
+<li><p><a href="http://forum.ubuntu.org.cn/viewtopic.php?t=395230" target="_blank" rel="noopener">ubuntu取消开机出现的grub</a></p>
+</li>
+<li><p><a href="http://www.cnblogs.com/dutlei/archive/2012/11/20/2778327.html" target="_blank" rel="noopener">Ubuntu完全教程，让你成为Ubuntu高手</a></p>
+</li>
+<li><p><a href="http://blog.sina.com.cn/s/blog_7deb436e0101nzkq.html" target="_blank" rel="noopener">多系统启动出现grub rescue模式，错误“normal.mod not found”解决办法</a></p>
+<p>第一步：<br>在liveCD模式进入UBUNTU，插入光盘，选择try ubuntu就是。<br>第二步：<br>安装Boot-Repair<br>先联网，然后打开终端，输入如下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:yannubuntu/boot-repair &amp;&amp; sudo apt-get update</span><br><span class="line">sudo apt-get install -y boot-repair &amp;&amp; boot-repair</span><br></pre></td></tr></table></figure>
+<p>第三步：<br>修复就是了，真是好简单</p>
+<img src="http://oss-aliyun.codz.me/images/2015/05/27/ubuntu-expand-hard-disk/repair-the-boot-of-the-computer.png" alt="repair the boot of the-computer" title="repair the boot of the-computer">
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://codz.me/2015/05/20/11-linux-terminal-commands-that-will-rock-your-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1986,168 +2157,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://codz.me/2015/05/02/ubuntu-desktop-1404-root-login/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="laudukang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/favicon.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Code Is Poetry">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/05/02/ubuntu-desktop-1404-root-login/" itemprop="url">Ubuntu Desktop 14.04 开启 root 登陆</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-05-02T14:14:00+08:00">
-                2015-05-02 14:14:00
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2015-05-02T19:58:21+08:00">
-                2015-05-02 19:58:21
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2015/05/02/ubuntu-desktop-1404-root-login/" class="leancloud_visitors" data-flag-title="Ubuntu Desktop 14.04 开启 root 登陆">
-                
-             </span>
-          
-
-          
-
-          
-
-          
-              <div class="post-description">
-                  ubuntu desktop permit root login
-              </div>
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>安装完成如需使用root身份登录，可打开终端输入以下命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#设置root密码</span></span><br><span class="line">sudo passwd root</span><br><span class="line"><span class="comment">#切换到root用户</span></span><br><span class="line">sudo -s</span><br></pre></td></tr></table></figure></p>
-<p>想要在登录界面使用root身份登录，可编辑<code>/etc/lightdm/</code>目录下的<code>lightdm.conf</code>文件，如没有此文件，直接创建<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">vim</span> /etc/lightdm/lightdm.<span class="keyword">conf</span></span><br></pre></td></tr></table></figure></p>
-<p>文件内容：<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[SeatDefaults]</span></span><br><span class="line"><span class="comment">#启动后以root身份自动登录</span></span><br><span class="line"><span class="attr">autologin-user</span>=root</span><br><span class="line"><span class="attr">greeter-session</span>=unity-greeter</span><br><span class="line"><span class="attr">user-session</span>=ubuntu</span><br><span class="line"><span class="comment">#手工输入登陆系统的用户名和密码</span></span><br><span class="line"><span class="attr">greeter-show-manual-login</span>=<span class="literal">true</span></span><br><span class="line"><span class="comment">#禁用guest用户</span></span><br><span class="line"><span class="attr">allow-guest</span>=<span class="literal">false</span></span><br></pre></td></tr></table></figure></p>
-<p>修改完之后执行<code>init 6</code>命令重启Ubuntu生效。<br>如果上面方式还是无法解决，再按照下面方式操作，修改<code>/etc/pam.d/login</code>文件：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gedit <span class="regexp">/etc/</span>pam.d<span class="regexp">/login</span></span><br></pre></td></tr></table></figure></p>
-<p>找到<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">auth [<span class="attribute">success</span>=ok <span class="attribute">new_authtok_reqd</span>=ok <span class="attribute">ignore</span>=ignore <span class="attribute">user_unknown</span>=bad <span class="attribute">default</span>=die] pam_securetty.so</span><br></pre></td></tr></table></figure></p>
-<p>修改成为下面的内容：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">auth</span> <span class="selector-tag">requisite</span> <span class="selector-tag">pam_securetty</span><span class="selector-class">.so</span></span><br></pre></td></tr></table></figure></p>
-<p>再次重启计算机。<br>此时，使用root用户可以登录计算机了。<br>root用户有风险，使用需谨慎。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2202,7 +2211,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">63</span>
+                  <span class="site-state-item-count">64</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

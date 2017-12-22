@@ -1,3 +1,4 @@
+http://codz.me/2017/12/20/recommend-articles/
 http://codz.me/2017/10/12/minio-and-nginx/
 http://codz.me/2017/09/24/rise-of-worse-is-better/
 http://codz.me/2017/06/10/can-not-read-from-dev-random/
@@ -60,4 +61,3 @@ http://codz.me/2015/05/03/apache-htaccess-usage/
 http://codz.me/2015/05/02/ubuntu-desktop-1404-root-login/
 http://codz.me/2015/05/01/apache-config-htaccess/
 http://codz.me/2015/05/01/can-not-connect-to-mysql-2002-error/
-http://codz.me/2015/05/01/shui-mao-xian/
