@@ -284,6 +284,218 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://codz.me/2016/07/21/ngrok-compile-and-run-online/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="laudukang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/favicon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Is Poetry">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/07/21/ngrok-compile-and-run-online/" itemprop="url">从编译到使用 - ngrok 服务搭建</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-21T20:39:00+08:00">
+                2016-07-21 20:39:00
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2017-02-20T08:42:32+08:00">
+                2017-02-20 08:42:32
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/07/21/ngrok-compile-and-run-online/" class="leancloud_visitors" data-flag-title="从编译到使用 - ngrok 服务搭建">
+                
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p><a href="https://ngrok.com/" target="_blank" rel="noopener">ngrok官网</a>被q，而且访问速度慢，最主要的是不支持域名绑定，每次启动都是随机的二级域名，333</p>
+<p><a href="https://www.ngrok.cc/" target="_blank" rel="noopener">ngrok.cc-Sunny-Ngrok内网转发</a>，服务器在香港，访问速度也慢，支持自定义系统域名，但只能定义一个（可以先定义TCP端口转发，保存后编辑，可以修改成系统分配域名，这样子就可以有多个自定义的系统域名，然并卵，客户端连接不上，一直提示该域名已被注册，官方做限制了吧）。</p>
+<p>对比了上面两个服务，加上自己的需求：</p>
+<ul>
+<li>需要多个自定义的域名；</li>
+<li>尽量提升访问速度；决定自己搭建一个ngrok服务。</li>
+</ul>
+<p>搭建ngrok服务需要的资源：</p>
+<ul>
+<li>一个域名，需要定义泛解析；</li>
+<li>一台ECS，需要公网IP</li>
+</ul>
+<p>以下操作建议在Ubuntu上尝试，不建议在Windows上尝试（花了一个晚上搞都没搞成功，第二天早上花一个小时在Ubuntu上完美运行）</p>
+<h2 id="拉取ngrok源码"><a href="#拉取ngrok源码" class="headerlink" title="拉取ngrok源码"></a>拉取ngrok源码</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> git@github.com:inconshreveable/ngrok.git /work/ngrok</span><br></pre></td></tr></table></figure>
+<p>使用ngrok.com官方服务时，我们使用的是官方的SSL证书。</p>
+<p>自建ngrokd服务，如果不想买SSL证书，我们需要生成自己的自签名证书，并编译一个携带该证书的ngrok客户端。</p>
+<p>证书生成过程需要一个<code>NGROK_BASE_DOMAIN</code>。</p>
+<p>以ngrok官方随机生成的地址693c358d.ngrok.com为例，其<code>NGROK_BASE_DOMAIN</code>就是<code>ngrok.com</code>，如果你要提供服务的地址为<code>example.ngrok.xxx.com</code>，那<code>NGROK_BASE_DOMAIN</code>就应该是<code>ngrok.xxx.com</code>。</p>
+<p>这里以<code>NGROK_BASE_DOMAIN=&quot;codz.me&quot;</code>为例，生成证书的命令如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /work/ngrok</span><br><span class="line">openssl genrsa -out rootCA.key 2048</span><br><span class="line">openssl req -x509 -new -nodes -key rootCA.key -subj <span class="string">"/CN=codz.me"</span> -days 5000 -out rootCA.pem</span><br><span class="line">openssl genrsa -out device.key 2048</span><br><span class="line">openssl req -new -key device.key -subj <span class="string">"/CN=codz.me"</span> -out device.csr</span><br><span class="line">openssl x509 -req -<span class="keyword">in</span> device.csr -CA rootCA.pem -CAkey rootCA.key -CAcreateserial -out device.crt -days 5000</span><br></pre></td></tr></table></figure></p>
+<p>ngrok目录下新建了如下文件<br><figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-rw-r--r--<span class="number"> 1 </span>root root <span class="number"> 985 </span>Jul<span class="number"> 21 </span>08:52 device.crt</span><br><span class="line">-rw-r--r--<span class="number"> 1 </span>root root <span class="number"> 895 </span>Jul<span class="number"> 21 </span>08:52 device.csr</span><br><span class="line">-rw-r--r--<span class="number"> 1 </span>root root<span class="number"> 1679 </span>Jul<span class="number"> 21 </span>08:52 device.key</span><br><span class="line">-rw-r--r--<span class="number"> 1 </span>root root<span class="number"> 1675 </span>Jul<span class="number"> 21 </span>08:51 rootCA.key</span><br><span class="line">-rw-r--r--<span class="number"> 1 </span>root root<span class="number"> 1103 </span>Jul<span class="number"> 21 </span>08:52 rootCA.pem</span><br><span class="line">-rw-r--r--<span class="number"> 1 </span>root root  <span class="number"> 17 </span>Jul<span class="number"> 21 </span>08:52 rootCA.srl</span><br></pre></td></tr></table></figure></p>
+<p>ngrok通过bindata将ngrok源码目录下的assets目录打包到可执行文件(ngrokd和ngrok)中去，<code>assets/client/tls和assets/server/tls</code>下分别存放着用于ngrok和ngrokd的默认证书文件。</p>
+<p>我们需要将它们替换成我们自己生成的，因此这一步务必放在编译可执行文件之前。</p>
+<p>所以，执行下面拷贝命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cp rootCA.pem assets/client/tls/ngrokroot.crt</span><br><span class="line">cp device.crt assets/server/tls/snakeoil.crt</span><br><span class="line">cp device.key assets/server/tls/snakeoil.key</span><br></pre></td></tr></table></figure></p>
+<h2 id="搭建go环境"><a href="#搭建go环境" class="headerlink" title="搭建go环境"></a>搭建go环境</h2><p><a href="https://golang.org/" target="_blank" rel="noopener">Golang官网</a>被q，下载安装包特么慢，<a href="https://golangtc.com/download" target="_blank" rel="noopener">Golang中国</a>提供下载站点，我使用的是1.6.3版本；</p>
+<p>下载并解压到go的默认安装路径<code>/usr/local/go</code><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /work/download</span><br><span class="line">wget http://www.golangtc.com/static/go/1.6.3/go1.6.3.linux-amd64.tar.gz</span><br><span class="line">tar -zxvf go1.6.3.linux-amd64.tar.gz -C /usr/<span class="built_in">local</span></span><br></pre></td></tr></table></figure></p>
+<p>修改PATH<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/profile</span><br><span class="line"><span class="built_in">export</span> GOROOT=/usr/<span class="built_in">local</span>/go</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$GOROOT</span>/bin</span><br><span class="line"><span class="built_in">source</span> /etc/profile</span><br></pre></td></tr></table></figure></p>
+<p>正确配置后，go env可以查看得到当前go的环境<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">GOARCH</span>=<span class="string">"amd64"</span></span><br><span class="line"><span class="attr">GOBIN</span>=<span class="string">""</span></span><br><span class="line"><span class="attr">GOEXE</span>=<span class="string">""</span></span><br><span class="line"><span class="attr">GOHOSTARCH</span>=<span class="string">"amd64"</span></span><br><span class="line"><span class="attr">GOHOSTOS</span>=<span class="string">"linux"</span></span><br><span class="line"><span class="attr">GOOS</span>=<span class="string">"linux"</span></span><br><span class="line"><span class="attr">GOPATH</span>=<span class="string">""</span></span><br><span class="line"><span class="attr">GORACE</span>=<span class="string">""</span></span><br><span class="line"><span class="attr">GOROOT</span>=<span class="string">"/usr/local/go"</span></span><br><span class="line"><span class="attr">GOTOOLDIR</span>=<span class="string">"/usr/local/go/pkg/tool/linux_amd64"</span></span><br><span class="line"><span class="attr">GO15VENDOREXPERIMENT</span>=<span class="string">"1"</span></span><br><span class="line"><span class="attr">CC</span>=<span class="string">"gcc"</span></span><br><span class="line"><span class="attr">GOGCCFLAGS</span>=<span class="string">"-fPIC -m64 -pthread -fmessage-length=0"</span></span><br><span class="line"><span class="attr">CXX</span>=<span class="string">"g++"</span></span><br><span class="line"><span class="attr">CGO_ENABLED</span>=<span class="string">"1"</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="编译安装"><a href="#编译安装" class="headerlink" title="编译安装"></a>编译安装</h2><p>进入<code>/work/ngrok</code>目录<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make release-server release-client</span><br></pre></td></tr></table></figure></p>
+<p>正常的话，<code>ngrok/bin</code>目录下应该有<code>ngrokd</code>和<code>ngrok</code>两个可执行文件，前面一个是服务端的，后面一个是客户端的；</p>
+<p>需要Windows下的<code>ngrok.exe</code>可以通过下面命令构建，正常的话<code>ngrok/bin/windows_amd64</code>下会生成的<code>ngrok.exe</code>文件；<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">GOOS</span>=windows <span class="attribute">GOARCH</span>=amd64 make release-client</span><br></pre></td></tr></table></figure></p>
+<p>编译mac客户端（没实际操作）<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">GOOS</span>=darwin <span class="attribute">GOARCH</span>=amd64 make release-client</span><br></pre></td></tr></table></figure></p>
+<p>make很可能出现的错误有（来自Windows下的错误信息，Ubuntu下跑一切正常）<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">package archive/zip: unrecognized import path "archive/zip" (import path does not <span class="keyword">begin</span> <span class="keyword">with</span> hostname)</span><br><span class="line"><span class="keyword">package</span> <span class="keyword">bytes</span>: unrecognized <span class="keyword">import</span> <span class="keyword">path</span> <span class="string">"bytes"</span> (<span class="keyword">import</span> <span class="keyword">path</span> does <span class="keyword">not</span> <span class="keyword">begin</span> <span class="keyword">with</span> hostname)</span><br><span class="line"><span class="keyword">package</span> <span class="keyword">encoding</span>/<span class="keyword">json</span>: unrecognized <span class="keyword">import</span> <span class="keyword">path</span> <span class="string">"encoding/json"</span> (<span class="keyword">import</span> <span class="keyword">path</span> does <span class="keyword">not</span> <span class="keyword">begin</span> <span class="keyword">with</span> hostname)</span><br><span class="line"><span class="keyword">package</span> <span class="keyword">encoding</span>/<span class="keyword">xml</span>: unrecognized <span class="keyword">import</span> <span class="keyword">path</span> <span class="string">"encoding/xml"</span> (<span class="keyword">import</span> <span class="keyword">path</span> does <span class="keyword">not</span> <span class="keyword">begin</span> <span class="keyword">with</span> hostname)</span><br><span class="line"><span class="keyword">package</span> <span class="keyword">errors</span>: unrecognized <span class="keyword">import</span> <span class="keyword">path</span> <span class="string">"errors"</span> (<span class="keyword">import</span> <span class="keyword">path</span> does <span class="keyword">not</span> <span class="keyword">begin</span> <span class="keyword">with</span> hostname)</span><br><span class="line"><span class="keyword">package</span> expvar: unrecognized <span class="keyword">import</span> <span class="keyword">path</span> <span class="string">"expvar"</span> (<span class="keyword">import</span> <span class="keyword">path</span> does <span class="keyword">not</span> <span class="keyword">begin</span> <span class="keyword">with</span> hostname)</span><br><span class="line"><span class="keyword">package</span> flag: unrecognized <span class="keyword">import</span> <span class="keyword">path</span> <span class="string">"flag"</span> (<span class="keyword">import</span> <span class="keyword">path</span> does <span class="keyword">not</span> <span class="keyword">begin</span> <span class="keyword">with</span> hostname)</span><br><span class="line"><span class="keyword">package</span> fmt: unrecognized <span class="keyword">import</span> <span class="keyword">path</span> <span class="string">"fmt"</span> (<span class="keyword">import</span> <span class="keyword">path</span> does <span class="keyword">not</span> <span class="keyword">begin</span> <span class="keyword">with</span> hostname)</span><br></pre></td></tr></table></figure></p>
+<h2 id="启动ngrok"><a href="#启动ngrok" class="headerlink" title="启动ngrok"></a>启动ngrok</h2><h3 id="服务端启动"><a href="#服务端启动" class="headerlink" title="服务端启动"></a>服务端启动</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /work/ngrok/bin</span><br><span class="line">ngrokd -domain=<span class="string">"codz.me"</span> -httpAddr=<span class="string">":8088"</span> -httpsAddr=<span class="string">":8089"</span></span><br></pre></td></tr></table></figure>
+<p>-domain的内容需要与上面生成证书所填的<code>NGROK_BASE_DOMAIN</code>一致；</p>
+<p>自定义http、https提供服务的端口，据此你使用的二级域名应该是 <a href="http://[自定义].codz.me:8088" target="_blank" rel="noopener">http://[自定义].codz.me:8088</a></p>
+<p>其他有用的启动脚本</p>
+<ul>
+<li><p>后台启动，输出日志</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup ngrokd -domain=<span class="string">"codz.me"</span> -httpAddr=<span class="string">":8088"</span> -httpsAddr=<span class="string">":8089"</span> &gt;/tmp/ngrok.log 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>后台启动不输出日志</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup ngrokd -domain=<span class="string">"codz.me"</span> -httpAddr=<span class="string">":8088"</span> -httpsAddr=<span class="string">":8089"</span> &gt;/dev/null 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="客户端启动"><a href="#客户端启动" class="headerlink" title="客户端启动"></a>客户端启动</h3><p>拷贝编译好的ngrok客户端可执行文件到需要的机子上，给予执行权限，创建配置文件<code>ngrok.cfg</code>：<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">server_addr:</span> <span class="string">"codz.me:4443"</span></span><br><span class="line"><span class="symbol">trust_host_root_certs:</span> false</span><br><span class="line"></span><br><span class="line"><span class="symbol">tunnels:</span></span><br><span class="line"><span class="symbol">  www:</span></span><br><span class="line"><span class="symbol">   subdomain:</span> <span class="string">"test"</span></span><br><span class="line"><span class="symbol">   proto:</span></span><br><span class="line"><span class="symbol">    http:</span> <span class="number">192.168</span><span class="number">.1</span><span class="number">.121</span>:<span class="number">8000</span></span><br></pre></td></tr></table></figure></p>
+<p>其中，<code>server_addr</code>需要跟<code>NGROK_BASE_DOMAIN</code>填写一致，否则服务端会报证书错误；</p>
+<p><code>trust_host_root_certs</code>需要设置为false；</p>
+<p><code>trust_host_root_certs</code>参数指示建立TLS连接到服务器时ngrok信任的根证书在计算机上。默认情况下，ngrok只信任的ngrok.com根证书；</p>
+<p><code>trust_host_root_certs</code>，对于ngrok官方server一般为<code>true</code>，现在官网国内不能用，通常为自编译的，有自己的证书，所以要设为<code>false</code>。</p>
+<p>启动客户端ngrok，之后就可以使用<code>http://test.codz.me:8088</code>来访问本地<code>192.168.121:8000</code>的资源了<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./ngrok -config ngrok.cfg start www</span><br></pre></td></tr></table></figure></p>
+<p>配置文件写法，来自ngrok.cc<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">server_addr:</span> <span class="string">"server.ngrok.cc:4443"</span></span><br><span class="line"><span class="symbol">auth_token:</span> <span class="string">""</span> <span class="meta">#授权token，在www.ngrok.cc平台注册账号获取</span></span><br><span class="line"><span class="symbol">tunnels:</span></span><br><span class="line"><span class="symbol">  sunny:</span></span><br><span class="line"><span class="symbol">   subdomain:</span> <span class="string">"sunny"</span> <span class="meta">#定义服务器分配域名前缀，跟平台上的要一样</span></span><br><span class="line"><span class="symbol">   proto:</span></span><br><span class="line"><span class="symbol">    http:</span> <span class="number">80</span> <span class="meta">#映射端口，不加ip默认本机</span></span><br><span class="line"><span class="symbol">    https:</span> <span class="number">80</span></span><br><span class="line"><span class="symbol">  web:</span></span><br><span class="line"><span class="symbol">   subdomain:</span> <span class="string">"web"</span> <span class="meta">#定义服务器分配域名前缀</span></span><br><span class="line"><span class="symbol">   proto:</span></span><br><span class="line"><span class="symbol">    http:</span> <span class="number">192.168</span><span class="number">.1</span><span class="number">.100</span>:<span class="number">80</span> <span class="meta">#映射端口，可以通过加ip为内网任意一台映射</span></span><br><span class="line"><span class="symbol">    https:</span> <span class="number">192.168</span><span class="number">.1</span><span class="number">.100</span>:<span class="number">80</span></span><br><span class="line"><span class="symbol">  web1:</span></span><br><span class="line"><span class="symbol">    hostname:</span> <span class="string">"www.sunnyos.com"</span></span><br><span class="line"><span class="symbol">    proto:</span></span><br><span class="line"><span class="symbol">      http:</span> <span class="number">80</span></span><br><span class="line"><span class="symbol">  web2:</span></span><br><span class="line"><span class="symbol">    hostname:</span> <span class="string">"sunnyos.com"</span></span><br><span class="line"><span class="symbol">    proto:</span></span><br><span class="line"><span class="symbol">      http:</span> <span class="number">80</span>  </span><br><span class="line"><span class="symbol">  ssh:</span></span><br><span class="line"><span class="symbol">   remote_port:</span> <span class="number">50001</span> <span class="meta">#服务器分配tcp转发端口，如果不填写此项则又服务器分配</span></span><br><span class="line"><span class="symbol">   proto:</span></span><br><span class="line"><span class="symbol">    tcp:</span> <span class="number">22</span> <span class="meta">#映射本地的22端口</span></span><br><span class="line"><span class="symbol">  ssh1:</span> <span class="meta">#将由服务器分配端口</span></span><br><span class="line"><span class="symbol">    proto:</span></span><br><span class="line"><span class="symbol">      tcp:</span> <span class="number">21</span></span><br></pre></td></tr></table></figure></p>
+<p>至此，all done.</p>
+<p>实测，单个用户通过ngrok访问内网速度有所提升；</p>
+<p>多个用户同时访问效果不是很明显，可能与ECS带宽有关（→_→ 1Mbps），ngrok使用多个自定义域名目的已达成，这是重点。</p>
+<p>参考：</p>
+<ul>
+<li><a href="https://aotu.io/notes/2016/02/19/ngrok/" target="_blank" rel="noopener">https://aotu.io/notes/2016/02/19/ngrok/</a></li>
+<li><a href="http://tonybai.com/2015/03/14/selfhost-ngrok-service" target="_blank" rel="noopener">http://tonybai.com/2015/03/14/selfhost-ngrok-service</a></li>
+<li><a href="http://blog.csdn.net/tao_627/article/details/17191977" target="_blank" rel="noopener">http://blog.csdn.net/tao_627/article/details/17191977</a></li>
+<li><a href="http://briteming.blogspot.com/2016/04/ngrok.html" target="_blank" rel="noopener">http://briteming.blogspot.com/2016/04/ngrok.html</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://codz.me/2016/05/30/elasticsearch-note-2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1723,162 +1935,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://codz.me/2016/02/06/difference-between-findone-getone/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="laudukang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/favicon.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Code Is Poetry">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/02/06/difference-between-findone-getone/" itemprop="url">Spring-data-jpa 中 findOne 与 getOne 的区别</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-02-06T16:55:00+08:00">
-                2016-02-06 16:55:00
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2016-02-06T16:58:09+08:00">
-                2016-02-06 16:58:09
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web/" itemprop="url" rel="index">
-                    <span itemprop="name">Web</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2016/02/06/difference-between-findone-getone/" class="leancloud_visitors" data-flag-title="Spring-data-jpa 中 findOne 与 getOne 的区别">
-                
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><a href="http://docs.spring.io/spring-data/data-commons/docs/current/api/org/springframework/data/repository/CrudRepository.html#findOne-ID-" target="_blank" rel="noopener">T findOne(ID id)</a><br><blockquote><p>Retrieves an entity by its id.<br>Parameters:<br>id - must not be null.<br>Returns:<br>the entity with the given id or null if none found<br>Throws:<br>IllegalArgumentException - if id is null</p>
-</blockquote></p>
-<p><a href="http://docs.spring.io/spring-data/jpa/docs/current/api/org/springframework/data/jpa/repository/JpaRepository.html#getOne-ID-" target="_blank" rel="noopener">T getOne(ID id)</a><br><blockquote><p>Returns a reference to the entity with the given identifier.<br>Parameters:<br>id - must not be null.<br>Returns:<br>a reference to the entity with the given identifier.<br>See Also:<br>EntityManager.getReference(Class, Object)</p>
-</blockquote></p>
-<p>{ % ossimag os-admin-debug.png % }<br>DEBUG下：osAdmin 为getOne()查询的结果，osAdmin2为findOne查询的结果</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1933,7 +1989,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-count">65</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2044,7 +2100,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2015 - <span itemprop="copyrightYear">2017</span>
+        <div class="copyright">&copy; 2015 - <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart icon-next-heart"></i>
   </span>

@@ -1,3 +1,4 @@
+http://codz.me/2018/01/05/annual-book-list-2018/
 http://codz.me/2017/12/20/recommend-articles/
 http://codz.me/2017/10/12/minio-and-nginx/
 http://codz.me/2017/09/24/rise-of-worse-is-better/
@@ -60,4 +61,3 @@ http://codz.me/2015/05/03/traceroute-icmp-udp-tcp/
 http://codz.me/2015/05/03/apache-htaccess-usage/
 http://codz.me/2015/05/02/ubuntu-desktop-1404-root-login/
 http://codz.me/2015/05/01/apache-config-htaccess/
-http://codz.me/2015/05/01/can-not-connect-to-mysql-2002-error/
