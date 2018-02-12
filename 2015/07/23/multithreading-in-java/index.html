@@ -89,13 +89,13 @@
 <meta property="og:site_name" content="Code Is Poetry">
 <meta property="og:description" content="Remark: Finished read 1-7, 2015-07-23 15:40:57Multithreading in Java is a very important topic. I have written a lot about Threads in Java. Java Thread is a lightweight process that executes some task">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://codz.me/2015/07/23/multithreading-in-java/multithreading-in-java.jpg">
-<meta property="og:image" content="https://codz.me/2015/07/23/multithreading-in-java/java-thread.png">
+<meta property="og:image" content="https://nat.oss-cn-hongkong.aliyuncs.com/images/2015/07/23/multithreading-in-java/multithreading-in-java.jpg">
+<meta property="og:image" content="https://nat.oss-cn-hongkong.aliyuncs.com/images/2015/07/23/multithreading-in-java/java-thread.png">
 <meta property="og:updated_time" content="2015-07-23T07:40:57.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Repost]Multithreading in Java">
 <meta name="twitter:description" content="Remark: Finished read 1-7, 2015-07-23 15:40:57Multithreading in Java is a very important topic. I have written a lot about Threads in Java. Java Thread is a lightweight process that executes some task">
-<meta name="twitter:image" content="https://codz.me/2015/07/23/multithreading-in-java/multithreading-in-java.jpg">
+<meta name="twitter:image" content="https://nat.oss-cn-hongkong.aliyuncs.com/images/2015/07/23/multithreading-in-java/multithreading-in-java.jpg">
 
 
 
@@ -388,14 +388,14 @@
 
       
         <h4 id="Remark-Finished-read-1-7-2015-07-23-15-40-57"><a href="#Remark-Finished-read-1-7-2015-07-23-15-40-57" class="headerlink" title="Remark: Finished read 1-7, 2015-07-23 15:40:57"></a>Remark: Finished read 1-7, 2015-07-23 15:40:57</h4><p>Multithreading in Java is a very important topic. I have written a lot about Threads in Java. Java Thread is a lightweight process that executes some task. Java provides multithreading support with the Thread class and an application can create multiple threads executing concurrently.</p>
-<img src="/2015/07/23/multithreading-in-java/multithreading-in-java.jpg" alt="multithreading-in-java.jpg" title="">
+<img src="https://nat.oss-cn-hongkong.aliyuncs.com/images/2015/07/23/multithreading-in-java/multithreading-in-java.jpg" alt="multithreading-in-java.jpg" title="">
 <p>There are two types of threads in an application – user thread and daemon thread. When we start an application, main is the first user thread created and we can create multiple user threads as well as daemon threads. When all the user threads are executed, JVM terminates the program.</p>
 <p>We can set different priorities to different Threads but it doesn’t guarantee that higher priority thread will execute first than lower priority thread. Thread scheduler is the part of Operating System implementation and when a Thread is started, it’s execution is controlled by Thread Scheduler and JVM doesn’t have any control on it’s execution.</p>
 <p>We can create Threads by either implementing Runnable interface or by extending Thread Class.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Thread t = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable()&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>Above is a one liner statement to create new Thread, Here we are creating Runnable as Anonymous Class, read this post to learn about inner class, nested class and anonymous inner class.</p>
 <p>In last few weeks, I have posted some useful articles on multithreading in java, you can follow them in order to learn about Threads in Java.</p>
-<h1 id="Threads-in-Java"><a href="#Threads-in-Java" class="headerlink" title="Threads in Java"></a>Threads in Java</h1><img src="/2015/07/23/multithreading-in-java/java-thread.png" alt="java-thread.png" title="">
+<h1 id="Threads-in-Java"><a href="#Threads-in-Java" class="headerlink" title="Threads in Java"></a>Threads in Java</h1><img src="https://nat.oss-cn-hongkong.aliyuncs.com/images/2015/07/23/multithreading-in-java/java-thread.png" alt="java-thread.png" title="">
 <p>With Java 8 lambda expressions, we can create Thread in java like below too because Runnable is a functional interface.</p>
 <ol>
 <li><h3 id="Java-Thread-Example"><a href="#Java-Thread-Example" class="headerlink" title="Java Thread Example"></a><span id="java-thread-example"><a href="https://www.journaldev.com/1016/java-thread-example" target="_blank" rel="noopener">Java Thread Example</a></span></h3><p>This is the first post in the multithreading in java tutorial series. Read this to learn about <strong>Process</strong> and <strong>Thread</strong>. What is the difference between Thread and Process. Benefits of using Threads and how we can create Threads using <strong>Runnable</strong> interface and <strong>Thread</strong> class. This post also compares Runnable interface with Thread class.</p>

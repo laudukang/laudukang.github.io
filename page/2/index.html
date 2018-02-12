@@ -778,10 +778,10 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf elasticsearch-2.3.3.tar.gz</span><br></pre></td></tr></table></figure>
 <p>进入<code>bin</code>目录启动ES</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> elasticsearch-2.3.3/bin</span><br><span class="line">./elasticsearch</span><br></pre></td></tr></table></figure>
-<img src="/2016/05/29/elasticsearch-note-1/es-start.png" alt="start" title="start">
+<img src="https://nat.oss-cn-hongkong.aliyuncs.com/images/2016/05/29/elasticsearch-note-1/es-start.png" alt="start" title="start">
 <p>至此，可以查看ES集群的信息</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -XGET <span class="string">'http://localhost:9200?pretty'</span></span><br></pre></td></tr></table></figure>
-<img src="/2016/05/29/elasticsearch-note-1/es-info.png" alt="info" title="info">
+<img src="https://nat.oss-cn-hongkong.aliyuncs.com/images/2016/05/29/elasticsearch-note-1/es-info.png" alt="info" title="info">
 </li>
 <li><p>关闭ES</p>
 <p>三种方式关闭：</p>
@@ -790,7 +790,7 @@
 <li>通过发送TERM信号杀掉服务器进程（参考Linux上的kill命令和Windows上的任务管理器）；</li>
 <li><p>使用REST API</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//关掉整个集群</span><br><span class="line">curl -XPOST http://localhost:9200/_cluster/nodes/_shutdown</span><br><span class="line"></span><br><span class="line">//关闭单一节点，假如节点标识符是BlrmMvBdSKiCeYGsiHijdg，如何查看见下一条</span><br><span class="line">curl –XPOST http://localhost:9200/_cluster/nodes/BlrmMvBdSKiCeYGsiHijdg/_shutdown</span><br><span class="line"></span><br><span class="line">//查看节点标识符</span><br><span class="line">curl -XGET http://localhost:9200/_cluster/nodes/</span><br><span class="line"></span><br><span class="line">//检查集群健康度</span><br><span class="line">curl -XGET http://localhost:9200/_cluster/health?pretty</span><br></pre></td></tr></table></figure>
-<img src="/2016/05/29/elasticsearch-note-1/es-health.png" alt="health" title="health">
+<img src="https://nat.oss-cn-hongkong.aliyuncs.com/images/2016/05/29/elasticsearch-note-1/es-health.png" alt="health" title="health">
 </li>
 </ul>
 </li>
@@ -1118,7 +1118,7 @@
 <p><code>Run/Debug Configurations - Tomcat Server - Server -Tomcat Server Settings</code></p>
 <p>勾选</p>
 <p><code>Deploy applications configured in Tomcat instance</code></p>
-<img src="/2016/03/23/idea-config-tomcat-virtual-directory/idea.png" alt="idea.png" title="">
+<img src="https://nat.oss-cn-hongkong.aliyuncs.com/images/2016/03/23/idea-config-tomcat-virtual-directory/idea.png" alt="idea.png" title="">
 
           
         
@@ -1895,7 +1895,7 @@
       
         
           
-            <img src="/2016/02/14/no-title-2016-02-14/Typecho-2016-02-14-yxf.jpg" alt="微信分享占位ICON（如有侵权联系删除）" title="微信分享占位ICON（如有侵权联系删除）">
+            <img src="https://nat.oss-cn-hongkong.aliyuncs.com/images/2016/02/14/no-title-2016-02-14/Typecho-2016-02-14-yxf.jpg" alt="微信分享占位ICON（如有侵权联系删除）" title="微信分享占位ICON（如有侵权联系删除）">
 <p>——————–华丽丽的分割线————————</p>
 <p>I miss you.</p>
 <p>(づ｡◕‿‿◕｡)づ 外面浪了一天，好累，我想静静，内容待补充…… 2016年2月14日01:46:12</p>

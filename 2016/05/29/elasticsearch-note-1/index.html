@@ -89,14 +89,14 @@
 <meta property="og:site_name" content="Code Is Poetry">
 <meta property="og:description" content="Elasticsearch 简介ElasticSearch（简称 ES） 是一个基于 Lucene 构建的开源，分布式，RESTful 搜索引擎。 设计用于云计算中，能够达到搜索实时、稳定、可靠和快速，并且安装使用方便。 支持通过 HTTP 请求，使用 JSON 进行数据索引。另外，ES还有非常强大的统计功能 (facets) , 一个例子：现在系统中的需要实时处理的统计功能从 MySQL 转接到">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://codz.me/2016/05/29/elasticsearch-note-1/es-start.png">
-<meta property="og:image" content="https://codz.me/2016/05/29/elasticsearch-note-1/es-info.png">
-<meta property="og:image" content="https://codz.me/2016/05/29/elasticsearch-note-1/es-health.png">
+<meta property="og:image" content="https://nat.oss-cn-hongkong.aliyuncs.com/images/2016/05/29/elasticsearch-note-1/es-start.png">
+<meta property="og:image" content="https://nat.oss-cn-hongkong.aliyuncs.com/images/2016/05/29/elasticsearch-note-1/es-info.png">
+<meta property="og:image" content="https://nat.oss-cn-hongkong.aliyuncs.com/images/2016/05/29/elasticsearch-note-1/es-health.png">
 <meta property="og:updated_time" content="2017-03-10T13:14:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="（一）Elasticsearch学习笔记：安装与配置">
 <meta name="twitter:description" content="Elasticsearch 简介ElasticSearch（简称 ES） 是一个基于 Lucene 构建的开源，分布式，RESTful 搜索引擎。 设计用于云计算中，能够达到搜索实时、稳定、可靠和快速，并且安装使用方便。 支持通过 HTTP 请求，使用 JSON 进行数据索引。另外，ES还有非常强大的统计功能 (facets) , 一个例子：现在系统中的需要实时处理的统计功能从 MySQL 转接到">
-<meta name="twitter:image" content="https://codz.me/2016/05/29/elasticsearch-note-1/es-start.png">
+<meta name="twitter:image" content="https://nat.oss-cn-hongkong.aliyuncs.com/images/2016/05/29/elasticsearch-note-1/es-start.png">
 
 
 
@@ -405,10 +405,10 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf elasticsearch-2.3.3.tar.gz</span><br></pre></td></tr></table></figure>
 <p>进入<code>bin</code>目录启动ES</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> elasticsearch-2.3.3/bin</span><br><span class="line">./elasticsearch</span><br></pre></td></tr></table></figure>
-<img src="/2016/05/29/elasticsearch-note-1/es-start.png" alt="start" title="start">
+<img src="https://nat.oss-cn-hongkong.aliyuncs.com/images/2016/05/29/elasticsearch-note-1/es-start.png" alt="start" title="start">
 <p>至此，可以查看ES集群的信息</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -XGET <span class="string">'http://localhost:9200?pretty'</span></span><br></pre></td></tr></table></figure>
-<img src="/2016/05/29/elasticsearch-note-1/es-info.png" alt="info" title="info">
+<img src="https://nat.oss-cn-hongkong.aliyuncs.com/images/2016/05/29/elasticsearch-note-1/es-info.png" alt="info" title="info">
 </li>
 <li><p>关闭ES</p>
 <p>三种方式关闭：</p>
@@ -417,7 +417,7 @@
 <li>通过发送TERM信号杀掉服务器进程（参考Linux上的kill命令和Windows上的任务管理器）；</li>
 <li><p>使用REST API</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//关掉整个集群</span><br><span class="line">curl -XPOST http://localhost:9200/_cluster/nodes/_shutdown</span><br><span class="line"></span><br><span class="line">//关闭单一节点，假如节点标识符是BlrmMvBdSKiCeYGsiHijdg，如何查看见下一条</span><br><span class="line">curl –XPOST http://localhost:9200/_cluster/nodes/BlrmMvBdSKiCeYGsiHijdg/_shutdown</span><br><span class="line"></span><br><span class="line">//查看节点标识符</span><br><span class="line">curl -XGET http://localhost:9200/_cluster/nodes/</span><br><span class="line"></span><br><span class="line">//检查集群健康度</span><br><span class="line">curl -XGET http://localhost:9200/_cluster/health?pretty</span><br></pre></td></tr></table></figure>
-<img src="/2016/05/29/elasticsearch-note-1/es-health.png" alt="health" title="health">
+<img src="https://nat.oss-cn-hongkong.aliyuncs.com/images/2016/05/29/elasticsearch-note-1/es-health.png" alt="health" title="health">
 </li>
 </ul>
 </li>

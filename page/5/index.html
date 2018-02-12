@@ -780,7 +780,7 @@
 <p>即使不通过mapreduce，仅有应用程序本身进行任务的分解与合成也是可以的，但从实现难度上考虑，自己实现可能会带来较大规模的复杂度，因此程序员急需一种范式来处理这一类的任务。</p>
 <p>在处理多线程中已经有了如AKKA这样的基于ACTOR模型的框架，而FORKJOIN则是针对具有明显可以进行任务分割特性需求的实现。</p>
 <p>其场景为：如果一个应用程序能够被分解成多个子任务，而且结合多个子任务的结果就能够得到最终的答案，那么它就适合使用FORK/JOIN模式来实现。</p>
-<img src="/2015/07/10/java-forkjoin/501882267.jpg" alt="501882267.jpg" title="">
+<img src="https://nat.oss-cn-hongkong.aliyuncs.com/images/2015/07/10/java-forkjoin/501882267.jpg" alt="501882267.jpg" title="">
 <p>Fork/Join使用两个类完成以上两件事情：</p>
 <ul>
 <li><p>ForkJoinTask: 我们要使用ForkJoin框架，必须首先创建一个ForkJoin任务。它提供在任务中执行fork()和join的操作机制，通常我们不直接继承ForkjoinTask类，只需要直接继承其子类。</p>
@@ -1929,9 +1929,9 @@
 <p>它不仅仅使你的屏幕变漂亮，而且也让你成为更好的编码员！</p>
 <h2 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h2><p>Sublime Text自带一些不错的功能，从视觉上改善你的编码体验，但是，有一些在默认状态下并未开启。下列是一些我不能没有的功能。</p>
 <p>注意：为了能编辑你的Sublime Text设置文件，从<code>Sublime Text 2&gt; Preferences &gt; Settings - Default</code>中打开它并选择合适项。</p>
-<img src="/2015/06/04/simple-visual-enhancements-for-better-coding-in-sublime-text/sublime-settings.png" alt="sublime-settings.png" title="">
+<img src="https://nat.oss-cn-hongkong.aliyuncs.com/images/2015/06/04/simple-visual-enhancements-for-better-coding-in-sublime-text/sublime-settings.png" alt="sublime-settings.png" title="">
 <p>找到你想要改的设置，之后把它加到你的User Settings来避免在更新Sublime Text的时候被覆盖。</p>
-<img src="/2015/06/04/simple-visual-enhancements-for-better-coding-in-sublime-text/sublime-settings-2.png" alt="sublime-settings-2.png" title="">
+<img src="https://nat.oss-cn-hongkong.aliyuncs.com/images/2015/06/04/simple-visual-enhancements-for-better-coding-in-sublime-text/sublime-settings-2.png" alt="sublime-settings-2.png" title="">
 <p>看一下Installation and Base Settings这篇文章来了解更多如何管理Sublime Text的设置。</p>
 <h3 id="字体和间隔"><a href="#字体和间隔" class="headerlink" title="字体和间隔"></a>字体和间隔</h3><p>选对字体和间隔最能使你的编码私人化。首先选择一个合适的字体，最好是monospaced font。这些可以仔细看看：</p>
 <ul>
@@ -1949,14 +1949,14 @@
 <h3 id="bold-folder-labels"><a href="#bold-folder-labels" class="headerlink" title="bold_folder_labels"></a>bold_folder_labels</h3><p>还有很多可用的不错设置来使你的侧栏看上去更美观，它们是：<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">"bold_folder_labels":</span> <span class="literal">true</span><span class="string">,</span></span><br></pre></td></tr></table></figure></p>
 <h3 id="在侧栏中显示打开的文件"><a href="#在侧栏中显示打开的文件" class="headerlink" title="在侧栏中显示打开的文件"></a>在侧栏中显示打开的文件</h3><p>奇怪的是，这项没有在自定义文件中设置好。为了在你的侧栏上端显示打开的文件，去：<br><figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">View</span> → Side <span class="built_in">Bar</span> → <span class="keyword">Show</span> <span class="keyword">Open</span> Files</span><br></pre></td></tr></table></figure></p>
 <h3 id="对齐侧栏"><a href="#对齐侧栏" class="headerlink" title="对齐侧栏"></a>对齐侧栏</h3><p>这个不打算一个设置，更多的是算一个技巧。就像表格一样，你可以双击内容栏和侧栏之间的边框来使你的侧栏与内容齐宽。</p>
-<img src="/2015/06/04/simple-visual-enhancements-for-better-coding-in-sublime-text/sublime-visual-sidebar.gif" alt="sublime-visual-sidebar.gif" title="">
+<img src="https://nat.oss-cn-hongkong.aliyuncs.com/images/2015/06/04/simple-visual-enhancements-for-better-coding-in-sublime-text/sublime-visual-sidebar.gif" alt="sublime-visual-sidebar.gif" title="">
 <h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><p>要用到Sublime Text更多功能的时候，插件是非常有用的，我强烈推荐用Package Control来管理你的插件</p>
 <h3 id="BracketHighlighter"><a href="#BracketHighlighter" class="headerlink" title="BracketHighlighter"></a>BracketHighlighter</h3><p>Bracket highlighter是一个可以标注出标签和括号的插件（去琢磨一下！）但是真的，这个工具给你显示出你所在编码段的始末。在侧栏显示的括号类型由不同的符号代表。</p>
-<img src="/2015/06/04/simple-visual-enhancements-for-better-coding-in-sublime-text/sublime-visual-brackethighlighter-2.png" alt="sublime-visual-brackethighlighter-2.png" title="">
-<h3 id="Git-Gutter"><a href="#Git-Gutter" class="headerlink" title="Git Gutter"></a>Git Gutter</h3><p>这个是我个人最爱。这个插件在侧边显示相较与你的git项目，哪些是新插入的，更改过的或是删除的行。Git gutter<br><img src="/2015/06/04/simple-visual-enhancements-for-better-coding-in-sublime-text/sublime-visual-gitgutter-2.png" alt="sublime-visual-gitgutter-2.png" title=""></p>
-<h3 id="SublimeLinter"><a href="#SublimeLinter" class="headerlink" title="SublimeLinter"></a>SublimeLinter</h3><p>这个插件显示出嵌入式的lint标注。它们的extensive documentation和长串的linters使其成为了一个很棒的，让你编码无错误的解决方案。<br><img src="/2015/06/04/simple-visual-enhancements-for-better-coding-in-sublime-text/sublime-visual-sublimelinter-2.png" alt="sublime-visual-sublimelinter-2.png" title=""></p>
+<img src="https://nat.oss-cn-hongkong.aliyuncs.com/images/2015/06/04/simple-visual-enhancements-for-better-coding-in-sublime-text/sublime-visual-brackethighlighter-2.png" alt="sublime-visual-brackethighlighter-2.png" title="">
+<h3 id="Git-Gutter"><a href="#Git-Gutter" class="headerlink" title="Git Gutter"></a>Git Gutter</h3><p>这个是我个人最爱。这个插件在侧边显示相较与你的git项目，哪些是新插入的，更改过的或是删除的行。Git gutter<br><img src="https://nat.oss-cn-hongkong.aliyuncs.com/images/2015/06/04/simple-visual-enhancements-for-better-coding-in-sublime-text/sublime-visual-gitgutter-2.png" alt="sublime-visual-gitgutter-2.png" title=""></p>
+<h3 id="SublimeLinter"><a href="#SublimeLinter" class="headerlink" title="SublimeLinter"></a>SublimeLinter</h3><p>这个插件显示出嵌入式的lint标注。它们的extensive documentation和长串的linters使其成为了一个很棒的，让你编码无错误的解决方案。<br><img src="https://nat.oss-cn-hongkong.aliyuncs.com/images/2015/06/04/simple-visual-enhancements-for-better-coding-in-sublime-text/sublime-visual-sublimelinter-2.png" alt="sublime-visual-sublimelinter-2.png" title=""></p>
 <h2 id="主题和配色方案"><a href="#主题和配色方案" class="headerlink" title="主题和配色方案"></a>主题和配色方案</h2><p>最有效的私人化Sublime Text的方法是用主题和配色方案。现在有不计其数的选择而且每周都有更新。这些是可以认真看一下的主题和配色方案</p>
-<h3 id="主题：Soda"><a href="#主题：Soda" class="headerlink" title="主题：Soda"></a>主题：Soda</h3><p>Soda变成了Sublime Text社区里最受欢迎的主题。很多主题都是在它之上开发的。Soda提供了额外的设置，retina图像，以及暗色和亮色的用户界面。<br><img src="/2015/06/04/simple-visual-enhancements-for-better-coding-in-sublime-text/sublime-visual-soda-2.png" alt="sublime-visual-soda-2.png" title=""></p>
+<h3 id="主题：Soda"><a href="#主题：Soda" class="headerlink" title="主题：Soda"></a>主题：Soda</h3><p>Soda变成了Sublime Text社区里最受欢迎的主题。很多主题都是在它之上开发的。Soda提供了额外的设置，retina图像，以及暗色和亮色的用户界面。<br><img src="https://nat.oss-cn-hongkong.aliyuncs.com/images/2015/06/04/simple-visual-enhancements-for-better-coding-in-sublime-text/sublime-visual-soda-2.png" alt="sublime-visual-soda-2.png" title=""></p>
 <h3 id="主题：Flatland"><a href="#主题：Flatland" class="headerlink" title="主题：Flatland"></a>主题：Flatland</h3><p>如果你是扁平式潮流的粉丝，那么Flatland是一个不错的选择。它简化了所有的视觉元素，而且让你指定一些其它选项，譬如</p>
 <h3 id="主题：Spacegray"><a href="#主题：Spacegray" class="headerlink" title="主题：Spacegray"></a>主题：Spacegray</h3><p>这个是我个人最喜欢的也是现在Github比较火的。 Spacegray有独特的色彩盘和极简化的UI。<br></p>
 <h3 id="色彩主题：-Solarized"><a href="#色彩主题：-Solarized" class="headerlink" title="色彩主题： Solarized"></a>色彩主题： Solarized</h3><p>这个有名的Solarized project在Sublime Text上也可用了。它被贴上“为人机设计的精确颜色”的标签，并且其创作背后有一套独特的色彩理论支持。</p>
