@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://codz.me/2018/02/28/ssh-login-with-key-fail-and-require-password/</loc>
+    
+    <lastmod>2018-02-28T07:29:42.743Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://codz.me/tags/index.html</loc>
     
     <lastmod>2018-01-07T05:15:08.841Z</lastmod>

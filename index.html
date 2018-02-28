@@ -284,6 +284,165 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://codz.me/2018/02/28/ssh-login-with-key-fail-and-require-password/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="laudukang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Is Poetry">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/02/28/ssh-login-with-key-fail-and-require-password/" itemprop="url">用户目录权限问题导致 SSH 免密码登录失败</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-28T15:08:47+08:00">
+                2018-02-28 15:08:47
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-02-28T15:29:42+08:00">
+                2018-02-28 15:29:42
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/02/28/ssh-login-with-key-fail-and-require-password/" class="leancloud_visitors" data-flag-title="用户目录权限问题导致 SSH 免密码登录失败">
+                
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>正确配置了公钥到远程机器，并且 <code>/root/.ssh/authorized_keys</code>存在公钥<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-copy-id -<span class="selector-tag">i</span> ~/.ssh/id_rsa<span class="selector-class">.pub</span> root@<span class="number">192.168</span>.<span class="number">3.20</span></span><br></pre></td></tr></table></figure></p>
+<p>权限确认无误<br><figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ls -al /root/.ssh</span><br><span class="line">total 24</span><br><span class="line">drwxr-xr-x <span class="number"> 2 </span>root root<span class="number"> 4096 </span>Nov<span class="number"> 13 </span>16:09 .</span><br><span class="line">drwx------<span class="number"> 24 </span>root root<span class="number"> 4096 </span>Feb<span class="number"> 28 </span>15:16 ..</span><br><span class="line">-rw------- <span class="number"> 1 </span>root root <span class="number"> 785 </span>Oct <span class="number"> 9 </span>18:23 authorized_keys</span><br><span class="line">-rw------- <span class="number"> 1 </span>root root<span class="number"> 1679 </span>Jul<span class="number"> 29 </span><span class="number"> 2017 </span>id_rsa</span><br><span class="line">-rw-r--r-- <span class="number"> 1 </span>root root <span class="number"> 395 </span>Jul<span class="number"> 29 </span><span class="number"> 2017 </span>id_rsa.pub</span><br><span class="line">-rw-r--r-- <span class="number"> 1 </span>root root<span class="number"> 3548 </span>Feb <span class="number"> 7 </span>18:22 known_hosts</span><br></pre></td></tr></table></figure></p>
+<p>然而登录还是需要输入密码，key不生效</p>
+<p>最后查看log文件，发现很重要的一行<code>Authentication refused: bad ownership or modes for directory /root</code></p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">vim /var/log/auth.log</span><br><span class="line"></span><br><span class="line">Feb 28 15:00:45 ubuntu sshd[6209]:<span class="built_in"> Connection </span>closed by 192.168.3.30<span class="built_in"> port </span>11364 [preauth]</span><br><span class="line">Feb 28 15:03:12 ubuntu sshd[6206]: Received signal 15; terminating.</span><br><span class="line">Feb 28 15:03:12 ubuntu sshd[6217]:<span class="built_in"> Server </span>listening on 0.0.0.0<span class="built_in"> port </span>22.</span><br><span class="line">Feb 28 15:03:12 ubuntu sshd[6217]:<span class="built_in"> Server </span>listening on ::<span class="built_in"> port </span>22.</span><br><span class="line">Feb 28 15:03:37 ubuntu sshd[6224]: Authentication refused: bad ownership <span class="keyword">or</span> modes <span class="keyword">for</span> directory /root</span><br><span class="line">Feb 28 15:03:37 ubuntu sshd[6224]: message repeated 3 times: [ Authentication refused: bad ownership <span class="keyword">or</span> modes <span class="keyword">for</span> directory /root]</span><br></pre></td></tr></table></figure>
+<p><code>/root</code>的权限为<br><figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drwxr-xr-x  <span class="number"> 6 </span><span class="number"> 501 </span>staff <span class="number"> 4096 </span>Feb<span class="number"> 28 </span>15:03 root/</span><br></pre></td></tr></table></figure></p>
+<p>f*ck，系统是硬盘clone过来的，样本为啥要修改<code>/root</code>权限？！</p>
+<p>最后修改<code>/root</code>权限为700完美解决！</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://codz.me/2018/01/05/annual-book-list-2018/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1813,167 +1972,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://codz.me/2016/07/28/ubuntu-desktop-boot-to-char-interface/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="laudukang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/head.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Code Is Poetry">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/07/28/ubuntu-desktop-boot-to-char-interface/" itemprop="url">Ubuntu Desktop 16.04 设置默认启动到字符界面</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-28T22:47:00+08:00">
-                2016-07-28 22:47:00
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2016-07-28T22:48:51+08:00">
-                2016-07-28 22:48:51
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2016/07/28/ubuntu-desktop-boot-to-char-interface/" class="leancloud_visitors" data-flag-title="Ubuntu Desktop 16.04 设置默认启动到字符界面">
-                
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>检查目前状态<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ls -l /lib/systemd/system/default.target</span><br><span class="line">lrwxrwxrwx 1 root root 16 May 12 16:05 /lib/systemd/system/default.target -&gt; graphical.target</span><br></pre></td></tr></table></figure></p>
-<p>设置为默认启动字符界面<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">set</span>-default multi-user.target</span><br></pre></td></tr></table></figure></p>
-<p>返回默认启动图形界面<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">set</span>-default graphical.target</span><br></pre></td></tr></table></figure></p>
-<p>其他方法，例如，均失败告终<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#1</span></span><br><span class="line">sudo vi /etc/default/grub</span><br><span class="line"></span><br><span class="line"><span class="attribute">GRUB_CMDLINE_LINUX_DEFAULT</span>=<span class="string">"text"</span></span><br><span class="line"></span><br><span class="line">sudo update-grub2</span><br><span class="line"></span><br><span class="line"><span class="comment">#2</span></span><br><span class="line">sudo vi /etc/init/rc-sysinit.conf</span><br><span class="line"></span><br><span class="line">env <span class="attribute">DEFAULT_RUNLEVEL</span>=3</span><br></pre></td></tr></table></figure></p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
-<li><p><a href="https://www.ubuntu.org.cn/viewtopic.php?f=49&amp;t=478193" target="_blank" rel="noopener">https://www.ubuntu.org.cn/viewtopic.php?f=49&amp;t=478193</a></p>
-</li>
-<li><p><a href="http://www.2cto.com/os/201308/237632.html" target="_blank" rel="noopener">http://www.2cto.com/os/201308/237632.html</a></p>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2028,7 +2026,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-count">66</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
