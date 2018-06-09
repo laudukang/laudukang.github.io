@@ -284,6 +284,242 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://codz.me/2018/05/07/build-spark-cluster/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="laudukang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Is Poetry">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/07/build-spark-cluster/" itemprop="url">Build spark cluster</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-07T17:47:03+08:00">
+                2018-05-07 17:47:03
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-06-09T15:00:52+08:00">
+                2018-06-09 15:00:52
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/05/07/build-spark-cluster/" class="leancloud_visitors" data-flag-title="Build spark cluster">
+                
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Install-pssh-to-batch-config-spark-slaves"><a href="#Install-pssh-to-batch-config-spark-slaves" class="headerlink" title="Install pssh, to batch config spark slaves"></a>Install pssh, to batch config spark slaves</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">wget https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.coms/parallel-ssh/pssh-2.3.1.tar.gz</span><br><span class="line"></span><br><span class="line">tar -xzvf pssh-2.3.1.tar.gz</span><br><span class="line"></span><br><span class="line">cd pssh-2.3.1</span><br><span class="line"></span><br><span class="line">python setup.py install</span><br></pre></td></tr></table></figure>
+<p>使用参见：</p>
+<ul>
+<li><p><a href="http://www.cnblogs.com/lurenjiashuo/p/pssh.html" target="_blank" rel="noopener">使用PSSH批量操作Linux服务器</a></p>
+</li>
+<li><p><a href="https://tonydeng.github.io/2014/12/08/pssh/" target="_blank" rel="noopener">PSSH基本使用介绍</a></p>
+</li>
+</ul>
+<h2 id="System-config-in-master"><a href="#System-config-in-master" class="headerlink" title="System config in master"></a>System config in master</h2><p>/work/hosts</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">root@192.168.4.210</span><br><span class="line">root@192.168.4.211</span><br><span class="line">root@192.168.4.212</span><br><span class="line">root@192.168.4.213</span><br><span class="line">root@192.168.4.214</span><br><span class="line">root@192.168.4.215</span><br><span class="line">root@192.168.4.216</span><br><span class="line">root@192.168.4.217</span><br></pre></td></tr></table></figure>
+<p>/etc/hosts</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1       localhost</span><br><span class="line">127.0.1.1       ubuntu</span><br><span class="line"></span><br><span class="line"># The following lines are desirable for IPv6 capable hosts</span><br><span class="line">::1     localhost ip6-localhost ip6-loopback</span><br><span class="line">ff02::1 ip6-allnodes</span><br><span class="line">ff02::2 ip6-allrouters</span><br><span class="line"></span><br><span class="line">192.168.4.211 n1</span><br><span class="line">192.168.4.212 n2</span><br><span class="line">192.168.4.213 n3</span><br><span class="line">192.168.4.214 n4</span><br><span class="line">192.168.4.215 n5</span><br><span class="line">192.168.4.216 n6</span><br><span class="line">192.168.4.217 n7</span><br></pre></td></tr></table></figure>
+<p>/etc/environment</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">LANGUAGE=&quot;zh_CN:zh:en_US:en&quot;</span><br><span class="line">LANG=zh_CN.GBK</span><br><span class="line">SPARK_HOME=/work/spark</span><br><span class="line">SCALA_HOME=/opt/scala</span><br><span class="line">JAVA_HOME=/opt/java</span><br><span class="line">J2SDKDIR=/opt/java</span><br><span class="line">J2REDIR=/opt/java/jre</span><br><span class="line">DERBY_HOME=/opt/java/db</span><br><span class="line">PATH=&quot;/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/opt/java/bin:/opt/scala/bin:/work/spark/bin&quot;</span><br><span class="line">CLASSPATH=..:/opt/java/lib:/opt/java/jre/lib:/opt/scala/lib:/work/spark/jars</span><br></pre></td></tr></table></figure>
+<p>/work/spark/conf/spark-env.sh,update <code>ens3</code> to your network interface</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">export SPARK_LOCAL_IP=$(ifconfig ens3 | grep "inet addr:" | awk '&#123;print $2&#125;' | cut -c 6-)</span><br><span class="line">export SPARK_MASTER_HOST=n1</span><br><span class="line">export SPARK_MASTER_PORT=7077</span><br><span class="line">export SPARK_MASTER_WEBUI_PORT=8000</span><br><span class="line">export SPARK_HISTORY_OPTS="-Dspark.history.fs.logDirectory=/work/spark/logs-event"</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="built_in">export</span> SPARK_EXECUTOR_CORES=1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="built_in">export</span> SPARK_EXECUTOR_MEMORY=512M</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="built_in">export</span> SPARK_WORKER_INSTANCES=4</span></span><br></pre></td></tr></table></figure>
+<p>update_hostname.sh, update default hostname <code>ubuntu</code> to <code>n{machine ip last number}</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/usr/bin/env bash</span></span><br><span class="line">NODE_LOCAL_IP=$(ifconfig ens3 | grep "inet addr:" | awk '&#123;print $2&#125;' | cut -c 6-)</span><br><span class="line">NEW_HOSTNAME="n$&#123;NODE_LOCAL_IP:12&#125;"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="built_in">echo</span> <span class="variable">$NEW_HOSTNAME</span> &gt; /proc/sys/kernel/hostname</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="built_in">echo</span> <span class="variable">$NEW_HOSTNAME</span> &gt; /etc/hostname</span></span><br><span class="line"></span><br><span class="line">sed -i 's/127.0.1.1.*/127.0.1.1\t'"$NEW_HOSTNAME"'/g' /etc/hosts</span><br><span class="line">hostnamectl set-hostname $NEW_HOSTNAME</span><br></pre></td></tr></table></figure>
+<h2 id="Init-master-and-slaves-in-master"><a href="#Init-master-and-slaves-in-master" class="headerlink" title="Init master and slaves in master"></a>Init master and slaves in master</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">pssh -h hosts "apt update"</span><br><span class="line">pssh -h hosts "apt install htop -y"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">zsh init</span></span><br><span class="line">pssh -h hosts "apt install zsh -y"</span><br><span class="line">pssh -h hosts 'sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)";'</span><br><span class="line">pssh -h hosts chsh -s $(which zsh)</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">update dns resolve</span></span><br><span class="line">pscp -h hosts /etc/resolvconf/resolv.conf.d/base /etc/resolvconf/resolv.conf.d/base</span><br><span class="line">pssh -h hosts "resolvconf -u"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">host update</span></span><br><span class="line">pscp -h hosts /etc/hosts /etc</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">create work directory</span></span><br><span class="line">pssh -h hosts "mkdir /work"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">copy from master: 192.168.4.210</span></span><br><span class="line"><span class="meta">#</span><span class="bash">plesae remove 192.168.4.210 <span class="keyword">in</span> hosts</span></span><br><span class="line"></span><br><span class="line">tar -zxvf jdk-8u172-linux-x64.tar.gz -C /opt</span><br><span class="line">tar -zxvf scala-2.11.12.tgz -C /opt</span><br><span class="line">tar -zxvf scala-2.11.12.tgz -C /opt</span><br><span class="line">mv /opt/jdk-8u172-linux-x64 /opt/java</span><br><span class="line">mv /opt/scala-2.11.12 /opt/scala</span><br><span class="line"></span><br><span class="line">tar -zxvf spark-2.3.0-bin-hadoop2.7.tgz -C /work</span><br><span class="line">mv spark-2.3.0-bin-hadoop2.7 spark</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">copy java, scala</span></span><br><span class="line">pscp -r -h hosts /opt/* /opt/</span><br><span class="line"><span class="meta">#</span><span class="bash">copy spark</span></span><br><span class="line">pscp -r -h hosts /work/spark /work</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">update env variables</span></span><br><span class="line">pscp -h hosts /etc/environment /etc</span><br><span class="line">pssh -h hosts "source /etc/environment"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">update hostname</span></span><br><span class="line">pscp -h hosts update_hostname.sh /tmp/</span><br><span class="line">pssh -h hosts "./tmp/update_hostname.sh"</span><br></pre></td></tr></table></figure>
+<h2 id="Hadoop-config-in-master"><a href="#Hadoop-config-in-master" class="headerlink" title="Hadoop config in master"></a>Hadoop config in master</h2><p>此处引入<code>hadoop</code>是为了slaves从<code>hadoop</code>拉去资源启动app；</p>
+<p>当然，也可以复制jar到各slaves相同的路径启动；</p>
+<p>后面发现，每次重启app，spark都会从<code>hadoop</code>全量拉取一遍资源到<code>spark/work</code>目录。</p>
+<p>core-site.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?</span>xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span><span class="meta">?&gt;</span></span></span><br><span class="line"><span class="php"><span class="meta">&lt;?</span>xml-stylesheet type=<span class="string">"text/xsl"</span> href=<span class="string">"configuration.xsl"</span><span class="meta">?&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">name</span>&gt;</span>hadoop.tmp.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">value</span>&gt;</span>file:/work/hadoop/tmp<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">description</span>&gt;</span>Abase for other temporary directories.<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">name</span>&gt;</span>fs.defaultFS<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">value</span>&gt;</span>hdfs://n0:9820<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>hdfs-site.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?</span>xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span><span class="meta">?&gt;</span></span></span><br><span class="line"><span class="php"><span class="meta">&lt;?</span>xml-stylesheet type=<span class="string">"text/xsl"</span> href=<span class="string">"configuration.xsl"</span><span class="meta">?&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.replication<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">value</span>&gt;</span>1<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.namenode.name.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">value</span>&gt;</span>file:/work/hadoop/tmp/dfs/namenode<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.datanode.data.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">value</span>&gt;</span>file:/work/hadoop/tmp/dfs/datanode<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.http.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">value</span>&gt;</span>n0:9870<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.permissions.enabled<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">value</span>&gt;</span>false<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.permissions.superusergroup<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">value</span>&gt;</span>hadoop<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">name</span>&gt;</span>hadoop.http.staticuser.user<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">value</span>&gt;</span>hadoop<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.secondary.http.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">value</span>&gt;</span>n0:9868<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.datanode.http.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">value</span>&gt;</span>n0:9864<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.datanode.address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">value</span>&gt;</span>n0:9866<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.datanode.hostname<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">value</span>&gt;</span>n0<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>init <code>hadoop</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">create hadoop user <span class="keyword">in</span> master</span></span><br><span class="line">sudo useradd -m hadoop -s /bin/bash</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">/work/hadoop/bin</span></span><br><span class="line">./hdfs dfs -mkdir -p /sparkHistoryLogs</span><br><span class="line">./hdfs dfs -mkdir -p /eventLogs</span><br><span class="line">./hdfs dfs -mkdir -p /spark</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">./hdfs dfs -rm -R /spark/app/*</span></span><br></pre></td></tr></table></figure>
+<p>copy_app_resouces_to_hadoop.sh, run as <code>hadoop</code> user</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">cd /work/hadoop/bin</span><br><span class="line"><span class="meta">#</span><span class="bash">./hdfs dfs -mkdir -p /spark</span></span><br><span class="line">./hdfs dfs -rm -R /spark/app/*</span><br><span class="line">./hdfs dfs -copyFromLocal -f /work/spark/app/log4j.properties /spark/app</span><br><span class="line"><span class="meta">#</span><span class="bash">spark config</span></span><br><span class="line">./hdfs dfs -copyFromLocal -f /work/spark/app/default.conf /spark/app</span><br><span class="line"><span class="meta">#</span><span class="bash">app dependencies</span></span><br><span class="line">./hdfs dfs -copyFromLocal -f /work/spark/app/lib /spark/app</span><br><span class="line">./hdfs dfs -copyFromLocal -f /work/spark/app/node-quality-streaming-0.0.1-SNAPSHOT.jar /spark/app</span><br></pre></td></tr></table></figure>
+<h2 id="Exception-solutions"><a href="#Exception-solutions" class="headerlink" title="Exception solutions"></a>Exception solutions</h2><ul>
+<li><p>fix spark WorkWebUI hostname(logs) 指向master机器hostname</p>
+<p>看源码，在<code>spark-env.sh</code>中指定<code>SPARK_LOCAL_HOSTNAME</code>并没起作用，</p>
+<p>解决方案：设置<code>SPARK_PUBLIC_DNS</code>参数后，worker webui中的跳转链接正常了。</p>
+<p><code>SPARK_PUBLIC_DNS</code>→<code>publicHostName</code>我也是服了，</p>
+<p>如下图，原先<code>stdout</code>的链接的的主机为<code>n0</code>，<code>n0</code>为master所在的机器：</p>
+<img src="https://nat.oss-cn-hongkong.aliyuncs.com/images/2018/05/07/build-spark-cluster/spark-worker-ui-hostname.png" alt="spark-worker-ui-hostname.png" title="">
+<p>源码参考</p>
+<p><a href="https://github.com/apache/spark/blob/master/core/src/main/scala/org/apache/spark/ui/WebUI.scala" target="_blank" rel="noopener">core/src/main/scala/org/apache/spark/ui/WebUI.scala</a></p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> <span class="keyword">val</span> publicHostName = <span class="type">Option</span>(conf.getenv(<span class="string">"SPARK_PUBLIC_DNS"</span>)).getOrElse(</span><br><span class="line">    conf.get(<span class="type">DRIVER_HOST_ADDRESS</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">/** Return the url of web interface. Only valid after bind(). */</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">webUrl</span></span>: <span class="type">String</span> = <span class="string">s"http://<span class="subst">$publicHostName</span>:<span class="subst">$boundPort</span>"</span></span><br></pre></td></tr></table></figure>
+<p><a href="https://github.com/apache/spark/blob/master/core/src/main/scala/org/apache/spark/util/Utils.scala" target="_blank" rel="noopener">core/src/main/scala/org/apache/spark/util/Utils.scala</a></p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">lazy</span> <span class="keyword">val</span> localIpAddress: <span class="type">InetAddress</span> = findLocalInetAddress()</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">var</span> customHostname: <span class="type">Option</span>[<span class="type">String</span>] = sys.env.get(<span class="string">"SPARK_LOCAL_HOSTNAME"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Get the local machine's URI.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">localHostNameForURI</span></span>(): <span class="type">String</span> = &#123;</span><br><span class="line">  customHostname.getOrElse(<span class="type">InetAddresses</span>.toUriString(localIpAddress))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>spark ConsumerRecord NotSerializableException bug</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">java.io.NotSerializableException: org.apache.kafka.clients.consumer.ConsumerRecord</span><br><span class="line">Serialization stack:</span><br><span class="line">    - <span class="function">object not <span class="title">serializable</span> <span class="params">(class: org.apache.kafka.clients.consumer.ConsumerRecord, value: ConsumerRecord(topic = hi2, partition = <span class="number">4</span>, offset = <span class="number">385</span>, CreateTime = <span class="number">1526369397516</span>, checksum = <span class="number">2122851237</span>, serialized key size = <span class="number">-1</span>, serialized value size = <span class="number">45</span>, key = <span class="keyword">null</span>, value = &#123;<span class="string">"date"</span>:<span class="number">1526369397516</span>,<span class="string">"message"</span>:<span class="string">"0hh2KcCH4j"</span>&#125;)</span>)</span></span><br><span class="line"><span class="function">    - element of <span class="title">array</span> <span class="params">(index: <span class="number">0</span>)</span></span></span><br><span class="line"><span class="function">    - <span class="title">array</span> <span class="params">(class [Lorg.apache.kafka.clients.consumer.ConsumerRecord;, size <span class="number">125</span>)</span></span></span><br><span class="line"><span class="function">    at org.apache.spark.serializer.SerializationDebugger$.<span class="title">improveException</span><span class="params">(SerializationDebugger.scala:<span class="number">40</span>)</span></span></span><br><span class="line"><span class="function">    at org.apache.spark.serializer.JavaSerializationStream.<span class="title">writeObject</span><span class="params">(JavaSerializer.scala:<span class="number">46</span>)</span></span></span><br><span class="line"><span class="function">    at org.apache.spark.serializer.JavaSerializerInstance.<span class="title">serialize</span><span class="params">(JavaSerializer.scala:<span class="number">100</span>)</span></span></span><br><span class="line"><span class="function">    at org.apache.spark.executor.Executor$TaskRunner.<span class="title">run</span><span class="params">(Executor.scala:<span class="number">393</span>)</span></span></span><br><span class="line"><span class="function">    at java.util.concurrent.ThreadPoolExecutor.<span class="title">runWorker</span><span class="params">(ThreadPoolExecutor.java:<span class="number">1149</span>)</span></span></span><br><span class="line"><span class="function">    at java.util.concurrent.ThreadPoolExecutor$Worker.<span class="title">run</span><span class="params">(ThreadPoolExecutor.java:<span class="number">624</span>)</span></span></span><br><span class="line"><span class="function">    at java.lang.Thread.<span class="title">run</span><span class="params">(Thread.java:<span class="number">748</span>)</span></span></span><br></pre></td></tr></table></figure>
+<p>解决方案</p>
+<p>set SparkConf</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sparkConf.set(<span class="string">"spark.serializer"</span>, <span class="string">"org.apache.spark.serializer.KryoSerializer"</span>);</span><br><span class="line">sparkConf.set(<span class="string">"spark.kryo.registrator"</span>, <span class="string">"me.codz.registrator.CunstomRegistrator"</span>);</span><br></pre></td></tr></table></figure>
+<p>create CunstomRegistrator</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> me.codz.registrator;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.esotericsoftware.kryo.Kryo;</span><br><span class="line"><span class="keyword">import</span> org.apache.kafka.clients.consumer.ConsumerRecord;</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.serializer.KryoRegistrator;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CunstomRegistrator</span> <span class="keyword">implements</span> <span class="title">KryoRegistrator</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">registerClasses</span><span class="params">(Kryo kryo)</span> </span>&#123;</span><br><span class="line">        kryo.register(ConsumerRecord.class);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>spark TaskContext.get() cause NullPointerException</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">stream.foreachRDD((VoidFunction2&lt;JavaRDD&lt;ConsumerRecord&lt;String, String&gt;&gt;, Time&gt;) (v1, v2) -&gt; &#123;</span><br><span class="line">           OffsetRange[] offsetRanges = ((HasOffsetRanges) v1.rdd()).offsetRanges();</span><br><span class="line"></span><br><span class="line">           List&lt;ConsumerRecord&lt;String, String&gt;&gt; consumerRecordList = CollectionTools.emptyWrapper(v1.collect());</span><br><span class="line">           consumerRecordList.forEach(consumerRecord -&gt; &#123;</span><br><span class="line">               TaskContext taskContext = TaskContext.get();</span><br><span class="line">               <span class="keyword">int</span> partitionId = taskContext.partitionId();</span><br><span class="line">               OffsetRange o = offsetRanges[partitionId];</span><br><span class="line"></span><br><span class="line">               <span class="comment">//...</span></span><br><span class="line">           &#125;);</span><br><span class="line"></span><br><span class="line">       &#125;);</span><br></pre></td></tr></table></figure>
+<p>解决方案<br>using <code>foreachPartition</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">v1.foreachPartition(consumerRecordIterator -&gt; &#123;</span><br><span class="line">                <span class="keyword">while</span> (consumerRecordIterator.hasNext()) &#123;</span><br><span class="line">                    ConsumerRecord&lt;String, String&gt; consumerRecord = consumerRecordIterator.next();</span><br><span class="line"></span><br><span class="line">                    <span class="comment">//...</span></span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                TaskContext taskContext = TaskContext.get();</span><br><span class="line">                <span class="keyword">int</span> partitionId = taskContext.partitionId();</span><br><span class="line">                OffsetRange offsetRange = offsetRanges[partitionId];</span><br><span class="line"></span><br><span class="line">                <span class="comment">//...</span></span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Spark app connect kafka server by ip suspend</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2018-06-07 18:40:16 [ForkJoinPool-1-worker-5] INFO :: [Consumer clientId=consumer-1, groupId=node-quality-streaming] Discovered group coordinator lau.cc:9092 (id: 2147483647 rack: null)</span><br><span class="line">2018-06-07 18:40:18 [ForkJoinPool-1-worker-5] INFO :: [Consumer clientId=consumer-1, groupId=node-quality-streaming] Group coordinator lau.cc:9092 (id: 2147483647 rack: null) is unavailable or invalid, will attempt rediscovery</span><br></pre></td></tr></table></figure>
+<p>解决方案</p>
+<p>vim kafka/config/server.properties</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#add follow line</span><br><span class="line">advertised.host.name=192.168.3.20</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Zookeeper-cluster-init"><a href="#Zookeeper-cluster-init" class="headerlink" title="Zookeeper cluster init"></a>Zookeeper cluster init</h2><p><a href="https://www.apache.org/dyn/closer.cgi/zookeeper/" target="_blank" rel="noopener">Download package from here</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf zookeeper-3.4.12.tar.gz -C /work</span><br><span class="line">mv zookeeper-3.4.12 zookeeper</span><br><span class="line"></span><br><span class="line">cp conf/zoo_sample.cfg conf/zoo.cfg</span><br></pre></td></tr></table></figure>
+<p>vim conf/zoo.cfg</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">tickTime=2000</span><br><span class="line">initLimit=10</span><br><span class="line">syncLimit=5</span><br><span class="line">dataDir=/work/zookeeper/data</span><br><span class="line">clientPort=2181</span><br><span class="line"></span><br><span class="line">server.0=192.168.4.210:2888:3888</span><br><span class="line">server.1=192.168.4.211:2888:3888</span><br><span class="line">server.2=192.168.4.212:2888:3888</span><br><span class="line">server.3=192.168.4.213:2888:3888</span><br><span class="line">server.4=192.168.4.214:2888:3888</span><br><span class="line">server.5=192.168.4.215:2888:3888</span><br><span class="line">server.6=192.168.4.216:2888:3888</span><br><span class="line">server.7=192.168.4.217:2888:3888</span><br></pre></td></tr></table></figure>
+<p>bin/init_myid.sh, update <code>ens3</code> to your network interface</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">NODE_LOCAL_IP=$(ifconfig ens3 | grep "inet addr:" | awk '&#123;print $2&#125;' | cut -c 6-)</span><br><span class="line">echo $&#123;NODE_LOCAL_IP##*.&#125; &gt; /work/zookeeper/data/myid</span><br></pre></td></tr></table></figure>
+<p>init cluster myid</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pssh -h /work/hosts "/work/zookeeper/bin/init_myid.sh"</span><br></pre></td></tr></table></figure>
+<p>start zookeeper cluster</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pssh -h /work/hhosts -o out "/work/zookeeper/bin/zkServer.sh start"</span><br></pre></td></tr></table></figure>
+<h2 id="参考内容"><a href="#参考内容" class="headerlink" title="参考内容"></a>参考内容</h2><ul>
+<li><p><a href="https://code.google.com/archive/p/parallel-ssh/downloads" target="_blank" rel="noopener">parallel-ssh download page</a></p>
+</li>
+<li><p><a href="https://www.iteblog.com/archives/2270.html" target="_blank" rel="noopener">Hadoop 2.x Port &amp; 3.x 多个服务的默认端口被改变</a></p>
+</li>
+<li><p><a href="https://hadoop.apache.org/docs/r3.1.0/hadoop-project-dist/hadoop-hdfs/hdfs-default.xml" target="_blank" rel="noopener">hadoop r3.1.0 hdfs-default.xml</a></p>
+</li>
+<li><p><a href="https://stackoverflow.com/questions/47310619/cant-delete-hdfs-directory-via-web-interface-because-im-dr-who" target="_blank" rel="noopener">Can’t Delete HDFS Directory Via Web Interface Because I’m Dr. Who</a></p>
+</li>
+<li><p><a href="https://github.com/apache/spark/pull/11490/commits/d64ade1939e51bfa4da0958e1057164b725ad7f3" target="_blank" rel="noopener">[SPARK-13117] [Web UI] WebUI should use the local ip not 0.0.0.0 #11490</a></p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://codz.me/2018/02/28/ssh-login-with-key-fail-and-require-password/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -313,7 +549,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-28T15:08:47+09:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-28T15:08:47+08:00">
                 2018-02-28 15:08:47
               </time>
             
@@ -327,8 +563,8 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-02-28T16:29:42+09:00">
-                2018-02-28 16:29:42
+              <time title="更新于" itemprop="dateModified" datetime="2018-02-28T15:29:42+08:00">
+                2018-02-28 15:29:42
               </time>
             
           </span>
@@ -472,7 +708,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-05T16:15:03+09:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-05T16:15:03+08:00">
                 2018-01-05 16:15:03
               </time>
             
@@ -486,7 +722,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-01-05T16:19:11+09:00">
+              <time title="更新于" itemprop="dateModified" datetime="2018-01-05T16:19:11+08:00">
                 2018-01-05 16:19:11
               </time>
             
@@ -645,7 +881,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-20T20:03:15+09:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-20T20:03:15+08:00">
                 2017-12-20 20:03:15
               </time>
             
@@ -659,7 +895,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-12-21T11:06:48+09:00">
+              <time title="更新于" itemprop="dateModified" datetime="2017-12-21T11:06:48+08:00">
                 2017-12-21 11:06:48
               </time>
             
@@ -800,7 +1036,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-12T10:16:00+09:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-12T10:16:00+08:00">
                 2017-10-12 10:16:00
               </time>
             
@@ -814,7 +1050,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-10-12T19:06:44+09:00">
+              <time title="更新于" itemprop="dateModified" datetime="2017-10-12T19:06:44+08:00">
                 2017-10-12 19:06:44
               </time>
             
@@ -965,7 +1201,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-24T16:54:00+09:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-24T16:54:00+08:00">
                 2017-09-24 16:54:00
               </time>
             
@@ -979,7 +1215,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-09-24T16:57:21+09:00">
+              <time title="更新于" itemprop="dateModified" datetime="2017-09-24T16:57:21+08:00">
                 2017-09-24 16:57:21
               </time>
             
@@ -1149,7 +1385,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-10T16:51:00+09:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-10T16:51:00+08:00">
                 2017-06-10 16:51:00
               </time>
             
@@ -1163,7 +1399,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-06-10T16:51:32+09:00">
+              <time title="更新于" itemprop="dateModified" datetime="2017-06-10T16:51:32+08:00">
                 2017-06-10 16:51:32
               </time>
             
@@ -1306,7 +1542,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-19T21:18:00+09:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-19T21:18:00+08:00">
                 2017-02-19 21:18:00
               </time>
             
@@ -1320,7 +1556,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-12-22T15:57:44+09:00">
+              <time title="更新于" itemprop="dateModified" datetime="2017-12-22T15:57:44+08:00">
                 2017-12-22 15:57:44
               </time>
             
@@ -1512,7 +1748,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-14T20:55:00+09:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-14T20:55:00+08:00">
                 2017-01-14 20:55:00
               </time>
             
@@ -1526,7 +1762,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-02-22T21:05:29+09:00">
+              <time title="更新于" itemprop="dateModified" datetime="2017-02-22T21:05:29+08:00">
                 2017-02-22 21:05:29
               </time>
             
@@ -1672,7 +1908,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-25T17:21:00+09:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-25T17:21:00+08:00">
                 2016-09-25 17:21:00
               </time>
             
@@ -1686,7 +1922,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2016-09-25T17:21:41+09:00">
+              <time title="更新于" itemprop="dateModified" datetime="2016-09-25T17:21:41+08:00">
                 2016-09-25 17:21:41
               </time>
             
@@ -1787,207 +2023,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://codz.me/2016/08/12/nginx-tomcat-config-https/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="laudukang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/head.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Code Is Poetry">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/08/12/nginx-tomcat-config-https/" itemprop="url">HTTPS 证书生成 & Nginx/Tomcat 配置 HTTPS</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-12T21:44:00+09:00">
-                2016-08-12 21:44:00
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2017-02-20T08:48:31+09:00">
-                2017-02-20 08:48:31
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web/" itemprop="url" rel="index">
-                    <span itemprop="name">Web</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2016/08/12/nginx-tomcat-config-https/" class="leancloud_visitors" data-flag-title="HTTPS 证书生成 & Nginx/Tomcat 配置 HTTPS">
-                
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ol>
-<li><p>OpenSSL安装</p>
-<p>OpenSSL官网，或者参考 linux升级OpenSSL</p>
-<p>中间可能会遇到 openssl.cnf 的问题，请使用 openssl-1.0.1t.tar.gz 包 apps下的 demoCA 和 openssl.cnf</p>
-</li>
-<li><p>证书生成</p>
-<ul>
-<li><p>单向认证，参考 Nginx单向认证的安装配置</p>
-<figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">openssl genrsa -des3 -out server.<span class="keyword">key</span> <span class="number">2048</span> <span class="meta">#自定义密码</span></span><br><span class="line"></span><br><span class="line">openssl req -<span class="keyword">new</span> -<span class="keyword">key</span> server.<span class="keyword">key</span> -out server.csr</span><br><span class="line"></span><br><span class="line"><span class="meta">#---------------------------------------------------------------------------------------------------------------</span></span><br><span class="line">Enter pass phrase <span class="keyword">for</span> server.<span class="keyword">key</span>: 自定义密码</span><br><span class="line">Country Name (<span class="number">2</span> letter code) [XX]: CN                                           <span class="meta">#国家</span></span><br><span class="line">State <span class="keyword">or</span> Province Name (full name) []: GD                                       <span class="meta">#区域或是省份</span></span><br><span class="line">Locality Name (eg, city) [<span class="keyword">Default</span> City]: SZ                                     <span class="meta">#地区局部名字</span></span><br><span class="line">Organization Name (eg, company) [<span class="keyword">Default</span> Company Ltd]: Test                     <span class="meta">#机构名称：填写公司名</span></span><br><span class="line">Organizational Unit Name (eg, section) []: Test                                 <span class="meta">#组织单位名称:部门名称</span></span><br><span class="line">Common Name (eg, your name <span class="keyword">or</span> your server<span class="comment">'s hostname) []: *.domain.com          #网站域名</span></span><br><span class="line">Email Address []: admin@domain.com                                              <span class="meta">#邮箱地址</span></span><br><span class="line">A challenge password []:                                                        <span class="meta">#输入一个密码</span></span><br><span class="line">An <span class="keyword">optional</span> company name []:                                                    <span class="meta">#一个可选的公司名称</span></span><br><span class="line"><span class="meta">#---------------------------------------------------------------------------------------------------------------</span></span><br></pre></td></tr></table></figure>
-<blockquote><p>怎么让nginx配置SSL安全证书重启免输入密码，不然Nginx、Tomcat使用该私钥启动的时候需要输入上面的密钥</p>
-<p>openssl rsa -in server.key -out server.key.unsecure<br>openssl x509 -req -days 365 -in server.csr -signkey server.key.unsecure -out server.crt  #使用上面的密钥和CSR对证书进行签名</p>
-</blockquote>
-</li>
-<li><p>双向认证，参考 openssl生成SSL证书的流程</p>
-<p>CA根证书的生成</p>
-<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># <span class="keyword">Generate</span> <span class="keyword">CA</span> private key   </span><br><span class="line">openssl genrsa -<span class="keyword">out</span> <span class="keyword">ca</span>.key 2048   </span><br><span class="line"># <span class="keyword">Generate</span> CSR   </span><br><span class="line">openssl req -new -key <span class="keyword">ca</span>.key -<span class="keyword">out</span> <span class="keyword">ca</span>.csr  </span><br><span class="line"># <span class="keyword">Generate</span> Self Signed certificate（<span class="keyword">CA</span> 根证书）  </span><br><span class="line">openssl x509 -req -days 365 -<span class="keyword">in</span> <span class="keyword">ca</span>.csr -signkey <span class="keyword">ca</span>.key -<span class="keyword">out</span> <span class="keyword">ca</span>.crt</span><br></pre></td></tr></table></figure>
-<p>用户证书的生成</p>
-<figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># 服务器端用户证书</span></span><br><span class="line"><span class="meta"># private key  </span></span><br><span class="line">openssl genrsa -des3 -out server.<span class="keyword">key</span> <span class="number">1024</span>   </span><br><span class="line"><span class="meta"># generate csr  </span></span><br><span class="line">openssl req -<span class="keyword">new</span> -<span class="keyword">key</span> server.<span class="keyword">key</span> -out server.csr  </span><br><span class="line"><span class="meta"># generate certificate  </span></span><br><span class="line">openssl ca -<span class="keyword">in</span> server.csr -out server.crt -cert ca.crt -keyfile ca.<span class="keyword">key</span>  </span><br><span class="line"></span><br><span class="line"><span class="meta"># 客户端用户证书</span></span><br><span class="line">openssl genrsa -des3 -out client.<span class="keyword">key</span> <span class="number">1024</span>   </span><br><span class="line">openssl req -<span class="keyword">new</span> -<span class="keyword">key</span> client.<span class="keyword">key</span> -out client.csr  </span><br><span class="line">openssl ca -<span class="keyword">in</span> client.csr -out client.crt -cert ca.crt -keyfile ca.<span class="keyword">key</span></span><br><span class="line">免密钥启动同上，TXT_DB <span class="keyword">error</span> number <span class="number">2</span> 异常请参考 openssl TXT_DB <span class="keyword">error</span> number <span class="number">2</span></span><br></pre></td></tr></table></figure>
-<p>生成pem格式证书<br>有时需要用到pem格式的证书，可以用以下方式合并证书文件（crt）和私钥文件（key）来生成</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$cat</span> client<span class="selector-class">.crt</span> client.key&gt; client.pem</span><br><span class="line"><span class="variable">$cat</span> server<span class="selector-class">.crt</span> server<span class="selector-class">.key</span> &gt; server.pem</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>Nginx、Tomcat配置HTTPS</p>
-<p>nginx.conf添加</p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">   <span class="attribute">listen</span>       <span class="number">443</span> ssl;</span><br><span class="line">   <span class="attribute">server_name</span>  localhost;</span><br><span class="line"></span><br><span class="line">   <span class="attribute">ssl_certificate</span>      /work/openssl/single/server.crt;</span><br><span class="line">   <span class="attribute">ssl_certificate_key</span>  /work/openssl/single/server.key.unsecure;</span><br><span class="line"></span><br><span class="line">   <span class="attribute">ssl_session_cache</span>    shared:SSL:<span class="number">1m</span>;</span><br><span class="line">   <span class="attribute">ssl_session_timeout</span>  <span class="number">5m</span>;</span><br><span class="line">   <span class="attribute">ssl_ciphers</span>  HIGH:!aNULL:!MD5;</span><br><span class="line">   <span class="attribute">ssl_prefer_server_ciphers</span>  <span class="literal">on</span>;</span><br><span class="line"></span><br><span class="line">   <span class="attribute">location</span> / &#123;</span><br><span class="line">            <span class="attribute">allow</span> all;</span><br><span class="line">            <span class="attribute">proxy_pass</span> https://192.168.1.121:443;</span><br><span class="line">            <span class="attribute">proxy_set_header</span> Host <span class="variable">$host</span>;</span><br><span class="line">            <span class="attribute">proxy_set_header</span> Upgrade <span class="variable">$http_upgrade</span>;</span><br><span class="line">            <span class="attribute">proxy_set_header</span> Connection <span class="string">"upgrade"</span>;</span><br><span class="line">            <span class="attribute">proxy_set_header</span> X-Real-Ip <span class="variable">$remote_addr</span>;</span><br><span class="line">            <span class="attribute">proxy_set_header</span> X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">            <span class="attribute">proxy_set_header</span> X-Forwarded-Proto <span class="variable">$scheme</span>;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-<p>tomcat server.xml添加</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;Connector <span class="attribute">port</span>=<span class="string">"8443"</span> <span class="attribute">protocol</span>=<span class="string">"org.apache.coyote.http11.Http11AprProtocol"</span></span><br><span class="line">               <span class="attribute">maxThreads</span>=<span class="string">"150"</span> <span class="attribute">SSLEnabled</span>=<span class="string">"true"</span> <span class="attribute">scheme</span>=<span class="string">"https"</span> <span class="attribute">secure</span>=<span class="string">"true"</span></span><br><span class="line">               <span class="attribute">clientAuth</span>=<span class="string">"false"</span> <span class="attribute">SSLCertificateFile</span>=<span class="string">"/work/openssl/single/server.crt"</span> <span class="attribute">SSLProtocol</span>=<span class="string">"SSLv2+SSLv3+TLSv1"</span></span><br><span class="line">          <span class="attribute">SSLCertificateKeyFile</span>=<span class="string">"/work/openssl/single/server.key.unsecure"</span> <span class="attribute">SSLVerifyClient</span>=<span class="string">"optional"</span>/&gt;</span><br></pre></td></tr></table></figure>
-<p>server.xml默认注释了</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;Connector <span class="attribute">port</span>=<span class="string">"8443"</span> <span class="attribute">protocol</span>=<span class="string">"org.apache.coyote.http11.Http11NioProtocol"</span></span><br><span class="line">               <span class="attribute">maxThreads</span>=<span class="string">"150"</span> <span class="attribute">SSLEnabled</span>=<span class="string">"true"</span> <span class="attribute">scheme</span>=<span class="string">"https"</span> <span class="attribute">secure</span>=<span class="string">"true"</span></span><br><span class="line">               <span class="attribute">clientAuth</span>=<span class="string">"false"</span> <span class="attribute">sslProtocol</span>=<span class="string">"TLS"</span> /&gt;</span><br></pre></td></tr></table></figure>
-<p>需要注意protocol中的 Http11AprProtocol 与 Http11NioProtocol，加密算法不支持的话，可能报异常 <code>Java and SSL - java.security.NoSuchAlgorithmException</code></p>
-</li>
-<li><p>一个大坑</p>
-<p>Ubuntu上跑Tengine，代理Windows上的应用，访问HTTPS页面时候总是报504错误，后来又报502错误。</p>
-<p>排查了一个多小时后发现是Windows系统安装了Vmware Workstation，而Vmware的VMware Authorization Service自动启动了。</p>
-<p>还有另外一个Vmware的服务忘记了，这两个服务会影响本地应用使用HTTPS，所以停止掉或禁用掉就可以了。</p>
-<p><a href="http://tool.chinaz.com/pagestatus/" target="_blank" rel="noopener">HTTP状态码</a></p>
-<blockquote><p>502 作为网关或者代理工作的服务器尝试执行请求时，从上游服务器接收到无效的响应。</p>
-<p>504 作为网关或者代理工作的服务器尝试执行请求时，未能及时从上游服务器（URI标识出的服务器，例如HTTP、FTP、LDAP）或者辅助服务器（例如DNS）收到响应。 　　注意：某些代理服务器在DNS查询超时时会返回400或者500错误</p>
-</blockquote>
-</li>
-</ol>
-<p>参考资料：</p>
-<ul>
-<li><a href="http://my.oschina.net/itblog/blog/651434" target="_blank" rel="noopener">OpenSSL生成根证书CA及签发子证书</a></li>
-<li><a href="http://my.oschina.net/u/658145/blog/75093" target="_blank" rel="noopener">Windows下Tomcat+nginx配置证书实现登录页https访问</a></li>
-<li><a href="http://itindex.net/detail/50701-tomcat-bio-nio.apr" target="_blank" rel="noopener">Tomcat 的三种(bio,nio.apr) 高级 Connector 运行模式</a></li>
-<li><a href="http://blog.csdn.net/na_tion/article/details/17334669" target="_blank" rel="noopener">Nginx部署部分https与部分http</a></li>
-<li><a href="https://iyaozhen.com/nginx-https-conf.html" target="_blank" rel="noopener">Nginx HTTPS 配置实践</a></li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2042,7 +2077,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">66</span>
+                  <span class="site-state-item-count">67</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2053,7 +2088,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2064,7 +2099,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

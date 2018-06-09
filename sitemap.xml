@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://codz.me/2018/05/07/build-spark-cluster/</loc>
+    
+    <lastmod>2018-06-09T07:00:52.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://codz.me/2018/02/28/ssh-login-with-key-fail-and-require-password/</loc>
     
     <lastmod>2018-02-28T07:29:42.743Z</lastmod>
@@ -32,462 +39,462 @@
   <url>
     <loc>https://codz.me/2018/01/05/annual-book-list-2018/</loc>
     
-    <lastmod>2018-01-05T07:19:11.000Z</lastmod>
+    <lastmod>2018-01-05T08:19:11.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2017/02/19/annual-book-list-2017/</loc>
     
-    <lastmod>2017-12-22T06:57:44.000Z</lastmod>
+    <lastmod>2017-12-22T07:57:44.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2017/12/20/recommend-articles/</loc>
     
-    <lastmod>2017-12-21T02:06:48.000Z</lastmod>
+    <lastmod>2017-12-21T03:06:48.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/about/index.html</loc>
     
-    <lastmod>2017-11-25T14:10:52.000Z</lastmod>
+    <lastmod>2017-11-25T15:10:52.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2017/10/12/minio-and-nginx/</loc>
     
-    <lastmod>2017-10-12T10:06:44.000Z</lastmod>
+    <lastmod>2017-10-12T11:06:44.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2017/09/24/rise-of-worse-is-better/</loc>
     
-    <lastmod>2017-09-24T07:57:21.000Z</lastmod>
+    <lastmod>2017-09-24T08:57:21.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2017/06/10/can-not-read-from-dev-random/</loc>
     
-    <lastmod>2017-06-10T07:51:32.000Z</lastmod>
+    <lastmod>2017-06-10T08:51:32.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2016/05/29/elasticsearch-note-1/</loc>
     
-    <lastmod>2017-03-10T12:14:17.000Z</lastmod>
+    <lastmod>2017-03-10T13:14:17.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2015/12/18/java-god-like/</loc>
     
-    <lastmod>2017-02-22T13:19:34.000Z</lastmod>
+    <lastmod>2017-02-22T14:19:34.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2016/05/30/elasticsearch-note-2/</loc>
     
-    <lastmod>2017-02-22T13:16:59.000Z</lastmod>
+    <lastmod>2017-02-22T14:16:59.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2017/01/14/a-bug-of-ubuntu-16_04_1/</loc>
     
-    <lastmod>2017-02-22T12:05:29.000Z</lastmod>
+    <lastmod>2017-02-22T13:05:29.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2016/08/12/nginx-tomcat-config-https/</loc>
     
-    <lastmod>2017-02-19T23:48:31.000Z</lastmod>
+    <lastmod>2017-02-20T00:48:31.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2016/07/21/ngrok-compile-and-run-online/</loc>
     
-    <lastmod>2017-02-19T23:42:32.000Z</lastmod>
+    <lastmod>2017-02-20T00:42:32.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2016/09/25/java-cacerts-import-certificate/</loc>
     
-    <lastmod>2016-09-25T08:21:41.000Z</lastmod>
+    <lastmod>2016-09-25T09:21:41.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2016/07/28/ubuntu-desktop-boot-to-char-interface/</loc>
     
-    <lastmod>2016-07-28T13:48:51.000Z</lastmod>
+    <lastmod>2016-07-28T14:48:51.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2016/05/26/music-always-quiet-asang/</loc>
     
-    <lastmod>2016-06-04T09:00:02.000Z</lastmod>
+    <lastmod>2016-06-04T10:00:02.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2016/03/22/spring-modelattribute-and-commandname-atributes/</loc>
     
-    <lastmod>2016-03-31T04:10:47.000Z</lastmod>
+    <lastmod>2016-03-31T05:10:47.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2016/03/23/idea-config-tomcat-virtual-directory/</loc>
     
-    <lastmod>2016-03-23T05:17:13.000Z</lastmod>
+    <lastmod>2016-03-23T06:17:13.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2016/03/12/idea-project-language-level-auto-change-to-1_6/</loc>
     
-    <lastmod>2016-03-12T10:09:44.000Z</lastmod>
+    <lastmod>2016-03-12T11:09:44.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2016/03/05/spring-modelattribute-annotation-random-code/</loc>
     
-    <lastmod>2016-03-05T13:08:12.000Z</lastmod>
+    <lastmod>2016-03-05T14:08:12.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2016/03/01/preventing-injection-in-jpa-query/</loc>
     
-    <lastmod>2016-03-01T12:06:20.000Z</lastmod>
+    <lastmod>2016-03-01T13:06:20.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2016/02/14/no-title-2016-02-14/</loc>
     
-    <lastmod>2016-02-13T17:12:12.000Z</lastmod>
+    <lastmod>2016-02-13T18:12:12.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2016/02/06/difference-between-findone-getone/</loc>
     
-    <lastmod>2016-02-06T07:58:09.000Z</lastmod>
+    <lastmod>2016-02-06T08:58:09.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2016/02/01/spring-propertyreferenceexception-exception/</loc>
     
-    <lastmod>2016-02-01T12:48:48.000Z</lastmod>
+    <lastmod>2016-02-01T13:48:48.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2015/05/27/gitlab-setup-and-svn2git/</loc>
     
-    <lastmod>2016-01-23T10:29:23.000Z</lastmod>
+    <lastmod>2016-01-23T11:29:23.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2016/01/23/gitignore-config/</loc>
     
-    <lastmod>2016-01-23T10:24:20.000Z</lastmod>
+    <lastmod>2016-01-23T11:24:20.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2016/01/20/spring-mvc-java-config/</loc>
     
-    <lastmod>2016-01-20T01:20:37.000Z</lastmod>
+    <lastmod>2016-01-20T02:20:37.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2015/12/27/tomcat-config-multiple-domains/</loc>
     
-    <lastmod>2015-12-27T11:49:04.000Z</lastmod>
+    <lastmod>2015-12-27T12:49:04.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2015/12/20/android-captive-portal/</loc>
     
-    <lastmod>2015-12-20T01:49:24.000Z</lastmod>
+    <lastmod>2015-12-20T02:49:24.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2015/09/01/google-java-program-special/</loc>
     
-    <lastmod>2015-09-01T08:27:28.000Z</lastmod>
+    <lastmod>2015-09-01T09:27:28.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2015/08/17/some-blogs-of-technology/</loc>
     
-    <lastmod>2015-08-30T12:19:14.000Z</lastmod>
+    <lastmod>2015-08-30T13:19:14.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2015/08/23/java-null-object-call-static-method/</loc>
     
-    <lastmod>2015-08-23T14:19:19.000Z</lastmod>
+    <lastmod>2015-08-23T15:19:19.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2015/08/17/translation-of-java-arraylist-vector/</loc>
     
-    <lastmod>2015-08-17T14:54:08.000Z</lastmod>
+    <lastmod>2015-08-17T15:54:08.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2015/06/10/web-front-end-security/</loc>
     
-    <lastmod>2015-08-17T01:37:12.000Z</lastmod>
+    <lastmod>2015-08-17T02:37:12.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2015/06/05/chrome-skills-repost/</loc>
     
-    <lastmod>2015-08-14T07:58:31.000Z</lastmod>
+    <lastmod>2015-08-14T08:58:31.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2015/07/19/tomcat-log-user-ip/</loc>
     
-    <lastmod>2015-08-14T07:58:07.000Z</lastmod>
+    <lastmod>2015-08-14T08:58:07.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2015/06/04/simple-visual-enhancements-for-better-coding-in-sublime-text/</loc>
     
-    <lastmod>2015-08-14T07:57:54.000Z</lastmod>
+    <lastmod>2015-08-14T08:57:54.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2015/08/10/sublime-text-plugins/</loc>
     
-    <lastmod>2015-08-14T07:57:39.000Z</lastmod>
+    <lastmod>2015-08-14T08:57:39.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2015/08/13/java-programmer-advanced-learning-day-3/</loc>
     
-    <lastmod>2015-08-13T02:13:51.000Z</lastmod>
+    <lastmod>2015-08-13T03:13:51.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2015/08/11/java-programmer-advanced-learning-day-2/</loc>
     
-    <lastmod>2015-08-11T14:54:06.000Z</lastmod>
+    <lastmod>2015-08-11T15:54:06.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2015/08/11/java-programmer-advanced-learning-day-1/</loc>
     
-    <lastmod>2015-08-11T04:02:49.000Z</lastmod>
+    <lastmod>2015-08-11T05:02:49.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2015/07/27/music-piao-yao-zhou-xun/</loc>
     
-    <lastmod>2015-07-27T14:54:01.000Z</lastmod>
+    <lastmod>2015-07-27T15:54:01.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2015/07/23/multithreading-in-java/</loc>
     
-    <lastmod>2015-07-23T06:40:57.000Z</lastmod>
+    <lastmod>2015-07-23T07:40:57.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2015/07/20/java-post-validation-code/</loc>
     
-    <lastmod>2015-07-19T15:38:26.000Z</lastmod>
+    <lastmod>2015-07-19T16:38:26.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2015/07/06/gson-HibernateProxy-serialize-error/</loc>
     
-    <lastmod>2015-07-18T08:39:12.000Z</lastmod>
+    <lastmod>2015-07-18T09:39:12.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2015/07/10/java-forkjoin/</loc>
     
-    <lastmod>2015-07-18T08:13:01.000Z</lastmod>
+    <lastmod>2015-07-18T09:13:01.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2015/07/18/server-distinct-ajax-request-whether-sync-or-async/</loc>
     
-    <lastmod>2015-07-18T07:48:01.000Z</lastmod>
+    <lastmod>2015-07-18T08:48:01.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2015/07/17/setup-linux-server/</loc>
     
-    <lastmod>2015-07-16T16:19:20.000Z</lastmod>
+    <lastmod>2015-07-16T17:19:20.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2015/07/11/rich-text-editor-plus/</loc>
     
-    <lastmod>2015-07-12T03:17:03.000Z</lastmod>
+    <lastmod>2015-07-12T04:17:03.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2015/06/23/update-ubuntu-user-path-from-zh-to-en/</loc>
     
-    <lastmod>2015-06-23T12:29:59.000Z</lastmod>
+    <lastmod>2015-06-23T13:29:59.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2015/06/04/web-performance-test-tool-gor/</loc>
     
-    <lastmod>2015-06-04T14:31:21.000Z</lastmod>
+    <lastmod>2015-06-04T15:31:21.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2015/06/03/building-gtk-plus-on-unix-like-systems/</loc>
     
-    <lastmod>2015-06-03T13:44:26.000Z</lastmod>
+    <lastmod>2015-06-03T14:44:26.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2015/05/27/ubuntu-expand-hard-disk/</loc>
     
-    <lastmod>2015-05-27T12:04:59.000Z</lastmod>
+    <lastmod>2015-05-27T13:04:59.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2015/05/20/11-linux-terminal-commands-that-will-rock-your-world/</loc>
     
-    <lastmod>2015-05-20T01:19:20.000Z</lastmod>
+    <lastmod>2015-05-20T02:19:20.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2015/05/17/vsftp-config-analysis/</loc>
     
-    <lastmod>2015-05-17T13:11:16.000Z</lastmod>
+    <lastmod>2015-05-17T14:11:16.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2015/05/08/mysql-update-table-not-exit/</loc>
     
-    <lastmod>2015-05-08T13:23:46.000Z</lastmod>
+    <lastmod>2015-05-08T14:23:46.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2015/05/06/warnning-hidden-information-in-resume-template/</loc>
     
-    <lastmod>2015-05-06T12:52:17.000Z</lastmod>
+    <lastmod>2015-05-06T13:52:17.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2015/05/04/mysql-user-and-permission-management/</loc>
     
-    <lastmod>2015-05-04T12:17:10.000Z</lastmod>
+    <lastmod>2015-05-04T13:17:10.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2015/05/04/jwplayer-test/</loc>
     
-    <lastmod>2015-05-04T05:13:25.000Z</lastmod>
+    <lastmod>2015-05-04T06:13:25.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2015/05/03/sbin-insserv-no-such-file-or-directory/</loc>
     
-    <lastmod>2015-05-03T06:43:40.000Z</lastmod>
+    <lastmod>2015-05-03T07:43:40.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2015/05/01/can-not-connect-to-mysql-2002-error/</loc>
     
-    <lastmod>2015-05-03T04:29:13.000Z</lastmod>
+    <lastmod>2015-05-03T05:29:13.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2015/05/03/traceroute-icmp-udp-tcp/</loc>
     
-    <lastmod>2015-05-03T04:28:26.000Z</lastmod>
+    <lastmod>2015-05-03T05:28:26.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2015/05/03/apache-htaccess-usage/</loc>
     
-    <lastmod>2015-05-02T15:48:43.000Z</lastmod>
+    <lastmod>2015-05-02T16:48:43.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2015/05/02/ubuntu-desktop-1404-root-login/</loc>
     
-    <lastmod>2015-05-02T10:58:21.000Z</lastmod>
+    <lastmod>2015-05-02T11:58:21.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2015/05/01/apache-config-htaccess/</loc>
     
-    <lastmod>2015-05-02T08:16:17.000Z</lastmod>
+    <lastmod>2015-05-02T09:16:17.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://codz.me/2015/05/01/shui-mao-xian/</loc>
     
-    <lastmod>2015-05-02T07:14:48.000Z</lastmod>
+    <lastmod>2015-05-02T08:14:48.000Z</lastmod>
     
   </url>
   

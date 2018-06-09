@@ -284,6 +284,207 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://codz.me/2016/08/12/nginx-tomcat-config-https/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="laudukang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Is Poetry">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/08/12/nginx-tomcat-config-https/" itemprop="url">HTTPS 证书生成 & Nginx/Tomcat 配置 HTTPS</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-12T21:44:00+08:00">
+                2016-08-12 21:44:00
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2017-02-20T08:48:31+08:00">
+                2017-02-20 08:48:31
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web/" itemprop="url" rel="index">
+                    <span itemprop="name">Web</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/08/12/nginx-tomcat-config-https/" class="leancloud_visitors" data-flag-title="HTTPS 证书生成 & Nginx/Tomcat 配置 HTTPS">
+                
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ol>
+<li><p>OpenSSL安装</p>
+<p>OpenSSL官网，或者参考 linux升级OpenSSL</p>
+<p>中间可能会遇到 openssl.cnf 的问题，请使用 openssl-1.0.1t.tar.gz 包 apps下的 demoCA 和 openssl.cnf</p>
+</li>
+<li><p>证书生成</p>
+<ul>
+<li><p>单向认证，参考 Nginx单向认证的安装配置</p>
+<figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">openssl genrsa -des3 -out server.<span class="keyword">key</span> <span class="number">2048</span> <span class="meta">#自定义密码</span></span><br><span class="line"></span><br><span class="line">openssl req -<span class="keyword">new</span> -<span class="keyword">key</span> server.<span class="keyword">key</span> -out server.csr</span><br><span class="line"></span><br><span class="line"><span class="meta">#---------------------------------------------------------------------------------------------------------------</span></span><br><span class="line">Enter pass phrase <span class="keyword">for</span> server.<span class="keyword">key</span>: 自定义密码</span><br><span class="line">Country Name (<span class="number">2</span> letter code) [XX]: CN                                           <span class="meta">#国家</span></span><br><span class="line">State <span class="keyword">or</span> Province Name (full name) []: GD                                       <span class="meta">#区域或是省份</span></span><br><span class="line">Locality Name (eg, city) [<span class="keyword">Default</span> City]: SZ                                     <span class="meta">#地区局部名字</span></span><br><span class="line">Organization Name (eg, company) [<span class="keyword">Default</span> Company Ltd]: Test                     <span class="meta">#机构名称：填写公司名</span></span><br><span class="line">Organizational Unit Name (eg, section) []: Test                                 <span class="meta">#组织单位名称:部门名称</span></span><br><span class="line">Common Name (eg, your name <span class="keyword">or</span> your server<span class="comment">'s hostname) []: *.domain.com          #网站域名</span></span><br><span class="line">Email Address []: admin@domain.com                                              <span class="meta">#邮箱地址</span></span><br><span class="line">A challenge password []:                                                        <span class="meta">#输入一个密码</span></span><br><span class="line">An <span class="keyword">optional</span> company name []:                                                    <span class="meta">#一个可选的公司名称</span></span><br><span class="line"><span class="meta">#---------------------------------------------------------------------------------------------------------------</span></span><br></pre></td></tr></table></figure>
+<blockquote><p>怎么让nginx配置SSL安全证书重启免输入密码，不然Nginx、Tomcat使用该私钥启动的时候需要输入上面的密钥</p>
+<p>openssl rsa -in server.key -out server.key.unsecure<br>openssl x509 -req -days 365 -in server.csr -signkey server.key.unsecure -out server.crt  #使用上面的密钥和CSR对证书进行签名</p>
+</blockquote>
+</li>
+<li><p>双向认证，参考 openssl生成SSL证书的流程</p>
+<p>CA根证书的生成</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># <span class="keyword">Generate</span> <span class="keyword">CA</span> private key   </span><br><span class="line">openssl genrsa -<span class="keyword">out</span> <span class="keyword">ca</span>.key 2048   </span><br><span class="line"># <span class="keyword">Generate</span> CSR   </span><br><span class="line">openssl req -new -key <span class="keyword">ca</span>.key -<span class="keyword">out</span> <span class="keyword">ca</span>.csr  </span><br><span class="line"># <span class="keyword">Generate</span> Self Signed certificate（<span class="keyword">CA</span> 根证书）  </span><br><span class="line">openssl x509 -req -days 365 -<span class="keyword">in</span> <span class="keyword">ca</span>.csr -signkey <span class="keyword">ca</span>.key -<span class="keyword">out</span> <span class="keyword">ca</span>.crt</span><br></pre></td></tr></table></figure>
+<p>用户证书的生成</p>
+<figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># 服务器端用户证书</span></span><br><span class="line"><span class="meta"># private key  </span></span><br><span class="line">openssl genrsa -des3 -out server.<span class="keyword">key</span> <span class="number">1024</span>   </span><br><span class="line"><span class="meta"># generate csr  </span></span><br><span class="line">openssl req -<span class="keyword">new</span> -<span class="keyword">key</span> server.<span class="keyword">key</span> -out server.csr  </span><br><span class="line"><span class="meta"># generate certificate  </span></span><br><span class="line">openssl ca -<span class="keyword">in</span> server.csr -out server.crt -cert ca.crt -keyfile ca.<span class="keyword">key</span>  </span><br><span class="line"></span><br><span class="line"><span class="meta"># 客户端用户证书</span></span><br><span class="line">openssl genrsa -des3 -out client.<span class="keyword">key</span> <span class="number">1024</span>   </span><br><span class="line">openssl req -<span class="keyword">new</span> -<span class="keyword">key</span> client.<span class="keyword">key</span> -out client.csr  </span><br><span class="line">openssl ca -<span class="keyword">in</span> client.csr -out client.crt -cert ca.crt -keyfile ca.<span class="keyword">key</span></span><br><span class="line">免密钥启动同上，TXT_DB <span class="keyword">error</span> number <span class="number">2</span> 异常请参考 openssl TXT_DB <span class="keyword">error</span> number <span class="number">2</span></span><br></pre></td></tr></table></figure>
+<p>生成pem格式证书<br>有时需要用到pem格式的证书，可以用以下方式合并证书文件（crt）和私钥文件（key）来生成</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$cat</span> client<span class="selector-class">.crt</span> client.key&gt; client.pem</span><br><span class="line"><span class="variable">$cat</span> server<span class="selector-class">.crt</span> server<span class="selector-class">.key</span> &gt; server.pem</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>Nginx、Tomcat配置HTTPS</p>
+<p>nginx.conf添加</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">   <span class="attribute">listen</span>       <span class="number">443</span> ssl;</span><br><span class="line">   <span class="attribute">server_name</span>  localhost;</span><br><span class="line"></span><br><span class="line">   <span class="attribute">ssl_certificate</span>      /work/openssl/single/server.crt;</span><br><span class="line">   <span class="attribute">ssl_certificate_key</span>  /work/openssl/single/server.key.unsecure;</span><br><span class="line"></span><br><span class="line">   <span class="attribute">ssl_session_cache</span>    shared:SSL:<span class="number">1m</span>;</span><br><span class="line">   <span class="attribute">ssl_session_timeout</span>  <span class="number">5m</span>;</span><br><span class="line">   <span class="attribute">ssl_ciphers</span>  HIGH:!aNULL:!MD5;</span><br><span class="line">   <span class="attribute">ssl_prefer_server_ciphers</span>  <span class="literal">on</span>;</span><br><span class="line"></span><br><span class="line">   <span class="attribute">location</span> / &#123;</span><br><span class="line">            <span class="attribute">allow</span> all;</span><br><span class="line">            <span class="attribute">proxy_pass</span> https://192.168.1.121:443;</span><br><span class="line">            <span class="attribute">proxy_set_header</span> Host <span class="variable">$host</span>;</span><br><span class="line">            <span class="attribute">proxy_set_header</span> Upgrade <span class="variable">$http_upgrade</span>;</span><br><span class="line">            <span class="attribute">proxy_set_header</span> Connection <span class="string">"upgrade"</span>;</span><br><span class="line">            <span class="attribute">proxy_set_header</span> X-Real-Ip <span class="variable">$remote_addr</span>;</span><br><span class="line">            <span class="attribute">proxy_set_header</span> X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">            <span class="attribute">proxy_set_header</span> X-Forwarded-Proto <span class="variable">$scheme</span>;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>tomcat server.xml添加</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;Connector <span class="attribute">port</span>=<span class="string">"8443"</span> <span class="attribute">protocol</span>=<span class="string">"org.apache.coyote.http11.Http11AprProtocol"</span></span><br><span class="line">               <span class="attribute">maxThreads</span>=<span class="string">"150"</span> <span class="attribute">SSLEnabled</span>=<span class="string">"true"</span> <span class="attribute">scheme</span>=<span class="string">"https"</span> <span class="attribute">secure</span>=<span class="string">"true"</span></span><br><span class="line">               <span class="attribute">clientAuth</span>=<span class="string">"false"</span> <span class="attribute">SSLCertificateFile</span>=<span class="string">"/work/openssl/single/server.crt"</span> <span class="attribute">SSLProtocol</span>=<span class="string">"SSLv2+SSLv3+TLSv1"</span></span><br><span class="line">          <span class="attribute">SSLCertificateKeyFile</span>=<span class="string">"/work/openssl/single/server.key.unsecure"</span> <span class="attribute">SSLVerifyClient</span>=<span class="string">"optional"</span>/&gt;</span><br></pre></td></tr></table></figure>
+<p>server.xml默认注释了</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;Connector <span class="attribute">port</span>=<span class="string">"8443"</span> <span class="attribute">protocol</span>=<span class="string">"org.apache.coyote.http11.Http11NioProtocol"</span></span><br><span class="line">               <span class="attribute">maxThreads</span>=<span class="string">"150"</span> <span class="attribute">SSLEnabled</span>=<span class="string">"true"</span> <span class="attribute">scheme</span>=<span class="string">"https"</span> <span class="attribute">secure</span>=<span class="string">"true"</span></span><br><span class="line">               <span class="attribute">clientAuth</span>=<span class="string">"false"</span> <span class="attribute">sslProtocol</span>=<span class="string">"TLS"</span> /&gt;</span><br></pre></td></tr></table></figure>
+<p>需要注意protocol中的 Http11AprProtocol 与 Http11NioProtocol，加密算法不支持的话，可能报异常 <code>Java and SSL - java.security.NoSuchAlgorithmException</code></p>
+</li>
+<li><p>一个大坑</p>
+<p>Ubuntu上跑Tengine，代理Windows上的应用，访问HTTPS页面时候总是报504错误，后来又报502错误。</p>
+<p>排查了一个多小时后发现是Windows系统安装了Vmware Workstation，而Vmware的VMware Authorization Service自动启动了。</p>
+<p>还有另外一个Vmware的服务忘记了，这两个服务会影响本地应用使用HTTPS，所以停止掉或禁用掉就可以了。</p>
+<p><a href="http://tool.chinaz.com/pagestatus/" target="_blank" rel="noopener">HTTP状态码</a></p>
+<blockquote><p>502 作为网关或者代理工作的服务器尝试执行请求时，从上游服务器接收到无效的响应。</p>
+<p>504 作为网关或者代理工作的服务器尝试执行请求时，未能及时从上游服务器（URI标识出的服务器，例如HTTP、FTP、LDAP）或者辅助服务器（例如DNS）收到响应。 　　注意：某些代理服务器在DNS查询超时时会返回400或者500错误</p>
+</blockquote>
+</li>
+</ol>
+<p>参考资料：</p>
+<ul>
+<li><a href="http://my.oschina.net/itblog/blog/651434" target="_blank" rel="noopener">OpenSSL生成根证书CA及签发子证书</a></li>
+<li><a href="http://my.oschina.net/u/658145/blog/75093" target="_blank" rel="noopener">Windows下Tomcat+nginx配置证书实现登录页https访问</a></li>
+<li><a href="http://itindex.net/detail/50701-tomcat-bio-nio.apr" target="_blank" rel="noopener">Tomcat 的三种(bio,nio.apr) 高级 Connector 运行模式</a></li>
+<li><a href="http://blog.csdn.net/na_tion/article/details/17334669" target="_blank" rel="noopener">Nginx部署部分https与部分http</a></li>
+<li><a href="https://iyaozhen.com/nginx-https-conf.html" target="_blank" rel="noopener">Nginx HTTPS 配置实践</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://codz.me/2016/07/28/ubuntu-desktop-boot-to-char-interface/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -313,7 +514,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-28T22:47:00+09:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-28T22:47:00+08:00">
                 2016-07-28 22:47:00
               </time>
             
@@ -327,7 +528,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2016-07-28T22:48:51+09:00">
+              <time title="更新于" itemprop="dateModified" datetime="2016-07-28T22:48:51+08:00">
                 2016-07-28 22:48:51
               </time>
             
@@ -474,7 +675,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-21T20:39:00+09:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-21T20:39:00+08:00">
                 2016-07-21 20:39:00
               </time>
             
@@ -488,7 +689,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-02-20T08:42:32+09:00">
+              <time title="更新于" itemprop="dateModified" datetime="2017-02-20T08:42:32+08:00">
                 2017-02-20 08:42:32
               </time>
             
@@ -686,7 +887,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-30T22:13:00+09:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-30T22:13:00+08:00">
                 2016-05-30 22:13:00
               </time>
             
@@ -700,7 +901,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-02-22T22:16:59+09:00">
+              <time title="更新于" itemprop="dateModified" datetime="2017-02-22T22:16:59+08:00">
                 2017-02-22 22:16:59
               </time>
             
@@ -848,7 +1049,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-29T22:04:00+09:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-29T22:04:00+08:00">
                 2016-05-29 22:04:00
               </time>
             
@@ -862,7 +1063,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-03-10T21:14:17+09:00">
+              <time title="更新于" itemprop="dateModified" datetime="2017-03-10T21:14:17+08:00">
                 2017-03-10 21:14:17
               </time>
             
@@ -1044,7 +1245,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-26T22:22:00+09:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-26T22:22:00+08:00">
                 2016-05-26 22:22:00
               </time>
             
@@ -1058,7 +1259,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2016-06-04T18:00:02+09:00">
+              <time title="更新于" itemprop="dateModified" datetime="2016-06-04T18:00:02+08:00">
                 2016-06-04 18:00:02
               </time>
             
@@ -1200,7 +1401,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-23T14:04:00+09:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-23T14:04:00+08:00">
                 2016-03-23 14:04:00
               </time>
             
@@ -1214,7 +1415,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2016-03-23T14:17:13+09:00">
+              <time title="更新于" itemprop="dateModified" datetime="2016-03-23T14:17:13+08:00">
                 2016-03-23 14:17:13
               </time>
             
@@ -1357,7 +1558,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-22T19:37:00+09:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-22T19:37:00+08:00">
                 2016-03-22 19:37:00
               </time>
             
@@ -1371,7 +1572,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2016-03-31T13:10:47+09:00">
+              <time title="更新于" itemprop="dateModified" datetime="2016-03-31T13:10:47+08:00">
                 2016-03-31 13:10:47
               </time>
             
@@ -1510,7 +1711,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-12T19:07:00+09:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-12T19:07:00+08:00">
                 2016-03-12 19:07:00
               </time>
             
@@ -1524,7 +1725,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2016-03-12T19:09:44+09:00">
+              <time title="更新于" itemprop="dateModified" datetime="2016-03-12T19:09:44+08:00">
                 2016-03-12 19:09:44
               </time>
             
@@ -1667,7 +1868,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-05T20:31:00+09:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-05T20:31:00+08:00">
                 2016-03-05 20:31:00
               </time>
             
@@ -1681,7 +1882,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2016-03-05T22:08:12+09:00">
+              <time title="更新于" itemprop="dateModified" datetime="2016-03-05T22:08:12+08:00">
                 2016-03-05 22:08:12
               </time>
             
@@ -1780,166 +1981,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://codz.me/2016/03/01/preventing-injection-in-jpa-query/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="laudukang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/head.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Code Is Poetry">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/03/01/preventing-injection-in-jpa-query/" itemprop="url">[Respot]Preventing injection in jpa query language - sample app and project</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-01T21:04:00+09:00">
-                2016-03-01 21:04:00
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2016-03-01T21:06:20+09:00">
-                2016-03-01 21:06:20
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/MySQL/" itemprop="url" rel="index">
-                    <span itemprop="name">MySQL</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2016/03/01/preventing-injection-in-jpa-query/" class="leancloud_visitors" data-flag-title="[Respot]Preventing injection in jpa query language - sample app and project">
-                
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>SQL and QL injection can be effectively prevented with the use of JPA Named Queries. In the contrary to the CMP 2.X spec, JPA QL are in general more flexible and can be parameterized.</p>
-<p>You can cover almost 90% of all cases with named queries. However, named queries only works in case the structure of the query is stable, and the parameters vary.</p>
-<p>Sometimes more flexibility is needed. Building the queries with Strings has several drawbacks:</p>
-<p>Lack or IDE support<br>Syntax is evaluated at runtime. (affects performance and stability)<br>QL/SQL injection is possible.<br>With a little “hack” and builder pattern, it is possible to use almost the old syntax more conveniently.</p>
-<p>Instead of writing a something like this:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String expected = <span class="string">"SELECT e FROM Customer e WHERE e.name = :name"</span>;</span><br></pre></td></tr></table></figure></p>
-<p>You could chain methods, which looks like this:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EntityQuery query = <span class="keyword">new</span> EntityQuery.SELECT().ENTITY().FROM(Customer.class).WHERE().attribute(<span class="string">"name"</span>).build();</span><br></pre></td></tr></table></figure>
-<p>A static inner class with the name SELECT implements the builder pattern and takes the responsibility for building the queries:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EntityQuery</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> String query;</span><br><span class="line">  <span class="comment">//attribute declaration</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">SELECT</span>&lt;<span class="title">T</span>&gt;</span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SELECT</span><span class="params">()</span></span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.sqlQuery = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">            <span class="keyword">this</span>.sqlQuery.append(<span class="string">"SELECT"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> SELECT <span class="title">column</span><span class="params">(String name)</span></span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(!multipleColumns) &#123;</span><br><span class="line">                    multipleColumns = <span class="keyword">true</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    <span class="keyword">this</span>.sqlQuery.append(SEPARATOR);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">this</span>.sqlQuery.append(name);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> SELECT <span class="title">FROM</span><span class="params">(Class entity)</span></span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.sqlQuery.append(BLANK).append(FROM).append(BLANK);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>The Entity Query Builder, as well as the unit tests are available from <a href="http://qlb.dev.java.net" target="_blank" rel="noopener">http://qlb.dev.java.net</a>. I’m working now on the EntityManager integration. First samples should be available in few days.</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1994,7 +2035,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">66</span>
+                  <span class="site-state-item-count">67</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2005,7 +2046,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2016,7 +2057,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
