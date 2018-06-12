@@ -447,6 +447,8 @@
 <p>解决方案</p>
 <p>vim kafka/config/server.properties</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#add follow line</span><br><span class="line">advertised.host.name=192.168.3.20</span><br></pre></td></tr></table></figure>
+<p>kafka <code>advertised.host.name</code> DEPRECATED since 0.10.x, <a href="https://kafka.apache.org/0100/documentation.html#brokerconfigs" target="_blank" rel="noopener">0100 brokerconfigs</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DEPRECATED: only used when `advertised.listeners` or `listeners` are not set. Use `advertised.listeners` instead. Hostname to publish to ZooKeeper for clients to use. In IaaS environments, this may need to be different from the interface to which the broker binds. If this is not set, it will use the value for `host.name` if configured. Otherwise it will use the value returned from java.net.InetAddress.getCanonicalHostName().</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h2 id="Zookeeper-cluster-init"><a href="#Zookeeper-cluster-init" class="headerlink" title="Zookeeper cluster init"></a>Zookeeper cluster init</h2><p><a href="https://www.apache.org/dyn/closer.cgi/zookeeper/" target="_blank" rel="noopener">Download package from here</a></p>
