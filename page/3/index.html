@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next pisces use-motion" lang="zh-Hans">
+<html class="theme-next pisces use-motion" lang="zh-CN">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -87,7 +87,7 @@
 <meta property="og:url" content="https://codz.me/page/3/index.html">
 <meta property="og:site_name" content="Code Is Poetry">
 <meta property="og:description" content="Bug Not Found">
-<meta property="og:locale" content="zh-Hans">
+<meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Code Is Poetry">
 <meta name="twitter:description" content="Bug Not Found">
@@ -106,7 +106,7 @@
     motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
       userId: '0',
-      author: '博主'
+      author: 'Author'
     },
     algolia: {
       applicationID: '',
@@ -125,6 +125,13 @@
 
 
 
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-8069999780024986",
+    enable_page_level_ads: true
+  });
+</script>
 
   <title>Code Is Poetry</title>
   
@@ -148,7 +155,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
   
   
@@ -197,7 +204,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            首页
+            Startseite
           </a>
         </li>
       
@@ -207,7 +214,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
-            关于
+            Über
           </a>
         </li>
       
@@ -217,7 +224,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
-            标签
+            Tags
           </a>
         </li>
       
@@ -227,7 +234,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
-            分类
+            Kategorien
           </a>
         </li>
       
@@ -237,7 +244,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            归档
+            Archiv
           </a>
         </li>
       
@@ -247,7 +254,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
             
-            公益404
+            Commonweal 404
           </a>
         </li>
       
@@ -270,6 +277,161 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://codz.me/2016/03/05/spring-modelattribute-annotation-random-code/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="laudukang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Is Poetry">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/03/05/spring-modelattribute-annotation-random-code/" itemprop="url">Spring MVC @ModelAttribute 参数乱码</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-03-05T20:31:00+08:00">
+                2016-03-05 20:31:00
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+              <time title="Updated at" itemprop="dateModified" datetime="2016-03-05T22:08:12+08:00">
+                2016-03-05 22:08:12
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/03/05/spring-modelattribute-annotation-random-code/" class="leancloud_visitors" data-flag-title="Spring MVC @ModelAttribute 参数乱码">
+                
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>issue<br><code>Spring MVC</code>提交form表单后台通过<code>@ModelAttribute</code>获取参数为乱码<br><code>Spring MVC</code> submit form and get random code parameters through `@ModelAttribute</p>
+<p>Java Config WebInitializer</p>
+<p>傻了，将<code>CharacterEncodingFilter</code>部分放到<code>DispatcherServlet</code>部分前面就可以了</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebInitializer</span> <span class="keyword">implements</span> <span class="title">WebApplicationInitializer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onStartup</span><span class="params">(javax.servlet.ServletContext sc)</span> <span class="keyword">throws</span> ServletException </span>&#123;</span><br><span class="line">        AnnotationConfigWebApplicationContext rootContext = <span class="keyword">new</span> AnnotationConfigWebApplicationContext();</span><br><span class="line">        rootContext.register(ApplicationConfig.class);</span><br><span class="line">        sc.addListener(<span class="keyword">new</span> ContextLoaderListener(rootContext));</span><br><span class="line"></span><br><span class="line">        <span class="comment">//CharacterEncodingFilter</span></span><br><span class="line">        CharacterEncodingFilter characterEncodingFilter = <span class="keyword">new</span> CharacterEncodingFilter();</span><br><span class="line">        characterEncodingFilter.setEncoding(<span class="string">"UTF-8"</span>);</span><br><span class="line">        characterEncodingFilter.setForceEncoding(<span class="keyword">true</span>);</span><br><span class="line">        FilterRegistration filterRegistration =</span><br><span class="line">                sc.addFilter(<span class="string">"characterEncodingFilter"</span>, characterEncodingFilter);</span><br><span class="line">        filterRegistration.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST), <span class="keyword">false</span>, <span class="string">"/*"</span>);<span class="comment">//注意这里匹配 "/*"</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//follow can be deleted</span></span><br><span class="line">        <span class="comment">//sc.addFilter("hibernateFilter", OpenSessionInViewFilter.class).addMappingForUrlPatterns(null, false, "/*");</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//maybe follow will be use</span></span><br><span class="line">        <span class="comment">// sc.addFilter("OpenEntityManagerInViewFilter", org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter.class).addMappingForUrlPatterns(null, false, "/*");</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//springmvc上下文</span></span><br><span class="line">        AnnotationConfigWebApplicationContext springMvcContext = <span class="keyword">new</span> AnnotationConfigWebApplicationContext();</span><br><span class="line">        springMvcContext.register(MvcConfig.class);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//DispatcherServlet</span></span><br><span class="line">        DispatcherServlet dispatcherServlet = <span class="keyword">new</span> DispatcherServlet(springMvcContext);</span><br><span class="line">        dispatcherServlet.setThrowExceptionIfNoHandlerFound(<span class="keyword">true</span>);</span><br><span class="line">        ServletRegistration.Dynamic dynamic = sc.addServlet(<span class="string">"dispatcherServlet"</span>, dispatcherServlet);</span><br><span class="line">        dynamic.setLoadOnStartup(<span class="number">1</span>);</span><br><span class="line">        dynamic.addMapping(<span class="string">"/"</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -313,7 +475,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-01T21:04:00+09:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-03-01T21:04:00+08:00">
                 2016-03-01 21:04:00
               </time>
             
@@ -327,7 +489,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2016-03-01T21:06:20+09:00">
+              <time title="Updated at" itemprop="dateModified" datetime="2016-03-01T21:06:20+08:00">
                 2016-03-01 21:06:20
               </time>
             
@@ -473,7 +635,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-02-14T00:55:00+09:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-02-14T00:55:00+08:00">
                 2016-02-14 00:55:00
               </time>
             
@@ -487,7 +649,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2016-02-14T02:12:12+09:00">
+              <time title="Updated at" itemprop="dateModified" datetime="2016-02-14T02:12:12+08:00">
                 2016-02-14 02:12:12
               </time>
             
@@ -629,7 +791,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-02-06T16:55:00+09:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-02-06T16:55:00+08:00">
                 2016-02-06 16:55:00
               </time>
             
@@ -643,7 +805,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2016-02-06T16:58:09+09:00">
+              <time title="Updated at" itemprop="dateModified" datetime="2016-02-06T16:58:09+08:00">
                 2016-02-06 16:58:09
               </time>
             
@@ -785,7 +947,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-02-01T21:48:00+09:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-02-01T21:48:00+08:00">
                 2016-02-01 21:48:00
               </time>
             
@@ -799,7 +961,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2016-02-01T21:48:48+09:00">
+              <time title="Updated at" itemprop="dateModified" datetime="2016-02-01T21:48:48+08:00">
                 2016-02-01 21:48:48
               </time>
             
@@ -945,7 +1107,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-01-23T19:14:00+09:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-01-23T19:14:00+08:00">
                 2016-01-23 19:14:00
               </time>
             
@@ -959,7 +1121,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2016-01-23T19:24:20+09:00">
+              <time title="Updated at" itemprop="dateModified" datetime="2016-01-23T19:24:20+08:00">
                 2016-01-23 19:24:20
               </time>
             
@@ -1112,7 +1274,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-01-20T10:04:00+09:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-01-20T10:04:00+08:00">
                 2016-01-20 10:04:00
               </time>
             
@@ -1126,7 +1288,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2016-01-20T10:20:37+09:00">
+              <time title="Updated at" itemprop="dateModified" datetime="2016-01-20T10:20:37+08:00">
                 2016-01-20 10:20:37
               </time>
             
@@ -1283,7 +1445,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-27T20:48:00+09:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-12-27T20:48:00+08:00">
                 2015-12-27 20:48:00
               </time>
             
@@ -1297,7 +1459,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2015-12-27T20:49:04+09:00">
+              <time title="Updated at" itemprop="dateModified" datetime="2015-12-27T20:49:04+08:00">
                 2015-12-27 20:49:04
               </time>
             
@@ -1442,7 +1604,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-20T10:48:00+09:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-12-20T10:48:00+08:00">
                 2015-12-20 10:48:00
               </time>
             
@@ -1456,7 +1618,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2015-12-20T10:49:24+09:00">
+              <time title="Updated at" itemprop="dateModified" datetime="2015-12-20T10:49:24+08:00">
                 2015-12-20 10:49:24
               </time>
             
@@ -1603,7 +1765,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-18T23:56:00+09:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-12-18T23:56:00+08:00">
                 2015-12-18 23:56:00
               </time>
             
@@ -1617,7 +1779,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-02-22T22:19:34+09:00">
+              <time title="Updated at" itemprop="dateModified" datetime="2017-02-22T22:19:34+08:00">
                 2017-02-22 22:19:34
               </time>
             
@@ -1713,164 +1875,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://codz.me/2015/09/01/google-java-program-special/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="laudukang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/head.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Code Is Poetry">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/09/01/google-java-program-special/" itemprop="url">Google Java编程风格指南</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-09-01T16:56:00+09:00">
-                2015-09-01 16:56:00
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2015-09-01T17:27:28+09:00">
-                2015-09-01 17:27:28
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2015/09/01/google-java-program-special/" class="leancloud_visitors" data-flag-title="Google Java编程风格指南">
-                
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>请参考</p>
-<ul>
-<li><a href="http://hawstein.com/posts/google-java-style.html" target="_blank" rel="noopener">Google Java编程风格指南</a></li>
-<li><a href="https://github.com/zh-google-styleguide/zh-google-styleguide" target="_blank" rel="noopener">zh-google-styleguide</a></li>
-<li><a href="https://github.com/google/google-java-format" target="_blank" rel="noopener">google-java-format</a></li>
-<li><a href="http://zh-google-styleguide.readthedocs.io/en/latest/google-cpp-styleguide/" target="_blank" rel="noopener">Google 开源项目风格指南</a></li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1925,8 +1929,8 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">67</span>
-                  <span class="site-state-item-name">日志</span>
+                  <span class="site-state-item-count">68</span>
+                  <span class="site-state-item-name">Artikel</span>
                 </a>
               </div>
             
@@ -1937,7 +1941,7 @@
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
                   <span class="site-state-item-count">9</span>
-                  <span class="site-state-item-name">分类</span>
+                  <span class="site-state-item-name">Kategorien</span>
                 </a>
               </div>
             
@@ -1948,7 +1952,7 @@
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
                   <span class="site-state-item-count">24</span>
-                  <span class="site-state-item-name">标签</span>
+                  <span class="site-state-item-name">Tags</span>
                 </a>
               </div>
             
@@ -2036,7 +2040,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2015 - <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; 2015 - <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart icon-next-heart"></i>
   </span>
@@ -2046,7 +2050,7 @@
 </div>
 
 
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io" rel="external nofollow">Hexo</a> 强力驱动</div>
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io" rel="external nofollow">Hexo</a></div>
 
 
 
@@ -2054,7 +2058,7 @@
 
 
 
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">NexT.Pisces</a> v5.1.3</div>
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">NexT.Pisces</a> v5.1.3</div>
 
 
 

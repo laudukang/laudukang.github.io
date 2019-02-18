@@ -1,3 +1,4 @@
+https://codz.me/2018/11/09/init-spark-2-4-0/
 https://codz.me/2018/05/07/build-spark-cluster/
 https://codz.me/2018/02/28/ssh-login-with-key-fail-and-require-password/
 https://codz.me/2018/01/05/annual-book-list-2018/
@@ -60,4 +61,3 @@ https://codz.me/2015/05/04/mysql-user-and-permission-management/
 https://codz.me/2015/05/04/jwplayer-test/
 https://codz.me/2015/05/03/sbin-insserv-no-such-file-or-directory/
 https://codz.me/2015/05/03/traceroute-icmp-udp-tcp/
-https://codz.me/2015/05/03/apache-htaccess-usage/

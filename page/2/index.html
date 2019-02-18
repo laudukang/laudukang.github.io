@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next pisces use-motion" lang="zh-Hans">
+<html class="theme-next pisces use-motion" lang="zh-CN">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -87,7 +87,7 @@
 <meta property="og:url" content="https://codz.me/page/2/index.html">
 <meta property="og:site_name" content="Code Is Poetry">
 <meta property="og:description" content="Bug Not Found">
-<meta property="og:locale" content="zh-Hans">
+<meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Code Is Poetry">
 <meta name="twitter:description" content="Bug Not Found">
@@ -106,7 +106,7 @@
     motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
       userId: '0',
-      author: '博主'
+      author: 'Author'
     },
     algolia: {
       applicationID: '',
@@ -125,6 +125,13 @@
 
 
 
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-8069999780024986",
+    enable_page_level_ads: true
+  });
+</script>
 
   <title>Code Is Poetry</title>
   
@@ -148,7 +155,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
   
   
@@ -197,7 +204,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            首页
+            Startseite
           </a>
         </li>
       
@@ -207,7 +214,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
-            关于
+            Über
           </a>
         </li>
       
@@ -217,7 +224,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
-            标签
+            Tags
           </a>
         </li>
       
@@ -227,7 +234,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
-            分类
+            Kategorien
           </a>
         </li>
       
@@ -237,7 +244,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            归档
+            Archiv
           </a>
         </li>
       
@@ -247,7 +254,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
             
-            公益404
+            Commonweal 404
           </a>
         </li>
       
@@ -270,6 +277,163 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://codz.me/2016/09/25/java-cacerts-import-certificate/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="laudukang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Is Poetry">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/09/25/java-cacerts-import-certificate/" itemprop="url">Java cacerts 证书库导入自签名证书</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-25T17:21:00+08:00">
+                2016-09-25 17:21:00
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+              <time title="Updated at" itemprop="dateModified" datetime="2016-09-25T17:21:41+08:00">
+                2016-09-25 17:21:41
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/09/25/java-cacerts-import-certificate/" class="leancloud_visitors" data-flag-title="Java cacerts 证书库导入自签名证书">
+                
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>issue<br>JDK未导入自签名证书，调HTTPS接口会有如下错误</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javax.net.ssl.SSLHandshakeException: sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target at sun.security.ssl.Alerts.getSSLException(Alerts.java:<span class="number">192</span>) at sun.security.ssl.SSLSocketImpl.fatal(SSLSocketImpl.java:<span class="number">1949</span>) at sun.security.ssl.Handshaker.fatalSE(Handshaker.java:<span class="number">302</span>) at sun.security.ssl.Handshaker.fatalSE(Handshaker.java:<span class="number">296</span>) at sun.security.ssl.ClientHandshaker.serverCertificate(ClientHandshaker.java:<span class="number">1509</span>) at sun.security.ssl.ClientHandshaker.processMessage(ClientHandshaker.java:<span class="number">216</span>) at sun.security.ssl.Handshaker.processLoop(Handshaker.java:<span class="number">979</span>) at sun.security.ssl.Handshaker.process_record(Handshaker.java:<span class="number">914</span>) at sun.security.ssl.SSLSocketImpl.readRecord(SSLSocketImpl.java:<span class="number">1062</span>) at sun.security.ssl.SSLSocketImpl.performInitialHandshake(SSLSocketImpl.java:<span class="number">1375</span>) at sun.security.ssl.SSLSocketImpl.writeRecord(SSLSocketImpl.java:<span class="number">747</span>) at sun.security.ssl.AppOutputStream.write(AppOutputStream.java:<span class="number">123</span>) at java.io.BufferedOutputStream.flushBuffer(BufferedOutputStream.java:<span class="number">82</span>) at java.io.BufferedOutputStream.flush(BufferedOutputStream.java:<span class="number">140</span>) at org.apache.commons.httpclient.HttpConnection.flushRequestOutputStream(HttpConnection.java:<span class="number">828</span>) at org.apache.commons.httpclient.HttpMethodBase.writeRequest(HttpMethodBase.java:<span class="number">2116</span>) at org.apache.commons.httpclient.HttpMethodBase.execute(HttpMethodBase.java:<span class="number">1096</span>) at org.apache.commons.httpclient.HttpMethodDirector.executeWithRetry(HttpMethodDirector.java:<span class="number">398</span>) at org.apache.commons.httpclient.HttpMethodDirector.executeMethod(HttpMethodDirector.java:<span class="number">171</span>) at org.apache.commons.httpclient.HttpClient.executeMethod(HttpClient.java:<span class="number">397</span>) at org.apache.commons.httpclient.HttpClient.executeMethod(HttpClient.java:<span class="number">323</span>) ``` ```java Caused by: sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target at sun.security.validator.PKIXValidator.doBuild(PKIXValidator.java:<span class="number">387</span>) at sun.security.validator.PKIXValidator.engineValidate(PKIXValidator.java:<span class="number">292</span>) at sun.security.validator.Validator.validate(Validator.java:<span class="number">260</span>) at sun.security.ssl.X509TrustManagerImpl.validate(X509TrustManagerImpl.java:<span class="number">324</span>) at sun.security.ssl.X509TrustManagerImpl.checkTrusted(X509TrustManagerImpl.java:<span class="number">229</span>) at sun.security.ssl.X509TrustManagerImpl.checkServerTrusted(X509TrustManagerImpl.java:<span class="number">124</span>) at sun.security.ssl.ClientHandshaker.serverCertificate(ClientHandshaker.java:<span class="number">1491</span>) ... <span class="number">19</span> more Caused by: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target at sun.security.provider.certpath.SunCertPathBuilder.build(SunCertPathBuilder.java:<span class="number">141</span>) at sun.security.provider.certpath.SunCertPathBuilder.engineBuild(SunCertPathBuilder.java:<span class="number">126</span>) at java.security.cert.CertPathBuilder.build(CertPathBuilder.java:<span class="number">280</span>) at sun.security.validator.PKIXValidator.doBuild(PKIXValidator.java:<span class="number">382</span>) ... <span class="number">25</span> more</span><br></pre></td></tr></table></figure>
+<p>solution<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> <span class="variable">$&#123;JAVA_HOME&#125;</span>/jre/lib/security</span><br><span class="line"></span><br><span class="line">keytool -import -<span class="built_in">alias</span> codz -keystore cacerts -file <span class="variable">$&#123;JAVA_HOME&#125;</span>/jre/lib/security/codz.cer  </span><br><span class="line"></span><br><span class="line">keytool -list -keystore cacerts -<span class="built_in">alias</span> codz</span><br></pre></td></tr></table></figure></p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><a href="http://blog.csdn.net/wangjunjun2008/article/details/37662851" target="_blank" rel="noopener">将安全证书导入到java的cacerts证书库</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -313,7 +477,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-12T21:44:00+09:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-08-12T21:44:00+08:00">
                 2016-08-12 21:44:00
               </time>
             
@@ -327,7 +491,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-02-20T08:48:31+09:00">
+              <time title="Updated at" itemprop="dateModified" datetime="2017-02-20T08:48:31+08:00">
                 2017-02-20 08:48:31
               </time>
             
@@ -514,7 +678,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-28T22:47:00+09:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-07-28T22:47:00+08:00">
                 2016-07-28 22:47:00
               </time>
             
@@ -528,7 +692,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2016-07-28T22:48:51+09:00">
+              <time title="Updated at" itemprop="dateModified" datetime="2016-07-28T22:48:51+08:00">
                 2016-07-28 22:48:51
               </time>
             
@@ -675,7 +839,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-21T20:39:00+09:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-07-21T20:39:00+08:00">
                 2016-07-21 20:39:00
               </time>
             
@@ -689,7 +853,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-02-20T08:42:32+09:00">
+              <time title="Updated at" itemprop="dateModified" datetime="2017-02-20T08:42:32+08:00">
                 2017-02-20 08:42:32
               </time>
             
@@ -887,7 +1051,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-30T22:13:00+09:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-05-30T22:13:00+08:00">
                 2016-05-30 22:13:00
               </time>
             
@@ -901,7 +1065,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-02-22T22:16:59+09:00">
+              <time title="Updated at" itemprop="dateModified" datetime="2017-02-22T22:16:59+08:00">
                 2017-02-22 22:16:59
               </time>
             
@@ -1049,7 +1213,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-29T22:04:00+09:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-05-29T22:04:00+08:00">
                 2016-05-29 22:04:00
               </time>
             
@@ -1063,7 +1227,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-03-10T21:14:17+09:00">
+              <time title="Updated at" itemprop="dateModified" datetime="2017-03-10T21:14:17+08:00">
                 2017-03-10 21:14:17
               </time>
             
@@ -1245,7 +1409,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-26T22:22:00+09:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-05-26T22:22:00+08:00">
                 2016-05-26 22:22:00
               </time>
             
@@ -1259,7 +1423,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2016-06-04T18:00:02+09:00">
+              <time title="Updated at" itemprop="dateModified" datetime="2016-06-04T18:00:02+08:00">
                 2016-06-04 18:00:02
               </time>
             
@@ -1401,7 +1565,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-23T14:04:00+09:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-03-23T14:04:00+08:00">
                 2016-03-23 14:04:00
               </time>
             
@@ -1415,7 +1579,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2016-03-23T14:17:13+09:00">
+              <time title="Updated at" itemprop="dateModified" datetime="2016-03-23T14:17:13+08:00">
                 2016-03-23 14:17:13
               </time>
             
@@ -1558,7 +1722,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-22T19:37:00+09:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-03-22T19:37:00+08:00">
                 2016-03-22 19:37:00
               </time>
             
@@ -1572,7 +1736,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2016-03-31T13:10:47+09:00">
+              <time title="Updated at" itemprop="dateModified" datetime="2016-03-31T13:10:47+08:00">
                 2016-03-31 13:10:47
               </time>
             
@@ -1711,7 +1875,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-12T19:07:00+09:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-03-12T19:07:00+08:00">
                 2016-03-12 19:07:00
               </time>
             
@@ -1725,7 +1889,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2016-03-12T19:09:44+09:00">
+              <time title="Updated at" itemprop="dateModified" datetime="2016-03-12T19:09:44+08:00">
                 2016-03-12 19:09:44
               </time>
             
@@ -1826,161 +1990,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://codz.me/2016/03/05/spring-modelattribute-annotation-random-code/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="laudukang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/head.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Code Is Poetry">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/03/05/spring-modelattribute-annotation-random-code/" itemprop="url">Spring MVC @ModelAttribute 参数乱码</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-05T20:31:00+09:00">
-                2016-03-05 20:31:00
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2016-03-05T22:08:12+09:00">
-                2016-03-05 22:08:12
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2016/03/05/spring-modelattribute-annotation-random-code/" class="leancloud_visitors" data-flag-title="Spring MVC @ModelAttribute 参数乱码">
-                
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>issue<br><code>Spring MVC</code>提交form表单后台通过<code>@ModelAttribute</code>获取参数为乱码<br><code>Spring MVC</code> submit form and get random code parameters through `@ModelAttribute</p>
-<p>Java Config WebInitializer</p>
-<p>傻了，将<code>CharacterEncodingFilter</code>部分放到<code>DispatcherServlet</code>部分前面就可以了</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebInitializer</span> <span class="keyword">implements</span> <span class="title">WebApplicationInitializer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onStartup</span><span class="params">(javax.servlet.ServletContext sc)</span> <span class="keyword">throws</span> ServletException </span>&#123;</span><br><span class="line">        AnnotationConfigWebApplicationContext rootContext = <span class="keyword">new</span> AnnotationConfigWebApplicationContext();</span><br><span class="line">        rootContext.register(ApplicationConfig.class);</span><br><span class="line">        sc.addListener(<span class="keyword">new</span> ContextLoaderListener(rootContext));</span><br><span class="line"></span><br><span class="line">        <span class="comment">//CharacterEncodingFilter</span></span><br><span class="line">        CharacterEncodingFilter characterEncodingFilter = <span class="keyword">new</span> CharacterEncodingFilter();</span><br><span class="line">        characterEncodingFilter.setEncoding(<span class="string">"UTF-8"</span>);</span><br><span class="line">        characterEncodingFilter.setForceEncoding(<span class="keyword">true</span>);</span><br><span class="line">        FilterRegistration filterRegistration =</span><br><span class="line">                sc.addFilter(<span class="string">"characterEncodingFilter"</span>, characterEncodingFilter);</span><br><span class="line">        filterRegistration.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST), <span class="keyword">false</span>, <span class="string">"/*"</span>);<span class="comment">//注意这里匹配 "/*"</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//follow can be deleted</span></span><br><span class="line">        <span class="comment">//sc.addFilter("hibernateFilter", OpenSessionInViewFilter.class).addMappingForUrlPatterns(null, false, "/*");</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//maybe follow will be use</span></span><br><span class="line">        <span class="comment">// sc.addFilter("OpenEntityManagerInViewFilter", org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter.class).addMappingForUrlPatterns(null, false, "/*");</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//springmvc上下文</span></span><br><span class="line">        AnnotationConfigWebApplicationContext springMvcContext = <span class="keyword">new</span> AnnotationConfigWebApplicationContext();</span><br><span class="line">        springMvcContext.register(MvcConfig.class);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//DispatcherServlet</span></span><br><span class="line">        DispatcherServlet dispatcherServlet = <span class="keyword">new</span> DispatcherServlet(springMvcContext);</span><br><span class="line">        dispatcherServlet.setThrowExceptionIfNoHandlerFound(<span class="keyword">true</span>);</span><br><span class="line">        ServletRegistration.Dynamic dynamic = sc.addServlet(<span class="string">"dispatcherServlet"</span>, dispatcherServlet);</span><br><span class="line">        dynamic.setLoadOnStartup(<span class="number">1</span>);</span><br><span class="line">        dynamic.addMapping(<span class="string">"/"</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2035,8 +2044,8 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">67</span>
-                  <span class="site-state-item-name">日志</span>
+                  <span class="site-state-item-count">68</span>
+                  <span class="site-state-item-name">Artikel</span>
                 </a>
               </div>
             
@@ -2047,7 +2056,7 @@
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
                   <span class="site-state-item-count">9</span>
-                  <span class="site-state-item-name">分类</span>
+                  <span class="site-state-item-name">Kategorien</span>
                 </a>
               </div>
             
@@ -2058,7 +2067,7 @@
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
                   <span class="site-state-item-count">24</span>
-                  <span class="site-state-item-name">标签</span>
+                  <span class="site-state-item-name">Tags</span>
                 </a>
               </div>
             
@@ -2146,7 +2155,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2015 - <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; 2015 - <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart icon-next-heart"></i>
   </span>
@@ -2156,7 +2165,7 @@
 </div>
 
 
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io" rel="external nofollow">Hexo</a> 强力驱动</div>
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io" rel="external nofollow">Hexo</a></div>
 
 
 
@@ -2164,7 +2173,7 @@
 
 
 
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">NexT.Pisces</a> v5.1.3</div>
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">NexT.Pisces</a> v5.1.3</div>
 
 
 

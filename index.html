@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next pisces use-motion" lang="zh-Hans">
+<html class="theme-next pisces use-motion" lang="zh-CN">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -87,7 +87,7 @@
 <meta property="og:url" content="https://codz.me/index.html">
 <meta property="og:site_name" content="Code Is Poetry">
 <meta property="og:description" content="Bug Not Found">
-<meta property="og:locale" content="zh-Hans">
+<meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Code Is Poetry">
 <meta name="twitter:description" content="Bug Not Found">
@@ -106,7 +106,7 @@
     motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
       userId: '0',
-      author: '博主'
+      author: 'Author'
     },
     algolia: {
       applicationID: '',
@@ -125,6 +125,13 @@
 
 
 
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-8069999780024986",
+    enable_page_level_ads: true
+  });
+</script>
 
   <title>Code Is Poetry</title>
   
@@ -148,7 +155,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
   
   
@@ -197,7 +204,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            首页
+            Startseite
           </a>
         </li>
       
@@ -207,7 +214,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
-            关于
+            Über
           </a>
         </li>
       
@@ -217,7 +224,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
-            标签
+            Tags
           </a>
         </li>
       
@@ -227,7 +234,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
-            分类
+            Kategorien
           </a>
         </li>
       
@@ -237,7 +244,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            归档
+            Archiv
           </a>
         </li>
       
@@ -247,7 +254,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
             
-            公益404
+            Commonweal 404
           </a>
         </li>
       
@@ -270,6 +277,139 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://codz.me/2018/11/09/init-spark-2-4-0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="laudukang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Is Poetry">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/09/init-spark-2-4-0/" itemprop="url">init-spark-2.4.0</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T14:15:53+08:00">
+                2018-11-09 14:15:53
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+              <time title="Updated at" itemprop="dateModified" datetime="2018-11-09T14:21:41+08:00">
+                2018-11-09 14:21:41
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/11/09/init-spark-2-4-0/" class="leancloud_visitors" data-flag-title="init-spark-2.4.0">
+                
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="init-spark-2-4-0"><a href="#init-spark-2-4-0" class="headerlink" title="init spark 2.4.0"></a>init spark 2.4.0</h1><h2 id="update-etc-environment"><a href="#update-etc-environment" class="headerlink" title="update /etc/environment"></a>update <code>/etc/environment</code></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SCALA_HOME=/opt/scala</span><br><span class="line">SPARK_HOME=/work/spark</span><br><span class="line">JAVA_HOME=/usr/lib/jvm/java-8-oracle</span><br><span class="line">CLASSPATH=..:/usr/lib/jvm/java-8-oracle/lib:/usr/lib/jvm/java-8-oracle/jre/lib:/opt/scala/lib:/work/spark/jars</span><br><span class="line">PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/opt/scala/bin:/work/spark/bin</span><br></pre></td></tr></table></figure>
+<h2 id="update-spark-config"><a href="#update-spark-config" class="headerlink" title="update spark config"></a>update spark config</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">conf</span></span><br><span class="line">cp log4j.properties.template log4j.properties</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">update spark-env.sh</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">spark home</span></span><br><span class="line">mkdir event_logs</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -313,7 +453,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-07T17:47:03+09:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-07T17:47:03+08:00">
                 2018-05-07 17:47:03
               </time>
             
@@ -327,7 +467,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-06-09T15:00:52+09:00">
+              <time title="Updated at" itemprop="dateModified" datetime="2018-06-09T15:00:52+08:00">
                 2018-06-09 15:00:52
               </time>
             
@@ -556,7 +696,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-28T15:08:47+09:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-28T15:08:47+08:00">
                 2018-02-28 15:08:47
               </time>
             
@@ -570,8 +710,8 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-02-28T16:29:42+09:00">
-                2018-02-28 16:29:42
+              <time title="Updated at" itemprop="dateModified" datetime="2018-02-28T15:29:42+08:00">
+                2018-02-28 15:29:42
               </time>
             
           </span>
@@ -715,7 +855,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-05T16:15:03+09:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-05T16:15:03+08:00">
                 2018-01-05 16:15:03
               </time>
             
@@ -729,7 +869,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-09-18T09:02:11+09:00">
+              <time title="Updated at" itemprop="dateModified" datetime="2018-09-18T09:02:11+08:00">
                 2018-09-18 09:02:11
               </time>
             
@@ -903,7 +1043,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-20T20:03:15+09:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-20T20:03:15+08:00">
                 2017-12-20 20:03:15
               </time>
             
@@ -917,7 +1057,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-12-21T11:06:48+09:00">
+              <time title="Updated at" itemprop="dateModified" datetime="2017-12-21T11:06:48+08:00">
                 2017-12-21 11:06:48
               </time>
             
@@ -1058,7 +1198,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-12T10:16:00+09:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-12T10:16:00+08:00">
                 2017-10-12 10:16:00
               </time>
             
@@ -1072,7 +1212,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-10-12T19:06:44+09:00">
+              <time title="Updated at" itemprop="dateModified" datetime="2017-10-12T19:06:44+08:00">
                 2017-10-12 19:06:44
               </time>
             
@@ -1223,7 +1363,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-24T16:54:00+09:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-24T16:54:00+08:00">
                 2017-09-24 16:54:00
               </time>
             
@@ -1237,7 +1377,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-09-24T16:57:21+09:00">
+              <time title="Updated at" itemprop="dateModified" datetime="2017-09-24T16:57:21+08:00">
                 2017-09-24 16:57:21
               </time>
             
@@ -1407,7 +1547,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-10T16:51:00+09:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-10T16:51:00+08:00">
                 2017-06-10 16:51:00
               </time>
             
@@ -1421,7 +1561,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-06-10T16:51:32+09:00">
+              <time title="Updated at" itemprop="dateModified" datetime="2017-06-10T16:51:32+08:00">
                 2017-06-10 16:51:32
               </time>
             
@@ -1564,7 +1704,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-19T21:18:00+09:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-19T21:18:00+08:00">
                 2017-02-19 21:18:00
               </time>
             
@@ -1578,7 +1718,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-12-22T15:57:44+09:00">
+              <time title="Updated at" itemprop="dateModified" datetime="2017-12-22T15:57:44+08:00">
                 2017-12-22 15:57:44
               </time>
             
@@ -1770,7 +1910,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-14T20:55:00+09:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-14T20:55:00+08:00">
                 2017-01-14 20:55:00
               </time>
             
@@ -1784,7 +1924,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-02-22T21:05:29+09:00">
+              <time title="Updated at" itemprop="dateModified" datetime="2017-02-22T21:05:29+08:00">
                 2017-02-22 21:05:29
               </time>
             
@@ -1888,163 +2028,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://codz.me/2016/09/25/java-cacerts-import-certificate/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="laudukang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/head.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Code Is Poetry">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/09/25/java-cacerts-import-certificate/" itemprop="url">Java cacerts 证书库导入自签名证书</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-25T17:21:00+09:00">
-                2016-09-25 17:21:00
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2016-09-25T17:21:41+09:00">
-                2016-09-25 17:21:41
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2016/09/25/java-cacerts-import-certificate/" class="leancloud_visitors" data-flag-title="Java cacerts 证书库导入自签名证书">
-                
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>issue<br>JDK未导入自签名证书，调HTTPS接口会有如下错误</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javax.net.ssl.SSLHandshakeException: sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target at sun.security.ssl.Alerts.getSSLException(Alerts.java:<span class="number">192</span>) at sun.security.ssl.SSLSocketImpl.fatal(SSLSocketImpl.java:<span class="number">1949</span>) at sun.security.ssl.Handshaker.fatalSE(Handshaker.java:<span class="number">302</span>) at sun.security.ssl.Handshaker.fatalSE(Handshaker.java:<span class="number">296</span>) at sun.security.ssl.ClientHandshaker.serverCertificate(ClientHandshaker.java:<span class="number">1509</span>) at sun.security.ssl.ClientHandshaker.processMessage(ClientHandshaker.java:<span class="number">216</span>) at sun.security.ssl.Handshaker.processLoop(Handshaker.java:<span class="number">979</span>) at sun.security.ssl.Handshaker.process_record(Handshaker.java:<span class="number">914</span>) at sun.security.ssl.SSLSocketImpl.readRecord(SSLSocketImpl.java:<span class="number">1062</span>) at sun.security.ssl.SSLSocketImpl.performInitialHandshake(SSLSocketImpl.java:<span class="number">1375</span>) at sun.security.ssl.SSLSocketImpl.writeRecord(SSLSocketImpl.java:<span class="number">747</span>) at sun.security.ssl.AppOutputStream.write(AppOutputStream.java:<span class="number">123</span>) at java.io.BufferedOutputStream.flushBuffer(BufferedOutputStream.java:<span class="number">82</span>) at java.io.BufferedOutputStream.flush(BufferedOutputStream.java:<span class="number">140</span>) at org.apache.commons.httpclient.HttpConnection.flushRequestOutputStream(HttpConnection.java:<span class="number">828</span>) at org.apache.commons.httpclient.HttpMethodBase.writeRequest(HttpMethodBase.java:<span class="number">2116</span>) at org.apache.commons.httpclient.HttpMethodBase.execute(HttpMethodBase.java:<span class="number">1096</span>) at org.apache.commons.httpclient.HttpMethodDirector.executeWithRetry(HttpMethodDirector.java:<span class="number">398</span>) at org.apache.commons.httpclient.HttpMethodDirector.executeMethod(HttpMethodDirector.java:<span class="number">171</span>) at org.apache.commons.httpclient.HttpClient.executeMethod(HttpClient.java:<span class="number">397</span>) at org.apache.commons.httpclient.HttpClient.executeMethod(HttpClient.java:<span class="number">323</span>) ``` ```java Caused by: sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target at sun.security.validator.PKIXValidator.doBuild(PKIXValidator.java:<span class="number">387</span>) at sun.security.validator.PKIXValidator.engineValidate(PKIXValidator.java:<span class="number">292</span>) at sun.security.validator.Validator.validate(Validator.java:<span class="number">260</span>) at sun.security.ssl.X509TrustManagerImpl.validate(X509TrustManagerImpl.java:<span class="number">324</span>) at sun.security.ssl.X509TrustManagerImpl.checkTrusted(X509TrustManagerImpl.java:<span class="number">229</span>) at sun.security.ssl.X509TrustManagerImpl.checkServerTrusted(X509TrustManagerImpl.java:<span class="number">124</span>) at sun.security.ssl.ClientHandshaker.serverCertificate(ClientHandshaker.java:<span class="number">1491</span>) ... <span class="number">19</span> more Caused by: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target at sun.security.provider.certpath.SunCertPathBuilder.build(SunCertPathBuilder.java:<span class="number">141</span>) at sun.security.provider.certpath.SunCertPathBuilder.engineBuild(SunCertPathBuilder.java:<span class="number">126</span>) at java.security.cert.CertPathBuilder.build(CertPathBuilder.java:<span class="number">280</span>) at sun.security.validator.PKIXValidator.doBuild(PKIXValidator.java:<span class="number">382</span>) ... <span class="number">25</span> more</span><br></pre></td></tr></table></figure>
-<p>solution<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> <span class="variable">$&#123;JAVA_HOME&#125;</span>/jre/lib/security</span><br><span class="line"></span><br><span class="line">keytool -import -<span class="built_in">alias</span> codz -keystore cacerts -file <span class="variable">$&#123;JAVA_HOME&#125;</span>/jre/lib/security/codz.cer  </span><br><span class="line"></span><br><span class="line">keytool -list -keystore cacerts -<span class="built_in">alias</span> codz</span><br></pre></td></tr></table></figure></p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
-<li><a href="http://blog.csdn.net/wangjunjun2008/article/details/37662851" target="_blank" rel="noopener">将安全证书导入到java的cacerts证书库</a></li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2099,8 +2082,8 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">67</span>
-                  <span class="site-state-item-name">日志</span>
+                  <span class="site-state-item-count">68</span>
+                  <span class="site-state-item-name">Artikel</span>
                 </a>
               </div>
             
@@ -2111,7 +2094,7 @@
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
                   <span class="site-state-item-count">9</span>
-                  <span class="site-state-item-name">分类</span>
+                  <span class="site-state-item-name">Kategorien</span>
                 </a>
               </div>
             
@@ -2122,7 +2105,7 @@
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
                   <span class="site-state-item-count">24</span>
-                  <span class="site-state-item-name">标签</span>
+                  <span class="site-state-item-name">Tags</span>
                 </a>
               </div>
             
@@ -2210,7 +2193,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2015 - <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; 2015 - <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart icon-next-heart"></i>
   </span>
@@ -2220,7 +2203,7 @@
 </div>
 
 
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io" rel="external nofollow">Hexo</a> 强力驱动</div>
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io" rel="external nofollow">Hexo</a></div>
 
 
 
@@ -2228,7 +2211,7 @@
 
 
 
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">NexT.Pisces</a> v5.1.3</div>
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">NexT.Pisces</a> v5.1.3</div>
 
 
 
