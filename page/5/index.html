@@ -204,7 +204,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            Home
           </a>
         </li>
       
@@ -214,7 +214,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
-            Über
+            About
           </a>
         </li>
       
@@ -234,7 +234,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
-            Kategorien
+            Categories
           </a>
         </li>
       
@@ -244,7 +244,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -277,168 +277,6 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://codz.me/2015/07/20/java-post-validation-code/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="laudukang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/head.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Code Is Poetry">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/07/20/java-post-validation-code/" itemprop="url">Java 实现图形验证码</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-07-20T00:27:00+08:00">
-                2015-07-20 00:27:00
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-              <time title="Updated at" itemprop="dateModified" datetime="2015-07-20T00:38:26+08:00">
-                2015-07-20 00:38:26
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2015/07/20/java-post-validation-code/" class="leancloud_visitors" data-flag-title="Java 实现图形验证码">
-                
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>实现图形验证码大致分为5步上来完成：</p>
-<ol>
-<li>建立图形缓冲区；</li>
-<li>在图形缓冲区用随机颜色填充背景。</li>
-<li>在图形缓冲区上输出验证码。</li>
-<li>将验证码保存在HttpSession对象中。</li>
-<li>向客户端输出图形验证码。</li>
-</ol>
-<p>通过 ValidationCode 类来实现验证码功能，该类也是Servlet类，在客户端只要像访问普通Servlet一样访问ValidationCode类即可。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.cnblogs.jbelial.Validation;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"><span class="keyword">import</span> java.awt.image.BufferedImage;</span><br><span class="line"><span class="keyword">import</span> java.io.* ;</span><br><span class="line"><span class="keyword">import</span> java.util.Random;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.imageio.ImageIO;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServlet;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpSession;</span><br><span class="line"></span><br><span class="line"><span class="meta">@SuppressWarnings</span>(<span class="string">"serial"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ValidationCode</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line"><span class="comment">//    图形验证码的字符集合，系统通过随机从这些字符串中选择一些字符作为验证码</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String codeChars =</span><br><span class="line">        <span class="string">"0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTYVWXYZ"</span> ;</span><br><span class="line"><span class="comment">//    返回一个随机颜色</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> Color <span class="title">getRandomColor</span><span class="params">(<span class="keyword">int</span> minColor , <span class="keyword">int</span> maxColor)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        Random random = <span class="keyword">new</span> Random() ;</span><br><span class="line">        <span class="keyword">if</span> (minColor &gt; <span class="number">255</span>)</span><br><span class="line">            minColor = <span class="number">255</span> ;</span><br><span class="line">        <span class="keyword">if</span> (maxColor &gt; <span class="number">255</span>)</span><br><span class="line">            maxColor = <span class="number">255</span> ;</span><br><span class="line"><span class="comment">//        获取颜色的随机值</span></span><br><span class="line">        <span class="keyword">int</span> red = minColor + random.nextInt(maxColor - minColor) ;</span><br><span class="line">        <span class="keyword">int</span> green = minColor + random.nextInt(maxColor - minColor) ;</span><br><span class="line">        <span class="keyword">int</span> blue = minColor + random.nextInt(maxColor - minColor) ;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Color(red,green,blue) ;  </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doGet</span> <span class="params">(HttpServletRequest request ,</span></span></span><br><span class="line"><span class="function"><span class="params">            HttpServletResponse response)</span> <span class="keyword">throws</span> IOException</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//       获取验证码集合的长度。</span></span><br><span class="line">        <span class="keyword">int</span> charsLength = codeChars.length() ;</span><br><span class="line"><span class="comment">//        关闭浏览器缓冲区</span></span><br><span class="line">        response.setHeader(<span class="string">"ragma"</span>, <span class="string">"No-cache"</span>) ;</span><br><span class="line">        response.setHeader(<span class="string">"Cache-Control"</span>, <span class="string">"no-cache"</span>) ;</span><br><span class="line">        response.setDateHeader(<span class="string">"Expires"</span>, <span class="number">0</span>) ;</span><br><span class="line"><span class="comment">//        设置图片传送的格式。</span></span><br><span class="line">        response.setContentType(<span class="string">"image/jpeg"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//        设置图形验证码的长和宽度</span></span><br><span class="line">        <span class="keyword">int</span> width = <span class="number">90</span> ;</span><br><span class="line">        <span class="keyword">int</span> height = <span class="number">20</span> ;</span><br><span class="line"><span class="comment">//        建立图形缓冲区</span></span><br><span class="line">        BufferedImage image = <span class="keyword">new</span> BufferedImage(width , height,</span><br><span class="line">                BufferedImage.TYPE_INT_RGB) ;</span><br><span class="line"><span class="comment">//        获取用于输出文字的Graphics对象</span></span><br><span class="line">        Graphics graphics = image.getGraphics() ;</span><br><span class="line"></span><br><span class="line">        Random random = <span class="keyword">new</span> Random() ;</span><br><span class="line"></span><br><span class="line"><span class="comment">//        设置要填充的颜色</span></span><br><span class="line">        graphics.setColor(getRandomColor(<span class="number">180</span> , <span class="number">250</span>)) ;</span><br><span class="line"><span class="comment">//        填充图形背景</span></span><br><span class="line">        graphics.fillRect(<span class="number">0</span>, <span class="number">0</span>, width, height) ;</span><br><span class="line"><span class="comment">//        设置初始字体和颜色</span></span><br><span class="line">        graphics.setFont(<span class="keyword">new</span> Font(<span class="string">"Time New Roman"</span> , Font.ITALIC, height)) ;</span><br><span class="line">        graphics.setColor(getRandomColor(<span class="number">120</span>,<span class="number">180</span>)) ;</span><br><span class="line"></span><br><span class="line"><span class="comment">//        保存验证码</span></span><br><span class="line">        StringBuilder validationCode = <span class="keyword">new</span> StringBuilder() ;</span><br><span class="line"><span class="comment">//        验证码的随机字体</span></span><br><span class="line">        String[] fontNames = &#123;<span class="string">"Times New Roman"</span> , <span class="string">"Book antiqua"</span> , <span class="string">"Arial"</span> &#125; ;</span><br><span class="line"><span class="comment">//        随机生成验证码</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; <span class="number">4</span> ; ++ i)</span><br><span class="line">        &#123;</span><br><span class="line"><span class="comment">//            设置当前验证码字符的字体</span></span><br><span class="line">            graphics.setFont(<span class="keyword">new</span> Font(fontNames[random.nextInt(<span class="number">3</span>)] , Font.ITALIC ,</span><br><span class="line">                    height)) ;</span><br><span class="line"><span class="comment">//            随机获得验证码的字符</span></span><br><span class="line">            <span class="keyword">char</span> codeChar = codeChars.charAt(random.nextInt(charsLength)) ;</span><br><span class="line">            validationCode.append(codeChar) ;</span><br><span class="line">            graphics.setColor(getRandomColor(<span class="number">20</span>,<span class="number">120</span>)) ;</span><br><span class="line"><span class="comment">//            在图形上输出验证码字符</span></span><br><span class="line">            graphics.drawString(String.valueOf(codeChar), <span class="number">16</span>*i+random.nextInt(<span class="number">7</span>),</span><br><span class="line">                    height - random.nextInt(<span class="number">6</span>) ) ;</span><br><span class="line">        &#125;</span><br><span class="line"><span class="comment">//        获得Session对象，并设置Session对象为3分钟</span></span><br><span class="line">        HttpSession session = request.getSession();</span><br><span class="line">        session.setMaxInactiveInterval(<span class="number">5</span>*<span class="number">60</span>) ;</span><br><span class="line"><span class="comment">//        将验证码放入session对象中.</span></span><br><span class="line">        session.setAttribute(<span class="string">"validationCode"</span>,validationCode.toString() ) ;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//        关闭graphics对象。</span></span><br><span class="line">        graphics.dispose() ;  </span><br><span class="line"><span class="comment">//        向客户端发送图形验证码</span></span><br><span class="line">        ImageIO.write(image,<span class="string">"JPEG"</span> ,response.getOutputStream()) ;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doPost</span> <span class="params">(HttpServletRequest request ,</span></span></span><br><span class="line"><span class="function"><span class="params">            HttpServletResponse response)</span> <span class="keyword">throws</span> IOException</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">            doGet(request , response) ;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<img src="https://nat.oss-cn-hongkong.aliyuncs.com/images/2015/07/20/java-post-validation-code/java-validation-code.png" alt="java validation code example" title="java validation code example">
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
     
       
 
@@ -496,7 +334,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="Updated at" itemprop="dateModified" datetime="2015-08-14T16:58:07+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2015-08-14T16:58:07+08:00">
                 2015-08-14 16:58:07
               </time>
             
@@ -648,7 +486,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="Updated at" itemprop="dateModified" datetime="2015-07-18T16:48:01+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2015-07-18T16:48:01+08:00">
                 2015-07-18 16:48:01
               </time>
             
@@ -810,7 +648,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="Updated at" itemprop="dateModified" datetime="2015-07-17T01:19:20+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2015-07-17T01:19:20+08:00">
                 2015-07-17 01:19:20
               </time>
             
@@ -991,7 +829,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="Updated at" itemprop="dateModified" datetime="2015-07-12T12:17:03+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2015-07-12T12:17:03+08:00">
                 2015-07-12 12:17:03
               </time>
             
@@ -1197,7 +1035,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="Updated at" itemprop="dateModified" datetime="2015-07-18T17:13:01+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2015-07-18T17:13:01+08:00">
                 2015-07-18 17:13:01
               </time>
             
@@ -1374,7 +1212,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="Updated at" itemprop="dateModified" datetime="2015-07-18T17:39:12+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2015-07-18T17:39:12+08:00">
                 2015-07-18 17:39:12
               </time>
             
@@ -1536,7 +1374,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="Updated at" itemprop="dateModified" datetime="2015-06-23T21:29:59+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2015-06-23T21:29:59+08:00">
                 2015-06-23 21:29:59
               </time>
             
@@ -1693,7 +1531,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="Updated at" itemprop="dateModified" datetime="2015-08-17T10:37:12+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2015-08-17T10:37:12+08:00">
                 2015-08-17 10:37:12
               </time>
             
@@ -1923,7 +1761,7 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               
-              <time title="Updated at" itemprop="dateModified" datetime="2015-08-14T16:58:31+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2015-08-14T16:58:31+08:00">
                 2015-08-14 16:58:31
               </time>
             
@@ -2119,6 +1957,179 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://codz.me/2015/06/04/web-performance-test-tool-gor/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="laudukang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Is Poetry">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/06/04/web-performance-test-tool-gor/" itemprop="url">终极 Web 应用性能和压力测试工具 Gor</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-06-04T23:30:00+08:00">
+                2015-06-04 23:30:00
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2015-06-04T23:31:21+08:00">
+                2015-06-04 23:31:21
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web/" itemprop="url" rel="index">
+                    <span itemprop="name">Web</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2015/06/04/web-performance-test-tool-gor/" class="leancloud_visitors" data-flag-title="终极 Web 应用性能和压力测试工具 Gor">
+                
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="常见的-Web-应用的压力测试工具"><a href="#常见的-Web-应用的压力测试工具" class="headerlink" title="常见的 Web 应用的压力测试工具"></a>常见的 Web 应用的压力测试工具</h2><p>Web 应用压力测试工具有很多，比如 Apache ab，node-ab，Apache JMeter, LoadRunner, httperf。但是这些工具都没能解决一个问题：</p>
+<h2 id="如何正确模拟生产环境的流量"><a href="#如何正确模拟生产环境的流量" class="headerlink" title="如何正确模拟生产环境的流量"></a>如何正确模拟生产环境的流量</h2><p>如今 Web 应用的架构变得非常复杂，内部包含复杂的各种负载均衡、 服务和 RPC 调用关系，简单的发送 GET 请求到某些 URL 或者 API 接口完全无法模拟真实的流量。假如回放 HTTP 日志，操作又异常麻烦。Tcpcopy 虽然能够复制实时流量，但是操作也很复杂。之前的 亚马逊云平台的迁移 就用到了 Gor 这个工具。</p>
+<h2 id="Gor-是-Web-应用压力测试的完美方案"><a href="#Gor-是-Web-应用压力测试的完美方案" class="headerlink" title="Gor 是 Web 应用压力测试的完美方案"></a>Gor 是 Web 应用压力测试的完美方案</h2><p>我一直在找一个简单又方便的解决方案，直到找到了 Gor 。Gor 是用 Golang 写的一个 HTTP 实时流量复制工具。只需要在 LB 或者 Varnish 入口服务器上执行一个进程，就可以把生产环境的流量复制到任何地方，比如 Staging 环境、Dev 环境。完美解决了 HTTP 层实时流量复制和压力测试的问题。</p>
+<h2 id="Gor-的功能"><a href="#Gor-的功能" class="headerlink" title="Gor 的功能"></a>Gor 的功能</h2><p>Gor 支持流量的放大和缩小、频率限制，这样不需要搭建和生产环境一致的服务器集群也可以正确测试。Gor 还支持根据正则表达式过滤流量，这意味着可以单独测试某个 API 服务。还可以修改 HTTP 请求头，比如替换 User-Agent, 或者增加某些 HTTP Header 。</p>
+<p>Gor 还可以把请求记录到文件，以备回放和分析。Gor 支持和 ElasticSearch 集成，将流量存入 ES 进行实时分析。</p>
+<h2 id="Gor-的常用命令"><a href="#Gor-的常用命令" class="headerlink" title="Gor 的常用命令"></a>Gor 的常用命令</h2><p>简单的 HTTP 流量复制：<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gor –input-<span class="string">raw :</span><span class="number">80</span> –output-http “<span class="string">http:</span><span class="comment">//staging.com”</span></span><br></pre></td></tr></table></figure></p>
+<p>HTTP 流量复制频率控制：<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gor –input-<span class="string">tcp :</span><span class="number">28020</span> –output-http “<span class="string">http:</span><span class="comment">//staging.com|10″</span></span><br></pre></td></tr></table></figure></p>
+<p>HTTP 流量复制缩小：<br><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gor –<span class="built_in">input</span>-raw :<span class="number">80</span> –<span class="built_in">output</span>-tcp “replay.<span class="keyword">local</span>:<span class="number">28020</span>|<span class="number">10</span>%”</span><br></pre></td></tr></table></figure></p>
+<p>HTTP 流量记录到本地文件：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">gor</span> –<span class="selector-tag">input-raw</span> <span class="selector-pseudo">:80</span> –<span class="selector-tag">output-file</span> <span class="selector-tag">requests</span><span class="selector-class">.gor</span></span><br></pre></td></tr></table></figure></p>
+<p>HTTP 流量回放和压测：<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gor –<span class="built_in">input</span>-<span class="keyword">file</span> “requests.gor|<span class="number">200</span>%” –output-http “staging.<span class="keyword">com</span>”</span><br></pre></td></tr></table></figure></p>
+<p>HTTP 流量过滤复制：<br><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gor –<span class="built_in">input</span>-raw :<span class="number">8080</span> –<span class="built_in">output</span>-http staging.com –<span class="built_in">output</span>-http-url-regexp ^www.</span><br></pre></td></tr></table></figure></p>
+<p>最后</p>
+<p>这个 Golang 写的 Gor 是开源的，意味着可以方便的集成到自己的架构中，可以用在压力测试平台、实时流量分析、应用层防火墙等等方面。</p>
+<p>reference:</p>
+<ul>
+<li><a href="http://blog.eood.cn/web-performance-testing-gor" target="_blank" rel="noopener">终极 Web 应用性能和压力测试工具 Gor</a></li>
+<li><a href="https://github.com/buger/gor" target="_blank" rel="noopener">https://github.com/buger/gor</a></li>
+<li><a href="[https://github.com/doubaokun/node-ab">https://github.com/doubaokun/node-ab</a></li>
+<li><a href="https://github.com/session-replay-tools/tcpcopy" target="_blank" rel="noopener">https://github.com/session-replay-tools/tcpcopy</a></li>
+<li><a href="https://github.com/httperf/httperf" target="_blank" rel="noopener">https://github.com/httperf/httperf</a></li>
+<li><a href="https://github.com/buger/gor/blob/master/ELASTICSEARCH.md" target="_blank" rel="noopener">https://github.com/buger/gor/blob/master/ELASTICSEARCH.md</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -2173,8 +2184,8 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">68</span>
-                  <span class="site-state-item-name">Artikel</span>
+                  <span class="site-state-item-count">67</span>
+                  <span class="site-state-item-name">posts</span>
                 </a>
               </div>
             
@@ -2185,7 +2196,7 @@
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
                   <span class="site-state-item-count">9</span>
-                  <span class="site-state-item-name">Kategorien</span>
+                  <span class="site-state-item-name">categories</span>
                 </a>
               </div>
             
@@ -2196,7 +2207,7 @@
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
                   <span class="site-state-item-count">24</span>
-                  <span class="site-state-item-name">Tags</span>
+                  <span class="site-state-item-name">tags</span>
                 </a>
               </div>
             
@@ -2294,7 +2305,7 @@
 </div>
 
 
-  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io" rel="external nofollow">Hexo</a></div>
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io" rel="external nofollow">Hexo</a></div>
 
 
 
