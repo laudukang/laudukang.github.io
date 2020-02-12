@@ -1,94 +1,58 @@
 <!DOCTYPE html>
-
-
-
-  
-
-
-<html class="theme-next pisces use-motion" lang="zh-Hans">
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
+  <link rel="mask-icon" href="/images/favicon.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
-<link href="/lib/nprogress/nprogress.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
 
 
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://codz.me').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.7.1',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
 
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png?v=5.1.3">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=5.1.3">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png?v=5.1.3">
-
-
-  <link rel="mask-icon" href="/images/favicon.png?v=5.1.3" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="chrome," />
-
-
-
-
-
-
-
-
-
-
-<meta name="description" content="Chrome的隐身模式先来说说隐身模式的启用方法吧 1.键盘快捷：Ctrl + Shift + N。 2.在Windows7下的任务栏处，右击“Chrome”图标，会出一个下拉菜单，点击“新建隐身窗口”。  3.你还可以在一个正在浏览的页面中，通过“右键点击链接”出现下拉菜单，选择“在隐身窗口中打开链接”，直接进入隐身">
-<meta name="keywords" content="chrome">
+  <meta name="description" content="Chrome的隐身模式先来说说隐身模式的启用方法吧 1.键盘快捷：Ctrl + Shift + N。 2.在Windows7下的任务栏处，右击“Chrome”图标，会出一个下拉菜单，点击“新建隐身窗口”。  3.你还可以在一个正在浏览的页面中，通过“右键点击链接”出现下拉菜单，选择“在隐身窗口中打开链接”，直接进入隐身窗口（如下图）。  简单一点的说，Chrome的隐身模式的好处就是保持你的隐私。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[转]史上最全的Chrome使用技巧集锦">
 <meta property="og:url" content="https://codz.me/2015/06/05/chrome-skills-repost/index.html">
 <meta property="og:site_name" content="Code Is Poetry">
 <meta property="og:description" content="Chrome的隐身模式先来说说隐身模式的启用方法吧 1.键盘快捷：Ctrl + Shift + N。 2.在Windows7下的任务栏处，右击“Chrome”图标，会出一个下拉菜单，点击“新建隐身窗口”。  3.你还可以在一个正在浏览的页面中，通过“右键点击链接”出现下拉菜单，选择“在隐身窗口中打开链接”，直接进入隐身窗口（如下图）。  简单一点的说，Chrome的隐身模式的好处就是保持你的隐私。">
-<meta property="og:locale" content="zh-Hans">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://static.codeceo.com/images/2015/02/cbd5e972f57b108337c8e3625a1aa59e.png">
 <meta property="og:image" content="http://static.codeceo.com/images/2015/02/dd8e476f2a1edde3693f7d94f2ba32ee.png">
 <meta property="og:image" content="http://static.codeceo.com/images/2015/02/3248ee61a830fa9aa2f3fac1183f6c79.png">
@@ -115,46 +79,24 @@
 <meta property="og:image" content="http://static.codeceo.com/images/2015/02/c57b1f00edb148d5264eceb68e07f971.png">
 <meta property="og:image" content="http://static.codeceo.com/images/2015/02/d4f57f19ab3b282c9a9fa82e0222f18f.png">
 <meta property="og:image" content="http://static.codeceo.com/images/2015/02/abf2aa00cc2395757fdf3798a937dff5.png">
-<meta property="og:updated_time" content="2015-08-14T08:58:31.000Z">
+<meta property="article:published_time" content="2015-06-05T06:09:00.000Z">
+<meta property="article:modified_time" content="2015-08-14T08:58:31.000Z">
+<meta property="article:author" content="laudukang">
+<meta property="article:tag" content="chrome">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="[转]史上最全的Chrome使用技巧集锦">
-<meta name="twitter:description" content="Chrome的隐身模式先来说说隐身模式的启用方法吧 1.键盘快捷：Ctrl + Shift + N。 2.在Windows7下的任务栏处，右击“Chrome”图标，会出一个下拉菜单，点击“新建隐身窗口”。  3.你还可以在一个正在浏览的页面中，通过“右键点击链接”出现下拉菜单，选择“在隐身窗口中打开链接”，直接进入隐身窗口（如下图）。  简单一点的说，Chrome的隐身模式的好处就是保持你的隐私。">
 <meta name="twitter:image" content="http://static.codeceo.com/images/2015/02/cbd5e972f57b108337c8e3625a1aa59e.png">
 
+<link rel="canonical" href="https://codz.me/2015/06/05/chrome-skills-repost/">
 
 
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Pisces',
-    version: '5.1.3',
-    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
   };
 </script>
-
-
-
-  <link rel="canonical" href="https://codz.me/2015/06/05/chrome-skills-repost/"/>
-
-
-
-
-
 
   <title>[转]史上最全的Chrome使用技巧集锦 | Code Is Poetry</title>
   
@@ -163,253 +105,163 @@
 
 
 
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?f286ee7ebbe4dd6dfe2457f73f042ac0";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
 
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
 
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
 
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
 
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+    <div>
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">Code Is Poetry</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-      
-        <h1 class="site-subtitle" itemprop="description"></h1>
-      
   </div>
 
   <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
   </div>
 </div>
 
+
 <nav class="site-nav">
   
-
-  
-    <ul id="menu" class="menu">
-      
-        
+  <ul id="menu" class="menu">
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
         <li class="menu-item menu-item-about">
-          <a href="/about/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
-        
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
         <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-        
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
         <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
         <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-        
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
         <li class="menu-item menu-item-commonweal">
-          <a href="/404/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
-            
-            公益404
-          </a>
-        </li>
-      
 
-      
-    </ul>
-  
+    <a href="/404/" rel="section"><i class="fa fa-fw fa-heartbeat"></i>公益 404</a>
 
-  
+  </li>
+  </ul>
+
 </nav>
-
-
-
- </div>
+</div>
     </header>
 
-    <main id="main" class="main">
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          <div id="content" class="content">
+          
+
+          <div class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
-
-  
-
+  <div class="posts-expand">
+      
   
   
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://codz.me/2015/06/05/chrome-skills-repost/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="laudukang">
-      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/head.png">
+      <meta itemprop="name" content="laudukang">
+      <meta itemprop="description" content="Bug Not Found">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Code Is Poetry">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">[转]史上最全的Chrome使用技巧集锦</h2>
-        
+        <h1 class="post-title" itemprop="name headline">
+          [转]史上最全的Chrome使用技巧集锦
+        </h1>
 
         <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2015-08-14 16:58:31 16:58:31" itemprop="dateModified" datetime="2015-08-14T16:58:31+08:00">2015-08-14 16:58:31</time>
               </span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-06-05T14:09:00+08:00">
-                2015-06-05 14:09:00
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2015-08-14T16:58:31+08:00">
-                2015-08-14 16:58:31
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              
-              
+              <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Chrome/" itemprop="url" rel="index">
                     <span itemprop="name">Chrome</span>
                   </a>
                 </span>
-
-                
-                
-              
             </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2015/06/05/chrome-skills-repost/" class="leancloud_visitors" data-flag-title="[转]史上最全的Chrome使用技巧集锦">
-                
-             </span>
-          
-
-          
-
-          
 
           
 
         </div>
       </header>
-    
 
     
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
-      
 
       
         <h2 id="Chrome的隐身模式"><a href="#Chrome的隐身模式" class="headerlink" title="Chrome的隐身模式"></a>Chrome的隐身模式</h2><p>先来说说隐身模式的启用方法吧</p>
@@ -431,7 +283,269 @@
 <li>通过秘密代理进行监视的行为</li>
 <li>站在身后的人</li>
 </ul>
-<h2 id="Chrome下各种组合键"><a href="#Chrome下各种组合键" class="headerlink" title="Chrome下各种组合键"></a>Chrome下各种组合键</h2><table><br><br><tbody><br><br><tr><br><br><th>热键组合</th><br><br><th>实现的功能</th><br><br></tr><br><br><tr><br><br><td>F1</td><br><br><td>Google浏览器帮助中心</td><br><br></tr><br><br><tr><br><br><td>F12</td><br><br><td>打开<span class="wp_keywordlink"><a href="http://www.codeceo.com/article/chrome-console.html" title="Chrome控制台" target="_blank" rel="noopener">Chrome控制台</a></span></td><br><br></tr><br><br><tr><br><br><td>Ctrl+J</td><br><br><td>进入“下载内容”页面</td><br><br></tr><br><br><tr><br><br><td>Ctrl+H</td><br><br><td>查看“历史记录”页面</td><br><br></tr><br><br><tr><br><br><td>Ctrl+D</td><br><br><td>将此页加入书签</td><br><br></tr><br><br><tr><br><br><td>Ctrl+F</td><br><br><td>打开/关闭 搜索框（搜索页面内的文字）</td><br><br></tr><br><br><tr><br><br><td>Ctrl+P</td><br><br><td>打开打印窗口</td><br><br></tr><br><br><tr><br><br><td>Ctrl+T</td><br><br><td>新建标签页</td><br><br></tr><br><br><tr><br><br><td>Ctrl+W</td><br><br><td>关闭标签页</td><br><br></tr><br><br><tr><br><br><td>Ctrl++</td><br><br><td>放大页面</td><br><br></tr><br><br><tr><br><br><td>Ctrl+-</td><br><br><td>缩小页面</td><br><br></tr><br><br><tr><br><br><td>Ctrl+0</td><br><br><td>默认页面字体大小</td><br><br></tr><br><br><tr><br><br><td>Ctrl+Shift+T</td><br><br><td>重新打开最近关闭的一个标签</td><br><br></tr><br><br><tr><br><br><td>Ctrl+N</td><br><br><td>新建一个窗口</td><br><br></tr><br><br><tr><br><br><td>Ctrl+Shift+N</td><br><br><td>新建一个隐身模式窗口</td><br><br></tr><br><br><tr><br><br><td>Ctrl+Tab</td><br><br><td>从左到右，标签循环浏览</td><br><br></tr><br><br><tr><br><br><td>Ctrl+Shift+Tab</td><br><br><td>从右到左，标签循环浏览</td><br><br></tr><br><br><tr><br><br><td>Ctrl+1-8</td><br><br><td>分别指向第1、2、3…8标签</td><br><br></tr><br><br><tr><br><br><td>Ctrl+9</td><br><br><td>跳转到最后一个标签</td><br><br></tr><br><br><tr><br><br><td>Ctrl+Shift+Del</td><br><br><td>打开“清除浏览数据”窗口</td><br><br></tr><br><br><tr><br><br><td>Ctrl+Shift+B</td><br><br><td>显示/隐藏书签栏</td><br><br></tr><br><br><tr><br><br><td>Shift+Esc</td><br><br><td>开打Chrome任务管理器</td><br><br></tr><br><br><tr><br><br><td>Alt+Home</td><br><br><td>在当前标签打开首页</td><br><br></tr><br><br><tr><br><br><td>Alt+D/Ctrl+L</td><br><br><td>迅速突出地址栏</td><br><br></tr><br><br><tr><br><br><td>Ctrl+Enter</td><br><br><td>在地址栏自动添加www或.com</td><br><br></tr><br><br><tr><br><br><td>Ctrl+Shift+V</td><br><br><td>粘帖剪切板中的纯文本格式</td><br><br></tr><br><br><tr><br><br><td>Shift+Alt+T</td><br><br><td>将焦点聚集到工具栏中的第一个工具</td><br><br></tr><br><br><tr><br><br><td>Tab (after Shift+Alt+T)</td><br><br><td>工具栏中将焦点移到各个选项上</td><br><br></tr><br><br><tr><br><br><td>Space or Enter (after Shift+Alt+T)</td><br><br><td>可激活工具栏按钮</td><br><br></tr><br><br><tr><br><br><td>Shift+F10 (after Shift+Alt+T)</td><br><br><td>可打开相关右键菜单</td><br><br></tr><br><br><tr><br><br><td>Esc (after Shift+Alt+T)</td><br><br><td>可将焦点从工具栏移回到网页上</td><br><br></tr><br><br></tbody><br><br></table>
+<h2 id="Chrome下各种组合键"><a href="#Chrome下各种组合键" class="headerlink" title="Chrome下各种组合键"></a>Chrome下各种组合键</h2><table>
+
+<tbody>
+
+<tr>
+
+<th>热键组合</th>
+
+<th>实现的功能</th>
+
+</tr>
+
+<tr>
+
+<td>F1</td>
+
+<td>Google浏览器帮助中心</td>
+
+</tr>
+
+<tr>
+
+<td>F12</td>
+
+<td>打开<span class="wp_keywordlink">[Chrome控制台](http://www.codeceo.com/article/chrome-console.html "Chrome控制台")</span></td>
+
+</tr>
+
+<tr>
+
+<td>Ctrl+J</td>
+
+<td>进入“下载内容”页面</td>
+
+</tr>
+
+<tr>
+
+<td>Ctrl+H</td>
+
+<td>查看“历史记录”页面</td>
+
+</tr>
+
+<tr>
+
+<td>Ctrl+D</td>
+
+<td>将此页加入书签</td>
+
+</tr>
+
+<tr>
+
+<td>Ctrl+F</td>
+
+<td>打开/关闭 搜索框（搜索页面内的文字）</td>
+
+</tr>
+
+<tr>
+
+<td>Ctrl+P</td>
+
+<td>打开打印窗口</td>
+
+</tr>
+
+<tr>
+
+<td>Ctrl+T</td>
+
+<td>新建标签页</td>
+
+</tr>
+
+<tr>
+
+<td>Ctrl+W</td>
+
+<td>关闭标签页</td>
+
+</tr>
+
+<tr>
+
+<td>Ctrl++</td>
+
+<td>放大页面</td>
+
+</tr>
+
+<tr>
+
+<td>Ctrl+-</td>
+
+<td>缩小页面</td>
+
+</tr>
+
+<tr>
+
+<td>Ctrl+0</td>
+
+<td>默认页面字体大小</td>
+
+</tr>
+
+<tr>
+
+<td>Ctrl+Shift+T</td>
+
+<td>重新打开最近关闭的一个标签</td>
+
+</tr>
+
+<tr>
+
+<td>Ctrl+N</td>
+
+<td>新建一个窗口</td>
+
+</tr>
+
+<tr>
+
+<td>Ctrl+Shift+N</td>
+
+<td>新建一个隐身模式窗口</td>
+
+</tr>
+
+<tr>
+
+<td>Ctrl+Tab</td>
+
+<td>从左到右，标签循环浏览</td>
+
+</tr>
+
+<tr>
+
+<td>Ctrl+Shift+Tab</td>
+
+<td>从右到左，标签循环浏览</td>
+
+</tr>
+
+<tr>
+
+<td>Ctrl+1-8</td>
+
+<td>分别指向第1、2、3…8标签</td>
+
+</tr>
+
+<tr>
+
+<td>Ctrl+9</td>
+
+<td>跳转到最后一个标签</td>
+
+</tr>
+
+<tr>
+
+<td>Ctrl+Shift+Del</td>
+
+<td>打开“清除浏览数据”窗口</td>
+
+</tr>
+
+<tr>
+
+<td>Ctrl+Shift+B</td>
+
+<td>显示/隐藏书签栏</td>
+
+</tr>
+
+<tr>
+
+<td>Shift+Esc</td>
+
+<td>开打Chrome任务管理器</td>
+
+</tr>
+
+<tr>
+
+<td>Alt+Home</td>
+
+<td>在当前标签打开首页</td>
+
+</tr>
+
+<tr>
+
+<td>Alt+D/Ctrl+L</td>
+
+<td>迅速突出地址栏</td>
+
+</tr>
+
+<tr>
+
+<td>Ctrl+Enter</td>
+
+<td>在地址栏自动添加www或.com</td>
+
+</tr>
+
+<tr>
+
+<td>Ctrl+Shift+V</td>
+
+<td>粘帖剪切板中的纯文本格式</td>
+
+</tr>
+
+<tr>
+
+<td>Shift+Alt+T</td>
+
+<td>将焦点聚集到工具栏中的第一个工具</td>
+
+</tr>
+
+<tr>
+
+<td>Tab (after Shift+Alt+T)</td>
+
+<td>工具栏中将焦点移到各个选项上</td>
+
+</tr>
+
+<tr>
+
+<td>Space or Enter (after Shift+Alt+T)</td>
+
+<td>可激活工具栏按钮</td>
+
+</tr>
+
+<tr>
+
+<td>Shift+F10 (after Shift+Alt+T)</td>
+
+<td>可打开相关右键菜单</td>
+
+</tr>
+
+<tr>
+
+<td>Esc (after Shift+Alt+T)</td>
+
+<td>可将焦点从工具栏移回到网页上</td>
+
+</tr>
+
+</tbody>
+
+</table>
 
 <h2 id="Chrome的about指令"><a href="#Chrome的about指令" class="headerlink" title="Chrome的about指令"></a>Chrome的about指令</h2><p>估计很多人不知道Chrome地址栏功能，作为一个Chrome用户，必须懂的。以下我要介绍的这些指令在Chrome地址栏输入即可</p>
 <p>about:version – 显示当前版本 也可以是chrome-resource://about/</p>
@@ -514,552 +628,372 @@
 <li><a href="http://www.codeceo.com/article/chrome-usage-most-useful.html" target="_blank" rel="noopener">史上最全的Chrome使用技巧集锦</a></li>
 </ul>
 
-      
     </div>
+
     
     
     
 
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/chrome/" rel="tag"># chrome</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2015/06/04/web-performance-test-tool-gor/" rel="next" title="终极 Web 应用性能和压力测试工具 Gor">
-                <i class="fa fa-chevron-left"></i> 终极 Web 应用性能和压力测试工具 Gor
-              </a>
-            
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/chrome/" rel="tag"># chrome</a>
           </div>
 
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/06/10/web-front-end-security/" rel="prev" title="[转]Web前端攻防（2014版）">
-                [转]Web前端攻防（2014版） <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          
-  
-
-
-        </div>
         
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2015/06/04/web-performance-test-tool-gor/" rel="prev" title="终极 Web 应用性能和压力测试工具 Gor">
+      <i class="fa fa-chevron-left"></i> 终极 Web 应用性能和压力测试工具 Gor
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2015/06/10/web-front-end-security/" rel="next" title="[转]Web前端攻防（2014版）">
+      [转]Web前端攻防（2014版） <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
   </div>
 
-  <aside id="sidebar" class="sidebar">
-    
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
     <div class="sidebar-inner">
 
-      
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
 
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <img class="site-author-image" itemprop="image"
-                src="/images/head.png"
-                alt="laudukang" />
-            
-              <p class="site-author-name" itemprop="name">laudukang</p>
-              <p class="site-description motion-element" itemprop="description"></p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/">
-              
-                  <span class="site-state-item-count">67</span>
-                  <span class="site-state-item-name">日志</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-categories">
-                <a href="/categories/index.html">
-                  <span class="site-state-item-count">9</span>
-                  <span class="site-state-item-name">分类</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                <a href="/tags/index.html">
-                  <span class="site-state-item-count">24</span>
-                  <span class="site-state-item-name">标签</span>
-                </a>
-              </div>
-            
-
-          </nav>
-
-          
-
-          <div class="links-of-author motion-element">
-            
-              
-                <span class="links-of-author-item">
-                  <a href="https://github.com/laudukang" target="_blank" title="GitHub">
-                    
-                      <i class="fa fa-fw fa-github"></i>GitHub</a>
-                </span>
-              
-                <span class="links-of-author-item">
-                  <a href="https://gitee.com/laudukang" target="_blank" title="Git@OSC">
-                    
-                      <i class="fa fa-fw fa-github-alt"></i>Git@OSC</a>
-                </span>
-              
-                <span class="links-of-author-item">
-                  <a href="https://stackoverflow.com/users/5621049/laudukang" target="_blank" title="StackOverflow">
-                    
-                      <i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
-                </span>
-              
-                <span class="links-of-author-item">
-                  <a href="https://www.google.com/maps/place/%E6%B7%B1%E5%9C%B3%E5%B8%82%E8%BD%AF%E4%BB%B6%E4%BA%A7%E4%B8%9A%E5%9F%BA%E5%9C%B0/@22.5244896,113.9382973,17z/data=!3m1!4b1!4m5!3m4!1s0x3403ee17d008a019:0xbb7b06b73d856c14!8m2!3d22.5244896!4d113.9382973" target="_blank" title="Map">
-                    
-                      <i class="fa fa-fw fa-map-marker"></i>Map</a>
-                </span>
-              
-            
-          </div>
-
-          
-          
-
-          
-          
-
-          
-
-        </div>
-      </section>
-
-      
       <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Chrome的隐身模式"><span class="nav-number">1.</span> <span class="nav-text">Chrome的隐身模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chrome下各种组合键"><span class="nav-number">2.</span> <span class="nav-text">Chrome下各种组合键</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chrome的about指令"><span class="nav-number">3.</span> <span class="nav-text">Chrome的about指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-accessibility-查看浏览器当前访问的标签"><span class="nav-number">4.</span> <span class="nav-text">chrome://accessibility     查看浏览器当前访问的标签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-appcache-internals-对HTML5应用的离线存储进行管理"><span class="nav-number">5.</span> <span class="nav-text">chrome://appcache-internals/    对HTML5应用的离线存储进行管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-apps-Chrome网上应用商店"><span class="nav-number">6.</span> <span class="nav-text">chrome://apps/      Chrome网上应用商店</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-bookmarks-Chrome书签管理"><span class="nav-number">7.</span> <span class="nav-text">chrome://bookmarks     Chrome书签管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-cache-Chrome缓存"><span class="nav-number">8.</span> <span class="nav-text">chrome://cache/      Chrome缓存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于Chrome-chrome-chrome-和chrome-help"><span class="nav-number">9.</span> <span class="nav-text">关于Chrome     chrome://chrome/和chrome://help/</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于Chrome的相关功能-chrome-about-和chrome-chrome-urls"><span class="nav-number">10.</span> <span class="nav-text">关于Chrome的相关功能    chrome://about/和chrome://chrome-urls/</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-components-查看相关组件"><span class="nav-number">11.</span> <span class="nav-text">chrome://components/     查看相关组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-conflicts-查看所有已经载入或者将要载入主要程序中的-dll-模块"><span class="nav-number">12.</span> <span class="nav-text">chrome://conflicts/     查看所有已经载入或者将要载入主要程序中的 dll 模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-crashes-停用启用崩溃报告"><span class="nav-number">13.</span> <span class="nav-text">chrome://crashes/    停用启用崩溃报告</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-credits-查看第三方软件许可证"><span class="nav-number">14.</span> <span class="nav-text">chrome://credits/     查看第三方软件许可证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-devices"><span class="nav-number">15.</span> <span class="nav-text">chrome://devices/</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-dns-查看DNS记录"><span class="nav-number">16.</span> <span class="nav-text">chrome://dns/      查看DNS记录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-downloads-查看下载文件"><span class="nav-number">17.</span> <span class="nav-text">chrome://downloads/     查看下载文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-extensions-查看扩展程序"><span class="nav-number">18.</span> <span class="nav-text">chrome://extensions/     查看扩展程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-plugins-停用启用相关插件"><span class="nav-number">19.</span> <span class="nav-text">chrome://plugins/      停用启用相关插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-flags"><span class="nav-number">20.</span> <span class="nav-text">chrome://flags/</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-flash-flash插件的详细信息"><span class="nav-number">21.</span> <span class="nav-text">chrome://flash/      flash插件的详细信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-gcm-internals-消息推送服务"><span class="nav-number">22.</span> <span class="nav-text">chrome://gcm-internals/     消息推送服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-history-查看历史记录"><span class="nav-number">23.</span> <span class="nav-text">chrome://history/      查看历史记录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-indexeddb-internals-查看-html5的本地存储"><span class="nav-number">24.</span> <span class="nav-text">chrome://indexeddb-internals/      查看 html5的本地存储</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-inspect-查看开发工具"><span class="nav-number">25.</span> <span class="nav-text">chrome://inspect/     查看开发工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-invalidations-失效的调试程序"><span class="nav-number">26.</span> <span class="nav-text">chrome://invalidations/    失效的调试程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-media-internals-查看媒体内部数据"><span class="nav-number">27.</span> <span class="nav-text">chrome://media-internals/     查看媒体内部数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-memory-redirect-查看内存信息"><span class="nav-number">28.</span> <span class="nav-text">chrome://memory-redirect/     查看内存信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-memory-internals"><span class="nav-number">29.</span> <span class="nav-text">chrome://memory-internals/</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-nacl"><span class="nav-number">30.</span> <span class="nav-text">chrome://nacl/</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#chrome-net-internals-Chrome的抓包工具"><span class="nav-number">30.1.</span> <span class="nav-text">chrome://net-internals     Chrome的抓包工具</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-newtab-打开新的标签"><span class="nav-number">31.</span> <span class="nav-text">chrome://newtab     打开新的标签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-omnibox-智能地址栏"><span class="nav-number">32.</span> <span class="nav-text">chrome://omnibox/     智能地址栏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-predictors-URl输入命中率"><span class="nav-number">33.</span> <span class="nav-text">chrome://predictors/    URl输入命中率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-policy-编辑策略"><span class="nav-number">34.</span> <span class="nav-text">chrome://policy/   编辑策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-print-调用打印机"><span class="nav-number">35.</span> <span class="nav-text">chrome://print/   调用打印机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-profiler-分析器"><span class="nav-number">36.</span> <span class="nav-text">chrome://profiler/   分析器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-serviceworker-internals-调试服务"><span class="nav-number">37.</span> <span class="nav-text">chrome://serviceworker-internals/    调试服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-quota-internals-显示磁盘详细可用空间以及各个网站的使用配额"><span class="nav-number">38.</span> <span class="nav-text">chrome://quota-internals/  显示磁盘详细可用空间以及各个网站的使用配额</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-settings-设置"><span class="nav-number">39.</span> <span class="nav-text">chrome://settings/    设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-signin-internals-内部标签"><span class="nav-number">40.</span> <span class="nav-text">chrome://signin-internals/     内部标签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-sync-internals-各种同步记录"><span class="nav-number">41.</span> <span class="nav-text">chrome://sync-internals/     各种同步记录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-system-系统诊断数据"><span class="nav-number">42.</span> <span class="nav-text">chrome://system/    系统诊断数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-terms-查看Chrome服务条款"><span class="nav-number">43.</span> <span class="nav-text">chrome://terms/    查看Chrome服务条款</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-thumbnails-近期浏览的网站的首页快照（以相册的形式）"><span class="nav-number">44.</span> <span class="nav-text">chrome://thumbnails/    近期浏览的网站的首页快照（以相册的形式）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-translate-internals-内部翻译器"><span class="nav-number">45.</span> <span class="nav-text">chrome://translate-internals/    内部翻译器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-tracing-追踪访问URL，包括浏览和渲染的过程"><span class="nav-number">46.</span> <span class="nav-text">chrome://tracing/    追踪访问URL，包括浏览和渲染的过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-user-actions-chrome-user-actions-监听用户行为"><span class="nav-number">47.</span> <span class="nav-text">chrome://user-actions/chrome://user-actions/     监听用户行为</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#写在最后"><span class="nav-number">48.</span> <span class="nav-text">写在最后</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Chrome的隐身模式"><span class="nav-number">1.</span> <span class="nav-text">Chrome的隐身模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chrome下各种组合键"><span class="nav-number">2.</span> <span class="nav-text">Chrome下各种组合键</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chrome的about指令"><span class="nav-number">3.</span> <span class="nav-text">Chrome的about指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-accessibility-查看浏览器当前访问的标签"><span class="nav-number">4.</span> <span class="nav-text">chrome:&#x2F;&#x2F;accessibility     查看浏览器当前访问的标签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-appcache-internals-对HTML5应用的离线存储进行管理"><span class="nav-number">5.</span> <span class="nav-text">chrome:&#x2F;&#x2F;appcache-internals&#x2F;    对HTML5应用的离线存储进行管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-apps-Chrome网上应用商店"><span class="nav-number">6.</span> <span class="nav-text">chrome:&#x2F;&#x2F;apps&#x2F;      Chrome网上应用商店</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-bookmarks-Chrome书签管理"><span class="nav-number">7.</span> <span class="nav-text">chrome:&#x2F;&#x2F;bookmarks     Chrome书签管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-cache-Chrome缓存"><span class="nav-number">8.</span> <span class="nav-text">chrome:&#x2F;&#x2F;cache&#x2F;      Chrome缓存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于Chrome-chrome-chrome-和chrome-help"><span class="nav-number">9.</span> <span class="nav-text">关于Chrome     chrome:&#x2F;&#x2F;chrome&#x2F;和chrome:&#x2F;&#x2F;help&#x2F;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于Chrome的相关功能-chrome-about-和chrome-chrome-urls"><span class="nav-number">10.</span> <span class="nav-text">关于Chrome的相关功能    chrome:&#x2F;&#x2F;about&#x2F;和chrome:&#x2F;&#x2F;chrome-urls&#x2F;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-components-查看相关组件"><span class="nav-number">11.</span> <span class="nav-text">chrome:&#x2F;&#x2F;components&#x2F;     查看相关组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-conflicts-查看所有已经载入或者将要载入主要程序中的-dll-模块"><span class="nav-number">12.</span> <span class="nav-text">chrome:&#x2F;&#x2F;conflicts&#x2F;     查看所有已经载入或者将要载入主要程序中的 dll 模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-crashes-停用启用崩溃报告"><span class="nav-number">13.</span> <span class="nav-text">chrome:&#x2F;&#x2F;crashes&#x2F;    停用启用崩溃报告</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-credits-查看第三方软件许可证"><span class="nav-number">14.</span> <span class="nav-text">chrome:&#x2F;&#x2F;credits&#x2F;     查看第三方软件许可证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-devices"><span class="nav-number">15.</span> <span class="nav-text">chrome:&#x2F;&#x2F;devices&#x2F;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-dns-查看DNS记录"><span class="nav-number">16.</span> <span class="nav-text">chrome:&#x2F;&#x2F;dns&#x2F;      查看DNS记录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-downloads-查看下载文件"><span class="nav-number">17.</span> <span class="nav-text">chrome:&#x2F;&#x2F;downloads&#x2F;     查看下载文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-extensions-查看扩展程序"><span class="nav-number">18.</span> <span class="nav-text">chrome:&#x2F;&#x2F;extensions&#x2F;     查看扩展程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-plugins-停用启用相关插件"><span class="nav-number">19.</span> <span class="nav-text">chrome:&#x2F;&#x2F;plugins&#x2F;      停用启用相关插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-flags"><span class="nav-number">20.</span> <span class="nav-text">chrome:&#x2F;&#x2F;flags&#x2F;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-flash-flash插件的详细信息"><span class="nav-number">21.</span> <span class="nav-text">chrome:&#x2F;&#x2F;flash&#x2F;      flash插件的详细信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-gcm-internals-消息推送服务"><span class="nav-number">22.</span> <span class="nav-text">chrome:&#x2F;&#x2F;gcm-internals&#x2F;     消息推送服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-history-查看历史记录"><span class="nav-number">23.</span> <span class="nav-text">chrome:&#x2F;&#x2F;history&#x2F;      查看历史记录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-indexeddb-internals-查看-html5的本地存储"><span class="nav-number">24.</span> <span class="nav-text">chrome:&#x2F;&#x2F;indexeddb-internals&#x2F;      查看 html5的本地存储</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-inspect-查看开发工具"><span class="nav-number">25.</span> <span class="nav-text">chrome:&#x2F;&#x2F;inspect&#x2F;     查看开发工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-invalidations-失效的调试程序"><span class="nav-number">26.</span> <span class="nav-text">chrome:&#x2F;&#x2F;invalidations&#x2F;    失效的调试程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-media-internals-查看媒体内部数据"><span class="nav-number">27.</span> <span class="nav-text">chrome:&#x2F;&#x2F;media-internals&#x2F;     查看媒体内部数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-memory-redirect-查看内存信息"><span class="nav-number">28.</span> <span class="nav-text">chrome:&#x2F;&#x2F;memory-redirect&#x2F;     查看内存信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-memory-internals"><span class="nav-number">29.</span> <span class="nav-text">chrome:&#x2F;&#x2F;memory-internals&#x2F;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-nacl"><span class="nav-number">30.</span> <span class="nav-text">chrome:&#x2F;&#x2F;nacl&#x2F;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#chrome-net-internals-Chrome的抓包工具"><span class="nav-number">30.1.</span> <span class="nav-text">chrome:&#x2F;&#x2F;net-internals     Chrome的抓包工具</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-newtab-打开新的标签"><span class="nav-number">31.</span> <span class="nav-text">chrome:&#x2F;&#x2F;newtab     打开新的标签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-omnibox-智能地址栏"><span class="nav-number">32.</span> <span class="nav-text">chrome:&#x2F;&#x2F;omnibox&#x2F;     智能地址栏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-predictors-URl输入命中率"><span class="nav-number">33.</span> <span class="nav-text">chrome:&#x2F;&#x2F;predictors&#x2F;    URl输入命中率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-policy-编辑策略"><span class="nav-number">34.</span> <span class="nav-text">chrome:&#x2F;&#x2F;policy&#x2F;   编辑策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-print-调用打印机"><span class="nav-number">35.</span> <span class="nav-text">chrome:&#x2F;&#x2F;print&#x2F;   调用打印机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-profiler-分析器"><span class="nav-number">36.</span> <span class="nav-text">chrome:&#x2F;&#x2F;profiler&#x2F;   分析器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-serviceworker-internals-调试服务"><span class="nav-number">37.</span> <span class="nav-text">chrome:&#x2F;&#x2F;serviceworker-internals&#x2F;    调试服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-quota-internals-显示磁盘详细可用空间以及各个网站的使用配额"><span class="nav-number">38.</span> <span class="nav-text">chrome:&#x2F;&#x2F;quota-internals&#x2F;  显示磁盘详细可用空间以及各个网站的使用配额</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-settings-设置"><span class="nav-number">39.</span> <span class="nav-text">chrome:&#x2F;&#x2F;settings&#x2F;    设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-signin-internals-内部标签"><span class="nav-number">40.</span> <span class="nav-text">chrome:&#x2F;&#x2F;signin-internals&#x2F;     内部标签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-sync-internals-各种同步记录"><span class="nav-number">41.</span> <span class="nav-text">chrome:&#x2F;&#x2F;sync-internals&#x2F;     各种同步记录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-system-系统诊断数据"><span class="nav-number">42.</span> <span class="nav-text">chrome:&#x2F;&#x2F;system&#x2F;    系统诊断数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-terms-查看Chrome服务条款"><span class="nav-number">43.</span> <span class="nav-text">chrome:&#x2F;&#x2F;terms&#x2F;    查看Chrome服务条款</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-thumbnails-近期浏览的网站的首页快照（以相册的形式）"><span class="nav-number">44.</span> <span class="nav-text">chrome:&#x2F;&#x2F;thumbnails&#x2F;    近期浏览的网站的首页快照（以相册的形式）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-translate-internals-内部翻译器"><span class="nav-number">45.</span> <span class="nav-text">chrome:&#x2F;&#x2F;translate-internals&#x2F;    内部翻译器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-tracing-追踪访问URL，包括浏览和渲染的过程"><span class="nav-number">46.</span> <span class="nav-text">chrome:&#x2F;&#x2F;tracing&#x2F;    追踪访问URL，包括浏览和渲染的过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome-user-actions-chrome-user-actions-监听用户行为"><span class="nav-number">47.</span> <span class="nav-text">chrome:&#x2F;&#x2F;user-actions&#x2F;chrome:&#x2F;&#x2F;user-actions&#x2F;     监听用户行为</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#写在最后"><span class="nav-number">48.</span> <span class="nav-text">写在最后</span></a></li></ol></div>
+      </div>
       <!--/noindex-->
-      
 
-      
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="laudukang"
+      src="/images/head.png">
+  <p class="site-author-name" itemprop="name">laudukang</p>
+  <div class="site-description" itemprop="description">Bug Not Found</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">67</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/laudukang" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;laudukang" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://gitee.com/laudukang" title="Gitee → https:&#x2F;&#x2F;gitee.com&#x2F;laudukang" rel="noopener" target="_blank"><i class="fa fa-fw fa-github-alt"></i>Gitee</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/users/5621049/laudukang" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;5621049&#x2F;laudukang" rel="noopener" target="_blank"><i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.google.com/maps/place/%E6%B7%B1%E5%9C%B3%E5%B8%82%E8%BD%AF%E4%BB%B6%E4%BA%A7%E4%B8%9A%E5%9F%BA%E5%9C%B0/@22.5244896,113.9382973,17z/data=!3m1!4b1!4m5!3m4!1s0x3403ee17d008a019:0xbb7b06b73d856c14!8m2!3d22.5244896!4d113.9382973" title="Map → https:&#x2F;&#x2F;www.google.com&#x2F;maps&#x2F;place&#x2F;%E6%B7%B1%E5%9C%B3%E5%B8%82%E8%BD%AF%E4%BB%B6%E4%BA%A7%E4%B8%9A%E5%9F%BA%E5%9C%B0&#x2F;@22.5244896,113.9382973,17z&#x2F;data&#x3D;!3m1!4b1!4m5!3m4!1s0x3403ee17d008a019:0xbb7b06b73d856c14!8m2!3d22.5244896!4d113.9382973" rel="noopener" target="_blank"><i class="fa fa-fw fa-map-marker"></i>Map</a>
+      </span>
+  </div>
+
+
+
+      </div>
 
     </div>
   </aside>
+  <div id="sidebar-dimmer"></div>
 
 
-        
       </div>
     </main>
 
-    <footer id="footer" class="footer">
+    <footer class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2015 - <span itemprop="copyrightYear">2019</span>
+        
+
+<div class="copyright">
+  
+  &copy; 2015 – 
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-heart icon-next-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">laudukang</span>
-
-  
 </div>
-
-
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io" rel="external nofollow">Hexo</a> 强力驱动</div>
-
-
-
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
   <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">NexT.Pisces</a> v5.1.3</div>
-
-
-
-
-        
-<div class="busuanzi-count" style="display: none;">
-  <script async src="/js/busuanzi.pure.mini.js"></script>
-
-  
-    <span class="site-uv">
-      <i class="fa fa-user"></i>
-      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
-      
-    </span>
-  
-
-  
-    <span class="site-pv">
-      <i class="fa fa-eye"></i>
-      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
-      
-    </span>
-  
-</div>
-
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.1
   </div>
 
-  
+        
+<div class="busuanzi-count">
+  <script pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
 
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
+
+
+
+
+
+  <script pjax>
+  function leancloudSelector(url) {
+    url = encodeURI(url);
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
   }
-</script>
-
-
-
-
-
-
-
-
-
-
-  
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-  
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/nprogress/nprogress.js"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-  
-  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
-
-  <script type="text/javascript" src="/js/src/custom/custom.js?v=5.1.3"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
-
-
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-  
-  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
-  <script>AV.initialize("CPfRDhOlTyfkHW155W3Kx3H1-gzGzoHsz", "TX05RQSQMd8fbL7RaJNADS7S");</script>
-  <script>
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.getAttribute('id'));
+      var title = visitors.getAttribute('data-flag-title');
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              })
+          } else {
+              leancloudSelector(url).innerText = 'Counter not initialized! More info at console err msg.';
+              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
+            
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
     function showTime(Counter) {
-      var query = new AV.Query(Counter);
-      var entries = [];
-      var $visitors = $(".leancloud_visitors");
-
-      $visitors.each(function () {
-        entries.push( $(this).attr("id").trim() );
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.getAttribute('id'));
       });
 
-      query.containedIn('url', entries);
-      query.find()
-        .done(function (results) {
-          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
-
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
           if (results.length === 0) {
-            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
             return;
           }
-
-          for (var i = 0; i < results.length; i++) {
-            var item = results[i];
-            var url = item.get('url');
-            var time = item.get('time');
-            var element = document.getElementById(url);
-
-            $(element).find(COUNT_CONTAINER_REF).text(time);
+          for (let item of results) {
+            let { url, time } = item;
+            leancloudSelector(url).innerText = time;
           }
-          for(var i = 0; i < entries.length; i++) {
-            var url = entries[i];
-            var element = document.getElementById(url);
-            var countSpan = $(element).find(COUNT_CONTAINER_REF);
-            if( countSpan.text() == '') {
-              countSpan.text(0);
+          for (let url of entries) {
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
             }
           }
         })
-        .fail(function (object, error) {
-          console.log("Error: " + error.code + " " + error.message);
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
         });
     }
+  }
 
-    function addCount(Counter) {
-      var $visitors = $(".leancloud_visitors");
-      var url = $visitors.attr('id').trim();
-      var title = $visitors.attr('data-flag-title').trim();
-      var query = new AV.Query(Counter);
-
-      query.equalTo("url", url);
-      query.find({
-        success: function(results) {
-          if (results.length > 0) {
-            var counter = results[0];
-            counter.fetchWhenSave(true);
-            counter.increment("time");
-            counter.save(null, {
-              success: function(counter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(counter.get('time'));
-              },
-              error: function(counter, error) {
-                console.log('Failed to save Visitor num, with error message: ' + error.message);
-              }
-            });
-          } else {
-            var newcounter = new Counter();
-            /* Set ACL */
-            var acl = new AV.ACL();
-            acl.setPublicReadAccess(true);
-            acl.setPublicWriteAccess(true);
-            newcounter.setACL(acl);
-            /* End Set ACL */
-            newcounter.set("title", title);
-            newcounter.set("url", url);
-            newcounter.set("time", 1);
-            newcounter.save(null, {
-              success: function(newcounter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
-              },
-              error: function(newcounter, error) {
-                console.log('Failed to create');
-              }
-            });
-          }
-        },
-        error: function(error) {
-          console.log('Error:' + error.code + " " + error.message);
-        }
-      });
-    }
-
-    $(function() {
-      var Counter = AV.Object.extend("Counter");
-      if ($('.leancloud_visitors').length == 1) {
+  fetch('https://app-router.leancloud.cn/2/route?appId=CPfRDhOlTyfkHW155W3Kx3H1-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id': 'CPfRDhOlTyfkHW155W3Kx3H1-gzGzoHsz',
+            'X-LC-Key': 'TX05RQSQMd8fbL7RaJNADS7S',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
         addCount(Counter);
-      } else if ($('.post-title-link').length > 1) {
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
         showTime(Counter);
       }
     });
   </script>
 
 
+      </div>
+    </footer>
+  </div>
 
   
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
     }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    if (element.className) {
+      script.className = element.className;
     }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.getAttribute('pjax') !== null) {
+      script.setAttribute('pjax', '');
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
 </script>
 
 
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
   
 
   
 
-  
-
-  
-
+    </div>
 </body>
 </html>

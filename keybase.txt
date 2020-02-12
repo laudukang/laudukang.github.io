@@ -1,0 +1,82 @@
+==================================================================
+https://keybase.io/laudukang
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://codz.me
+  * I am laudukang (https://keybase.io/laudukang) on keybase.
+  * I have a public key with fingerprint 09A5 E3C0 86ED F2C7 4D5D  DB2C DADC B7A7 7E8F D26A
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "010119731f39e4c15e2ce5c58ebad82ca178a0142d5c212e8af77a0732b7dbc39d580a",
+      "fingerprint": "09a5e3c086edf2c74d5ddb2cdadcb7a77e8fd26a",
+      "host": "keybase.io",
+      "key_id": "dadcb7a77e8fd26a",
+      "kid": "010119731f39e4c15e2ce5c58ebad82ca178a0142d5c212e8af77a0732b7dbc39d580a",
+      "uid": "3be8c994a92eb8246b82d536d9937b19",
+      "username": "laudukang"
+    },
+    "merkle_root": {
+      "ctime": 1557710200,
+      "hash_meta": "8acd66916918291580846cfdd4bbdc11546691f2317ef2c987821054bda678a0",
+      "seqno": 5356795
+    },
+    "revoke": {
+      "sig_ids": [
+        "2bd564ef1abd753dc1715ab633783ac4a420ace76345ee0362ce4a036d5401910f"
+      ]
+    },
+    "service": {
+      "hostname": "codz.me",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 1
+  },
+  "ctime": 1557710201,
+  "expire_in": 157680000,
+  "prev": "38bebfb704b1816233f658bf54c69a52f0f7e816b17f42c6e0bd60dadbeb3940",
+  "seqno": 12,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v2.1.0
+Comment: https://keybase.io/crypto
+
+yMK2AnicrVNbaB1FGD5J09SmSHoBFQWrixZiY537zMZQzYN4efGSp5I0J3Pbc9Zz
+cvZkd0+aWGOpYKlV81KlpVWjoEW0YCotYr3V6FEhQkIQGmmxMfoipBBQ+xBicTZU
+EPFRWHZmZ7/vm+//5p+vrl+Ta2m42H1h5x2/lPINU5NxLdc7Vx/Z66nIjHgde72S
+XR1s2dgkzZdC43V4AAIIfY5hgH1LNKQWaUs1FVZJI5CWkAsJIEGGagSRFTLgXAKO
+keJGaewbKoD02r0grBRsXI3DSprJ+pJarIFg1gRIc2KoMQppI41WXHJuRWAQy4jF
+KMkYzpySid0RRm7NfeRX7f0H/n/2XVuVw8oK7ftE+sgqgQhzL0MxM76PuYJ+Bkxs
+XJED1qHLsmZqJVkpeKPt3oCNS2Wbj6MozdLVaZhhIKWcQ4AAcBXKpJgfsKl0VCG1
+YcyH7hHIh86EIEwHxhCljIaQkuxvgDDk1gXnCy4QBJQoI1lWkTOS2MFK5HVQTBn3
+qXMQ26GoZLPNk7Dgcku8jh4PKUMZsQGUynCKnTaHVCqGMRdYaiIJAlJbzjCh1gLM
+XH5EutFQAqAPQeDtHs02i4dCvSqeHdS1AHRkntrhZu1eNY7SSEdlt1hM02rSkUWS
+jlQz1B6r8tf4eRVWjOsQxxiycRJGFReRQ/47Ldju2eFqGNt8mCEoZwKALMOqKzI7
+J6GsChQHREEBGcI4YFSogBLNXMuhAASuVSBTkAcEaWaBMgy4LnI07JN/xAeR8ykL
+TtOFVpFpLbbe6OS53qZcQ0uueW1jdnVyLes3/n2hlvevu7pz4tyNfY27uspfPBC8
++dCZb+rPBO+1rRy4gbXOlV4S34mvNw0fnzj4wfba7fcsHP18+MgPP9a7373l0ETb
+w82Pq7eD6Xvf/3hhzF/o3vr9lSdeqD54Hu3v/aNp8bHx3Z2dK7+OD741VYivbHu1
+tT54ceTSmuLZzR/2Xj585vSx1yf7X2mc7uo7ebJ4yVs3vth9vO9I04FPbxVzdvG6
+g6/dd9tvaf9aD16dme1av0288fuWR06fn3lyy/zZ4vLLS0s//XnX5hN39ty/Yf75
+rcNHN8wvtb1Tq471Txfq+56eOrbv0RPF2WTs58ELy9/am2af+8zOpM09hw53gZtf
+fLbz7u0rGz861fhl6+W+nl2f7PkLnqWEdg==
+=qce5
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/laudukang
+
+==================================================================
+
