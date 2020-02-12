@@ -187,6 +187,119 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://codz.me/2019/11/20/opentsdb-query-optimization/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.png">
+      <meta itemprop="name" content="laudukang">
+      <meta itemprop="description" content="Bug Not Found">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Is Poetry">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/20/opentsdb-query-optimization/" class="post-title-link" itemprop="url">OpenTSDB 查询优化</a>
+        </h1>
+
+        <div class="post-meta">
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-20 10:50:49 10:50:49" itemprop="dateModified" datetime="2019-11-20T10:50:49+08:00">2019-11-20 10:50:49</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OpenTSDB/" itemprop="url" rel="index">
+                    <span itemprop="name">OpenTSDB</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="OpenTSDB-简介"><a href="#OpenTSDB-简介" class="headerlink" title="OpenTSDB 简介"></a>OpenTSDB 简介</h2><p><code>OpenTSDB</code>是一个基于HBase的可扩展时间序列数据库，支持数百万每秒的读写，与OpenTSDB的交互主要是通过运行一个或多个TSD来实现的。每个TSD是独立的，没有主设备，没有共享状态，因此您可以根据需要运行任意数量的 TSD，以处理向其施加的任何负载。</p>
+<p><code>Cloudera Express</code>管理并运行了生产环境的 HDFS/HBase/ZooKeeper。</p>
+<h2 id="项目背景"><a href="#项目背景" class="headerlink" title="项目背景"></a>项目背景</h2><p>OpenTSDB存储了SDN设备间的流量数据，粒度包括：源IP、目的IP、上下行流量、服务类型、协议等。</p>
+<p>流量统计接口按时间区间直接查询了OpenTSDB的原始数据，未经Rollup处理。</p>
+<h2 id="查询瓶颈"><a href="#查询瓶颈" class="headerlink" title="查询瓶颈"></a>查询瓶颈</h2><p>客户BJ联通反馈某台<code>SDN</code>设备11月初的流量统计接口返回超时。测试发现其他设备流量统计正常，联通设备查询时候有如下错误日志：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">16:14:13.466 ERROR [RegionClient.exceptionCaught] - Unexpected exception from downstream on [id: 0xbbc6970f, &#x2F;172.31.250.10:50790 &#x3D;&gt; &#x2F;172.31.120.131:16020]</span><br><span class="line">com.stumbleupon.async.CallbackOverflowError: Too many callbacks in Deferred@1273979129(state&#x3D;PENDING, result&#x3D;null, callback&#x3D;net.opentsdb.tsd.HttpJsonSerializer$1DPsResolver@682fd571 -&gt; net.opentsdb.tsd.HttpJsonSerializer$1DPsResolver@3061522a -&gt; net.opentsdb.tsd.HttpJsonSerializer$1DPsResolver@27fac471 -&gt; net.opentsdb.tsd.HttpJsonSerializer$1DPsResolver@17a290df -&gt; net.opentsdb.tsd.HttpJsonSerializer$1DPsResolver@1304b07 -&gt; </span><br><span class="line">&#x2F;&#x2F;....</span><br><span class="line">passthrough -&gt; passthrough) (size&#x3D;16383) when attempting to add cb&#x3D;net.opentsdb.tsd.HttpJsonSerializer$1DPsResolver@29bbd6fc@700176124, eb&#x3D;passthrough@1260931085</span><br></pre></td></tr></table></figure>
+
+<p>Github上有人2016年就遇到该错误，<a href="https://github.com/OpenTSDB/opentsdb/issues/839" target="_blank" rel="noopener">CallbackOverflowError with many tag values</a>，issue至今未关闭</p>
+<p>翻阅了OpenTSDB报错代码段</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">short</span> MAX_CALLBACK_CHAIN_LENGTH = (<span class="number">1</span> &lt;&lt; <span class="number">14</span>) - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">....</span><br><span class="line"></span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (last_callback == callbacks.length) &#123;</span><br><span class="line">          <span class="keyword">final</span> <span class="keyword">int</span> oldlen = callbacks.length;</span><br><span class="line">          <span class="keyword">if</span> (oldlen == MAX_CALLBACK_CHAIN_LENGTH * <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> CallbackOverflowError(<span class="string">"Too many callbacks in "</span> + <span class="keyword">this</span></span><br><span class="line">              + <span class="string">" (size="</span> + (oldlen / <span class="number">2</span>) + <span class="string">") when attempting to add cb="</span></span><br><span class="line">              + cb + <span class="string">'@'</span> + cb.hashCode() + <span class="string">", eb="</span> + eb + <span class="string">'@'</span> + eb.hashCode());</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="keyword">final</span> <span class="keyword">int</span> len = Math.min(oldlen * <span class="number">2</span>, MAX_CALLBACK_CHAIN_LENGTH * <span class="number">2</span>);</span><br><span class="line">          <span class="keyword">final</span> Callback[] newcbs = <span class="keyword">new</span> Callback[len];</span><br><span class="line">          System.arraycopy(callbacks, next_callback,  <span class="comment">// Outstanding callbacks.</span></span><br><span class="line">                           newcbs, <span class="number">0</span>,            <span class="comment">// Move them to the beginning.</span></span><br><span class="line">                           last_callback - next_callback);  <span class="comment">// Number of items.</span></span><br><span class="line">          last_callback -= next_callback;</span><br><span class="line">          next_callback = <span class="number">0</span>;</span><br><span class="line">          callbacks = newcbs;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>MAX_CALLBACK_CHAIN_LENGTH</code>限制了<code>Deferred</code>链的长度，而进入到上面<code>addCallbacks</code>方法的为聚合分类后的每条数据，估计联通的问题就是处理数据超过了该限制。</p>
+<p>测试也发现缩短联通设备的查询时间区间是能正常返回的，并且2019-11-06 8:00:00 - 2019-11-06 9:00:00的数据就近1.5W条返回，也就是说联通设备目的IP近1.5W个，大多数IP流量不多。</p>
+<blockquote>
+<p>Deferred类是Java库提供一些有用的构建模块去 构建高性能，多线程，异步的java应用。它的实现灵感来自Twisted的异步库（twisted.internet.defer）。<br>Deferred允许你轻松地构建异步的处理链，这个处理链必须触发，当一个异步的事件（I/O,RPC 以及其它）完成。它能被广泛用于构建异步API，在一个多线程服务器或者是客户端中。</p>
+</blockquote>
+<h2 id="着手解决"><a href="#着手解决" class="headerlink" title="着手解决"></a>着手解决</h2><p>OpenTSDB并不提供返回结果限制参数，至少2.4版本没有。</p>
+<p>华为云CloudTable集成的OpenTSDB服务支持了结果限制，也就是query api提供了一个limit参数。</p>
+<p>流量统计接口是统计该设备的<code>TOP10</code>流量，因此设置更大的MAX_CALLBACK_CHAIN_LENGTH没有意义：返回结果多，查询慢。</p>
+<p>解决办法就是过滤进入到addCallback的数据大小：</p>
+<p>1、OpenTSDB的查询最后准备返回结果的时候才通过三行代码过滤掉不在该时间区间的数据，</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (dp.timestamp() &lt; data_query.startTime() || </span><br><span class="line">    dp.timestamp() &gt; data_query.endTime()) &#123;</span><br><span class="line">  <span class="keyword">continue</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>因此一个优化就是在进入addCallback就过滤掉这一部分数据。</p>
+<p>2、提供一个limit参数，限制返回结果集大小。这里分两步，一是进入addCallback前通过<code>TreeSet</code>自动排序，至少有limit条数据会进入处理，而是OutputStream写入时候，截取前limit大小的数据。</p>
+<p>关键是提前过滤不在时间区间的数据点及TreeSet自动排序过滤掉大部分小流量的IP数据</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> Deferred&lt;Object&gt; cb_chain = <span class="keyword">new</span> Deferred&lt;Object&gt;();</span><br><span class="line">TreeSet&lt;Number&gt; numberTreeSet = LongStream.range(<span class="number">0</span> - limit, <span class="number">0</span>).mapToDouble(i -&gt; <span class="number">1.0</span> * i).boxed().collect(Collectors.toCollection(TreeSet::<span class="keyword">new</span>));</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (DataPoints[] separate_dps : results) &#123;</span><br><span class="line">  <span class="keyword">for</span> (DataPoints dps : separate_dps) &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="comment">//filter empty dps, laudukang</span></span><br><span class="line">      <span class="keyword">boolean</span> isDpsOk = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">final</span> DataPoint dp : dps) &#123;</span><br><span class="line">        <span class="keyword">if</span> (dp.timestamp() &gt;= data_query.startTime() &amp;&amp;</span><br><span class="line">                dp.timestamp() &lt;= data_query.endTime()) &#123;</span><br><span class="line">          isDpsOk = <span class="keyword">true</span>;</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (isDpsOk &amp;&amp; limit &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        Number dpsSum = dps.sumDps();</span><br><span class="line">        <span class="keyword">if</span> (numberTreeSet.first().doubleValue() &lt; dpsSum.doubleValue()) &#123;</span><br><span class="line">          numberTreeSet.pollFirst();</span><br><span class="line">          numberTreeSet.add(dpsSum.doubleValue());</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="comment">//filter</span></span><br><span class="line">          isDpsOk = <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (isDpsOk) &#123;</span><br><span class="line">        cb_chain.addCallback(<span class="keyword">new</span> DPsResolver(dps));</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"Unexpected error durring resolution"</span>, e);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如query api传入参数包含limit，则先将数据写入到<code>ByteArrayOutputStream</code>（这样子源代码改动小），再从<code>ByteArrayOutputStream</code>中反序列化获得原响应数据，截取前limit条数据写入到<code>OutputStream</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SuppressWarnings</span>(<span class="string">"unchecked"</span>)</span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">sortDps</span><span class="params">(<span class="keyword">long</span> limit, ByteArrayOutputStream stream, OutputStream output)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    <span class="keyword">byte</span>[] content = stream.toByteArray();</span><br><span class="line">    TypeReference&lt;List&lt;Map&lt;String, Object&gt;&gt;&gt; typeReference = <span class="keyword">new</span> TypeReference&lt;List&lt;Map&lt;String, Object&gt;&gt;&gt;() &#123;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    List&lt;Map&lt;String, Object&gt;&gt; dataList = JSON.parseToObject(content, typeReference);</span><br><span class="line"></span><br><span class="line">    List&lt;Map&lt;String, Object&gt;&gt; resultMapList = dataList.stream()</span><br><span class="line">            .filter(m -&gt; !m.containsKey(<span class="string">"metric"</span>))</span><br><span class="line">            .collect(Collectors.toList());</span><br><span class="line"></span><br><span class="line">    List&lt;Map&lt;String, Object&gt;&gt; metricNodeMapList = dataList.stream()</span><br><span class="line">            .filter(m -&gt; m.containsKey(<span class="string">"metric"</span>))</span><br><span class="line">            .collect(Collectors.toList());</span><br><span class="line"></span><br><span class="line">    <span class="comment">//sum dps for sort</span></span><br><span class="line">    metricNodeMapList.forEach(m -&gt; &#123;</span><br><span class="line">      <span class="keyword">double</span> value = ((Map&lt;String, Object&gt;) m.get(<span class="string">"dps"</span>)).values().stream()</span><br><span class="line">              .mapToDouble(i -&gt; &#123;</span><br><span class="line">                <span class="keyword">if</span> (i <span class="keyword">instanceof</span> Integer) &#123;</span><br><span class="line">                  <span class="keyword">return</span> ((Integer) i).doubleValue();</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> (<span class="keyword">double</span>) i;</span><br><span class="line">              &#125;)</span><br><span class="line">              .sum();</span><br><span class="line"></span><br><span class="line">      m.put(<span class="string">"sumDps"</span>, value);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    Comparator&lt;Map&lt;String, Object&gt;&gt; dpsSorter = Comparator.comparingDouble(m -&gt; (<span class="keyword">double</span>) m.get(<span class="string">"sumDps"</span>));</span><br><span class="line">    List&lt;Map&lt;String, Object&gt;&gt; metricLimitNodeMapList = metricNodeMapList.stream()</span><br><span class="line">            .sorted(dpsSorter.reversed()).limit(limit)</span><br><span class="line">            .collect(Collectors.toList());</span><br><span class="line"></span><br><span class="line">    resultMapList.addAll(metricLimitNodeMapList);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">final</span> JsonGenerator json = JSON.getFactory().createGenerator(output);</span><br><span class="line">    json.writeObject(resultMapList);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="编译测试"><a href="#编译测试" class="headerlink" title="编译测试"></a>编译测试</h2><p>参考<a href="http://opentsdb.net/docs/build/html/development/development.html" target="_blank" rel="noopener">OpenTSDB General Development</a> <code>Compiles OpenTSDB and generates a Debian package</code>，卸载官方版本后安装。</p>
+<p>修改 <a href="https://github.com/laudukang/opentsdb-okhttp-client" target="_blank" rel="noopener">laudukang/opentsdb-okhttp-client</a> 让其支持<code>limit</code>查询参数。</p>
+<p>测试显示查询耗时明显缩短，而且响应大小也减少了，不再返回几MB的json数据。</p>
+<p>查询例子<br><code>POST /api/query?summary</code></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"limit"</span>: <span class="number">10</span>,</span><br><span class="line">  <span class="attr">"delete"</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="attr">"end"</span>: <span class="number">1573012800000</span>,</span><br><span class="line">  <span class="attr">"globalAnnotations"</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="attr">"msResolution"</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="attr">"noAnnotations"</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="attr">"queries"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"aggregator"</span>: <span class="string">"sum"</span>,</span><br><span class="line">      <span class="attr">"downsample"</span>: <span class="string">"0all-sum"</span>,</span><br><span class="line">      <span class="attr">"explicitTags"</span>: <span class="literal">false</span>,</span><br><span class="line">      <span class="attr">"filters"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">"filter"</span>: <span class="string">"*"</span>,</span><br><span class="line">          <span class="attr">"groupBy"</span>: <span class="literal">true</span>,</span><br><span class="line">          <span class="attr">"tagk"</span>: <span class="string">"dst_ip"</span>,</span><br><span class="line">          <span class="attr">"type"</span>: <span class="string">"wildcard"</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">"filter"</span>: <span class="string">"CONNECTION_OVERSEAS"</span>,</span><br><span class="line">          <span class="attr">"groupBy"</span>: <span class="literal">false</span>,</span><br><span class="line">          <span class="attr">"tagk"</span>: <span class="string">"service_type"</span>,</span><br><span class="line">          <span class="attr">"type"</span>: <span class="string">"literal_or"</span></span><br><span class="line">        &#125;</span><br><span class="line">      ],</span><br><span class="line">      <span class="attr">"metric"</span>: <span class="string">"1164.conn.total.in"</span>,</span><br><span class="line">      <span class="attr">"preAggregate"</span>: <span class="literal">false</span>,</span><br><span class="line">      <span class="attr">"rate"</span>: <span class="literal">false</span>,</span><br><span class="line">      <span class="attr">"useMultiGets"</span>: <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"showQuery"</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="attr">"showStats"</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="attr">"showSummary"</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="attr">"showTSUIDs"</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="attr">"start"</span>: <span class="number">1572998400000</span>,</span><br><span class="line">  <span class="attr">"timezone"</span>: <span class="string">"UTC"</span>,</span><br><span class="line">  <span class="attr">"useCalendar"</span>: <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>response</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">"metric"</span>: <span class="string">"1164.conn.total.in"</span>,</span><br><span class="line">    <span class="attr">"tags"</span>: &#123;</span><br><span class="line">      <span class="attr">"protocol"</span>: <span class="string">"TCP"</span>,</span><br><span class="line">      <span class="attr">"service_type"</span>: <span class="string">"CONNECTION_OVERSEAS"</span>,</span><br><span class="line">      <span class="attr">"dst_ip"</span>: <span class="string">"107.167.89.234"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"aggregateTags"</span>: [</span><br><span class="line">      <span class="string">"src_ip"</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">"dps"</span>: &#123;</span><br><span class="line">      <span class="attr">"157296960"</span>: <span class="number">17588304652</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"sumDps"</span>: <span class="number">17588304652</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">"metric"</span>: <span class="string">"1164.conn.total.in"</span>,</span><br><span class="line">    <span class="attr">"tags"</span>: &#123;</span><br><span class="line">      <span class="attr">"src_ip"</span>: <span class="string">"240.16.1.109"</span>,</span><br><span class="line">      <span class="attr">"protocol"</span>: <span class="string">"TCP"</span>,</span><br><span class="line">      <span class="attr">"service_type"</span>: <span class="string">"CONNECTION_OVERSEAS"</span>,</span><br><span class="line">      <span class="attr">"dst_ip"</span>: <span class="string">"152.199.39.180"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"aggregateTags"</span>: [],</span><br><span class="line">    <span class="attr">"dps"</span>: &#123;</span><br><span class="line">      <span class="attr">"157296960"</span>: <span class="number">9804591660</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"sumDps"</span>: <span class="number">9804591660</span></span><br><span class="line">  &#125;,</span><br><span class="line">  </span><br><span class="line">  <span class="comment">//余下8条省略...</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>提供一个编译好的安装包：<a href="https://codz.me/d/opentsdb-2.4.0_all.deb">Debian package: opentsdb-2.4.0_all.deb</a></p>
+<h2 id="部分资料"><a href="#部分资料" class="headerlink" title="部分资料"></a>部分资料</h2><ul>
+<li><a href="https://github.com/laudukang/opentsdb" target="_blank" rel="noopener">laudukang/opentsdb</a></li>
+<li><a href="https://github.com/laudukang/opentsdb-okhttp-client" target="_blank" rel="noopener">laudukang/opentsdb-okhttp-client</a></li>
+<li><a href="http://opentsdb.net/" target="_blank" rel="noopener">OpenTSDB</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://codz.me/2018/05/07/build-spark-cluster/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1102,82 +1215,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://codz.me/2016/09/25/java-cacerts-import-certificate/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head.png">
-      <meta itemprop="name" content="laudukang">
-      <meta itemprop="description" content="Bug Not Found">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Code Is Poetry">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/09/25/java-cacerts-import-certificate/" class="post-title-link" itemprop="url">Java cacerts 证书库导入自签名证书</a>
-        </h1>
-
-        <div class="post-meta">
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2016-09-25 17:21:41 17:21:41" itemprop="dateModified" datetime="2016-09-25T17:21:41+08:00">2016-09-25 17:21:41</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>issue<br>JDK未导入自签名证书，调HTTPS接口会有如下错误</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javax.net.ssl.SSLHandshakeException: sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target at sun.security.ssl.Alerts.getSSLException(Alerts.java:<span class="number">192</span>) at sun.security.ssl.SSLSocketImpl.fatal(SSLSocketImpl.java:<span class="number">1949</span>) at sun.security.ssl.Handshaker.fatalSE(Handshaker.java:<span class="number">302</span>) at sun.security.ssl.Handshaker.fatalSE(Handshaker.java:<span class="number">296</span>) at sun.security.ssl.ClientHandshaker.serverCertificate(ClientHandshaker.java:<span class="number">1509</span>) at sun.security.ssl.ClientHandshaker.processMessage(ClientHandshaker.java:<span class="number">216</span>) at sun.security.ssl.Handshaker.processLoop(Handshaker.java:<span class="number">979</span>) at sun.security.ssl.Handshaker.process_record(Handshaker.java:<span class="number">914</span>) at sun.security.ssl.SSLSocketImpl.readRecord(SSLSocketImpl.java:<span class="number">1062</span>) at sun.security.ssl.SSLSocketImpl.performInitialHandshake(SSLSocketImpl.java:<span class="number">1375</span>) at sun.security.ssl.SSLSocketImpl.writeRecord(SSLSocketImpl.java:<span class="number">747</span>) at sun.security.ssl.AppOutputStream.write(AppOutputStream.java:<span class="number">123</span>) at java.io.BufferedOutputStream.flushBuffer(BufferedOutputStream.java:<span class="number">82</span>) at java.io.BufferedOutputStream.flush(BufferedOutputStream.java:<span class="number">140</span>) at org.apache.commons.httpclient.HttpConnection.flushRequestOutputStream(HttpConnection.java:<span class="number">828</span>) at org.apache.commons.httpclient.HttpMethodBase.writeRequest(HttpMethodBase.java:<span class="number">2116</span>) at org.apache.commons.httpclient.HttpMethodBase.execute(HttpMethodBase.java:<span class="number">1096</span>) at org.apache.commons.httpclient.HttpMethodDirector.executeWithRetry(HttpMethodDirector.java:<span class="number">398</span>) at org.apache.commons.httpclient.HttpMethodDirector.executeMethod(HttpMethodDirector.java:<span class="number">171</span>) at org.apache.commons.httpclient.HttpClient.executeMethod(HttpClient.java:<span class="number">397</span>) at org.apache.commons.httpclient.HttpClient.executeMethod(HttpClient.java:<span class="number">323</span>) ``` ```java Caused by: sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target at sun.security.validator.PKIXValidator.doBuild(PKIXValidator.java:<span class="number">387</span>) at sun.security.validator.PKIXValidator.engineValidate(PKIXValidator.java:<span class="number">292</span>) at sun.security.validator.Validator.validate(Validator.java:<span class="number">260</span>) at sun.security.ssl.X509TrustManagerImpl.validate(X509TrustManagerImpl.java:<span class="number">324</span>) at sun.security.ssl.X509TrustManagerImpl.checkTrusted(X509TrustManagerImpl.java:<span class="number">229</span>) at sun.security.ssl.X509TrustManagerImpl.checkServerTrusted(X509TrustManagerImpl.java:<span class="number">124</span>) at sun.security.ssl.ClientHandshaker.serverCertificate(ClientHandshaker.java:<span class="number">1491</span>) ... <span class="number">19</span> more Caused by: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target at sun.security.provider.certpath.SunCertPathBuilder.build(SunCertPathBuilder.java:<span class="number">141</span>) at sun.security.provider.certpath.SunCertPathBuilder.engineBuild(SunCertPathBuilder.java:<span class="number">126</span>) at java.security.cert.CertPathBuilder.build(CertPathBuilder.java:<span class="number">280</span>) at sun.security.validator.PKIXValidator.doBuild(PKIXValidator.java:<span class="number">382</span>) ... <span class="number">25</span> more</span><br></pre></td></tr></table></figure>
-
-<p>solution</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> <span class="variable">$&#123;JAVA_HOME&#125;</span>/jre/lib/security</span><br><span class="line"></span><br><span class="line">keytool -import -<span class="built_in">alias</span> codz -keystore cacerts -file <span class="variable">$&#123;JAVA_HOME&#125;</span>/jre/lib/security/codz.cer  </span><br><span class="line"></span><br><span class="line">keytool -list -keystore cacerts -<span class="built_in">alias</span> codz</span><br></pre></td></tr></table></figure>
-
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
-<li><a href="http://blog.csdn.net/wangjunjun2008/article/details/37662851" target="_blank" rel="noopener">将安全证书导入到java的cacerts证书库</a></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1250,20 +1287,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">67</span>
+          <span class="site-state-item-count">68</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

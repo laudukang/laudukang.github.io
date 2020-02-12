@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://codz.me/2019/11/20/opentsdb-query-optimization/</loc>
+    
+    <lastmod>2019-11-20T02:50:49.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://codz.me/50x.html</loc>
     
     <lastmod>2018-10-19T02:41:13.628Z</lastmod>

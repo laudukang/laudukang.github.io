@@ -187,6 +187,82 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://codz.me/2016/09/25/java-cacerts-import-certificate/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.png">
+      <meta itemprop="name" content="laudukang">
+      <meta itemprop="description" content="Bug Not Found">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Is Poetry">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/09/25/java-cacerts-import-certificate/" class="post-title-link" itemprop="url">Java cacerts 证书库导入自签名证书</a>
+        </h1>
+
+        <div class="post-meta">
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2016-09-25 17:21:41 17:21:41" itemprop="dateModified" datetime="2016-09-25T17:21:41+08:00">2016-09-25 17:21:41</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>issue<br>JDK未导入自签名证书，调HTTPS接口会有如下错误</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javax.net.ssl.SSLHandshakeException: sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target at sun.security.ssl.Alerts.getSSLException(Alerts.java:<span class="number">192</span>) at sun.security.ssl.SSLSocketImpl.fatal(SSLSocketImpl.java:<span class="number">1949</span>) at sun.security.ssl.Handshaker.fatalSE(Handshaker.java:<span class="number">302</span>) at sun.security.ssl.Handshaker.fatalSE(Handshaker.java:<span class="number">296</span>) at sun.security.ssl.ClientHandshaker.serverCertificate(ClientHandshaker.java:<span class="number">1509</span>) at sun.security.ssl.ClientHandshaker.processMessage(ClientHandshaker.java:<span class="number">216</span>) at sun.security.ssl.Handshaker.processLoop(Handshaker.java:<span class="number">979</span>) at sun.security.ssl.Handshaker.process_record(Handshaker.java:<span class="number">914</span>) at sun.security.ssl.SSLSocketImpl.readRecord(SSLSocketImpl.java:<span class="number">1062</span>) at sun.security.ssl.SSLSocketImpl.performInitialHandshake(SSLSocketImpl.java:<span class="number">1375</span>) at sun.security.ssl.SSLSocketImpl.writeRecord(SSLSocketImpl.java:<span class="number">747</span>) at sun.security.ssl.AppOutputStream.write(AppOutputStream.java:<span class="number">123</span>) at java.io.BufferedOutputStream.flushBuffer(BufferedOutputStream.java:<span class="number">82</span>) at java.io.BufferedOutputStream.flush(BufferedOutputStream.java:<span class="number">140</span>) at org.apache.commons.httpclient.HttpConnection.flushRequestOutputStream(HttpConnection.java:<span class="number">828</span>) at org.apache.commons.httpclient.HttpMethodBase.writeRequest(HttpMethodBase.java:<span class="number">2116</span>) at org.apache.commons.httpclient.HttpMethodBase.execute(HttpMethodBase.java:<span class="number">1096</span>) at org.apache.commons.httpclient.HttpMethodDirector.executeWithRetry(HttpMethodDirector.java:<span class="number">398</span>) at org.apache.commons.httpclient.HttpMethodDirector.executeMethod(HttpMethodDirector.java:<span class="number">171</span>) at org.apache.commons.httpclient.HttpClient.executeMethod(HttpClient.java:<span class="number">397</span>) at org.apache.commons.httpclient.HttpClient.executeMethod(HttpClient.java:<span class="number">323</span>) ``` ```java Caused by: sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target at sun.security.validator.PKIXValidator.doBuild(PKIXValidator.java:<span class="number">387</span>) at sun.security.validator.PKIXValidator.engineValidate(PKIXValidator.java:<span class="number">292</span>) at sun.security.validator.Validator.validate(Validator.java:<span class="number">260</span>) at sun.security.ssl.X509TrustManagerImpl.validate(X509TrustManagerImpl.java:<span class="number">324</span>) at sun.security.ssl.X509TrustManagerImpl.checkTrusted(X509TrustManagerImpl.java:<span class="number">229</span>) at sun.security.ssl.X509TrustManagerImpl.checkServerTrusted(X509TrustManagerImpl.java:<span class="number">124</span>) at sun.security.ssl.ClientHandshaker.serverCertificate(ClientHandshaker.java:<span class="number">1491</span>) ... <span class="number">19</span> more Caused by: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target at sun.security.provider.certpath.SunCertPathBuilder.build(SunCertPathBuilder.java:<span class="number">141</span>) at sun.security.provider.certpath.SunCertPathBuilder.engineBuild(SunCertPathBuilder.java:<span class="number">126</span>) at java.security.cert.CertPathBuilder.build(CertPathBuilder.java:<span class="number">280</span>) at sun.security.validator.PKIXValidator.doBuild(PKIXValidator.java:<span class="number">382</span>) ... <span class="number">25</span> more</span><br></pre></td></tr></table></figure>
+
+<p>solution</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> <span class="variable">$&#123;JAVA_HOME&#125;</span>/jre/lib/security</span><br><span class="line"></span><br><span class="line">keytool -import -<span class="built_in">alias</span> codz -keystore cacerts -file <span class="variable">$&#123;JAVA_HOME&#125;</span>/jre/lib/security/codz.cer  </span><br><span class="line"></span><br><span class="line">keytool -list -keystore cacerts -<span class="built_in">alias</span> codz</span><br></pre></td></tr></table></figure>
+
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><a href="http://blog.csdn.net/wangjunjun2008/article/details/37662851" target="_blank" rel="noopener">将安全证书导入到java的cacerts证书库</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://codz.me/2016/08/12/nginx-tomcat-config-https/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1050,77 +1126,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://codz.me/2016/03/05/spring-modelattribute-annotation-random-code/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head.png">
-      <meta itemprop="name" content="laudukang">
-      <meta itemprop="description" content="Bug Not Found">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Code Is Poetry">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/03/05/spring-modelattribute-annotation-random-code/" class="post-title-link" itemprop="url">Spring MVC @ModelAttribute 参数乱码</a>
-        </h1>
-
-        <div class="post-meta">
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2016-03-05 22:08:12 22:08:12" itemprop="dateModified" datetime="2016-03-05T22:08:12+08:00">2016-03-05 22:08:12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>issue<br><code>Spring MVC</code>提交form表单后台通过<code>@ModelAttribute</code>获取参数为乱码<br><code>Spring MVC</code> submit form and get random code parameters through `@ModelAttribute</p>
-<p>Java Config WebInitializer</p>
-<p>傻了，将<code>CharacterEncodingFilter</code>部分放到<code>DispatcherServlet</code>部分前面就可以了</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebInitializer</span> <span class="keyword">implements</span> <span class="title">WebApplicationInitializer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onStartup</span><span class="params">(javax.servlet.ServletContext sc)</span> <span class="keyword">throws</span> ServletException </span>&#123;</span><br><span class="line">        AnnotationConfigWebApplicationContext rootContext = <span class="keyword">new</span> AnnotationConfigWebApplicationContext();</span><br><span class="line">        rootContext.register(ApplicationConfig<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        sc.addListener(<span class="keyword">new</span> ContextLoaderListener(rootContext));</span><br><span class="line"></span><br><span class="line">        <span class="comment">//CharacterEncodingFilter</span></span><br><span class="line">        CharacterEncodingFilter characterEncodingFilter = <span class="keyword">new</span> CharacterEncodingFilter();</span><br><span class="line">        characterEncodingFilter.setEncoding(<span class="string">"UTF-8"</span>);</span><br><span class="line">        characterEncodingFilter.setForceEncoding(<span class="keyword">true</span>);</span><br><span class="line">        FilterRegistration filterRegistration =</span><br><span class="line">                sc.addFilter(<span class="string">"characterEncodingFilter"</span>, characterEncodingFilter);</span><br><span class="line">        filterRegistration.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST), <span class="keyword">false</span>, <span class="string">"/*"</span>);<span class="comment">//注意这里匹配 "/*"</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//follow can be deleted</span></span><br><span class="line">        <span class="comment">//sc.addFilter("hibernateFilter", OpenSessionInViewFilter.class).addMappingForUrlPatterns(null, false, "/*");</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//maybe follow will be use</span></span><br><span class="line">        <span class="comment">// sc.addFilter("OpenEntityManagerInViewFilter", org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter.class).addMappingForUrlPatterns(null, false, "/*");</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//springmvc上下文</span></span><br><span class="line">        AnnotationConfigWebApplicationContext springMvcContext = <span class="keyword">new</span> AnnotationConfigWebApplicationContext();</span><br><span class="line">        springMvcContext.register(MvcConfig<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//DispatcherServlet</span></span><br><span class="line">        DispatcherServlet dispatcherServlet = <span class="keyword">new</span> DispatcherServlet(springMvcContext);</span><br><span class="line">        dispatcherServlet.setThrowExceptionIfNoHandlerFound(<span class="keyword">true</span>);</span><br><span class="line">        ServletRegistration.Dynamic dynamic = sc.addServlet(<span class="string">"dispatcherServlet"</span>, dispatcherServlet);</span><br><span class="line">        dynamic.setLoadOnStartup(<span class="number">1</span>);</span><br><span class="line">        dynamic.addMapping(<span class="string">"/"</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1193,20 +1198,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">67</span>
+          <span class="site-state-item-count">68</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
