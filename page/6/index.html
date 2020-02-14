@@ -227,7 +227,7 @@
 
           
             <span id="/2015/06/04/web-performance-test-tool-gor/" class="post-meta-item leancloud_visitors" data-flag-title="终极 Web 应用性能和压力测试工具 Gor" title="阅读次数">
-                <span class="leancloud-visitors-count"></span>
+                <span hidden class="leancloud-visitors-count"></span>
             </span>
 
         </div>
@@ -326,7 +326,7 @@
 
           
             <span id="/2015/06/04/simple-visual-enhancements-for-better-coding-in-sublime-text/" class="post-meta-item leancloud_visitors" data-flag-title="[转]在 Sublime Text 里有助编码的简单视觉改善" title="阅读次数">
-                <span class="leancloud-visitors-count"></span>
+                <span hidden class="leancloud-visitors-count"></span>
             </span>
 
         </div>
@@ -470,7 +470,7 @@
 
           
             <span id="/2015/06/03/building-gtk-plus-on-unix-like-systems/" class="post-meta-item leancloud_visitors" data-flag-title="Building GTK+ on UNIX-like systems" title="阅读次数">
-                <span class="leancloud-visitors-count"></span>
+                <span hidden class="leancloud-visitors-count"></span>
             </span>
 
         </div>
@@ -547,7 +547,7 @@
 
           
             <span id="/2015/05/27/gitlab-setup-and-svn2git/" class="post-meta-item leancloud_visitors" data-flag-title="GitLab 搭建及 svn2git 保留原提交记录" title="阅读次数">
-                <span class="leancloud-visitors-count"></span>
+                <span hidden class="leancloud-visitors-count"></span>
             </span>
 
         </div>
@@ -647,7 +647,7 @@
 
           
             <span id="/2015/05/27/ubuntu-expand-hard-disk/" class="post-meta-item leancloud_visitors" data-flag-title="Ubuntu 扩展硬盘/交换分区" title="阅读次数">
-                <span class="leancloud-visitors-count"></span>
+                <span hidden class="leancloud-visitors-count"></span>
             </span>
 
         </div>
@@ -738,7 +738,7 @@
 
           
             <span id="/2015/05/20/11-linux-terminal-commands-that-will-rock-your-world/" class="post-meta-item leancloud_visitors" data-flag-title="[转]11 Linux Terminal Commands That Will Rock Your World" title="阅读次数">
-                <span class="leancloud-visitors-count"></span>
+                <span hidden class="leancloud-visitors-count"></span>
             </span>
 
         </div>
@@ -921,7 +921,7 @@
 
           
             <span id="/2015/05/17/vsftp-config-analysis/" class="post-meta-item leancloud_visitors" data-flag-title="[转] vsftpd 配置文件详解" title="阅读次数">
-                <span class="leancloud-visitors-count"></span>
+                <span hidden class="leancloud-visitors-count"></span>
             </span>
 
         </div>
@@ -1226,7 +1226,7 @@
 
           
             <span id="/2015/05/08/mysql-update-table-not-exit/" class="post-meta-item leancloud_visitors" data-flag-title="ERROR 1146 (42S02)/1146 mysql table doesn't exist" title="阅读次数">
-                <span class="leancloud-visitors-count"></span>
+                <span hidden class="leancloud-visitors-count"></span>
             </span>
 
         </div>
@@ -1308,7 +1308,7 @@
 
           
             <span id="/2015/05/06/warnning-hidden-information-in-resume-template/" class="post-meta-item leancloud_visitors" data-flag-title="记一次简历模板中的隐藏信息" title="阅读次数">
-                <span class="leancloud-visitors-count"></span>
+                <span hidden class="leancloud-visitors-count"></span>
             </span>
 
         </div>
@@ -1386,7 +1386,7 @@
 
           
             <span id="/2015/05/04/mysql-user-and-permission-management/" class="post-meta-item leancloud_visitors" data-flag-title="MySQL用户和权限管理" title="阅读次数">
-                <span class="leancloud-visitors-count"></span>
+                <span hidden class="leancloud-visitors-count"></span>
             </span>
 
         </div>
@@ -1581,18 +1581,21 @@
         .then(({ results }) => {
           if (results.length > 0) {
             var counter = results[0];
+              leancloudSelector(url).innerText = counter.time + 1;
             Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
               .then(response => response.json())
-              .then(() => {
-                leancloudSelector(url).innerText = counter.time + 1;
-              })
               .catch(error => {
                 console.error('Failed to save visitor count', error);
               })
           } else {
-              leancloudSelector(url).innerText = 'Counter not initialized! More info at console err msg.';
-              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
-            
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
           }
         })
         .catch(error => {

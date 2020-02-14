@@ -227,7 +227,7 @@
 
           
             <span id="/2015/07/20/java-post-validation-code/" class="post-meta-item leancloud_visitors" data-flag-title="Java 实现图形验证码" title="阅读次数">
-                <span class="leancloud-visitors-count"></span>
+                <span hidden class="leancloud-visitors-count"></span>
             </span>
 
         </div>
@@ -309,7 +309,7 @@
 
           
             <span id="/2015/07/19/tomcat-log-user-ip/" class="post-meta-item leancloud_visitors" data-flag-title="Tomcat Log 记录访问者 ip 及访问地址" title="阅读次数">
-                <span class="leancloud-visitors-count"></span>
+                <span hidden class="leancloud-visitors-count"></span>
             </span>
 
         </div>
@@ -381,7 +381,7 @@
 
           
             <span id="/2015/07/18/server-distinct-ajax-request-whether-sync-or-async/" class="post-meta-item leancloud_visitors" data-flag-title="Server distinct ajax request whether sync or async" title="阅读次数">
-                <span class="leancloud-visitors-count"></span>
+                <span hidden class="leancloud-visitors-count"></span>
             </span>
 
         </div>
@@ -464,7 +464,7 @@
 
           
             <span id="/2015/07/17/setup-linux-server/" class="post-meta-item leancloud_visitors" data-flag-title="[转]Linux 服务器的初步配置流程" title="阅读次数">
-                <span class="leancloud-visitors-count"></span>
+                <span hidden class="leancloud-visitors-count"></span>
             </span>
 
         </div>
@@ -587,7 +587,7 @@
 
           
             <span id="/2015/07/11/rich-text-editor-plus/" class="post-meta-item leancloud_visitors" data-flag-title="Rich Text Editor Plus" title="阅读次数">
-                <span class="leancloud-visitors-count"></span>
+                <span hidden class="leancloud-visitors-count"></span>
             </span>
 
         </div>
@@ -709,7 +709,7 @@
 
           
             <span id="/2015/07/10/java-forkjoin/" class="post-meta-item leancloud_visitors" data-flag-title="JAVA 并行框架 ForkJoin" title="阅读次数">
-                <span class="leancloud-visitors-count"></span>
+                <span hidden class="leancloud-visitors-count"></span>
             </span>
 
         </div>
@@ -807,7 +807,7 @@
 
           
             <span id="/2015/07/06/gson-HibernateProxy-serialize-error/" class="post-meta-item leancloud_visitors" data-flag-title="Gson error: Attempted to serialize java.lang.Class: org.hibernate.proxy.HibernateProxy" title="阅读次数">
-                <span class="leancloud-visitors-count"></span>
+                <span hidden class="leancloud-visitors-count"></span>
             </span>
 
         </div>
@@ -893,7 +893,7 @@
 
           
             <span id="/2015/06/23/update-ubuntu-user-path-from-zh-to-en/" class="post-meta-item leancloud_visitors" data-flag-title="中文 Ubuntu 用户目录里路径改成英文" title="阅读次数">
-                <span class="leancloud-visitors-count"></span>
+                <span hidden class="leancloud-visitors-count"></span>
             </span>
 
         </div>
@@ -972,7 +972,7 @@
 
           
             <span id="/2015/06/10/web-front-end-security/" class="post-meta-item leancloud_visitors" data-flag-title="[转]Web前端攻防（2014版）" title="阅读次数">
-                <span class="leancloud-visitors-count"></span>
+                <span hidden class="leancloud-visitors-count"></span>
             </span>
 
         </div>
@@ -1122,7 +1122,7 @@
 
           
             <span id="/2015/06/05/chrome-skills-repost/" class="post-meta-item leancloud_visitors" data-flag-title="[转]史上最全的Chrome使用技巧集锦" title="阅读次数">
-                <span class="leancloud-visitors-count"></span>
+                <span hidden class="leancloud-visitors-count"></span>
             </span>
 
         </div>
@@ -1674,18 +1674,21 @@
         .then(({ results }) => {
           if (results.length > 0) {
             var counter = results[0];
+              leancloudSelector(url).innerText = counter.time + 1;
             Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
               .then(response => response.json())
-              .then(() => {
-                leancloudSelector(url).innerText = counter.time + 1;
-              })
               .catch(error => {
                 console.error('Failed to save visitor count', error);
               })
           } else {
-              leancloudSelector(url).innerText = 'Counter not initialized! More info at console err msg.';
-              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
-            
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
           }
         })
         .catch(error => {
