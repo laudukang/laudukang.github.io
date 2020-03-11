@@ -61,3 +61,8 @@ https://codz.me/2015/05/04/mysql-user-and-permission-management/
 https://codz.me/2015/05/04/jwplayer-test/
 https://codz.me/2015/05/03/sbin-insserv-no-such-file-or-directory/
 https://codz.me/2015/05/03/traceroute-icmp-udp-tcp/
+https://codz.me/2015/05/03/apache-htaccess-usage/
+https://codz.me/2015/05/02/ubuntu-desktop-1404-root-login/
+https://codz.me/2015/05/01/apache-config-htaccess/
+https://codz.me/2015/05/01/can-not-connect-to-mysql-2002-error/
+https://codz.me/2015/05/01/shui-mao-xian/
