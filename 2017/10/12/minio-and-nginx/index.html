@@ -1,4 +1,307 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"><meta name="theme-color" content="#222"><meta name="generator" content="Hexo 4.2.0"><link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png"><link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png"><link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png"><link rel="mask-icon" href="/images/favicon.png" color="#222"><link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css"><script id="hexo-configurations">var NexT=window.NexT||{},CONFIG={hostname:new URL("https://codz.me").hostname,root:"/",scheme:"Muse",version:"7.7.1",exturl:!1,sidebar:{position:"right",display:"post",padding:18,offset:12,onmobile:!1},copycode:{enable:!1,show_result:!1,style:null},back2top:{enable:!0,sidebar:!1,scrollpercent:!1},bookmark:{enable:!1,color:"#222",save:"auto"},fancybox:!0,mediumzoom:!1,lazyload:!1,pangu:!1,comments:{style:"tabs",active:null,storage:!0,lazyload:!1,nav:null},algolia:{appID:"",apiKey:"",indexName:"",hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}},localsearch:{enable:!1,trigger:"auto",top_n_per_article:1,unescape:!1,preload:!1},path:"",motion:{enable:!0,async:!1,transition:{post_block:"fadeIn",post_header:"slideDownIn",post_body:"slideDownIn",coll_header:"slideLeftIn",sidebar:"slideUpIn"}}}</script><meta name="description" content="Minio IntroductionMinio is an object storage server released under Apache License v2.0. It is compatible with Amazon S3 cloud storage service. It is best suited for storing unstructured data such as p"><meta property="og:type" content="article"><meta property="og:title" content="High Vailability Minio Deploy Tutorial"><meta property="og:url" content="https://codz.me/2017/10/12/minio-and-nginx/index.html"><meta property="og:site_name" content="Code Is Poetry"><meta property="og:description" content="Minio IntroductionMinio is an object storage server released under Apache License v2.0. It is compatible with Amazon S3 cloud storage service. It is best suited for storing unstructured data such as p"><meta property="og:locale" content="zh_CN"><meta property="article:published_time" content="2017-10-12T02:16:00.000Z"><meta property="article:modified_time" content="2017-10-12T11:06:44.000Z"><meta property="article:author" content="laudukang"><meta property="article:tag" content="minio"><meta name="twitter:card" content="summary"><link rel="canonical" href="https://codz.me/2017/10/12/minio-and-nginx/"><script id="page-configurations">CONFIG.page={sidebar:"",isHome:!1,isPost:!0}</script><title>High Vailability Minio Deploy Tutorial | Code Is Poetry</title><noscript><style>.sidebar-inner,.use-motion .brand,.use-motion .collection-header,.use-motion .comments,.use-motion .menu-item,.use-motion .pagination,.use-motion .post-block,.use-motion .post-body,.use-motion .post-header{opacity:initial}.use-motion .site-subtitle,.use-motion .site-title{opacity:initial;top:initial}.use-motion .logo-line-before i{left:initial}.use-motion .logo-line-after i{right:initial}</style></noscript></head><body itemscope itemtype="http://schema.org/WebPage"><div class="container use-motion"><div class="headband"></div><header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-brand-container"><div class="site-meta"><div><a href="/" class="brand" rel="start"><span class="logo-line-before"><i></i></span> <span class="site-title">Code Is Poetry</span><span class="logo-line-after"><i></i></span></a></div></div><div class="site-nav-toggle"><div class="toggle" aria-label="切换导航栏"><span class="toggle-line toggle-line-first"></span><span class="toggle-line toggle-line-middle"></span><span class="toggle-line toggle-line-last"></span></div></div></div><nav class="site-nav"><ul id="menu" class="menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-fw fa-home"></i> 首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i> 关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i> 标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i> 分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i> 归档</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-fw fa-heartbeat"></i> 公益 404</a></li></ul></nav></div></header><div class="back-to-top"><i class="fa fa-arrow-up"></i> <span>0%</span></div><main class="main"><div class="main-inner"><div class="content-wrap"><div class="content"><div class="posts-expand"><article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN"><link itemprop="mainEntityOfPage" href="https://codz.me/2017/10/12/minio-and-nginx/"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="image" content="/images/head.png"><meta itemprop="name" content="laudukang"><meta itemprop="description" content="Bug Not Found"></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="Code Is Poetry"></span><header class="post-header"><h1 class="post-title" itemprop="name headline"> High Vailability Minio Deploy Tutorial</h1><div class="post-meta"><span class="post-meta-item"><span class="post-meta-item-icon"><i class="fa fa-calendar-check-o"></i></span> <span class="post-meta-item-text">更新于</span> <time title="修改时间：2017-10-12 19:06:44 19:06:44" itemprop="dateModified" datetime="2017-10-12T19:06:44+08:00">2017-10-12 19:06:44</time></span><span class="post-meta-item"><span class="post-meta-item-icon"><i class="fa fa-folder-o"></i></span> <span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span></span><span id="/2017/10/12/minio-and-nginx/" class="post-meta-item leancloud_visitors" data-flag-title="High Vailability Minio Deploy Tutorial" title="阅读次数"><span hidden class="leancloud-visitors-count"></span></span></div></header><div class="post-body" itemprop="articleBody"><h2 id="Minio-Introduction"><a href="#Minio-Introduction" class="headerlink" title="Minio Introduction"></a><a href="https://minio.io/" target="_blank" rel="noopener">Minio Introduction</a></h2><p>Minio is an object storage server released under Apache License v2.0.</p><p>It is compatible with Amazon S3 cloud storage service.</p><p>It is best suited for storing unstructured data such as photos, videos, log files, backups and container / VM images.</p><p>Size of an object can range from a few KBs to a maximum of 5TB.</p><p>Minio server is light enough to be bundled with the application stack, similar to NodeJS, Redis and MySQL.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /tmp</span><br><span class="line"><span class="comment">#https://dl.minio.io/server/minio/release/中选择合适的版本</span></span><br><span class="line">curl -O https://dl.minio.io/server/minio/release/linux-amd64/minio</span><br><span class="line">sudo chmod +x minio</span><br><span class="line"><span class="comment">#directory where Minio's systemd startup script expects to find it</span></span><br><span class="line">sudo mv minio /usr/<span class="built_in">local</span>/bin</span><br><span class="line"></span><br><span class="line">sudo useradd -r minio-user -s /sbin/nologin</span><br><span class="line">sudo chown minio-user:minio-user /usr/<span class="built_in">local</span>/bin/minio</span><br><span class="line"></span><br><span class="line"><span class="comment">#创建数据存储目录</span></span><br><span class="line">sudo mkdir -p /work/minio/data1 /work/minio/data2</span><br><span class="line">sudo chown minio-user:minio-user /work/minio</span><br><span class="line"></span><br><span class="line"><span class="comment">#创建配置文件目录</span></span><br><span class="line">sudo mkdir /etc/minio</span><br><span class="line">sudo chown minio-user:minio-user /etc/minio</span><br><span class="line"></span><br><span class="line"><span class="comment">#default config, modify your own MINIO_VOLUMES/MINIO_OPTS/MINIO_ACCESS_KEY/MINIO_SECRET_KEY</span></span><br><span class="line">cat &lt;&lt;EOF &gt; /etc/default/minio</span><br><span class="line"><span class="comment"># Remote node configuration.</span></span><br><span class="line">MINIO_VOLUMES=<span class="string">"http://192.168.3.21/work/minio/data1 http://192.168.3.21/work/minio/data2 http://192.168.3.23/work/minio/data1 http://192.168.3.23/work/minio/data2"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Use if you want to run Minio on a custom port.</span></span><br><span class="line">MINIO_OPTS=<span class="string">"-C /etc/minio --address :9001"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Access Key of the server.</span></span><br><span class="line">MINIO_ACCESS_KEY=YOUR-ACCESS-KEY-HERE</span><br><span class="line"></span><br><span class="line"><span class="comment"># Secret key of the server.</span></span><br><span class="line">MINIO_SECRET_KEY=YOUR-SECRET-KEY-HERE</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> /etc/systemd/system/</span><br><span class="line">curl -O https://raw.githubusercontent.com/minio/minio-service/master/linux-systemd/distributed/minio.service</span><br><span class="line">sudo chmod 755 minio.service</span><br><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl <span class="built_in">enable</span> minio</span><br><span class="line">sudo systemctl start minio</span><br><span class="line">sudo systemctl status minio</span><br></pre></td></tr></table></figure><h2 id="Nginx-Configuration"><a href="#Nginx-Configuration" class="headerlink" title="Nginx Configuration"></a>Nginx Configuration</h2><p>Multiple Minio servers load balance</p><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">upstream</span> minio_servers &#123;</span><br><span class="line">    <span class="attribute">server</span> minio-server-<span class="number">1</span>:<span class="number">9000</span>;</span><br><span class="line">    <span class="attribute">server</span> minio-server-<span class="number">2</span>:<span class="number">9000</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">    <span class="attribute">server_name</span> www.example.com;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">location</span> / &#123;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> Host <span class="variable">$http_host</span>;</span><br><span class="line">        <span class="attribute">proxy_pass</span>       http://minio_servers;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>SSL/TLS Termination</p><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">    <span class="attribute">server_name</span> www.example.com;</span><br><span class="line">    <span class="attribute">return</span> <span class="number">301</span> https://www.example.com<span class="variable">$request_uri</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span>              <span class="number">443</span> ssl;</span><br><span class="line">    <span class="attribute">server_name</span>         www.example.com;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">ssl_certificate</span>     www.example.com.crt;</span><br><span class="line">    <span class="attribute">ssl_certificate_key</span> www.example.com.key;</span><br><span class="line">    <span class="attribute">ssl_protocols</span>       TLSv1 TLSv1.<span class="number">1</span> TLSv1.<span class="number">2</span>;</span><br><span class="line">    <span class="attribute">ssl_ciphers</span>         HIGH:!aNULL:!MD5;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">location</span> / &#123;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> Host <span class="variable">$http_host</span>;</span><br><span class="line">        <span class="attribute">proxy_pass</span>       http://localhost:9000;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>Nginx caching</p><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">limit_req_zone <span class="variable">$binary_remote_addr</span> <span class="attribute">zone</span>=my_req_limit:10m <span class="attribute">rate</span>=10r/s;</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">    # <span class="built_in">..</span>.</span><br><span class="line">    location /images/ &#123;</span><br><span class="line">        limit_req <span class="attribute">zone</span>=my_req_limit <span class="attribute">burst</span>=20;</span><br><span class="line">        # <span class="built_in">..</span>.</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul><li><a href="https://github.com/minio/minio/tree/master/docs/distributed" target="_blank" rel="noopener">Distributed Minio Quickstart Guide</a></li><li><a href="https://github.com/minio/minio-service/tree/master/linux-systemd" target="_blank" rel="noopener">Systemd service for Minio</a></li><li><a href="https://www.nginx.com/blog/enterprise-grade-cloud-storage-nginx-plus-minio/" target="_blank" rel="noopener">Enterprise-Grade Cloud Storage with NGINX Plus and Minio</a></li></ul></div><footer class="post-footer"><div class="post-tags"> <a href="/tags/minio/" rel="tag"># minio</a></div><div class="post-nav"><div class="post-nav-item"><a href="/2017/09/24/rise-of-worse-is-better/" rel="prev" title="[Repost]The Rise of Worse is Better"><i class="fa fa-chevron-left"></i> [Repost]The Rise of Worse is Better</a></div><div class="post-nav-item"> <a href="/2017/12/20/recommend-articles/" rel="next" title="Recommend Articles">Recommend Articles<i class="fa fa-chevron-right"></i></a></div></div></footer></article></div></div><script>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
+  <link rel="mask-icon" href="/images/favicon.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://codz.me').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.7.1',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Minio IntroductionMinio is an object storage server released under Apache License v2.0. It is compatible with Amazon S3 cloud storage service. It is best suited for storing unstructured data such as p">
+<meta property="og:type" content="article">
+<meta property="og:title" content="High Vailability Minio Deploy Tutorial">
+<meta property="og:url" content="https://codz.me/2017/10/12/minio-and-nginx/index.html">
+<meta property="og:site_name" content="Code Is Poetry">
+<meta property="og:description" content="Minio IntroductionMinio is an object storage server released under Apache License v2.0. It is compatible with Amazon S3 cloud storage service. It is best suited for storing unstructured data such as p">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2017-10-12T02:16:00.000Z">
+<meta property="article:modified_time" content="2017-10-12T11:06:44.000Z">
+<meta property="article:author" content="laudukang">
+<meta property="article:tag" content="minio">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://codz.me/2017/10/12/minio-and-nginx/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>High Vailability Minio Deploy Tutorial | Code Is Poetry</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Code Is Poetry</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-fw fa-heartbeat"></i>公益 404</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://codz.me/2017/10/12/minio-and-nginx/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.png">
+      <meta itemprop="name" content="laudukang">
+      <meta itemprop="description" content="Bug Not Found">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Is Poetry">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          High Vailability Minio Deploy Tutorial
+        </h1>
+
+        <div class="post-meta">
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2017-10-12 19:06:44 19:06:44" itemprop="dateModified" datetime="2017-10-12T19:06:44+08:00">2017-10-12 19:06:44</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/10/12/minio-and-nginx/" class="post-meta-item leancloud_visitors" data-flag-title="High Vailability Minio Deploy Tutorial" title="阅读次数">
+                <span hidden class="leancloud-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Minio-Introduction"><a href="#Minio-Introduction" class="headerlink" title="Minio Introduction"></a><a href="https://minio.io/" target="_blank" rel="noopener">Minio Introduction</a></h2><p>Minio is an object storage server released under Apache License v2.0.</p>
+<p>It is compatible with Amazon S3 cloud storage service.</p>
+<p>It is best suited for storing unstructured data such as photos, videos, log files, backups and container / VM images.</p>
+<p>Size of an object can range from a few KBs to a maximum of 5TB.</p>
+<p>Minio server is light enough to be bundled with the application stack, similar to NodeJS, Redis and MySQL.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /tmp</span><br><span class="line"><span class="comment">#https://dl.minio.io/server/minio/release/中选择合适的版本</span></span><br><span class="line">curl -O https://dl.minio.io/server/minio/release/linux-amd64/minio</span><br><span class="line">sudo chmod +x minio</span><br><span class="line"><span class="comment">#directory where Minio's systemd startup script expects to find it</span></span><br><span class="line">sudo mv minio /usr/<span class="built_in">local</span>/bin</span><br><span class="line"></span><br><span class="line">sudo useradd -r minio-user -s /sbin/nologin</span><br><span class="line">sudo chown minio-user:minio-user /usr/<span class="built_in">local</span>/bin/minio</span><br><span class="line"></span><br><span class="line"><span class="comment">#创建数据存储目录</span></span><br><span class="line">sudo mkdir -p /work/minio/data1 /work/minio/data2</span><br><span class="line">sudo chown minio-user:minio-user /work/minio</span><br><span class="line"></span><br><span class="line"><span class="comment">#创建配置文件目录</span></span><br><span class="line">sudo mkdir /etc/minio</span><br><span class="line">sudo chown minio-user:minio-user /etc/minio</span><br><span class="line"></span><br><span class="line"><span class="comment">#default config, modify your own MINIO_VOLUMES/MINIO_OPTS/MINIO_ACCESS_KEY/MINIO_SECRET_KEY</span></span><br><span class="line">cat &lt;&lt;EOF &gt; /etc/default/minio</span><br><span class="line"><span class="comment"># Remote node configuration.</span></span><br><span class="line">MINIO_VOLUMES=<span class="string">"http://192.168.3.21/work/minio/data1 http://192.168.3.21/work/minio/data2 http://192.168.3.23/work/minio/data1 http://192.168.3.23/work/minio/data2"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Use if you want to run Minio on a custom port.</span></span><br><span class="line">MINIO_OPTS=<span class="string">"-C /etc/minio --address :9001"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Access Key of the server.</span></span><br><span class="line">MINIO_ACCESS_KEY=YOUR-ACCESS-KEY-HERE</span><br><span class="line"></span><br><span class="line"><span class="comment"># Secret key of the server.</span></span><br><span class="line">MINIO_SECRET_KEY=YOUR-SECRET-KEY-HERE</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> /etc/systemd/system/</span><br><span class="line">curl -O https://raw.githubusercontent.com/minio/minio-service/master/linux-systemd/distributed/minio.service</span><br><span class="line">sudo chmod 755 minio.service</span><br><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl <span class="built_in">enable</span> minio</span><br><span class="line">sudo systemctl start minio</span><br><span class="line">sudo systemctl status minio</span><br></pre></td></tr></table></figure>
+
+<h2 id="Nginx-Configuration"><a href="#Nginx-Configuration" class="headerlink" title="Nginx Configuration"></a>Nginx Configuration</h2><p>Multiple Minio servers load balance</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">upstream</span> minio_servers &#123;</span><br><span class="line">    <span class="attribute">server</span> minio-server-<span class="number">1</span>:<span class="number">9000</span>;</span><br><span class="line">    <span class="attribute">server</span> minio-server-<span class="number">2</span>:<span class="number">9000</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">    <span class="attribute">server_name</span> www.example.com;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">location</span> / &#123;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> Host <span class="variable">$http_host</span>;</span><br><span class="line">        <span class="attribute">proxy_pass</span>       http://minio_servers;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>SSL/TLS Termination</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">    <span class="attribute">server_name</span> www.example.com;</span><br><span class="line">    <span class="attribute">return</span> <span class="number">301</span> https://www.example.com<span class="variable">$request_uri</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span>              <span class="number">443</span> ssl;</span><br><span class="line">    <span class="attribute">server_name</span>         www.example.com;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">ssl_certificate</span>     www.example.com.crt;</span><br><span class="line">    <span class="attribute">ssl_certificate_key</span> www.example.com.key;</span><br><span class="line">    <span class="attribute">ssl_protocols</span>       TLSv1 TLSv1.<span class="number">1</span> TLSv1.<span class="number">2</span>;</span><br><span class="line">    <span class="attribute">ssl_ciphers</span>         HIGH:!aNULL:!MD5;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">location</span> / &#123;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> Host <span class="variable">$http_host</span>;</span><br><span class="line">        <span class="attribute">proxy_pass</span>       http://localhost:9000;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Nginx caching</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">limit_req_zone <span class="variable">$binary_remote_addr</span> <span class="attribute">zone</span>=my_req_limit:10m <span class="attribute">rate</span>=10r/s;</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">    # <span class="built_in">..</span>.</span><br><span class="line">    location /images/ &#123;</span><br><span class="line">        limit_req <span class="attribute">zone</span>=my_req_limit <span class="attribute">burst</span>=20;</span><br><span class="line">        # <span class="built_in">..</span>.</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><a href="https://github.com/minio/minio/tree/master/docs/distributed" target="_blank" rel="noopener">Distributed Minio Quickstart Guide</a></li>
+<li><a href="https://github.com/minio/minio-service/tree/master/linux-systemd" target="_blank" rel="noopener">Systemd service for Minio</a></li>
+<li><a href="https://www.nginx.com/blog/enterprise-grade-cloud-storage-nginx-plus-minio/" target="_blank" rel="noopener">Enterprise-Grade Cloud Storage with NGINX Plus and Minio</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/minio/" rel="tag"># minio</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/09/24/rise-of-worse-is-better/" rel="prev" title="[Repost]The Rise of Worse is Better">
+      <i class="fa fa-chevron-left"></i> [Repost]The Rise of Worse is Better
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/12/20/recommend-articles/" rel="next" title="Recommend Articles">
+      Recommend Articles <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
   window.addEventListener('tabs:register', () => {
     let activeClass = CONFIG.comments.activeClass;
     if (CONFIG.comments.storage) {
@@ -18,7 +321,122 @@
       localStorage.setItem('comments_active', commentClass);
     });
   }
-</script></div><div class="toggle sidebar-toggle"><span class="toggle-line toggle-line-first"></span><span class="toggle-line toggle-line-middle"></span><span class="toggle-line toggle-line-last"></span></div><aside class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc"> 文章目录</li><li class="sidebar-nav-overview"> 站点概览</li></ul><div class="post-toc-wrap sidebar-panel"><div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Minio-Introduction"><span class="nav-number">1.</span> <span class="nav-text">Minio Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nginx-Configuration"><span class="nav-number">2.</span> <span class="nav-text">Nginx Configuration</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li></ol></div></div><div class="site-overview-wrap sidebar-panel"><div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person"> <img class="site-author-image" itemprop="image" alt="laudukang" src="/images/head.png"><p class="site-author-name" itemprop="name">laudukang</p><div class="site-description" itemprop="description">Bug Not Found</div></div><div class="site-state-wrap motion-element"><nav class="site-state"><div class="site-state-item site-state-posts"> <a href="/archives/"><span class="site-state-item-count">68</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-categories"> <a href="/categories/"><span class="site-state-item-count">10</span> <span class="site-state-item-name">分类</span></a></div><div class="site-state-item site-state-tags"> <a href="/tags/"><span class="site-state-item-count">25</span> <span class="site-state-item-name">标签</span></a></div></nav></div><div class="links-of-author motion-element"><span class="links-of-author-item"><a href="https://github.com/laudukang" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;laudukang" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i> GitHub</a></span><span class="links-of-author-item"><a href="https://gitee.com/laudukang" title="Gitee → https:&#x2F;&#x2F;gitee.com&#x2F;laudukang" rel="noopener" target="_blank"><i class="fa fa-fw fa-github-alt"></i> Gitee</a></span><span class="links-of-author-item"><a href="https://stackoverflow.com/users/5621049/laudukang" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;5621049&#x2F;laudukang" rel="noopener" target="_blank"><i class="fa fa-fw fa-stack-overflow"></i> StackOverflow</a></span><span class="links-of-author-item"><a href="https://www.google.com/maps/place/%E6%B7%B1%E5%9C%B3%E5%B8%82%E8%BD%AF%E4%BB%B6%E4%BA%A7%E4%B8%9A%E5%9F%BA%E5%9C%B0/@22.5244896,113.9382973,17z/data=!3m1!4b1!4m5!3m4!1s0x3403ee17d008a019:0xbb7b06b73d856c14!8m2!3d22.5244896!4d113.9382973" title="Map → https:&#x2F;&#x2F;www.google.com&#x2F;maps&#x2F;place&#x2F;%E6%B7%B1%E5%9C%B3%E5%B8%82%E8%BD%AF%E4%BB%B6%E4%BA%A7%E4%B8%9A%E5%9F%BA%E5%9C%B0&#x2F;@22.5244896,113.9382973,17z&#x2F;data&#x3D;!3m1!4b1!4m5!3m4!1s0x3403ee17d008a019:0xbb7b06b73d856c14!8m2!3d22.5244896!4d113.9382973" rel="noopener" target="_blank"><i class="fa fa-fw fa-map-marker"></i> Map</a></span></div></div></div></aside><div id="sidebar-dimmer"></div></div></main><footer class="footer"><div class="footer-inner"><div class="copyright"> &copy; 2015 – <span itemprop="copyrightYear">2020</span><span class="with-love"><i class="fa fa-heart icon-next-heart"></i></span> <span class="author" itemprop="copyrightHolder">laudukang</span></div><div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0</div> <span class="post-meta-divider">|</span><div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.1</div><div class="busuanzi-count"><script pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script pjax>
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Minio-Introduction"><span class="nav-number">1.</span> <span class="nav-text">Minio Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nginx-Configuration"><span class="nav-number">2.</span> <span class="nav-text">Nginx Configuration</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="laudukang"
+      src="/images/head.png">
+  <p class="site-author-name" itemprop="name">laudukang</p>
+  <div class="site-description" itemprop="description">Bug Not Found</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">68</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/laudukang" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;laudukang" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://gitee.com/laudukang" title="Gitee → https:&#x2F;&#x2F;gitee.com&#x2F;laudukang" rel="noopener" target="_blank"><i class="fa fa-fw fa-github-alt"></i>Gitee</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/users/5621049/laudukang" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;5621049&#x2F;laudukang" rel="noopener" target="_blank"><i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.google.com/maps/place/%E6%B7%B1%E5%9C%B3%E5%B8%82%E8%BD%AF%E4%BB%B6%E4%BA%A7%E4%B8%9A%E5%9F%BA%E5%9C%B0/@22.5244896,113.9382973,17z/data=!3m1!4b1!4m5!3m4!1s0x3403ee17d008a019:0xbb7b06b73d856c14!8m2!3d22.5244896!4d113.9382973" title="Map → https:&#x2F;&#x2F;www.google.com&#x2F;maps&#x2F;place&#x2F;%E6%B7%B1%E5%9C%B3%E5%B8%82%E8%BD%AF%E4%BB%B6%E4%BA%A7%E4%B8%9A%E5%9F%BA%E5%9C%B0&#x2F;@22.5244896,113.9382973,17z&#x2F;data&#x3D;!3m1!4b1!4m5!3m4!1s0x3403ee17d008a019:0xbb7b06b73d856c14!8m2!3d22.5244896!4d113.9382973" rel="noopener" target="_blank"><i class="fa fa-fw fa-map-marker"></i>Map</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2015 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">laudukang</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.1
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+  <script pjax>
   function leancloudSelector(url) {
     url = encodeURI(url);
     return document.getElementById(url).querySelector('.leancloud-visitors-count');
@@ -109,7 +527,32 @@
         showTime(Counter);
       }
     });
-  </script></div></footer></div><script src="/lib/anime.min.js"></script><script src="/lib/pjax/pjax.min.js"></script><script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script><script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script><script src="/lib/velocity/velocity.min.js"></script><script src="/lib/velocity/velocity.ui.min.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script>
+  </script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
 var pjax = new Pjax({
   selectors: [
     'head title',
@@ -165,4 +608,32 @@ window.addEventListener('pjax:success', () => {
   }
   NexT.utils.updateSidebarPosition();
 });
-</script><div id="pjax"></div></body></html>
+</script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+    </div>
+</body>
+</html>

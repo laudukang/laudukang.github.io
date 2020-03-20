@@ -1,4 +1,303 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"><meta name="theme-color" content="#222"><meta name="generator" content="Hexo 4.2.0"><link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png"><link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png"><link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png"><link rel="mask-icon" href="/images/favicon.png" color="#222"><link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css"><script id="hexo-configurations">var NexT=window.NexT||{},CONFIG={hostname:new URL("https://codz.me").hostname,root:"/",scheme:"Muse",version:"7.7.1",exturl:!1,sidebar:{position:"right",display:"post",padding:18,offset:12,onmobile:!1},copycode:{enable:!1,show_result:!1,style:null},back2top:{enable:!0,sidebar:!1,scrollpercent:!1},bookmark:{enable:!1,color:"#222",save:"auto"},fancybox:!0,mediumzoom:!1,lazyload:!1,pangu:!1,comments:{style:"tabs",active:null,storage:!0,lazyload:!1,nav:null},algolia:{appID:"",apiKey:"",indexName:"",hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}},localsearch:{enable:!1,trigger:"auto",top_n_per_article:1,unescape:!1,preload:!1},path:"",motion:{enable:!0,async:!1,transition:{post_block:"fadeIn",post_header:"slideDownIn",post_body:"slideDownIn",coll_header:"slideLeftIn",sidebar:"slideUpIn"}}}</script><meta name="description" content="线程同步与线程安全Vector 是线程同步的，而ArrayList不是； 线程同步和线程安全意味着同一时间只允许一个线程访问数据； Vector 类中的所有方法都是线程同步的，这就解析了为什么创建Vector 对象时就属于线程同步的了。 性能对比就两者相比较，Vector 属于线程同步的，其性能相对低，而ArrayList 相对较快，因为ArrayList 允许两个或多个线程同时访问数据，而Vec"><meta property="og:type" content="article"><meta property="og:title" content="[译]Java ArrayList 与 Vector"><meta property="og:url" content="https://codz.me/2015/08/17/translation-of-java-arraylist-vector/index.html"><meta property="og:site_name" content="Code Is Poetry"><meta property="og:description" content="线程同步与线程安全Vector 是线程同步的，而ArrayList不是； 线程同步和线程安全意味着同一时间只允许一个线程访问数据； Vector 类中的所有方法都是线程同步的，这就解析了为什么创建Vector 对象时就属于线程同步的了。 性能对比就两者相比较，Vector 属于线程同步的，其性能相对低，而ArrayList 相对较快，因为ArrayList 允许两个或多个线程同时访问数据，而Vec"><meta property="og:locale" content="zh_CN"><meta property="article:published_time" content="2015-08-17T15:51:00.000Z"><meta property="article:modified_time" content="2015-08-17T15:54:08.000Z"><meta property="article:author" content="laudukang"><meta property="article:tag" content="java"><meta name="twitter:card" content="summary"><link rel="canonical" href="https://codz.me/2015/08/17/translation-of-java-arraylist-vector/"><script id="page-configurations">CONFIG.page={sidebar:"",isHome:!1,isPost:!0}</script><title>[译]Java ArrayList 与 Vector | Code Is Poetry</title><noscript><style>.sidebar-inner,.use-motion .brand,.use-motion .collection-header,.use-motion .comments,.use-motion .menu-item,.use-motion .pagination,.use-motion .post-block,.use-motion .post-body,.use-motion .post-header{opacity:initial}.use-motion .site-subtitle,.use-motion .site-title{opacity:initial;top:initial}.use-motion .logo-line-before i{left:initial}.use-motion .logo-line-after i{right:initial}</style></noscript></head><body itemscope itemtype="http://schema.org/WebPage"><div class="container use-motion"><div class="headband"></div><header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-brand-container"><div class="site-meta"><div><a href="/" class="brand" rel="start"><span class="logo-line-before"><i></i></span> <span class="site-title">Code Is Poetry</span><span class="logo-line-after"><i></i></span></a></div></div><div class="site-nav-toggle"><div class="toggle" aria-label="切换导航栏"><span class="toggle-line toggle-line-first"></span><span class="toggle-line toggle-line-middle"></span><span class="toggle-line toggle-line-last"></span></div></div></div><nav class="site-nav"><ul id="menu" class="menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-fw fa-home"></i> 首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i> 关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i> 标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i> 分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i> 归档</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-fw fa-heartbeat"></i> 公益 404</a></li></ul></nav></div></header><div class="back-to-top"><i class="fa fa-arrow-up"></i> <span>0%</span></div><main class="main"><div class="main-inner"><div class="content-wrap"><div class="content"><div class="posts-expand"><article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN"><link itemprop="mainEntityOfPage" href="https://codz.me/2015/08/17/translation-of-java-arraylist-vector/"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="image" content="/images/head.png"><meta itemprop="name" content="laudukang"><meta itemprop="description" content="Bug Not Found"></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="Code Is Poetry"></span><header class="post-header"><h1 class="post-title" itemprop="name headline"> [译]Java ArrayList 与 Vector</h1><div class="post-meta"><span class="post-meta-item"><span class="post-meta-item-icon"><i class="fa fa-calendar-check-o"></i></span> <span class="post-meta-item-text">更新于</span> <time title="修改时间：2015-08-17 23:54:08 23:54:08" itemprop="dateModified" datetime="2015-08-17T23:54:08+08:00">2015-08-17 23:54:08</time></span><span class="post-meta-item"><span class="post-meta-item-icon"><i class="fa fa-folder-o"></i></span> <span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span></span><span id="/2015/08/17/translation-of-java-arraylist-vector/" class="post-meta-item leancloud_visitors" data-flag-title="[译]Java ArrayList 与 Vector" title="阅读次数"><span hidden class="leancloud-visitors-count"></span></span></div></header><div class="post-body" itemprop="articleBody"><h2 id="线程同步与线程安全"><a href="#线程同步与线程安全" class="headerlink" title="线程同步与线程安全"></a>线程同步与线程安全</h2><p>Vector 是线程同步的，而ArrayList不是；</p><p>线程同步和线程安全意味着同一时间只允许一个线程访问数据；</p><p>Vector 类中的所有方法都是线程同步的，这就解析了为什么创建Vector 对象时就属于线程同步的了。</p><h2 id="性能对比"><a href="#性能对比" class="headerlink" title="性能对比"></a>性能对比</h2><p>就两者相比较，Vector 属于线程同步的，其性能相对低，而ArrayList 相对较快，因为ArrayList 允许两个或多个线程同时访问数据，而Vector 则限制同一时间只允许一个线程访问数据。</p><h2 id="自动增长容量"><a href="#自动增长容量" class="headerlink" title="自动增长容量"></a>自动增长容量</h2><p>Vector 默认按当前大小的两倍增长，而ArrayList 是按50%长度增长，当你往Arraylist 中插入元素（当填满元素）</p><p>Arraylist 的默认大小为10，Arraylist 会检查是否到了最后一个元素，然后会创建新的数组，复制原数组的数据到新数组，原数组由jvm回收。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//ArrayList源码</span></span><br><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Default initial capacity.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEFAULT_CAPACITY = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//Vector源码</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Constructs an empty vector so that its internal data array</span></span><br><span class="line"><span class="comment"> * has size &#123;<span class="doctag">@code</span> 10&#125; and its standard capacity increment is</span></span><br><span class="line"><span class="comment"> * zero.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Vector</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>(<span class="number">10</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="设定增长大小"><a href="#设定增长大小" class="headerlink" title="设定增长大小"></a>设定增长大小</h3><p>ArrayList 不能指定增长长度，而Vector 可以指定增长长度，你可以通过Vector 类的下面方法指定增长长度</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">setSize</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line"><span class="comment">//some code</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//来自源码</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Sets the size of this vector. If the new size is greater than the</span></span><br><span class="line"><span class="comment"> * current size, new &#123;<span class="doctag">@code</span> null&#125; items are added to the end of</span></span><br><span class="line"><span class="comment"> * the vector. If the new size is less than the current size, all</span></span><br><span class="line"><span class="comment"> * components at index &#123;<span class="doctag">@code</span> newSize&#125; and greater are discarded.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span>  newSize   the new size of this vector</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@throws</span> ArrayIndexOutOfBoundsException if the new size is negative</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">setSize</span><span class="params">(<span class="keyword">int</span> newSize)</span> </span>&#123;</span><br><span class="line">    modCount++;</span><br><span class="line">    <span class="keyword">if</span> (newSize &gt; elementCount) &#123;</span><br><span class="line">        ensureCapacityHelper(newSize);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = newSize ; i &lt; elementCount ; i++) &#123;</span><br><span class="line">            elementData[i] = <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    elementCount = newSize;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h2><p>除了HashTable，Vector 是同时使用了枚举和迭代的唯一一个类，而ArrayList 只能用迭代器遍历一个ArrayList 对象。</p><h2 id="官方定义"><a href="#官方定义" class="headerlink" title="官方定义"></a>官方定义</h2><p><code>java.util.Vector</code>自jdk1.0就出现了，<code>java.util.ArrayList</code>在jdk1.2中被作为Java 集合框架介绍过；在jdk1.2版本，Vector 类已经被重构实现List 接口。</p><p>reference:</p><ul><li><a href="http://jeet-software.blogspot.in/2014/11/arraylist-vs-vector-in-java.html" target="_blank" rel="noopener">Arraylist vs Vector in Java</a></li><li><a href="http://www.javacodegeeks.com/2010/08/java-best-practices-vector-arraylist.html" target="_blank" rel="noopener">Java Best Practices – Vector vs ArrayList vs HashSet</a></li></ul></div><footer class="post-footer"><div class="post-tags"> <a href="/tags/java/" rel="tag"># java</a></div><div class="post-nav"><div class="post-nav-item"><a href="/2015/08/17/some-blogs-of-technology/" rel="prev" title="Some blogs of technology"><i class="fa fa-chevron-left"></i> Some blogs of technology</a></div><div class="post-nav-item"> <a href="/2015/08/23/java-null-object-call-static-method/" rel="next" title="Java null object 能否调用 static 方法">Java null object 能否调用 static 方法<i class="fa fa-chevron-right"></i></a></div></div></footer></article></div></div><script>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
+  <link rel="mask-icon" href="/images/favicon.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://codz.me').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.7.1',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="线程同步与线程安全Vector 是线程同步的，而ArrayList不是； 线程同步和线程安全意味着同一时间只允许一个线程访问数据； Vector 类中的所有方法都是线程同步的，这就解析了为什么创建Vector 对象时就属于线程同步的了。 性能对比就两者相比较，Vector 属于线程同步的，其性能相对低，而ArrayList 相对较快，因为ArrayList 允许两个或多个线程同时访问数据，而Vec">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[译]Java ArrayList 与 Vector">
+<meta property="og:url" content="https://codz.me/2015/08/17/translation-of-java-arraylist-vector/index.html">
+<meta property="og:site_name" content="Code Is Poetry">
+<meta property="og:description" content="线程同步与线程安全Vector 是线程同步的，而ArrayList不是； 线程同步和线程安全意味着同一时间只允许一个线程访问数据； Vector 类中的所有方法都是线程同步的，这就解析了为什么创建Vector 对象时就属于线程同步的了。 性能对比就两者相比较，Vector 属于线程同步的，其性能相对低，而ArrayList 相对较快，因为ArrayList 允许两个或多个线程同时访问数据，而Vec">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2015-08-17T15:51:00.000Z">
+<meta property="article:modified_time" content="2015-08-17T15:54:08.000Z">
+<meta property="article:author" content="laudukang">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://codz.me/2015/08/17/translation-of-java-arraylist-vector/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>[译]Java ArrayList 与 Vector | Code Is Poetry</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Code Is Poetry</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-fw fa-heartbeat"></i>公益 404</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://codz.me/2015/08/17/translation-of-java-arraylist-vector/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.png">
+      <meta itemprop="name" content="laudukang">
+      <meta itemprop="description" content="Bug Not Found">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code Is Poetry">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [译]Java ArrayList 与 Vector
+        </h1>
+
+        <div class="post-meta">
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2015-08-17 23:54:08 23:54:08" itemprop="dateModified" datetime="2015-08-17T23:54:08+08:00">2015-08-17 23:54:08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2015/08/17/translation-of-java-arraylist-vector/" class="post-meta-item leancloud_visitors" data-flag-title="[译]Java ArrayList 与 Vector" title="阅读次数">
+                <span hidden class="leancloud-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="线程同步与线程安全"><a href="#线程同步与线程安全" class="headerlink" title="线程同步与线程安全"></a>线程同步与线程安全</h2><p>Vector 是线程同步的，而ArrayList不是；</p>
+<p>线程同步和线程安全意味着同一时间只允许一个线程访问数据；</p>
+<p>Vector 类中的所有方法都是线程同步的，这就解析了为什么创建Vector 对象时就属于线程同步的了。</p>
+<h2 id="性能对比"><a href="#性能对比" class="headerlink" title="性能对比"></a>性能对比</h2><p>就两者相比较，Vector 属于线程同步的，其性能相对低，而ArrayList 相对较快，因为ArrayList 允许两个或多个线程同时访问数据，而Vector 则限制同一时间只允许一个线程访问数据。</p>
+<h2 id="自动增长容量"><a href="#自动增长容量" class="headerlink" title="自动增长容量"></a>自动增长容量</h2><p>Vector 默认按当前大小的两倍增长，而ArrayList 是按50%长度增长，当你往Arraylist 中插入元素（当填满元素）</p>
+<p>Arraylist 的默认大小为10，Arraylist 会检查是否到了最后一个元素，然后会创建新的数组，复制原数组的数据到新数组，原数组由jvm回收。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//ArrayList源码</span></span><br><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Default initial capacity.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEFAULT_CAPACITY = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//Vector源码</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Constructs an empty vector so that its internal data array</span></span><br><span class="line"><span class="comment"> * has size &#123;<span class="doctag">@code</span> 10&#125; and its standard capacity increment is</span></span><br><span class="line"><span class="comment"> * zero.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Vector</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>(<span class="number">10</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="设定增长大小"><a href="#设定增长大小" class="headerlink" title="设定增长大小"></a>设定增长大小</h3><p>ArrayList 不能指定增长长度，而Vector 可以指定增长长度，你可以通过Vector 类的下面方法指定增长长度</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">setSize</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line"><span class="comment">//some code</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//来自源码</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Sets the size of this vector. If the new size is greater than the</span></span><br><span class="line"><span class="comment"> * current size, new &#123;<span class="doctag">@code</span> null&#125; items are added to the end of</span></span><br><span class="line"><span class="comment"> * the vector. If the new size is less than the current size, all</span></span><br><span class="line"><span class="comment"> * components at index &#123;<span class="doctag">@code</span> newSize&#125; and greater are discarded.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span>  newSize   the new size of this vector</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@throws</span> ArrayIndexOutOfBoundsException if the new size is negative</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">setSize</span><span class="params">(<span class="keyword">int</span> newSize)</span> </span>&#123;</span><br><span class="line">    modCount++;</span><br><span class="line">    <span class="keyword">if</span> (newSize &gt; elementCount) &#123;</span><br><span class="line">        ensureCapacityHelper(newSize);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = newSize ; i &lt; elementCount ; i++) &#123;</span><br><span class="line">            elementData[i] = <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    elementCount = newSize;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h2><p>除了HashTable，Vector 是同时使用了枚举和迭代的唯一一个类，而ArrayList 只能用迭代器遍历一个ArrayList 对象。</p>
+<h2 id="官方定义"><a href="#官方定义" class="headerlink" title="官方定义"></a>官方定义</h2><p><code>java.util.Vector</code>自jdk1.0就出现了，<code>java.util.ArrayList</code>在jdk1.2中被作为Java 集合框架介绍过；在jdk1.2版本，Vector 类已经被重构实现List 接口。</p>
+<p>reference:</p>
+<ul>
+<li><a href="http://jeet-software.blogspot.in/2014/11/arraylist-vs-vector-in-java.html" target="_blank" rel="noopener">Arraylist vs Vector in Java</a></li>
+<li><a href="http://www.javacodegeeks.com/2010/08/java-best-practices-vector-arraylist.html" target="_blank" rel="noopener">Java Best Practices – Vector vs ArrayList vs HashSet</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/java/" rel="tag"># java</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2015/08/17/some-blogs-of-technology/" rel="prev" title="Some blogs of technology">
+      <i class="fa fa-chevron-left"></i> Some blogs of technology
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2015/08/23/java-null-object-call-static-method/" rel="next" title="Java null object 能否调用 static 方法">
+      Java null object 能否调用 static 方法 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
   window.addEventListener('tabs:register', () => {
     let activeClass = CONFIG.comments.activeClass;
     if (CONFIG.comments.storage) {
@@ -18,7 +317,122 @@
       localStorage.setItem('comments_active', commentClass);
     });
   }
-</script></div><div class="toggle sidebar-toggle"><span class="toggle-line toggle-line-first"></span><span class="toggle-line toggle-line-middle"></span><span class="toggle-line toggle-line-last"></span></div><aside class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc"> 文章目录</li><li class="sidebar-nav-overview"> 站点概览</li></ul><div class="post-toc-wrap sidebar-panel"><div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#线程同步与线程安全"><span class="nav-number">1.</span> <span class="nav-text">线程同步与线程安全</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#性能对比"><span class="nav-number">2.</span> <span class="nav-text">性能对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自动增长容量"><span class="nav-number">3.</span> <span class="nav-text">自动增长容量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设定增长大小"><span class="nav-number">3.1.</span> <span class="nav-text">设定增长大小</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#枚举"><span class="nav-number">4.</span> <span class="nav-text">枚举</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#官方定义"><span class="nav-number">5.</span> <span class="nav-text">官方定义</span></a></li></ol></div></div><div class="site-overview-wrap sidebar-panel"><div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person"> <img class="site-author-image" itemprop="image" alt="laudukang" src="/images/head.png"><p class="site-author-name" itemprop="name">laudukang</p><div class="site-description" itemprop="description">Bug Not Found</div></div><div class="site-state-wrap motion-element"><nav class="site-state"><div class="site-state-item site-state-posts"> <a href="/archives/"><span class="site-state-item-count">68</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-categories"> <a href="/categories/"><span class="site-state-item-count">10</span> <span class="site-state-item-name">分类</span></a></div><div class="site-state-item site-state-tags"> <a href="/tags/"><span class="site-state-item-count">25</span> <span class="site-state-item-name">标签</span></a></div></nav></div><div class="links-of-author motion-element"><span class="links-of-author-item"><a href="https://github.com/laudukang" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;laudukang" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i> GitHub</a></span><span class="links-of-author-item"><a href="https://gitee.com/laudukang" title="Gitee → https:&#x2F;&#x2F;gitee.com&#x2F;laudukang" rel="noopener" target="_blank"><i class="fa fa-fw fa-github-alt"></i> Gitee</a></span><span class="links-of-author-item"><a href="https://stackoverflow.com/users/5621049/laudukang" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;5621049&#x2F;laudukang" rel="noopener" target="_blank"><i class="fa fa-fw fa-stack-overflow"></i> StackOverflow</a></span><span class="links-of-author-item"><a href="https://www.google.com/maps/place/%E6%B7%B1%E5%9C%B3%E5%B8%82%E8%BD%AF%E4%BB%B6%E4%BA%A7%E4%B8%9A%E5%9F%BA%E5%9C%B0/@22.5244896,113.9382973,17z/data=!3m1!4b1!4m5!3m4!1s0x3403ee17d008a019:0xbb7b06b73d856c14!8m2!3d22.5244896!4d113.9382973" title="Map → https:&#x2F;&#x2F;www.google.com&#x2F;maps&#x2F;place&#x2F;%E6%B7%B1%E5%9C%B3%E5%B8%82%E8%BD%AF%E4%BB%B6%E4%BA%A7%E4%B8%9A%E5%9F%BA%E5%9C%B0&#x2F;@22.5244896,113.9382973,17z&#x2F;data&#x3D;!3m1!4b1!4m5!3m4!1s0x3403ee17d008a019:0xbb7b06b73d856c14!8m2!3d22.5244896!4d113.9382973" rel="noopener" target="_blank"><i class="fa fa-fw fa-map-marker"></i> Map</a></span></div></div></div></aside><div id="sidebar-dimmer"></div></div></main><footer class="footer"><div class="footer-inner"><div class="copyright"> &copy; 2015 – <span itemprop="copyrightYear">2020</span><span class="with-love"><i class="fa fa-heart icon-next-heart"></i></span> <span class="author" itemprop="copyrightHolder">laudukang</span></div><div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0</div> <span class="post-meta-divider">|</span><div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.1</div><div class="busuanzi-count"><script pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script pjax>
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#线程同步与线程安全"><span class="nav-number">1.</span> <span class="nav-text">线程同步与线程安全</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#性能对比"><span class="nav-number">2.</span> <span class="nav-text">性能对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自动增长容量"><span class="nav-number">3.</span> <span class="nav-text">自动增长容量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设定增长大小"><span class="nav-number">3.1.</span> <span class="nav-text">设定增长大小</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#枚举"><span class="nav-number">4.</span> <span class="nav-text">枚举</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#官方定义"><span class="nav-number">5.</span> <span class="nav-text">官方定义</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="laudukang"
+      src="/images/head.png">
+  <p class="site-author-name" itemprop="name">laudukang</p>
+  <div class="site-description" itemprop="description">Bug Not Found</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">68</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/laudukang" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;laudukang" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://gitee.com/laudukang" title="Gitee → https:&#x2F;&#x2F;gitee.com&#x2F;laudukang" rel="noopener" target="_blank"><i class="fa fa-fw fa-github-alt"></i>Gitee</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/users/5621049/laudukang" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;5621049&#x2F;laudukang" rel="noopener" target="_blank"><i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.google.com/maps/place/%E6%B7%B1%E5%9C%B3%E5%B8%82%E8%BD%AF%E4%BB%B6%E4%BA%A7%E4%B8%9A%E5%9F%BA%E5%9C%B0/@22.5244896,113.9382973,17z/data=!3m1!4b1!4m5!3m4!1s0x3403ee17d008a019:0xbb7b06b73d856c14!8m2!3d22.5244896!4d113.9382973" title="Map → https:&#x2F;&#x2F;www.google.com&#x2F;maps&#x2F;place&#x2F;%E6%B7%B1%E5%9C%B3%E5%B8%82%E8%BD%AF%E4%BB%B6%E4%BA%A7%E4%B8%9A%E5%9F%BA%E5%9C%B0&#x2F;@22.5244896,113.9382973,17z&#x2F;data&#x3D;!3m1!4b1!4m5!3m4!1s0x3403ee17d008a019:0xbb7b06b73d856c14!8m2!3d22.5244896!4d113.9382973" rel="noopener" target="_blank"><i class="fa fa-fw fa-map-marker"></i>Map</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2015 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">laudukang</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.1
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+  <script pjax>
   function leancloudSelector(url) {
     url = encodeURI(url);
     return document.getElementById(url).querySelector('.leancloud-visitors-count');
@@ -109,7 +523,32 @@
         showTime(Counter);
       }
     });
-  </script></div></footer></div><script src="/lib/anime.min.js"></script><script src="/lib/pjax/pjax.min.js"></script><script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script><script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script><script src="/lib/velocity/velocity.min.js"></script><script src="/lib/velocity/velocity.ui.min.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script>
+  </script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
 var pjax = new Pjax({
   selectors: [
     'head title',
@@ -165,4 +604,32 @@ window.addEventListener('pjax:success', () => {
   }
   NexT.utils.updateSidebarPosition();
 });
-</script><div id="pjax"></div></body></html>
+</script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+    </div>
+</body>
+</html>
