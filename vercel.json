@@ -1,0 +1,1 @@
+{"rewrites":[{"source":"/this-is-vercel-insights/:match*","destination":"https://codz-me.vercel.app/_vercel/insights/:match*"}]}

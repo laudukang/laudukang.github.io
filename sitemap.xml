@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://codz-me.vercel.app/vercel.json</loc>
+    
+    <lastmod>2025-07-10T08:23:58.007Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://codz-me.vercel.app/tags/index.html</loc>
     
     <lastmod>2025-07-10T02:47:39.238Z</lastmod>
