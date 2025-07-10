@@ -20,7 +20,7 @@
 <script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    hostname: new URL('https://laudukang.github.io').hostname,
+    hostname: new URL('https://codz-me.vercel.app').hostname,
     root: '/',
     scheme: 'Muse',
     version: '7.7.1',
@@ -50,14 +50,14 @@
   <meta name="description" content="Bug Not Found">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Code Is Poetry">
-<meta property="og:url" content="https://laudukang.github.io/index.html">
+<meta property="og:url" content="https://codz-me.vercel.app/index.html">
 <meta property="og:site_name" content="Code Is Poetry">
 <meta property="og:description" content="Bug Not Found">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="laudukang">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://laudukang.github.io/">
+<link rel="canonical" href="https://codz-me.vercel.app/">
 
 
 <script id="page-configurations">
@@ -188,7 +188,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://laudukang.github.io/2019/11/20/opentsdb-query-optimization/">
+    <link itemprop="mainEntityOfPage" href="https://codz-me.vercel.app/2019/11/20/opentsdb-query-optimization/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/head.png">
@@ -290,7 +290,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> OpenTSDBService <span class="title">openTSDBService</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    List&lt;String&gt; openTSDBServerList = configProperties.getOpentsdbServer();</span><br><span class="line">    <span class="keyword">if</span> (CollectionUtils.isEmpty(openTSDBServerList)) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"empty opentsdb server url"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> () -&gt; openTSDBServerList;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>Thanks to <a href="https://www.jetbrains.com/?from=OpenTSDB%20Java%20Async%20Client" target="_blank" rel="noopener">JetBrains</a>‘ support</p>
-<img src="https://nat.oss-cn-hongkong.aliyuncs.com/images/2019/11/20/opentsdb-query-optimization/jetbrains_support.png" alt="jetbrains_support.png" title="">
+<img src="/2019/11/20/opentsdb-query-optimization/jetbrains_support.png" alt="jetbrains_support.png" title="">
 
 <h2 id="部分资料"><a href="#部分资料" class="headerlink" title="部分资料"></a>部分资料</h2><ul>
 <li><a href="https://github.com/laudukang/opentsdb" target="_blank" rel="noopener">laudukang/opentsdb</a></li>
@@ -316,7 +316,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://laudukang.github.io/2018/05/07/build-spark-cluster/">
+    <link itemprop="mainEntityOfPage" href="https://codz-me.vercel.app/2018/05/07/build-spark-cluster/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/head.png">
@@ -415,7 +415,7 @@
 <p>解决方案：设置<code>SPARK_PUBLIC_DNS</code>参数后，worker webui中的跳转链接正常了。</p>
 <p><code>SPARK_PUBLIC_DNS</code>→<code>publicHostName</code>我也是服了，</p>
 <p>如下图，原先<code>stdout</code>的链接的的主机为<code>n0</code>，<code>n0</code>为master所在的机器：</p>
-<img src="https://nat.oss-cn-hongkong.aliyuncs.com/images/2018/05/07/build-spark-cluster/spark-worker-ui-hostname.png" alt="spark-worker-ui-hostname.png" title="">
+<img src="/2018/05/07/build-spark-cluster/spark-worker-ui-hostname.png" alt="spark-worker-ui-hostname.png" title="">
 
 <p>源码参考</p>
 <p><a href="https://github.com/apache/spark/blob/master/core/src/main/scala/org/apache/spark/ui/WebUI.scala" target="_blank" rel="noopener">core/src/main/scala/org/apache/spark/ui/WebUI.scala</a></p>
@@ -508,7 +508,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://laudukang.github.io/2018/02/28/ssh-login-with-key-fail-and-require-password/">
+    <link itemprop="mainEntityOfPage" href="https://codz-me.vercel.app/2018/02/28/ssh-login-with-key-fail-and-require-password/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/head.png">
@@ -593,7 +593,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://laudukang.github.io/2018/01/05/annual-book-list-2018/">
+    <link itemprop="mainEntityOfPage" href="https://codz-me.vercel.app/2018/01/05/annual-book-list-2018/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/head.png">
@@ -700,7 +700,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://laudukang.github.io/2017/12/20/recommend-articles/">
+    <link itemprop="mainEntityOfPage" href="https://codz-me.vercel.app/2017/12/20/recommend-articles/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/head.png">
@@ -774,7 +774,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://laudukang.github.io/2017/10/12/minio-and-nginx/">
+    <link itemprop="mainEntityOfPage" href="https://codz-me.vercel.app/2017/10/12/minio-and-nginx/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/head.png">
@@ -865,7 +865,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://laudukang.github.io/2017/09/24/rise-of-worse-is-better/">
+    <link itemprop="mainEntityOfPage" href="https://codz-me.vercel.app/2017/09/24/rise-of-worse-is-better/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/head.png">
@@ -968,7 +968,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://laudukang.github.io/2017/06/10/can-not-read-from-dev-random/">
+    <link itemprop="mainEntityOfPage" href="https://codz-me.vercel.app/2017/06/10/can-not-read-from-dev-random/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/head.png">
@@ -1048,7 +1048,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://laudukang.github.io/2017/02/19/annual-book-list-2017/">
+    <link itemprop="mainEntityOfPage" href="https://codz-me.vercel.app/2017/02/19/annual-book-list-2017/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/head.png">
@@ -1173,7 +1173,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://laudukang.github.io/2017/01/14/a-bug-of-ubuntu-16_04_1/">
+    <link itemprop="mainEntityOfPage" href="https://codz-me.vercel.app/2017/01/14/a-bug-of-ubuntu-16_04_1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/head.png">

@@ -20,7 +20,7 @@
 <script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    hostname: new URL('https://laudukang.github.io').hostname,
+    hostname: new URL('https://codz-me.vercel.app').hostname,
     root: '/',
     scheme: 'Muse',
     version: '7.7.1',
@@ -50,19 +50,19 @@
   <meta name="description" content="OpenTSDB 简介OpenTSDB是一个基于HBase的可扩展时间序列数据库，支持数百万每秒的读写，与OpenTSDB的交互主要是通过运行一个或多个TSD来实现的。每个TSD是独立的，没有主设备，没有共享状态，因此您可以根据需要运行任意数量的 TSD，以处理向其施加的任何负载。 Cloudera Express管理并运行了生产环境的 HDFS&#x2F;HBase&#x2F;ZooKeeper。 项目背景Open">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OpenTSDB 查询优化">
-<meta property="og:url" content="https://laudukang.github.io/2019/11/20/opentsdb-query-optimization/index.html">
+<meta property="og:url" content="https://codz-me.vercel.app/2019/11/20/opentsdb-query-optimization/index.html">
 <meta property="og:site_name" content="Code Is Poetry">
 <meta property="og:description" content="OpenTSDB 简介OpenTSDB是一个基于HBase的可扩展时间序列数据库，支持数百万每秒的读写，与OpenTSDB的交互主要是通过运行一个或多个TSD来实现的。每个TSD是独立的，没有主设备，没有共享状态，因此您可以根据需要运行任意数量的 TSD，以处理向其施加的任何负载。 Cloudera Express管理并运行了生产环境的 HDFS&#x2F;HBase&#x2F;ZooKeeper。 项目背景Open">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://nat.oss-cn-hongkong.aliyuncs.com/images/2019/11/20/opentsdb-query-optimization/jetbrains_support.png">
+<meta property="og:image" content="https://codz-me.vercel.app/2019/11/20/opentsdb-query-optimization/jetbrains_support.png">
 <meta property="article:published_time" content="2019-11-20T02:48:49.000Z">
 <meta property="article:modified_time" content="2020-03-10T02:50:49.000Z">
 <meta property="article:author" content="laudukang">
 <meta property="article:tag" content="opentsdb">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://nat.oss-cn-hongkong.aliyuncs.com/images/2019/11/20/opentsdb-query-optimization/jetbrains_support.png">
+<meta name="twitter:image" content="https://codz-me.vercel.app/2019/11/20/opentsdb-query-optimization/jetbrains_support.png">
 
-<link rel="canonical" href="https://laudukang.github.io/2019/11/20/opentsdb-query-optimization/">
+<link rel="canonical" href="https://codz-me.vercel.app/2019/11/20/opentsdb-query-optimization/">
 
 
 <script id="page-configurations">
@@ -193,7 +193,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://laudukang.github.io/2019/11/20/opentsdb-query-optimization/">
+    <link itemprop="mainEntityOfPage" href="https://codz-me.vercel.app/2019/11/20/opentsdb-query-optimization/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/head.png">
@@ -294,7 +294,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> OpenTSDBService <span class="title">openTSDBService</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    List&lt;String&gt; openTSDBServerList = configProperties.getOpentsdbServer();</span><br><span class="line">    <span class="keyword">if</span> (CollectionUtils.isEmpty(openTSDBServerList)) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"empty opentsdb server url"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> () -&gt; openTSDBServerList;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>Thanks to <a href="https://www.jetbrains.com/?from=OpenTSDB%20Java%20Async%20Client" target="_blank" rel="noopener">JetBrains</a>‘ support</p>
-<img src="https://nat.oss-cn-hongkong.aliyuncs.com/images/2019/11/20/opentsdb-query-optimization/jetbrains_support.png" alt="jetbrains_support.png" title="">
+<img src="/2019/11/20/opentsdb-query-optimization/jetbrains_support.png" alt="jetbrains_support.png" title="">
 
 <h2 id="部分资料"><a href="#部分资料" class="headerlink" title="部分资料"></a>部分资料</h2><ul>
 <li><a href="https://github.com/laudukang/opentsdb" target="_blank" rel="noopener">laudukang/opentsdb</a></li>

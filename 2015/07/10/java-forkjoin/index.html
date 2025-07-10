@@ -20,7 +20,7 @@
 <script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    hostname: new URL('https://laudukang.github.io').hostname,
+    hostname: new URL('https://codz-me.vercel.app').hostname,
     root: '/',
     scheme: 'Muse',
     version: '7.7.1',
@@ -50,19 +50,19 @@
   <meta name="description" content="ForkJoin是Java7提供的原生多线程并行处理框架，其基本思想是将大人物分割成小任务，最后将小任务聚合起来得到结果。 它非常类似于HADOOP提供的MapReduce框架，只是MapReduce的任务可以针对集群内的所有计算节点，可以充分利用集群的能力完成计算任务。 ForkJoin更加类似于单机版的MapReduce。 即使不通过mapreduce，仅有应用程序本身进行任务的分解与合成也是">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JAVA 并行框架 ForkJoin">
-<meta property="og:url" content="https://laudukang.github.io/2015/07/10/java-forkjoin/index.html">
+<meta property="og:url" content="https://codz-me.vercel.app/2015/07/10/java-forkjoin/index.html">
 <meta property="og:site_name" content="Code Is Poetry">
 <meta property="og:description" content="ForkJoin是Java7提供的原生多线程并行处理框架，其基本思想是将大人物分割成小任务，最后将小任务聚合起来得到结果。 它非常类似于HADOOP提供的MapReduce框架，只是MapReduce的任务可以针对集群内的所有计算节点，可以充分利用集群的能力完成计算任务。 ForkJoin更加类似于单机版的MapReduce。 即使不通过mapreduce，仅有应用程序本身进行任务的分解与合成也是">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://nat.oss-cn-hongkong.aliyuncs.com/images/2015/07/10/java-forkjoin/501882267.jpg">
+<meta property="og:image" content="https://codz-me.vercel.app/2015/07/10/java-forkjoin/501882267.jpg">
 <meta property="article:published_time" content="2015-07-10T08:23:00.000Z">
 <meta property="article:modified_time" content="2015-07-18T09:13:01.000Z">
 <meta property="article:author" content="laudukang">
 <meta property="article:tag" content="java">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://nat.oss-cn-hongkong.aliyuncs.com/images/2015/07/10/java-forkjoin/501882267.jpg">
+<meta name="twitter:image" content="https://codz-me.vercel.app/2015/07/10/java-forkjoin/501882267.jpg">
 
-<link rel="canonical" href="https://laudukang.github.io/2015/07/10/java-forkjoin/">
+<link rel="canonical" href="https://codz-me.vercel.app/2015/07/10/java-forkjoin/">
 
 
 <script id="page-configurations">
@@ -193,7 +193,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://laudukang.github.io/2015/07/10/java-forkjoin/">
+    <link itemprop="mainEntityOfPage" href="https://codz-me.vercel.app/2015/07/10/java-forkjoin/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/head.png">
@@ -249,7 +249,7 @@
 <p>即使不通过mapreduce，仅有应用程序本身进行任务的分解与合成也是可以的，但从实现难度上考虑，自己实现可能会带来较大规模的复杂度，因此程序员急需一种范式来处理这一类的任务。</p>
 <p>在处理多线程中已经有了如AKKA这样的基于ACTOR模型的框架，而FORKJOIN则是针对具有明显可以进行任务分割特性需求的实现。</p>
 <p>其场景为：如果一个应用程序能够被分解成多个子任务，而且结合多个子任务的结果就能够得到最终的答案，那么它就适合使用FORK/JOIN模式来实现。</p>
-<img src="https://nat.oss-cn-hongkong.aliyuncs.com/images/2015/07/10/java-forkjoin/501882267.jpg" alt="501882267.jpg" title="">
+<img src="/2015/07/10/java-forkjoin/501882267.jpg" alt="501882267.jpg" title="">
 
 <p>Fork/Join使用两个类完成以上两件事情：</p>
 <ul>
