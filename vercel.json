@@ -1,1 +1,1 @@
-{"rewrites":[{"source":"/this-is-vercel-insights/:match*","destination":"https://codz-me.vercel.app/_vercel/insights/:match*"}]}
+{"$schema":"https://openapi.vercel.sh/vercel.json","regions":["hkg1"],"rewrites":[{"source":"/this-is-vercel-insights/:match*","destination":"https://codz-me.vercel.app/_vercel/insights/:match*"}]}
